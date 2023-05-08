@@ -1,0 +1,3 @@
+[submodule "Assets/ff/common-unity"]
+	path = Assets/ff/common-unity
+	url = git@github.com:framefield/common-unity.git
