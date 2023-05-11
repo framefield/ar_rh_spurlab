@@ -276,39 +276,41 @@ namespace ff.ar_rh_spurlab
             }
 #endif
 
-            if (Pointer.current == null || m_Pressed == false)
-                return;
-
             var placedMarker = Object.FindObjectsByType<ARAnchor>(FindObjectsSortMode.None).ToList();
             placedMarker.Sort((a, b) => a.gameObject.name.CompareTo(b.gameObject.name));
+            Log($"current num marker {placedMarker.Count}");
 
-            var touchPosition = Pointer.current.position.ReadValue();
-
-            if (m_RaycastManager.Raycast(touchPosition, s_Hits, TrackableType.PlaneWithinPolygon))
+            if (Pointer.current != null && m_Pressed == true)
             {
-                // Raycast hits are sorted by distance, so the first one will be the closest hit.
-                var hitPose = s_Hits[0].pose;
+                var touchPosition = Pointer.current.position.ReadValue();
 
-                GameObject selectedMarkerObject = null;
-                foreach (var obj in placedMarker)
+                if (m_RaycastManager.Raycast(touchPosition, s_Hits, TrackableType.PlaneWithinPolygon))
                 {
-                    if ((obj.transform.position - hitPose.position).magnitude < 0.1)
+                    // Raycast hits are sorted by distance, so the first one will be the closest hit.
+                    var hitPose = s_Hits[0].pose;
+
+                    GameObject selectedMarkerObject = null;
+                    foreach (var obj in placedMarker)
                     {
-                        selectedMarkerObject = obj.gameObject;
-                        break;
+                        if ((obj.transform.position - hitPose.position).magnitude < 0.1)
+                        {
+                            selectedMarkerObject = obj.gameObject;
+                            break;
+                        }
                     }
-                }
 
-                if (selectedMarkerObject != null)
-                {
-                    selectedMarkerObject.transform.position = hitPose.position;
-                }
-                else
-                {
-                    if (placedMarker.Count < MAX_NUMBER_OF_REFERENCE_POINTS)
+                    if (selectedMarkerObject != null)
                     {
-                        var marker = Instantiate(m_MarkerPrefab, hitPose.position, hitPose.rotation, m_XROrigin);
-                        marker.name = $"ARMarkerAnchor_{placedMarker.Count}";
+                        selectedMarkerObject.transform.position = hitPose.position;
+                    }
+                    else
+                    {
+                        if (placedMarker.Count < MAX_NUMBER_OF_REFERENCE_POINTS)
+                        {
+                            var marker = Instantiate(m_MarkerPrefab, hitPose.position, hitPose.rotation, m_XROrigin);
+                            marker.name = $"ARMarkerAnchor_{placedMarker.Count}";
+                            placedMarker.Add(marker.GetComponent<ARAnchor>());
+                        }
                     }
                 }
             }
@@ -333,7 +335,7 @@ namespace ff.ar_rh_spurlab
                 if (m_LocationObject == null)
                 {
                     m_LocationObject = Instantiate(m_LocationPrefab, xrOriginTLocationOrigin.GetPosition(), xrOriginTLocationOrigin.rotation, m_XROrigin);
-                    Debug.LogFormat($"matching deviation: {matchingDeviation}");
+                    Log($"matching deviation: {matchingDeviation}");
                 }
                 else
                 {
