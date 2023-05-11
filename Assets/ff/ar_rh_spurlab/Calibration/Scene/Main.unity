@@ -205,8 +205,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 268973513}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 275107523}
+        m_TargetAssemblyTypeName: ff.ar_rh_spurlab.CalibrationController, Assembly-CSharp
         m_MethodName: OnLoadButton
         m_Mode: 1
         m_Arguments:
@@ -255,56 +255,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62387508}
   m_CullTransparentMesh: 0
---- !u!1 &268973511
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 268973512}
-  - component: {fileID: 268973513}
-  m_Layer: 0
-  m_Name: ARWorldMapController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &268973512
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268973511}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &268973513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268973511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650a45a045e92478a9d4ce3ff7858893, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ARSession: {fileID: 2030565722}
-  m_ErrorText: {fileID: 1146635410}
-  m_LogText: {fileID: 1544020817}
-  m_MappingStatusText: {fileID: 1883263241}
-  m_SaveButton: {fileID: 1337723566}
-  m_LoadButton: {fileID: 62387510}
 --- !u!1 &275107516
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 275107520}
   - component: {fileID: 275107519}
+  - component: {fileID: 275107524}
   - component: {fileID: 275107518}
   - component: {fileID: 275107517}
   - component: {fileID: 275107522}
@@ -413,10 +364,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d7670303e9d46209a4b23ef86f7ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MarkerPrefab: {fileID: 1934569588295450, guid: b34b6c8f1206a6844b983e23b9da0441,
+  m_ARSession: {fileID: 2030565722}
+  m_MarkerPrefab: {fileID: 6558320816550134305, guid: fbef29c2681494649959a5ee1bb31225,
     type: 3}
   m_XROrigin: {fileID: 275107520}
   m_LocationPrefab: {fileID: 6273536067965249258, guid: b3fe1dec878e245bcb78b1ab4304ed61,
+    type: 3}
+  m_ErrorText: {fileID: 1146635410}
+  m_LogText: {fileID: 1544020817}
+  m_MappingStatusText: {fileID: 1883263241}
+  m_SaveButton: {fileID: 1337723566}
+  m_LoadButton: {fileID: 62387510}
+  m_ResetButton: {fileID: 781829499}
+--- !u!114 &275107524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275107516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AnchorPrefab: {fileID: 6558320816550134305, guid: fbef29c2681494649959a5ee1bb31225,
     type: 3}
 --- !u!1 &277232891
 GameObject:
@@ -464,7 +436,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &277232895
 MonoBehaviour:
@@ -676,8 +648,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 268973513}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 275107523}
+        m_TargetAssemblyTypeName: ff.ar_rh_spurlab.CalibrationController, Assembly-CSharp
         m_MethodName: OnResetButton
         m_Mode: 1
         m_Arguments:
@@ -826,7 +798,7 @@ RectTransform:
   - {fileID: 1337723565}
   - {fileID: 781829498}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2427,8 +2399,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 268973513}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 275107523}
+        m_TargetAssemblyTypeName: ff.ar_rh_spurlab.CalibrationController, Assembly-CSharp
         m_MethodName: OnSaveButton
         m_Mode: 1
         m_Arguments:
