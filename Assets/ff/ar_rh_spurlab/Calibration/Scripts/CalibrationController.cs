@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ff.ar_rh_spurlab.Calibration;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,6 +36,9 @@ namespace ff.ar_rh_spurlab
         [SerializeField]
         Transform m_XROrigin;
 
+        [SerializeField]
+        private ARAnchorManager _arAnchorManager;
+        
         [SerializeField]
         GameObject m_LocationPrefab;
 
@@ -107,7 +111,7 @@ namespace ff.ar_rh_spurlab
         }
 
 #if UNITY_IOS
-        IEnumerator Save()
+        private IEnumerator Save()
         {
             var sessionSubsystem = (ARKitSessionSubsystem)m_ARSession.subsystem;
             if (sessionSubsystem == null)
@@ -209,6 +213,7 @@ namespace ff.ar_rh_spurlab
             base.Awake();
             m_RaycastManager = GetComponent<ARRaycastManager>();
             m_LogMessages = new List<string>();
+            _calibrationAnchorController = new CalibrationAnchorController(_arAnchorManager);
         }
 
         void Log(string logMessage)
@@ -236,6 +241,8 @@ namespace ff.ar_rh_spurlab
 
         void Update()
         {
+            _calibrationAnchorController.Update();
+            
             if (supported)
             {
                 SetActive(m_ErrorText, false);
@@ -308,8 +315,11 @@ namespace ff.ar_rh_spurlab
                         if (placedMarker.Count < MAX_NUMBER_OF_REFERENCE_POINTS)
                         {
                             var marker = Instantiate(m_MarkerPrefab, hitPose.position, hitPose.rotation, m_XROrigin);
-                            marker.name = $"ARMarkerAnchor_{placedMarker.Count}";
-                            placedMarker.Add(marker.GetComponent<ARAnchor>());
+                            var arAnchor = marker.GetComponent<ARAnchor>();
+                            var calibrationId =$"ARMarkerAnchor_{placedMarker.Count}";
+                            marker.name = calibrationId;
+                            placedMarker.Add(arAnchor);
+                            _calibrationAnchorController.TryAddCalibrationId(calibrationId, arAnchor);
                         }
                     }
                 }
@@ -376,5 +386,7 @@ namespace ff.ar_rh_spurlab
 
         const int MAX_NUMBER_OF_REFERENCE_POINTS = 3;
         GameObject m_LocationObject;
+        
+        private CalibrationAnchorController _calibrationAnchorController;
     }
 }
