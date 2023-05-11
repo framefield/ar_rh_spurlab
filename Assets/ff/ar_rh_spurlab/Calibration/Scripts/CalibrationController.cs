@@ -62,7 +62,7 @@ namespace ff.ar_rh_spurlab
                 {
                     if (m_PlacedMarkerObjects.Count < MAX_NUMBER_OF_REFERENCE_POINTS)
                     {
-                        m_PlacedMarkerObjects.Add(Instantiate(m_MarkerPrefab, hitPose.position, hitPose.rotation));
+                        m_PlacedMarkerObjects.Add(Instantiate(m_MarkerPrefab, hitPose.position, hitPose.rotation, m_XROrigin));
                     }
                 }
             }
