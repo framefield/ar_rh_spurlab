@@ -74,10 +74,13 @@ namespace ff.ar_rh_spurlab
                                                m_PlacedMarkerObjects[1].transform.position,
                                                m_PlacedMarkerObjects[2].transform.position };
 
-                Matrix4x4 xrOriginTLocationOrigin = calculateTransfromFromeAToB(pointsInLocationOrigin, pointsInXROrigin);
+
+                float matchingDeviation = 0.0f;
+                Matrix4x4 xrOriginTLocationOrigin = calculateTransfromFromeAToB(pointsInLocationOrigin, pointsInXROrigin, ref matchingDeviation);
                 if (m_LocationObject == null)
                 {
                     m_LocationObject = Instantiate(m_LocationPrefab, xrOriginTLocationOrigin.GetPosition(), xrOriginTLocationOrigin.rotation, m_XROrigin);
+                    Debug.LogFormat("matching deviation: {0}", matchingDeviation);
                 }
                 else
                 {
@@ -88,14 +91,24 @@ namespace ff.ar_rh_spurlab
 
         }
 
-        Matrix4x4 calculateTransfromFromeAToB(IList<Vector3> pointsInA, IList<Vector3> pointsInB)
+        static Matrix4x4 calculateTransfromFromeAToB(IList<Vector3> pointsInA, IList<Vector3> pointsInB, ref float matchingDeviation)
         {
             if (pointsInA.Count != pointsInB.Count || pointsInA.Count != 3)
                 return Matrix4x4.identity;
-
-            Matrix4x4 aTPoints = Matrix4x4.TRS(pointsInA[0], Quaternion.LookRotation(pointsInA[0] - pointsInA[2], pointsInA[0] - pointsInA[1]), Vector3.one);
-            Matrix4x4 bTPoints = Matrix4x4.TRS(pointsInB[0], Quaternion.LookRotation(pointsInB[0] - pointsInB[2], pointsInB[0] - pointsInB[1]), Vector3.one);
+            
+            Vector3 aPPointsCenter = (pointsInA[0] + pointsInA[1] + pointsInA[2]) / 3.0f;
+            Vector3 bPPointsCenter = (pointsInB[0] + pointsInB[1] + pointsInB[2]) / 3.0f;
+            Matrix4x4 aTPoints = Matrix4x4.TRS(aPPointsCenter, Quaternion.LookRotation(pointsInA[0] - pointsInA[2], pointsInA[0] - pointsInA[1]), Vector3.one);
+            Matrix4x4 bTPoints = Matrix4x4.TRS(bPPointsCenter, Quaternion.LookRotation(pointsInB[0] - pointsInB[2], pointsInB[0] - pointsInB[1]), Vector3.one);
             Matrix4x4 bTA = bTPoints * Matrix4x4.Inverse(aTPoints);
+
+            matchingDeviation = 0;
+            for (int i = 0; i < pointsInA.Count; ++i)
+            {
+                matchingDeviation += (pointsInB[i] - bTA.MultiplyPoint(pointsInA[i])).magnitude;
+            }
+            matchingDeviation /= pointsInA.Count;
+
             return bTA;
         }
 
