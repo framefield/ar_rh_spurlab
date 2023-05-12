@@ -12,13 +12,13 @@ namespace ff.ar_rh_spurlab.Locations
 
         private void Update()
         {
-            if (_calibrationData is not { IsValid: true })
+            if (_calibrationData?.IsValid != true)
             {
                 _content.gameObject.SetActive(false);
                 return;
             }
 
-            var (xrOriginTLocationOrigin, isValid) = _calibrationData.GetXrOriginTLocationOrigin();
+            var (xrOriginTLocationOrigin, isValid) = CalibrationCalculator.GetXrOriginTLocationOrigin(_calibrationData);
 
             transform.position = xrOriginTLocationOrigin.GetPosition();
             transform.rotation = xrOriginTLocationOrigin.rotation;

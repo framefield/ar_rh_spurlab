@@ -4,46 +4,24 @@ using UnityEngine.XR.ARFoundation;
 
 namespace ff.ar_rh_spurlab.Calibration
 {
-    public class CalibrationData
+    public static class CalibrationCalculator
     {
-        private Marker _marker1;
-        private Marker _marker2;
-        private Marker _marker3;
-
-        public Vector3[] PointsInLocationOrigin =
-            { new(10.615f, 6.802f, 2.355f), new(8.448f, 6.809f, 4.812f), new(8.734f, 9.936f, 2.708f) };
-
-        public CalibrationData(string name)
+        public static (Matrix4x4 xrOriginTLocationOrigin, bool isValid) GetXrOriginTLocationOrigin(
+            CalibrationData calibrationData)
         {
-            Name = name;
-        }
-
-        public string Name { get; private set; }
-        public bool IsValid => Marker.IsValid(_marker1) && Marker.IsValid(_marker2) && Marker.IsValid(_marker3);
-        public int NumberOfReferencePoints => 3;
-
-        public void UpdateMarkers(ARAnchor anchor1, ARAnchor anchor2, ARAnchor anchor3)
-        {
-            _marker1 = new Marker(anchor1);
-            _marker2 = new Marker(anchor2);
-            _marker3 = new Marker(anchor3);
-        }
-
-        public (Matrix4x4 xrOriginTLocationOrigin, bool isValid) GetXrOriginTLocationOrigin()
-        {
-            if (!IsValid)
+            if (calibrationData?.IsValid != true)
             {
                 return (Matrix4x4.identity, false);
             }
 
             Vector3[] pointsInXROrigin =
             {
-                _marker1.Position,
-                _marker2.Position,
-                _marker3.Position
+                calibrationData.Marker1.Position,
+                calibrationData.Marker2.Position,
+                calibrationData.Marker3.Position
             };
             var (xrOriginTLocationOrigin, matchingDeviation) =
-                CalculateTransformFromAToB(PointsInLocationOrigin, pointsInXROrigin);
+                CalculateTransformFromAToB(calibrationData.PointsInLocationOrigin, pointsInXROrigin);
             return (xrOriginTLocationOrigin, true);
         }
 
@@ -68,6 +46,33 @@ namespace ff.ar_rh_spurlab.Calibration
                 matchingDeviation += (pointsInB[i] - bTA.MultiplyPoint(pointsInA[i])).magnitude;
 
             return (bTA, matchingDeviation / pointsInA.Count);
+        }
+    }
+
+    public class CalibrationData
+    {
+        public Marker Marker1;
+        public Marker Marker2;
+        public Marker Marker3;
+
+        public Vector3[] PointsInLocationOrigin;
+        //    { new(10.615f, 6.802f, 2.355f), new(8.448f, 6.809f, 4.812f), new(8.734f, 9.936f, 2.708f) };
+
+        public CalibrationData(string name, Vector3[] pointsInLocationOrigin)
+        {
+            Name = name;
+            PointsInLocationOrigin = pointsInLocationOrigin;
+        }
+
+        public string Name { get; private set; }
+        public bool IsValid => Marker.IsValid(Marker1) && Marker.IsValid(Marker2) && Marker.IsValid(Marker3);
+        public int NumberOfReferencePoints => 3;
+
+        public void UpdateMarkers(ARAnchor anchor1, ARAnchor anchor2, ARAnchor anchor3)
+        {
+            Marker1 = new Marker(anchor1);
+            Marker2 = new Marker(anchor2);
+            Marker3 = new Marker(anchor3);
         }
     }
 
