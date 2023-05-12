@@ -111,7 +111,10 @@ namespace ff.ar_rh_spurlab.Calibration
         {
             var directoryPath = Path.Combine(Application.persistentDataPath, CalibrationData.Name);
             var filePath = Path.Combine(directoryPath, "my_session.worldmap");
+
+#if UNITY_IOS
             StartCoroutine(ARWorldMapController.Save(_arSession, filePath));
+#endif
 
             CalibrationData.Store(directoryPath);
         }
