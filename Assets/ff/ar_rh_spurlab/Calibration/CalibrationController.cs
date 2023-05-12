@@ -80,6 +80,7 @@ namespace ff.ar_rh_spurlab.Calibration
             }
 
             _location.SetCalibrationData(CalibrationData);
+            _calibrationUi.SetCalibrationData(CalibrationData);
         }
     }
 }
