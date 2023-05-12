@@ -461,6 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1138061816}
   - component: {fileID: 1138061817}
+  - component: {fileID: 1138061818}
   m_Layer: 0
   m_Name: Fine Tune - State
   m_TagString: Untagged
@@ -507,6 +508,18 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1138061818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138061815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2220a722041a7424e86b6be3a7b255e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1221971437
 GameObject:
   m_ObjectHideFlags: 0

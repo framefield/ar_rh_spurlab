@@ -22,7 +22,8 @@ namespace ff.ar_rh_spurlab.Calibration
             };
             var (xrOriginTLocationOrigin, matchingDeviation) =
                 CalculateTransformFromAToB(calibrationData.PointsInLocationOrigin, pointsInXROrigin);
-            return (xrOriginTLocationOrigin, true);
+            
+            return (Matrix4x4.Translate(calibrationData.Offset) * xrOriginTLocationOrigin, true);
         }
 
         private static (Matrix4x4, float) CalculateTransformFromAToB(IList<Vector3> pointsInA,
@@ -57,6 +58,8 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public Vector3[] PointsInLocationOrigin;
         //    { new(10.615f, 6.802f, 2.355f), new(8.448f, 6.809f, 4.812f), new(8.734f, 9.936f, 2.708f) };
+
+        public Vector3 Offset { get; set; }
 
         public CalibrationData(string name, Vector3[] pointsInLocationOrigin)
         {
