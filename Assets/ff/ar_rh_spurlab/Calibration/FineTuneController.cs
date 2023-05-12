@@ -12,6 +12,9 @@ namespace ff.ar_rh_spurlab.Calibration
 {
     public class FineTuneController : PressInputBase, IActiveInStateContent
     {
+        [SerializeField]
+        private CalibrationFineTuneUi _calibrationFineTuneUiPrefab;
+
         private readonly List<ARRaycastHit> _sHits = new();
         private CalibrationController _calibrationController;
         private Camera _mainCamera;
@@ -22,6 +25,7 @@ namespace ff.ar_rh_spurlab.Calibration
         private bool _offsetValid = false;
 
         private StateMachine _stateMachine;
+        private CalibrationFineTuneUi _calibrationFineTuneUi;
 
         private void Update()
         {
@@ -50,8 +54,6 @@ namespace ff.ar_rh_spurlab.Calibration
 
             _lastWorldPTouchPosition = worldPTouchPosition;
             _offsetValid = true;
-
-            //_stateMachine.Continue();
         }
 
 
@@ -65,18 +67,28 @@ namespace ff.ar_rh_spurlab.Calibration
             {
                 _calibrationController = stateMachine.GetComponent<CalibrationController>();
             }
+
+            if (!_calibrationFineTuneUiPrefab)
+            {
+                Debug.LogError("FineTuneController: CalibrationFineTuneUiPrefab is not set!");
+                return;
+            }
+
             if (!_mainCamera)
             {
                 _mainCamera = Camera.main;
             }
 
             _stateMachine = stateMachine;
+            _calibrationFineTuneUi = Instantiate(_calibrationFineTuneUiPrefab, transform);
+            _calibrationFineTuneUi.OnContinueButtonClicked += () => _stateMachine.Continue();
             _isActive = true;
             _offsetValid = false;
         }
 
         public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
         {
+            Destroy(_calibrationFineTuneUi.gameObject);
             _isActive = false;
         }
 
@@ -84,10 +96,6 @@ namespace ff.ar_rh_spurlab.Calibration
         {
             _pressed = true;
         }
-
-        //protected override void OnPressBegan(Vector3 position)
-        //{
-        //}
 
         protected override void OnPressCancel()
         {
