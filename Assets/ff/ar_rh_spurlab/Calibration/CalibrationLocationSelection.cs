@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ff.ar_rh_spurlab.Calibration
 {
-    public class LocationSelection : MonoBehaviour, IActiveInStateContent
+    public class CalibrationLocationSelection : MonoBehaviour, IActiveInStateContent
     {
         private CalibrationController _calibrationController;
 

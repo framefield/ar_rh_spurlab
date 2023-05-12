@@ -132,7 +132,11 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public Vector3 GetUpdatedPosition()
         {
-            UpdatePosition();
+            if (_anchor)
+            {
+                UpdatePosition();
+            }
+
             return Position;
         }
 

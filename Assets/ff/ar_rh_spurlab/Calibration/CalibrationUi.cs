@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARKit;
@@ -12,6 +13,12 @@ namespace ff.ar_rh_spurlab.Calibration
         [Header("Prefab references")]
         [SerializeField]
         private Button _restartButton;
+
+        [SerializeField]
+        private string _mainSceneName = "Main";
+
+        [SerializeField]
+        private Button _goToMainSceneButton;
 
         [Header("Calibration Data Texts")]
         [SerializeField]
@@ -31,12 +38,18 @@ namespace ff.ar_rh_spurlab.Calibration
         private void Start()
         {
             _restartButton.onClick.AddListener(RestartButtonClickedHandler);
+            _goToMainSceneButton.onClick.AddListener(GoToMainSceneButtonClickedHandler);
         }
 
         private void Update()
         {
             UpdateCalibrationDataStatusUi();
             UpdateMappingStatusUi();
+        }
+
+        private void GoToMainSceneButtonClickedHandler()
+        {
+            SceneManager.LoadScene(_mainSceneName);
         }
 
         private void UpdateCalibrationDataStatusUi()
