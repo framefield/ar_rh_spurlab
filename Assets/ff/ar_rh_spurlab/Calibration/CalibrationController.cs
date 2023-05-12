@@ -8,6 +8,9 @@ namespace ff.ar_rh_spurlab.Calibration
     public class CalibrationController : MonoBehaviour
     {
         [SerializeField]
+        private CalibrationUi _calibrationUiPrefab;
+
+        [SerializeField]
         private Location _locationPrefab;
 
         [Header("Scene References")]
@@ -22,6 +25,8 @@ namespace ff.ar_rh_spurlab.Calibration
 
         [SerializeField]
         private Transform _xrOrigin;
+
+        private CalibrationUi _calibrationUi;
 
         private Location _location;
 
@@ -51,6 +56,15 @@ namespace ff.ar_rh_spurlab.Calibration
                 return;
             }
 
+            if (!_calibrationUiPrefab)
+            {
+                Debug.LogError("CalibrationController: CalibrationUiPrefab is not set!");
+                return;
+            }
+
+            _calibrationUi = Instantiate(_calibrationUiPrefab, transform);
+            _calibrationUi.OnRestartButtonClicked += () => _stateMachine.Reset();
+
             _stateMachine.Initialize();
         }
 
@@ -59,7 +73,12 @@ namespace ff.ar_rh_spurlab.Calibration
             CalibrationData = new CalibrationData(locationName,
                 new Vector3[]
                     { new(10.615f, 6.802f, 2.355f), new(8.448f, 6.809f, 4.812f), new(8.734f, 9.936f, 2.708f) });
-            _location = Instantiate(_locationPrefab, _xrOrigin);
+
+            if (!_location)
+            {
+                _location = Instantiate(_locationPrefab, _xrOrigin);
+            }
+
             _location.SetCalibrationData(CalibrationData);
         }
     }

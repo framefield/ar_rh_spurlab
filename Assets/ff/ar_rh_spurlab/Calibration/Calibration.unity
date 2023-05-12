@@ -2565,6 +2565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6510531017147211393}
   - component: {fileID: 6612096320635124215}
+  - component: {fileID: 6612096320635124216}
   m_Layer: 0
   m_Name: Calibrate - State
   m_TagString: Untagged
@@ -2630,6 +2631,18 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6612096320635124216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6508276277693709277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce4e2db98405495580d59bf2f22c3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6612144957398312631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2665,6 +2678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e3f76cf7d34d469faf377fd7cc5a12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _calibrationUiPrefab: {fileID: 59770335312172965, guid: dcd0999ca55804ea7a8f05b628ff1f41,
+    type: 3}
   _locationPrefab: {fileID: 7933056274355397598, guid: b3fe1dec878e245bcb78b1ab4304ed61,
     type: 3}
   _stateMachine: {fileID: 6612144957398312631}
