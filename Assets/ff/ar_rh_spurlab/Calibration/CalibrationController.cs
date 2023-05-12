@@ -1,3 +1,5 @@
+using System.IO;
+using ff.ar_rh_spurlab.AR;
 using ff.ar_rh_spurlab.Locations;
 using ff.common.statemachine;
 using UnityEngine;
@@ -18,6 +20,9 @@ namespace ff.ar_rh_spurlab.Calibration
         private StateMachine _stateMachine;
 
         [SerializeField]
+        private ARSession _arSession;
+
+        [SerializeField]
         private ARRaycastManager _arRaycastManager;
 
         [SerializeField]
@@ -32,12 +37,25 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public CalibrationData CalibrationData { get; private set; }
 
+        public ARSession Session => _arSession;
         public ARRaycastManager RaycastManager => _arRaycastManager;
         public ARAnchorManager AnchorManager => _arAnchorManager;
         public Transform XrOrigin => _xrOrigin;
 
         private void Start()
         {
+            if (!_stateMachine)
+            {
+                Debug.LogError("CalibrationController: StateMachine is not set!");
+                return;
+            }
+
+            if (!_arSession)
+            {
+                Debug.LogError("CalibrationController: ARSession is not set!");
+                return;
+            }
+
             if (!_arRaycastManager)
             {
                 Debug.LogError("CalibrationController: ARRaycastManager is not set!");
@@ -81,6 +99,12 @@ namespace ff.ar_rh_spurlab.Calibration
 
             _location.SetCalibrationData(CalibrationData);
             _calibrationUi.SetCalibrationData(CalibrationData);
+        }
+
+        public void SaveCalibrationData()
+        {
+            var filePath = Path.Combine(Application.persistentDataPath, "my_session.worldmap");
+            StartCoroutine(ARWorldMapController.Save(_arSession, filePath));
         }
     }
 }

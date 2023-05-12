@@ -528,6 +528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1074023778}
   - component: {fileID: 1074023779}
+  - component: {fileID: 1074023780}
   m_Layer: 0
   m_Name: Test Precision - State
   m_TagString: Untagged
@@ -574,6 +575,18 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1074023780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074023777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 509eaa876b09c422c8a6a82fea4c420d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1138061815
 GameObject:
   m_ObjectHideFlags: 0
@@ -2821,6 +2834,7 @@ MonoBehaviour:
   _locationPrefab: {fileID: 7933056274355397598, guid: b3fe1dec878e245bcb78b1ab4304ed61,
     type: 3}
   _stateMachine: {fileID: 6612144957398312631}
+  _arSession: {fileID: 2030565722}
   _arRaycastManager: {fileID: 275107522}
   _arAnchorManager: {fileID: 275107524}
   _xrOrigin: {fileID: 275107520}
