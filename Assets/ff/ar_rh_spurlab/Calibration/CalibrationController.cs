@@ -82,6 +82,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
             _calibrationUi = Instantiate(_calibrationUiPrefab, transform);
             _calibrationUi.OnRestartButtonClicked += () => _stateMachine.Reset();
+            _calibrationUi.SetSession(_arSession);
 
             _stateMachine.Initialize();
         }
