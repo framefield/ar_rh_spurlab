@@ -46,37 +46,37 @@ namespace ff.ar_rh_spurlab.Calibration
         {
             if (!_stateMachine)
             {
-                Debug.LogError("CalibrationController: StateMachine is not set!");
+                Debug.LogError("CalibrationController: StateMachine is not set!", this);
                 return;
             }
 
             if (!_arSession)
             {
-                Debug.LogError("CalibrationController: ARSession is not set!");
+                Debug.LogError("CalibrationController: ARSession is not set!", this);
                 return;
             }
 
             if (!_arRaycastManager)
             {
-                Debug.LogError("CalibrationController: ARRaycastManager is not set!");
+                Debug.LogError("CalibrationController: ARRaycastManager is not set!", this);
                 return;
             }
 
             if (!_arAnchorManager)
             {
-                Debug.LogError("CalibrationController: ARAnchorManager is not set!");
+                Debug.LogError("CalibrationController: ARAnchorManager is not set!", this);
                 return;
             }
 
             if (!_xrOrigin)
             {
-                Debug.LogError("CalibrationController: XrOrigin is not set!");
+                Debug.LogError("CalibrationController: XrOrigin is not set!", this);
                 return;
             }
 
             if (!_calibrationUiPrefab)
             {
-                Debug.LogError("CalibrationController: CalibrationUiPrefab is not set!");
+                Debug.LogError("CalibrationController: CalibrationUiPrefab is not set!", this);
                 return;
             }
 
@@ -97,6 +97,7 @@ namespace ff.ar_rh_spurlab.Calibration
                     new Vector3[]
                         { new(10.615f, 6.802f, 2.355f), new(8.448f, 6.809f, 4.812f), new(8.734f, 9.936f, 2.708f) });
             }
+
             if (!_location)
             {
                 _location = Instantiate(_locationPrefab, _xrOrigin);
@@ -108,11 +109,11 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void SaveCalibrationData()
         {
-            string path = Path.Combine(Application.persistentDataPath + "/" + CalibrationData.Name);
-            var filePath = Path.Combine(path, "my_session.worldmap");
+            var directoryPath = Path.Combine(Application.persistentDataPath, CalibrationData.Name);
+            var filePath = Path.Combine(directoryPath, "my_session.worldmap");
             StartCoroutine(ARWorldMapController.Save(_arSession, filePath));
 
-            CalibrationData.Store(path);
+            CalibrationData.Store(directoryPath);
         }
     }
 }

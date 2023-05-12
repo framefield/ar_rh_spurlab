@@ -18,13 +18,13 @@ namespace ff.ar_rh_spurlab.Calibration
 
             Vector3[] pointsInXROrigin =
             {
-                calibrationData.Marker1.Position,
-                calibrationData.Marker2.Position,
-                calibrationData.Marker3.Position
+                calibrationData.Marker1.GetUpdatedPosition(),
+                calibrationData.Marker2.GetUpdatedPosition(),
+                calibrationData.Marker3.GetUpdatedPosition()
             };
             var (xrOriginTLocationOrigin, matchingDeviation) =
                 CalculateTransformFromAToB(calibrationData.PointsInLocationOrigin, pointsInXROrigin);
-            
+
             return (Matrix4x4.Translate(calibrationData.Offset) * xrOriginTLocationOrigin, true);
         }
 
@@ -60,9 +60,9 @@ namespace ff.ar_rh_spurlab.Calibration
         public Marker Marker3;
 
         public Vector3[] PointsInLocationOrigin;
-        //    { new(10.615f, 6.802f, 2.355f), new(8.448f, 6.809f, 4.812f), new(8.734f, 9.936f, 2.708f) };
 
-        public Vector3 Offset { get; set; }
+        public string Name;
+        public Vector3 Offset;
 
         public CalibrationData(string name, Vector3[] pointsInLocationOrigin)
         {
@@ -70,35 +70,44 @@ namespace ff.ar_rh_spurlab.Calibration
             PointsInLocationOrigin = pointsInLocationOrigin;
         }
 
-        static public CalibrationData TryLoad(string name)
+        public bool IsValid => Marker.IsValid(Marker1) && Marker.IsValid(Marker2) && Marker.IsValid(Marker3);
+        public int NumberOfReferencePoints => 3;
+
+        public static CalibrationData TryLoad(string name)
         {
-            string path = Path.Combine(Application.persistentDataPath + "/" + name, "calibrationdata.json");
+            var filePath = Path.Combine(Application.persistentDataPath, name, "calibrationdata.json");
+            Debug.Log(filePath);
             try
             {
-                var reader = new StreamReader(path);
+                var reader = new StreamReader(filePath);
                 return JsonUtility.FromJson<CalibrationData>(reader.ReadToEnd());
             }
             catch (Exception)
             {
-                Debug.LogError($"Failed to read file at {path}");
+                Debug.LogError($"Failed to read file at {filePath}");
             }
+
             return null;
         }
 
-        public void Store(string path)
+        public void Store(string directoryPath)
         {
-            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(directoryPath);
 
-            string filePath = Path.Combine(path, "calibrationdata.json");
+            Marker1.UpdatePosition();
+            Marker2.UpdatePosition();
+            Marker3.UpdatePosition();
+
+            var jsonContent = JsonUtility.ToJson(this);
+            Debug.Log($"calibration serialized content: {jsonContent}");
+
+            var filePath = Path.Combine(directoryPath, "calibrationdata.json");
             var writer = new StreamWriter(filePath);
-            writer.Write(JsonUtility.ToJson(this));
+            writer.Write(jsonContent);
             writer.Close();
-            Debug.Log($"calibration data read from file {filePath}");
-        }
 
-        public string Name { get; private set; }
-        public bool IsValid => Marker.IsValid(Marker1) && Marker.IsValid(Marker2) && Marker.IsValid(Marker3);
-        public int NumberOfReferencePoints => 3;
+            Debug.Log($"calibration data store to file {filePath}");
+        }
 
         public void UpdateMarkers(ARAnchor anchor1, ARAnchor anchor2, ARAnchor anchor3)
         {
@@ -112,14 +121,25 @@ namespace ff.ar_rh_spurlab.Calibration
     [Serializable]
     public class Marker
     {
+        public Vector3 Position;
         private readonly ARAnchor _anchor;
 
         public Marker(ARAnchor anchor)
         {
             _anchor = anchor;
+            Position = _anchor ? _anchor.transform.position : Vector3.zero;
         }
 
-        public Vector3 Position => _anchor ? _anchor.transform.position : Vector3.zero;
+        public Vector3 GetUpdatedPosition()
+        {
+            UpdatePosition();
+            return Position;
+        }
+
+        public void UpdatePosition()
+        {
+            Position = _anchor ? _anchor.transform.position : Vector3.zero;
+        }
 
         public static bool IsValid(Marker marker)
         {
