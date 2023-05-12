@@ -89,10 +89,14 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void SetLocation(string locationName)
         {
-            CalibrationData = new CalibrationData(locationName,
-                new Vector3[]
-                    { new(10.615f, 6.802f, 2.355f), new(8.448f, 6.809f, 4.812f), new(8.734f, 9.936f, 2.708f) });
+            CalibrationData = CalibrationData.TryLoad(locationName);
 
+            if (CalibrationData == null)
+            {
+                CalibrationData = new CalibrationData(locationName,
+                    new Vector3[]
+                        { new(10.615f, 6.802f, 2.355f), new(8.448f, 6.809f, 4.812f), new(8.734f, 9.936f, 2.708f) });
+            }
             if (!_location)
             {
                 _location = Instantiate(_locationPrefab, _xrOrigin);
@@ -104,8 +108,11 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void SaveCalibrationData()
         {
-            var filePath = Path.Combine(Application.persistentDataPath, "my_session.worldmap");
+            string path = Path.Combine(Application.persistentDataPath + "/" + CalibrationData.Name);
+            var filePath = Path.Combine(path, "my_session.worldmap");
             StartCoroutine(ARWorldMapController.Save(_arSession, filePath));
+
+            CalibrationData.Store(path);
         }
     }
 }

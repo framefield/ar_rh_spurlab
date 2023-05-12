@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
@@ -50,6 +52,7 @@ namespace ff.ar_rh_spurlab.Calibration
         }
     }
 
+    [Serializable]
     public class CalibrationData
     {
         public Marker Marker1;
@@ -67,6 +70,32 @@ namespace ff.ar_rh_spurlab.Calibration
             PointsInLocationOrigin = pointsInLocationOrigin;
         }
 
+        static public CalibrationData TryLoad(string name)
+        {
+            string path = Path.Combine(Application.persistentDataPath + "/" + name, "calibrationdata.json");
+            try
+            {
+                var reader = new StreamReader(path);
+                return JsonUtility.FromJson<CalibrationData>(reader.ReadToEnd());
+            }
+            catch (Exception)
+            {
+                Debug.LogError($"Failed to read file at {path}");
+            }
+            return null;
+        }
+
+        public void Store(string path)
+        {
+            Directory.CreateDirectory(path);
+
+            string filePath = Path.Combine(path, "calibrationdata.json");
+            var writer = new StreamWriter(filePath);
+            writer.Write(JsonUtility.ToJson(this));
+            writer.Close();
+            Debug.Log($"calibration data read from file {filePath}");
+        }
+
         public string Name { get; private set; }
         public bool IsValid => Marker.IsValid(Marker1) && Marker.IsValid(Marker2) && Marker.IsValid(Marker3);
         public int NumberOfReferencePoints => 3;
@@ -80,6 +109,7 @@ namespace ff.ar_rh_spurlab.Calibration
     }
 
 
+    [Serializable]
     public class Marker
     {
         private readonly ARAnchor _anchor;
