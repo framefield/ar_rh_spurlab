@@ -74,6 +74,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
             marker.name = "ARMarkerAnchor";
             _placedAnchors.Add(marker);
+            _calibrationController.CalibrationData.MatchedAnchors.Add(marker);
         }
 
 
@@ -88,6 +89,11 @@ namespace ff.ar_rh_spurlab.Calibration
                 _calibrationController = stateMachine.GetComponent<CalibrationController>();
             }
 
+            if (_calibrationController.CalibrationData == null)
+            {
+                return;
+            }
+
             _stateMachine = stateMachine;
             _isActive = true;
 
@@ -95,7 +101,17 @@ namespace ff.ar_rh_spurlab.Calibration
             _pointSelectionUi.SetPointSelectionController(this);
             _pointSelectionUi.OnContinueButtonClicked += () => _stateMachine.Continue();
 
+            foreach (var placedAnchor in _placedAnchors)
+            {
+                if (placedAnchor || placedAnchor.gameObject)
+                {
+                    Destroy(placedAnchor.gameObject);
+                }
+            }
+
             _placedAnchors.Clear();
+
+            _calibrationController.CalibrationData.MatchedAnchors.Clear();
         }
 
         public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)

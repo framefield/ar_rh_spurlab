@@ -52,8 +52,8 @@ namespace ff.ar_rh_spurlab.Calibration
         public Vector3 Offset;
         public Vector3[] PointsInWorldMap;
 
-        [NonSerialized]
-        public bool AreAnchorsReady;
+        // matched anchors are stored here to be able to simulate anchors in editor.
+        public List<ARAnchor> MatchedAnchors = new();
 
         public CalibrationData(string name)
         {
@@ -61,6 +61,8 @@ namespace ff.ar_rh_spurlab.Calibration
             Offset = Vector3.zero;
             PointsInWorldMap = new Vector3[LocationData.NumberOfReferencePoints];
         }
+
+        public bool AreAnchorsReady => MatchedAnchors.Count == LocationData.NumberOfReferencePoints;
 
         public static CalibrationData TryLoad(string name)
         {
@@ -98,7 +100,7 @@ namespace ff.ar_rh_spurlab.Calibration
     {
         public enum Mode
         {
-            Calibration,
+            Calibrating,
             Tracking
         }
 
@@ -107,7 +109,6 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private readonly ARAnchorManager _arAnchorManager;
 
-        private readonly List<ARAnchor> _matchedAnchors = new();
         private readonly Mode _mode;
         private CalibrationData _calibrationData;
 
@@ -119,15 +120,13 @@ namespace ff.ar_rh_spurlab.Calibration
             _arAnchorManager.anchorsChanged += OnAnchorsChanged;
         }
 
-        private bool AreAnchorsReady => _matchedAnchors.Count == LocationData.NumberOfReferencePoints;
-
         private void OnAnchorsChanged(ARAnchorsChangedEventArgs args)
         {
             Debug.Log("On Anchors Changed");
 
             switch (_mode)
             {
-                case Mode.Calibration:
+                case Mode.Calibrating:
                     UpdateAnchorsInCalibration(args);
                     break;
                 case Mode.Tracking:
@@ -137,38 +136,16 @@ namespace ff.ar_rh_spurlab.Calibration
                     throw new ArgumentOutOfRangeException();
             }
 
-            _calibrationData.AreAnchorsReady = AreAnchorsReady;
 
-            for (var i = 0; i < _matchedAnchors.Count; i++)
+            for (var i = 0; i < _calibrationData.MatchedAnchors.Count; i++)
             {
-                _calibrationData.PointsInWorldMap[i] = _matchedAnchors[i].transform.position;
+                _calibrationData.PointsInWorldMap[i] = _calibrationData.MatchedAnchors[i].transform.position;
             }
         }
 
         private void UpdateAnchorsInCalibration(ARAnchorsChangedEventArgs args)
         {
-            foreach (var removedAnchor in args.removed)
-            {
-                _matchedAnchors.Remove(removedAnchor);
-            }
-
-            foreach (var addedAnchor in args.added)
-            {
-                if (_matchedAnchors.Count < LocationData.NumberOfReferencePoints)
-                {
-                    _matchedAnchors.Add(addedAnchor);
-                }
-            }
-
-            if (_calibrationData == null)
-            {
-                return;
-            }
-
-            for (var i = 0; i < _matchedAnchors.Count; i++)
-            {
-                _calibrationData.PointsInWorldMap[i] = _matchedAnchors[i].transform.position;
-            }
+            // do nothing, PointSelectionController handles the anchors.
         }
 
         private void UpdateAnchorsInTracking(ARAnchorsChangedEventArgs args)
@@ -191,24 +168,46 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private void MatchExistingAnchors()
         {
-            _matchedAnchors.Clear();
-
-            if (_calibrationData == null || _allAnchors.Count < _calibrationData.PointsInWorldMap.Length)
+            if (_mode == Mode.Calibrating)
             {
                 return;
             }
 
-            foreach (var storedPointInWorldMap in _calibrationData.PointsInWorldMap)
+            if (_calibrationData == null)
+            {
+                return;
+            }
+
+            _calibrationData.MatchedAnchors.Clear();
+
+#if UNITY_IOS && !UNITY_EDITOR
+            if (_allAnchors.Count < _calibrationData.PointsInWorldMap.Length)
+            {
+                return;
+            }
+
+            for (var i = 0; i < _calibrationData.PointsInWorldMap.Length; i++)
             {
                 foreach (var anchor in _allAnchors)
                 {
-                    if (Vector3.Distance(anchor.transform.position, storedPointInWorldMap) < 0.1f)
+                    if (Vector3.Distance(anchor.transform.position, _calibrationData.PointsInWorldMap[i]) < 0.1f)
                     {
-                        _matchedAnchors.Add(anchor);
+                        _calibrationData.MatchedAnchors.Add(anchor);
+                        _calibrationData.PointsInWorldMap[i] = anchor.transform.position;
                         break;
                     }
                 }
             }
+#elif UNITY_EDITOR
+            // simulate anchors in editor
+            foreach (var position in _calibrationData.PointsInWorldMap)
+            {
+                var gameObject = Object.Instantiate(_arAnchorManager.anchorPrefab);
+                gameObject.transform.position = position;
+                var anchor = gameObject.GetComponent<ARAnchor>();
+                _calibrationData.MatchedAnchors.Add(anchor);
+            }
+#endif
         }
 
         public void SetCalibrationData(CalibrationData calibrationData)
@@ -219,7 +218,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void Reset()
         {
-            if (_mode != Mode.Calibration)
+            if (_mode != Mode.Calibrating)
             {
                 return;
             }
@@ -230,7 +229,8 @@ namespace ff.ar_rh_spurlab.Calibration
             }
 
             _allAnchors.Clear();
-            _matchedAnchors.Clear();
+
+            _calibrationData?.MatchedAnchors.Clear();
         }
     }
 }

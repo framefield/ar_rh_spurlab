@@ -88,7 +88,7 @@ namespace ff.ar_rh_spurlab.Calibration
             _calibrationUi.SetSession(_arSession);
 
             _calibrationARAnchorManager =
-                new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Calibration);
+                new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Calibrating);
             _stateMachine.Initialize();
         }
 
