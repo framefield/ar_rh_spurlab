@@ -1,26 +1,43 @@
-using ff.ar_rh_spurlab.Locations;
 using ff.common.statemachine;
 using UnityEngine;
 
-public class LocationSelection : MonoBehaviour, IActiveInStateContent
+namespace ff.ar_rh_spurlab.Locations
 {
-    public void Initialize()
+    public class LocationSelection : MonoBehaviour, IActiveInStateContent
     {
-    }
+        [SerializeField]
+        private LocationSelectionUi _locationSelectionUiPrefab;
 
-    public void Activate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
-    {
-        var locationController = stateMachine.GetComponent<LocationController>();
+        private LocationController _locationController;
 
-        if (locationController)
+        private LocationSelectionUi _locationSelectionUi;
+        private StateMachine _stateMachine;
+
+        public void Initialize()
         {
-            locationController.SetLocation("FF Office");
+            _locationSelectionUi = Instantiate(_locationSelectionUiPrefab, transform);
+            _locationSelectionUi.SetVisibility(false);
         }
 
-        stateMachine.Continue();
-    }
+        public void Activate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
+        {
+            _locationController = stateMachine.GetComponent<LocationController>();
+            _stateMachine = stateMachine;
+            _locationSelectionUi.SetVisibility(true);
+            _locationSelectionUi.SetOptions(_locationController.AvailableLocations);
+            _locationSelectionUi.OnLocationSelected += OnLocationSelected;
+        }
 
-    public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
-    {
+        public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
+        {
+            _locationSelectionUi.SetVisibility(false);
+            _locationSelectionUi.OnLocationSelected -= OnLocationSelected;
+        }
+
+        private void OnLocationSelected(LocationData locationData)
+        {
+            _locationController.SetLocation(locationData);
+            _stateMachine.Continue();
+        }
     }
 }

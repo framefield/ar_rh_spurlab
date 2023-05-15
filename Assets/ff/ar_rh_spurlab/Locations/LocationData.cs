@@ -7,6 +7,7 @@ namespace ff.ar_rh_spurlab.Locations
     {
         public static readonly int NumberOfReferencePoints = 3;
 
+        public string _name = "Location Placeholder Name";
         public Location _prefab;
         public Vector3[] _pointsInLocationOrigin;
 
@@ -19,7 +20,10 @@ namespace ff.ar_rh_spurlab.Locations
 
             var validPoints = new Vector3[NumberOfReferencePoints];
             for (var i = 0; i < Mathf.Min(NumberOfReferencePoints, _pointsInLocationOrigin.Length); ++i)
+            {
                 validPoints[i] = _pointsInLocationOrigin[i];
+            }
+
             _pointsInLocationOrigin = validPoints;
         }
     }

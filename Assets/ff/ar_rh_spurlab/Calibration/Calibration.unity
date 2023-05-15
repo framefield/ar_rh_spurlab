@@ -2245,6 +2245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735d33fbd4e6148d99095a5293bf3dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _locationSelectionUiPrefab: {fileID: 6635344559012655264, guid: 503d003bcc8894051b317b8d9cccf014,
+    type: 3}
 --- !u!1 &1955458092
 GameObject:
   m_ObjectHideFlags: 0
@@ -4865,7 +4867,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _calibrationUiPrefab: {fileID: 59770335312172965, guid: dcd0999ca55804ea7a8f05b628ff1f41,
     type: 3}
-  _locationData: {fileID: 11400000, guid: aae92e1daa2ef477591c98f9d3d30b33, type: 2}
+  _availableLocations:
+  - {fileID: 11400000, guid: aae92e1daa2ef477591c98f9d3d30b33, type: 2}
+  - {fileID: 11400000, guid: 53100a4c1ba144d3d984376d9d22a690, type: 2}
   _stateMachine: {fileID: 6612144957398312631}
   _arSession: {fileID: 2030565722}
   _arRaycastManager: {fileID: 275107522}

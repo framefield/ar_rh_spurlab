@@ -13,7 +13,7 @@ namespace ff.ar_rh_spurlab.Calibration
         private CalibrationUi _calibrationUiPrefab;
 
         [SerializeField]
-        private LocationData _locationData;
+        private LocationData[] _availableLocations;
 
         [Header("Scene References")]
         [SerializeField]
@@ -43,6 +43,8 @@ namespace ff.ar_rh_spurlab.Calibration
         public ARSession Session => _arSession;
         public ARRaycastManager RaycastManager => _arRaycastManager;
         public ARAnchorManager AnchorManager => _arAnchorManager;
+        public LocationData[] AvailableLocations => _availableLocations;
+
         public Transform XrOrigin => _xrOrigin;
 
         private void Start()
@@ -92,16 +94,17 @@ namespace ff.ar_rh_spurlab.Calibration
             _stateMachine.Initialize();
         }
 
-        public void SetLocation(string locationName)
+        public void SetLocation(LocationData locationData)
         {
-            CalibrationData = new CalibrationData(locationName);
+            CalibrationData = new CalibrationData(locationData._name);
 
-            if (!_location)
+            if (_location)
             {
-                _location = Instantiate(_locationData._prefab, _xrOrigin);
+                Destroy(_location.gameObject);
             }
 
-            _location.Initialize(CalibrationData, _locationData);
+            _location = Instantiate(locationData._prefab, _xrOrigin);
+            _location.Initialize(CalibrationData, locationData);
             _calibrationUi.SetCalibrationData(CalibrationData);
             _calibrationARAnchorManager.SetCalibrationData(CalibrationData);
         }

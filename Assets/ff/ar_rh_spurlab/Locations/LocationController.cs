@@ -10,7 +10,7 @@ namespace ff.ar_rh_spurlab.Locations
     public class LocationController : MonoBehaviour
     {
         [SerializeField]
-        private LocationData _locationData;
+        private LocationData[] _availableLocations;
 
         [Header("Scene References")]
         [SerializeField]
@@ -29,6 +29,8 @@ namespace ff.ar_rh_spurlab.Locations
 
 
         private Location _location;
+        public LocationData[] AvailableLocations => _availableLocations;
+
 
         private void Start()
         {
@@ -61,22 +63,23 @@ namespace ff.ar_rh_spurlab.Locations
             _stateMachine.Initialize();
         }
 
-        public void SetLocation(string locationName)
+        public void SetLocation(LocationData locationData)
         {
-            var calibrationData = CalibrationData.TryLoad(locationName);
+            var calibrationData = CalibrationData.TryLoad(locationData._name);
 
             if (calibrationData == null)
             {
-                Debug.LogError($"Location is not calibrated: {locationName}", this);
+                Debug.LogError($"Location is not calibrated: {locationData._name}", this);
                 return;
             }
 
-            if (!_location)
+            if (_location)
             {
-                _location = Instantiate(_locationData._prefab, _xrOrigin);
+                Destroy(_location.gameObject);
             }
 
-            _location.Initialize(calibrationData, _locationData);
+            _location = Instantiate(locationData._prefab, _xrOrigin);
+            _location.Initialize(calibrationData, locationData);
             _calibrationARAnchorManager.SetCalibrationData(calibrationData);
 
 #if UNITY_IOS
