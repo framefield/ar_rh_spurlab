@@ -32,10 +32,10 @@ namespace ff.ar_rh_spurlab.Calibration
             }
 
             var calibration = _calibrationController.CalibrationData;
-            _calibrationAnchorController.Update();
+            //_calibrationAnchorController.Update();
 
-            var placedMarker = FindObjectsByType<ARAnchor>(FindObjectsSortMode.None).ToList();
-            placedMarker.Sort((a, b) => string.Compare(a.gameObject.name, b.gameObject.name, StringComparison.Ordinal));
+            //var placedMarker = FindObjectsByType<ARAnchor>(FindObjectsSortMode.None).ToList();
+            //placedMarker.Sort((a, b) => string.Compare(a.gameObject.name, b.gameObject.name, StringComparison.Ordinal));
 
             if (Pointer.current == null || !_pressed)
             {
@@ -53,10 +53,10 @@ namespace ff.ar_rh_spurlab.Calibration
             var hitPose = _sHits[0].pose;
 
             GameObject selectedMarkerObject = null;
-            foreach (var obj in placedMarker)
-                if ((obj.transform.position - hitPose.position).magnitude < 0.1)
+            foreach (var obj in calibration.Markers)
+                if ((obj.Position - hitPose.position).magnitude < 0.1)
                 {
-                    selectedMarkerObject = obj.gameObject;
+                    selectedMarkerObject = obj.GameObject;
                     break;
                 }
 
@@ -66,22 +66,24 @@ namespace ff.ar_rh_spurlab.Calibration
             }
             else
             {
-                if (placedMarker.Count < calibration.NumberOfReferencePoints)
+                if (calibration.Markers.Count < calibration.NumberOfReferencePoints)
                 {
                     var marker = Instantiate(_markerPrefab, hitPose.position, hitPose.rotation,
                         _calibrationController.XrOrigin);
-                    var arAnchor = marker.GetComponent<ARAnchor>();
-                    var calibrationId = $"ARMarkerAnchor_{placedMarker.Count}";
+                    //var arAnchor = marker.GetComponent<ARAnchor>();
+                    var calibrationId = $"ARMarkerAnchor_{calibration.Markers.Count}";
                     marker.name = calibrationId;
-                    placedMarker.Add(arAnchor);
-                    _calibrationAnchorController.TryAddCalibrationId(calibrationId, arAnchor);
+                    //placedMarker.Add(arAnchor);
+                    calibration.Markers.Add(new Marker(marker));
+
+                    //_calibrationAnchorController.TryAddCalibrationId(calibrationId, arAnchor);
                 }
             }
 
 
-            if (placedMarker.Count == calibration.NumberOfReferencePoints)
+            if (calibration.Markers.Count == calibration.NumberOfReferencePoints)
             {
-                calibration.UpdateMarkers(placedMarker[0], placedMarker[1], placedMarker[2]);
+                //calibration.UpdateMarkers(placedMarker[0], placedMarker[1], placedMarker[2]);
                 _stateMachine.Continue();
             }
         }

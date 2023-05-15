@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
@@ -18,9 +19,9 @@ namespace ff.ar_rh_spurlab.Calibration
 
             Vector3[] pointsInXROrigin =
             {
-                calibrationData.Marker1.GetUpdatedPosition(),
-                calibrationData.Marker2.GetUpdatedPosition(),
-                calibrationData.Marker3.GetUpdatedPosition()
+                calibrationData.Markers[0].Position,
+                calibrationData.Markers[1].Position,
+                calibrationData.Markers[2].Position
             };
             var (xrOriginTLocationOrigin, matchingDeviation) =
                 CalculateTransformFromAToB(calibrationData.PointsInLocationOrigin, pointsInXROrigin);
@@ -53,25 +54,71 @@ namespace ff.ar_rh_spurlab.Calibration
     }
 
     [Serializable]
+    public struct _CalibrationData
+    {
+        public string Name;
+        public Vector3[] PointsInWorldMap;
+        public Vector3[] PointsInLocationOrigin;
+        public Vector3 Offset;
+
+        public _CalibrationData(CalibrationData calibrationData)
+        {
+            Name = calibrationData.Name;
+            var pointsInWorldMap = new List<Vector3>();
+            foreach (var marker in calibrationData.Markers)
+                pointsInWorldMap.Add(marker.Position);
+            PointsInWorldMap = pointsInWorldMap.ToArray();
+            PointsInLocationOrigin = calibrationData.PointsInLocationOrigin;
+            Offset = calibrationData.Offset;
+        }
+    }
+
     public class CalibrationData
     {
-        public Marker Marker1;
-        public Marker Marker2;
-        public Marker Marker3;
-
-        public Vector3[] PointsInLocationOrigin;
-
         public string Name;
+        public List<Marker> Markers;
+        public Vector3[] PointsInLocationOrigin;
         public Vector3 Offset;
 
         public CalibrationData(string name, Vector3[] pointsInLocationOrigin)
         {
             Name = name;
             PointsInLocationOrigin = pointsInLocationOrigin;
+            Offset = Vector3.zero;
+
+            var placedMarker = MonoBehaviour.FindObjectsByType<ARAnchor>(FindObjectsSortMode.None).ToList();
+            placedMarker.Sort((a, b) => string.Compare(a.gameObject.name, b.gameObject.name, StringComparison.Ordinal));
+
+            Markers = new List<Marker>();
+            foreach (var markerObj in placedMarker)
+                Markers.Add(new Marker(markerObj.gameObject));
         }
 
-        public bool IsValid => Marker.IsValid(Marker1) && Marker.IsValid(Marker2) && Marker.IsValid(Marker3);
-        public int NumberOfReferencePoints => 3;
+        public CalibrationData(_CalibrationData data)
+        {
+            Name = data.Name;
+            PointsInLocationOrigin = data.PointsInLocationOrigin;
+            Offset = data.Offset;
+
+            Markers = new List<Marker>();
+            if (data.PointsInWorldMap.Length > 0)
+            {
+                var anchorsInWorldMap = MonoBehaviour.FindObjectsByType<ARAnchor>(FindObjectsSortMode.None).ToList();
+
+                foreach (var storedPointInWorldMap in data.PointsInWorldMap)
+                {
+                    foreach (var anchorInWorldMap in anchorsInWorldMap)
+                    {
+                        if ((storedPointInWorldMap - anchorInWorldMap.transform.position).magnitude < 0.1)
+                            Markers.Add(new Marker(anchorInWorldMap.gameObject));
+                    }
+                }
+            }
+        }
+
+        public bool IsValid => Markers.Count == 3 && Marker.IsValid(Markers[0]) && Marker.IsValid(Markers[1]) && Marker.IsValid(Markers[2]);
+
+        public int NumberOfReferencePoints => PointsInLocationOrigin.Length;
 
         public static CalibrationData TryLoad(string name)
         {
@@ -80,7 +127,7 @@ namespace ff.ar_rh_spurlab.Calibration
             try
             {
                 var reader = new StreamReader(filePath);
-                return JsonUtility.FromJson<CalibrationData>(reader.ReadToEnd());
+                return new CalibrationData(JsonUtility.FromJson<_CalibrationData>(reader.ReadToEnd()));
             }
             catch (Exception)
             {
@@ -94,11 +141,8 @@ namespace ff.ar_rh_spurlab.Calibration
         {
             Directory.CreateDirectory(directoryPath);
 
-            Marker1.UpdatePosition();
-            Marker2.UpdatePosition();
-            Marker3.UpdatePosition();
-
-            var jsonContent = JsonUtility.ToJson(this);
+            var data = new _CalibrationData(this);
+            var jsonContent = JsonUtility.ToJson(data);
             Debug.Log($"calibration serialized content: {jsonContent}");
 
             var filePath = Path.Combine(directoryPath, "calibrationdata.json");
@@ -109,40 +153,35 @@ namespace ff.ar_rh_spurlab.Calibration
             Debug.Log($"calibration data store to file {filePath}");
         }
 
-        public void UpdateMarkers(ARAnchor anchor1, ARAnchor anchor2, ARAnchor anchor3)
-        {
-            Marker1 = new Marker(anchor1);
-            Marker2 = new Marker(anchor2);
-            Marker3 = new Marker(anchor3);
-        }
+        //public void UpdateMarkers(ARAnchor anchor1, ARAnchor anchor2, ARAnchor anchor3)
+        //{
+        //    Marker1 = new Marker(anchor1);
+        //    Marker2 = new Marker(anchor2);
+        //    Marker3 = new Marker(anchor3);
+        //}
     }
 
 
-    [Serializable]
     public class Marker
     {
-        public Vector3 Position;
-        private readonly ARAnchor _anchor;
-
-        public Marker(ARAnchor anchor)
+        public Vector3 Position
         {
-            _anchor = anchor;
-            Position = _anchor ? _anchor.transform.position : Vector3.zero;
-        }
-
-        public Vector3 GetUpdatedPosition()
-        {
-            if (_anchor)
+            get
             {
-                UpdatePosition();
+                return _anchor ? _anchor.transform.position : Vector3.zero;
             }
-
-            return Position;
         }
 
-        public void UpdatePosition()
+        public GameObject GameObject { get { return _markerObj; } }
+
+        private readonly ARAnchor _anchor;
+        private readonly GameObject _markerObj;
+
+        public Marker(GameObject markerObj)//ARAnchor anchor)
         {
-            Position = _anchor ? _anchor.transform.position : Vector3.zero;
+            _markerObj = markerObj;
+
+            _anchor = markerObj.GetComponent<ARAnchor>();
         }
 
         public static bool IsValid(Marker marker)

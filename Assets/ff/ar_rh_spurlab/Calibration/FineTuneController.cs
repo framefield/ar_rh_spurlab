@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using ff.common.statemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARFoundation.Samples;
-using UnityEngine.XR.ARSubsystems;
 
 namespace ff.ar_rh_spurlab.Calibration
 {
@@ -41,7 +38,6 @@ namespace ff.ar_rh_spurlab.Calibration
             }
 
             var touchPosition = Pointer.current.position.ReadValue();
-            Debug.Log($"touch position {touchPosition}");
 
             var worldPTouchPosition = _mainCamera.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, _mainCamera.nearClipPlane));
             var worldPOffset = worldPTouchPosition - _lastWorldPTouchPosition;
@@ -49,7 +45,6 @@ namespace ff.ar_rh_spurlab.Calibration
             {
                 var calibration = _calibrationController.CalibrationData;
                 calibration.Offset += worldPOffset;
-                Debug.Log($"offset: {calibration.Offset}");
             }
 
             _lastWorldPTouchPosition = worldPTouchPosition;
