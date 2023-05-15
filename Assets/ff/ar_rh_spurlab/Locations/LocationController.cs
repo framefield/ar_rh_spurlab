@@ -1,8 +1,5 @@
-#if UNITY_IOS && !UNITY_EDITOR
 using System.IO;
 using ff.ar_rh_spurlab.AR;
-#endif
-
 using ff.ar_rh_spurlab.Calibration;
 using ff.common.statemachine;
 using UnityEngine;
@@ -23,7 +20,12 @@ namespace ff.ar_rh_spurlab.Locations
         private ARSession _arSession;
 
         [SerializeField]
+        private ARAnchorManager _arAnchorManager;
+
+        [SerializeField]
         private Transform _xrOrigin;
+
+        private CalibrationARAnchorManager _calibrationARAnchorManager;
 
 
         private Location _location;
@@ -42,12 +44,20 @@ namespace ff.ar_rh_spurlab.Locations
                 return;
             }
 
+            if (!_arAnchorManager)
+            {
+                Debug.LogError("LocationController: ARAnchorManager is not set!", this);
+                return;
+            }
+
             if (!_xrOrigin)
             {
                 Debug.LogError("LocationController: XrOrigin is not set!", this);
                 return;
             }
 
+            _calibrationARAnchorManager =
+                new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Tracking);
             _stateMachine.Initialize();
         }
 
@@ -67,20 +77,14 @@ namespace ff.ar_rh_spurlab.Locations
             }
 
             _location.Initialize(calibrationData, _locationData);
+            _calibrationARAnchorManager.SetCalibrationData(calibrationData);
 
-#if UNITY_IOS && !UNITY_EDITOR
+#if UNITY_IOS
             var directoryPath = Path.Combine(Application.persistentDataPath, calibrationData.Name);
             var filePath = Path.Combine(directoryPath, "my_session.worldmap");
 
-            StartCoroutine(ARWorldMapController.Load(_arSession, filePath, OnArWorldMapLoadedHandler));
-#else
-            _location.CalibrationData.SearchForMarkers();
+            StartCoroutine(ARWorldMapController.Load(_arSession, filePath));
 #endif
-        }
-
-        private void OnArWorldMapLoadedHandler()
-        {
-            _location.CalibrationData.SearchForMarkers();
         }
     }
 }

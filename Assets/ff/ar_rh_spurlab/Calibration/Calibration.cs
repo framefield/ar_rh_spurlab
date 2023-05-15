@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using ff.ar_rh_spurlab.Locations;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -14,13 +13,6 @@ namespace ff.ar_rh_spurlab.Calibration
         public static (Matrix4x4 xrOriginTLocationOrigin, bool isValid) GetXrOriginTLocationOrigin(
             CalibrationData calibrationData, LocationData locationData)
         {
-            if (calibrationData?.IsValid != true)
-            {
-                return (Matrix4x4.identity, false);
-            }
-
-            calibrationData.Update();
-
             var (xrOriginTLocationOrigin, matchingDeviation) =
                 CalculateTransformFromAToB(locationData._pointsInLocationOrigin, calibrationData.PointsInWorldMap);
 
@@ -45,7 +37,9 @@ namespace ff.ar_rh_spurlab.Calibration
 
             var matchingDeviation = 0.0f;
             for (var i = 0; i < pointsInA.Count; ++i)
+            {
                 matchingDeviation += (pointsInB[i] - bTA.MultiplyPoint(pointsInA[i])).magnitude;
+            }
 
             return (bTA, matchingDeviation / pointsInA.Count);
         }
@@ -57,65 +51,15 @@ namespace ff.ar_rh_spurlab.Calibration
         public string Name;
         public Vector3 Offset;
         public Vector3[] PointsInWorldMap;
-        public List<Marker> Markers = new();
+
+        [NonSerialized]
+        public bool AreAnchorsReady;
 
         public CalibrationData(string name)
         {
             Name = name;
             Offset = Vector3.zero;
-
             PointsInWorldMap = new Vector3[LocationData.NumberOfReferencePoints];
-        }
-
-        public bool IsValid => Markers != null && Markers.Count == LocationData.NumberOfReferencePoints &&
-                               Markers.All(Marker.IsValid);
-
-        public void SearchForMarkers()
-        {
-            Markers = new List<Marker>();
-            if (PointsInWorldMap.Length == 0)
-            {
-                return;
-            }
-
-#if UNITY_IOS && !UNITY_EDITOR
-            var anchorsInWorldMap = UnityEngine.Object.FindObjectsByType<ARAnchor>(FindObjectsSortMode.None).ToList();
-
-            foreach (var storedPointInWorldMap in PointsInWorldMap)
-            {
-                foreach (var anchorInWorldMap in anchorsInWorldMap)
-                {
-                    var isSamePoint = (storedPointInWorldMap - anchorInWorldMap.transform.position).magnitude < 0.1;
-                    if (isSamePoint)
-                    {
-                        Markers.Add(new Marker(anchorInWorldMap));
-                        break;
-                    }
-                }
-            }
-            
-            Debug.Log($"Found {anchorsInWorldMap.Count} anchors in world map and matched {Markers.Count} of them.");
-#else
-            for (var i = 0; i < PointsInWorldMap.Length; i++)
-            {
-                var anchorGameObject = new GameObject
-                {
-                    name = $"ARMarkerAnchor_{i + 1}",
-                    transform =
-                    {
-                        position = PointsInWorldMap[i]
-                    }
-                };
-                var anchor = anchorGameObject.AddComponent<ARAnchor>();
-                Markers.Add(new Marker(anchor));
-            }
-#endif
-        }
-
-        public void Update()
-        {
-            for (var i = 0; i < Mathf.Min(Markers.Count, PointsInWorldMap.Length); ++i)
-                PointsInWorldMap[i] = Markers[i].Position;
         }
 
         public static CalibrationData TryLoad(string name)
@@ -148,34 +92,145 @@ namespace ff.ar_rh_spurlab.Calibration
 
             Debug.Log($"calibration data store to file {filePath}");
         }
+    }
+
+    public class CalibrationARAnchorManager
+    {
+        public enum Mode
+        {
+            Calibration,
+            Tracking
+        }
+
+        private readonly List<ARAnchor> _allAnchors = new();
+
+
+        private readonly ARAnchorManager _arAnchorManager;
+
+        private readonly List<ARAnchor> _matchedAnchors = new();
+        private readonly Mode _mode;
+        private CalibrationData _calibrationData;
+
+        public CalibrationARAnchorManager(ARAnchorManager arAnchorManager, Mode mode)
+        {
+            _arAnchorManager = arAnchorManager;
+            _mode = mode;
+
+            _arAnchorManager.anchorsChanged += OnAnchorsChanged;
+        }
+
+        private bool AreAnchorsReady => _matchedAnchors.Count == LocationData.NumberOfReferencePoints;
+
+        private void OnAnchorsChanged(ARAnchorsChangedEventArgs args)
+        {
+            Debug.Log("On Anchors Changed");
+
+            switch (_mode)
+            {
+                case Mode.Calibration:
+                    UpdateAnchorsInCalibration(args);
+                    break;
+                case Mode.Tracking:
+                    UpdateAnchorsInTracking(args);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            _calibrationData.AreAnchorsReady = AreAnchorsReady;
+
+            for (var i = 0; i < _matchedAnchors.Count; i++)
+            {
+                _calibrationData.PointsInWorldMap[i] = _matchedAnchors[i].transform.position;
+            }
+        }
+
+        private void UpdateAnchorsInCalibration(ARAnchorsChangedEventArgs args)
+        {
+            foreach (var removedAnchor in args.removed)
+            {
+                _matchedAnchors.Remove(removedAnchor);
+            }
+
+            foreach (var addedAnchor in args.added)
+            {
+                if (_matchedAnchors.Count < LocationData.NumberOfReferencePoints)
+                {
+                    _matchedAnchors.Add(addedAnchor);
+                }
+            }
+
+            if (_calibrationData == null)
+            {
+                return;
+            }
+
+            for (var i = 0; i < _matchedAnchors.Count; i++)
+            {
+                _calibrationData.PointsInWorldMap[i] = _matchedAnchors[i].transform.position;
+            }
+        }
+
+        private void UpdateAnchorsInTracking(ARAnchorsChangedEventArgs args)
+        {
+            foreach (var removedAnchor in args.removed)
+            {
+                _allAnchors.Remove(removedAnchor);
+            }
+
+            foreach (var addedAnchor in args.added)
+            {
+                _allAnchors.Add(addedAnchor);
+            }
+
+            if (args.removed.Count != 0 || args.added.Count != 0)
+            {
+                MatchExistingAnchors();
+            }
+        }
+
+        private void MatchExistingAnchors()
+        {
+            _matchedAnchors.Clear();
+
+            if (_calibrationData == null || _allAnchors.Count < _calibrationData.PointsInWorldMap.Length)
+            {
+                return;
+            }
+
+            foreach (var storedPointInWorldMap in _calibrationData.PointsInWorldMap)
+            {
+                foreach (var anchor in _allAnchors)
+                {
+                    if (Vector3.Distance(anchor.transform.position, storedPointInWorldMap) < 0.1f)
+                    {
+                        _matchedAnchors.Add(anchor);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void SetCalibrationData(CalibrationData calibrationData)
+        {
+            _calibrationData = calibrationData;
+            MatchExistingAnchors();
+        }
 
         public void Reset()
         {
-            foreach (var marker in Markers)
+            if (_mode != Mode.Calibration)
             {
-                Object.Destroy(marker.GameObject);
+                return;
             }
 
-            Markers.Clear();
-        }
-    }
+            foreach (var anchor in _allAnchors)
+            {
+                Object.Destroy(anchor.gameObject);
+            }
 
-
-    public class Marker
-    {
-        private readonly ARAnchor _anchor;
-
-        public Marker(ARAnchor anchor)
-        {
-            _anchor = anchor;
-        }
-
-        public Vector3 Position => _anchor ? _anchor.transform.position : Vector3.zero;
-        public GameObject GameObject => _anchor ? _anchor.gameObject : null;
-
-        public static bool IsValid(Marker marker)
-        {
-            return marker != null && marker._anchor != null;
+            _allAnchors.Clear();
+            _matchedAnchors.Clear();
         }
     }
 }

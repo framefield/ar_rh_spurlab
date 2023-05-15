@@ -2817,6 +2817,7 @@ MonoBehaviour:
   _locationData: {fileID: 11400000, guid: aae92e1daa2ef477591c98f9d3d30b33, type: 2}
   _stateMachine: {fileID: 2059743936}
   _arSession: {fileID: 2030565722}
+  _arAnchorManager: {fileID: 275107524}
   _xrOrigin: {fileID: 275107520}
 --- !u!1 &2109275442
 GameObject:

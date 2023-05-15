@@ -31,6 +31,8 @@ namespace ff.ar_rh_spurlab.Calibration
         [SerializeField]
         private Transform _xrOrigin;
 
+        private CalibrationARAnchorManager _calibrationARAnchorManager;
+
         private CalibrationUi _calibrationUi;
 
         private Location _location;
@@ -85,6 +87,8 @@ namespace ff.ar_rh_spurlab.Calibration
             _calibrationUi.OnRestartButtonClicked += () => _stateMachine.Reset();
             _calibrationUi.SetSession(_arSession);
 
+            _calibrationARAnchorManager =
+                new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Calibration);
             _stateMachine.Initialize();
         }
 
@@ -99,6 +103,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
             _location.Initialize(CalibrationData, _locationData);
             _calibrationUi.SetCalibrationData(CalibrationData);
+            _calibrationARAnchorManager.SetCalibrationData(CalibrationData);
         }
 
         public void SaveCalibrationData()
@@ -111,6 +116,16 @@ namespace ff.ar_rh_spurlab.Calibration
 #endif
 
             CalibrationData.Store(directoryPath);
+        }
+
+        public void ResetCalibration()
+        {
+            if (Session.didStart)
+            {
+                Session.Reset();
+            }
+
+            _calibrationARAnchorManager.Reset();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace ff.ar_rh_spurlab.Locations
 
         private void Update()
         {
-            if (CalibrationData?.IsValid != true)
+            if (CalibrationData?.AreAnchorsReady != true)
             {
                 _content.gameObject.SetActive(false);
                 return;

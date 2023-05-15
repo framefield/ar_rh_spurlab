@@ -29,7 +29,7 @@ namespace ff.ar_rh_spurlab.Calibration
                 return;
             }
 
-            _text.text = $"ARAnchor: {_arAnchor.trackableId} \n state:{_arAnchor.trackingState}";
+            _text.text = $"ARAnchor: {transform.position} \n state:{_arAnchor.trackingState}";
         }
     }
 }

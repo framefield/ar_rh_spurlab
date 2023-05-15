@@ -1,7 +1,5 @@
-using System.Linq;
 using ff.common.statemachine;
 using UnityEngine;
-using UnityEngine.XR.ARFoundation;
 
 namespace ff.ar_rh_spurlab.Calibration
 {
@@ -21,12 +19,7 @@ namespace ff.ar_rh_spurlab.Calibration
                 return;
             }
 
-            if (_calibrationController.Session.didStart)
-            {
-                _calibrationController.Session.Reset();
-            }
-            
-            _calibrationController.CalibrationData.Reset();
+            _calibrationController.ResetCalibration();
         }
 
         public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)

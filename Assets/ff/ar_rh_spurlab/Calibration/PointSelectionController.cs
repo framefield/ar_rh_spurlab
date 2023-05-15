@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ff.ar_rh_spurlab.Locations;
 using ff.common.statemachine;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace ff.ar_rh_spurlab.Calibration
         [SerializeField]
         private PointSelectionUi _pointSelectionUiPrefab;
 
+        private readonly List<ARAnchor> _placedAnchors = new();
+
         private readonly List<ARRaycastHit> _sHits = new();
 
         private CalibrationController _calibrationController;
@@ -27,8 +30,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private StateMachine _stateMachine;
 
-        public bool IsReady =>
-            _calibrationController.CalibrationData.Markers.Count == LocationData.NumberOfReferencePoints;
+        public bool IsReady => _placedAnchors.Count == LocationData.NumberOfReferencePoints;
 
         private void Update()
         {
@@ -36,9 +38,6 @@ namespace ff.ar_rh_spurlab.Calibration
             {
                 return;
             }
-
-            var calibration = _calibrationController.CalibrationData;
-
 
             if (Pointer.current == null || !_pressed)
             {
@@ -55,29 +54,26 @@ namespace ff.ar_rh_spurlab.Calibration
             // Raycast hits are sorted by distance, so the first one will be the closest hit.
             var hitPose = _sHits[0].pose;
 
-            GameObject selectedMarkerObject = null;
-            foreach (var obj in calibration.Markers)
-                if ((obj.Position - hitPose.position).magnitude < 0.1)
-                {
-                    selectedMarkerObject = obj.GameObject;
-                    break;
-                }
+            var draggedAnchor = (from placedAnchor in _placedAnchors
+                where Vector3.Distance(placedAnchor.transform.position, hitPose.position) < 0.1f
+                select placedAnchor.transform).FirstOrDefault();
 
-            if (selectedMarkerObject != null)
+            if (draggedAnchor)
             {
-                selectedMarkerObject.transform.position = hitPose.position;
+                draggedAnchor.position = hitPose.position;
+                return;
             }
-            else
+
+            if (IsReady)
             {
-                if (calibration.Markers.Count < LocationData.NumberOfReferencePoints)
-                {
-                    var marker = Instantiate(_markerPrefab, hitPose.position, hitPose.rotation,
-                        _calibrationController.XrOrigin);
-                    var calibrationId = $"ARMarkerAnchor_{calibration.Markers.Count}";
-                    marker.name = calibrationId;
-                    calibration.Markers.Add(new Marker(marker));
-                }
+                return;
             }
+
+            var marker = Instantiate(_markerPrefab, hitPose.position, hitPose.rotation,
+                _calibrationController.XrOrigin);
+
+            marker.name = "ARMarkerAnchor";
+            _placedAnchors.Add(marker);
         }
 
 
@@ -98,6 +94,8 @@ namespace ff.ar_rh_spurlab.Calibration
             _pointSelectionUi = Instantiate(_pointSelectionUiPrefab, transform);
             _pointSelectionUi.SetPointSelectionController(this);
             _pointSelectionUi.OnContinueButtonClicked += () => _stateMachine.Continue();
+
+            _placedAnchors.Clear();
         }
 
         public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
@@ -109,6 +107,7 @@ namespace ff.ar_rh_spurlab.Calibration
                 Destroy(_pointSelectionUi.gameObject);
             }
         }
+
 
         protected override void OnPress(Vector3 position)
         {
