@@ -8,26 +8,29 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private GameObject _content;
 
-        private CalibrationData _calibrationData;
+        public LocationData LocationData { get; private set; }
+        public CalibrationData CalibrationData { get; private set; }
 
         private void Update()
         {
-            if (_calibrationData?.IsValid != true)
+            if (CalibrationData?.IsValid != true)
             {
                 _content.gameObject.SetActive(false);
                 return;
             }
 
-            var (xrOriginTLocationOrigin, isValid) = CalibrationCalculator.GetXrOriginTLocationOrigin(_calibrationData);
+            var (xrOriginTLocationOrigin, isValid) =
+                CalibrationCalculator.GetXrOriginTLocationOrigin(CalibrationData, LocationData);
 
             transform.position = xrOriginTLocationOrigin.GetPosition();
             transform.rotation = xrOriginTLocationOrigin.rotation;
             _content.gameObject.SetActive(true);
         }
 
-        public void SetCalibrationData(CalibrationData calibrationData)
+        public void Initialize(CalibrationData calibrationData, LocationData locationData)
         {
-            _calibrationData = calibrationData;
+            CalibrationData = calibrationData;
+            LocationData = locationData;
         }
     }
 }

@@ -25,11 +25,8 @@ namespace ff.ar_rh_spurlab.Calibration
             {
                 _calibrationController.Session.Reset();
             }
-
-            var placedMarker = FindObjectsByType<ARAnchor>(FindObjectsSortMode.None).ToList();
-
-            for (var i = placedMarker.Count - 1; i >= 0; i--)
-                Destroy(placedMarker[i].gameObject);
+            
+            _calibrationController.CalibrationData.Reset();
         }
 
         public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)

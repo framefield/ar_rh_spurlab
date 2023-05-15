@@ -2814,8 +2814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d01be36c0a14a5982dd81e46cdbb28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationPrefab: {fileID: 7933056274355397598, guid: b3fe1dec878e245bcb78b1ab4304ed61,
-    type: 3}
+  _locationData: {fileID: 11400000, guid: aae92e1daa2ef477591c98f9d3d30b33, type: 2}
   _stateMachine: {fileID: 2059743936}
   _arSession: {fileID: 2030565722}
   _xrOrigin: {fileID: 275107520}
@@ -3625,7 +3624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debugContent:
   - {fileID: 5482791880870165213}
-  _toggleKey: 100
+  _toggleKey: 102
   _deactivateOnStart: 0
 --- !u!222 &4262395647077668085
 CanvasRenderer:

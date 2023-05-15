@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c3916d0868b4856a55ad4ad190d895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _markerPrefab: {fileID: 6558320816550134305, guid: fbef29c2681494649959a5ee1bb31225,
+  _markerPrefab: {fileID: 4328341890100118322, guid: fbef29c2681494649959a5ee1bb31225,
     type: 3}
   _pointSelectionUiPrefab: {fileID: 237287437828813792, guid: b043f0491f9ee4f4fa3411e87e825666,
     type: 3}
@@ -3373,7 +3373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debugContent:
   - {fileID: 5482791880870165213}
-  _toggleKey: 100
+  _toggleKey: 102
   _deactivateOnStart: 0
 --- !u!222 &4262395647077668085
 CanvasRenderer:
@@ -4865,8 +4865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _calibrationUiPrefab: {fileID: 59770335312172965, guid: dcd0999ca55804ea7a8f05b628ff1f41,
     type: 3}
-  _locationPrefab: {fileID: 7933056274355397598, guid: b3fe1dec878e245bcb78b1ab4304ed61,
-    type: 3}
+  _locationData: {fileID: 11400000, guid: aae92e1daa2ef477591c98f9d3d30b33, type: 2}
   _stateMachine: {fileID: 6612144957398312631}
   _arSession: {fileID: 2030565722}
   _arRaycastManager: {fileID: 275107522}

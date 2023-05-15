@@ -13,7 +13,7 @@ namespace ff.ar_rh_spurlab.Calibration
         private CalibrationUi _calibrationUiPrefab;
 
         [SerializeField]
-        private Location _locationPrefab;
+        private LocationData _locationData;
 
         [Header("Scene References")]
         [SerializeField]
@@ -36,6 +36,7 @@ namespace ff.ar_rh_spurlab.Calibration
         private Location _location;
 
         public CalibrationData CalibrationData { get; private set; }
+        public LocationData LocationData => _location.LocationData;
 
         public ARSession Session => _arSession;
         public ARRaycastManager RaycastManager => _arRaycastManager;
@@ -89,21 +90,14 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void SetLocation(string locationName)
         {
-            CalibrationData = CalibrationData.TryLoad(locationName);
-
-            if (CalibrationData == null)
-            {
-                CalibrationData = new CalibrationData(locationName,
-                    new Vector3[]
-                        { new(10.615f, 6.802f, 2.355f), new(8.448f, 6.809f, 4.812f), new(8.734f, 9.936f, 2.708f) });
-            }
+            CalibrationData = new CalibrationData(locationName);
 
             if (!_location)
             {
-                _location = Instantiate(_locationPrefab, _xrOrigin);
+                _location = Instantiate(_locationData._prefab, _xrOrigin);
             }
 
-            _location.SetCalibrationData(CalibrationData);
+            _location.Initialize(CalibrationData, _locationData);
             _calibrationUi.SetCalibrationData(CalibrationData);
         }
 

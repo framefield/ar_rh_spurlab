@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -67,7 +68,7 @@ namespace ff.ar_rh_spurlab.AR
             Debug.Log($"ARWorldMap written to {worldMapFilePath}");
         }
 
-        public static IEnumerator Load(ARSession arSession, string worldMapFilePath)
+        public static IEnumerator Load(ARSession arSession, string worldMapFilePath, Action onLoaded)
         {
             if (!IsSupported(arSession))
             {
@@ -119,6 +120,7 @@ namespace ff.ar_rh_spurlab.AR
             if (worldMap.valid)
             {
                 Debug.Log("Deserialized successfully.");
+                onLoaded?.Invoke();
             }
             else
             {

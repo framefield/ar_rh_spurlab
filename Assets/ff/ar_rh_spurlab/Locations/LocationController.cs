@@ -1,5 +1,8 @@
+#if UNITY_IOS && !UNITY_EDITOR
 using System.IO;
 using ff.ar_rh_spurlab.AR;
+#endif
+
 using ff.ar_rh_spurlab.Calibration;
 using ff.common.statemachine;
 using UnityEngine;
@@ -10,7 +13,7 @@ namespace ff.ar_rh_spurlab.Locations
     public class LocationController : MonoBehaviour
     {
         [SerializeField]
-        private Location _locationPrefab;
+        private LocationData _locationData;
 
         [Header("Scene References")]
         [SerializeField]
@@ -60,17 +63,24 @@ namespace ff.ar_rh_spurlab.Locations
 
             if (!_location)
             {
-                _location = Instantiate(_locationPrefab, _xrOrigin);
+                _location = Instantiate(_locationData._prefab, _xrOrigin);
             }
 
-            _location.SetCalibrationData(calibrationData);
+            _location.Initialize(calibrationData, _locationData);
 
-#if UNITY_IOS
+#if UNITY_IOS && !UNITY_EDITOR
             var directoryPath = Path.Combine(Application.persistentDataPath, calibrationData.Name);
             var filePath = Path.Combine(directoryPath, "my_session.worldmap");
 
-            StartCoroutine(ARWorldMapController.Load(_arSession, filePath));    
+            StartCoroutine(ARWorldMapController.Load(_arSession, filePath, OnArWorldMapLoadedHandler));
+#else
+            _location.CalibrationData.SearchForMarkers();
 #endif
+        }
+
+        private void OnArWorldMapLoadedHandler()
+        {
+            _location.CalibrationData.SearchForMarkers();
         }
     }
 }

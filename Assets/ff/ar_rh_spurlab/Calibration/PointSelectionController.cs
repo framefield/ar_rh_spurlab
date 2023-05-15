@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ff.ar_rh_spurlab.Locations;
 using ff.common.statemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,13 +12,13 @@ namespace ff.ar_rh_spurlab.Calibration
     public class PointSelectionController : PressInputBase, IActiveInStateContent
     {
         [SerializeField]
-        private GameObject _markerPrefab;
+        private ARAnchor _markerPrefab;
 
         [SerializeField]
         private PointSelectionUi _pointSelectionUiPrefab;
 
         private readonly List<ARRaycastHit> _sHits = new();
-        private CalibrationAnchorController _calibrationAnchorController;
+
         private CalibrationController _calibrationController;
         private bool _isActive;
         private PointSelectionUi _pointSelectionUi;
@@ -26,8 +27,8 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private StateMachine _stateMachine;
 
-        public bool IsReady => _calibrationController.CalibrationData.Markers.Count ==
-                               _calibrationController.CalibrationData.NumberOfReferencePoints;
+        public bool IsReady =>
+            _calibrationController.CalibrationData.Markers.Count == LocationData.NumberOfReferencePoints;
 
         private void Update()
         {
@@ -37,10 +38,7 @@ namespace ff.ar_rh_spurlab.Calibration
             }
 
             var calibration = _calibrationController.CalibrationData;
-            //_calibrationAnchorController.Update();
 
-            //var placedMarker = FindObjectsByType<ARAnchor>(FindObjectsSortMode.None).ToList();
-            //placedMarker.Sort((a, b) => string.Compare(a.gameObject.name, b.gameObject.name, StringComparison.Ordinal));
 
             if (Pointer.current == null || !_pressed)
             {
@@ -71,17 +69,13 @@ namespace ff.ar_rh_spurlab.Calibration
             }
             else
             {
-                if (calibration.Markers.Count < calibration.NumberOfReferencePoints)
+                if (calibration.Markers.Count < LocationData.NumberOfReferencePoints)
                 {
                     var marker = Instantiate(_markerPrefab, hitPose.position, hitPose.rotation,
                         _calibrationController.XrOrigin);
-                    //var arAnchor = marker.GetComponent<ARAnchor>();
                     var calibrationId = $"ARMarkerAnchor_{calibration.Markers.Count}";
                     marker.name = calibrationId;
-                    //placedMarker.Add(arAnchor);
                     calibration.Markers.Add(new Marker(marker));
-
-                    //_calibrationAnchorController.TryAddCalibrationId(calibrationId, arAnchor);
                 }
             }
         }
@@ -96,11 +90,6 @@ namespace ff.ar_rh_spurlab.Calibration
             if (!_calibrationController)
             {
                 _calibrationController = stateMachine.GetComponent<CalibrationController>();
-            }
-
-            if (_calibrationController)
-            {
-                _calibrationAnchorController = new CalibrationAnchorController(_calibrationController.AnchorManager);
             }
 
             _stateMachine = stateMachine;
