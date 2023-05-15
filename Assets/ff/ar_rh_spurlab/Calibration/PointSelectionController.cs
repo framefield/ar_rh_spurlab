@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using ff.common.statemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,19 +8,26 @@ using UnityEngine.XR.ARSubsystems;
 
 namespace ff.ar_rh_spurlab.Calibration
 {
-    public class PointSelection : PressInputBase, IActiveInStateContent
+    public class PointSelectionController : PressInputBase, IActiveInStateContent
     {
         [SerializeField]
         private GameObject _markerPrefab;
+
+        [SerializeField]
+        private PointSelectionUi _pointSelectionUiPrefab;
 
         private readonly List<ARRaycastHit> _sHits = new();
         private CalibrationAnchorController _calibrationAnchorController;
         private CalibrationController _calibrationController;
         private bool _isActive;
+        private PointSelectionUi _pointSelectionUi;
 
         private bool _pressed;
 
         private StateMachine _stateMachine;
+
+        public bool IsReady => _calibrationController.CalibrationData.Markers.Count ==
+                               _calibrationController.CalibrationData.NumberOfReferencePoints;
 
         private void Update()
         {
@@ -79,13 +84,6 @@ namespace ff.ar_rh_spurlab.Calibration
                     //_calibrationAnchorController.TryAddCalibrationId(calibrationId, arAnchor);
                 }
             }
-
-
-            if (calibration.Markers.Count == calibration.NumberOfReferencePoints)
-            {
-                //calibration.UpdateMarkers(placedMarker[0], placedMarker[1], placedMarker[2]);
-                _stateMachine.Continue();
-            }
         }
 
 
@@ -107,11 +105,20 @@ namespace ff.ar_rh_spurlab.Calibration
 
             _stateMachine = stateMachine;
             _isActive = true;
+
+            _pointSelectionUi = Instantiate(_pointSelectionUiPrefab, transform);
+            _pointSelectionUi.SetPointSelectionController(this);
+            _pointSelectionUi.OnContinueButtonClicked += () => _stateMachine.Continue();
         }
 
         public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
         {
             _isActive = false;
+
+            if (_pointSelectionUi)
+            {
+                Destroy(_pointSelectionUi.gameObject);
+            }
         }
 
         protected override void OnPress(Vector3 position)

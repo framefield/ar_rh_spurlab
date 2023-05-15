@@ -332,6 +332,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _markerPrefab: {fileID: 6558320816550134305, guid: fbef29c2681494649959a5ee1bb31225,
     type: 3}
+  _pointSelectionUiPrefab: {fileID: 237287437828813792, guid: b043f0491f9ee4f4fa3411e87e825666,
+    type: 3}
 --- !u!1 &871895674
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,8 +2176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b9a38b393e7474a8613c1656e2bcf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _environmentScannedTrigger: {fileID: 11400000, guid: 21e149f294ea941a5ba0f308193345c1,
-    type: 2}
 --- !u!1 &1809270557
 GameObject:
   m_ObjectHideFlags: 0
