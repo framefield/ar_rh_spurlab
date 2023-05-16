@@ -202,12 +202,12 @@ namespace ff.ar_rh_spurlab.Calibration
             _calibrationData.MatchedAnchors.Clear();
 
 #if UNITY_IOS && !UNITY_EDITOR
-            if (_allAnchors.Count < _calibrationData.PointsInWorldMap.Length)
+            if (_allAnchors.Count < _calibrationData.PointsInWorldMap.Count)
             {
                 return;
             }
 
-            for (var i = 0; i < _calibrationData.PointsInWorldMap.Length; i++)
+            for (var i = 0; i < _calibrationData.PointsInWorldMap.Count; i++)
             {
                 foreach (var anchor in _allAnchors)
                 {
