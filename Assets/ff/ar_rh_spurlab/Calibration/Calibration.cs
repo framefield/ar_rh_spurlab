@@ -96,7 +96,9 @@ namespace ff.ar_rh_spurlab.Calibration
             try
             {
                 var reader = new StreamReader(filePath);
-                return JsonUtility.FromJson<CalibrationData>(reader.ReadToEnd());
+                var readCalibrationData = JsonUtility.FromJson<CalibrationData>(reader.ReadToEnd());
+                readCalibrationData.MatchedAnchors = new List<ARAnchor>();
+                return readCalibrationData;
             }
             catch (Exception)
             {
