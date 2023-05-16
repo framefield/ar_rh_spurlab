@@ -21,7 +21,7 @@ namespace ff.ar_rh_spurlab.Calibration
             allowedMatchingDeviation = 100.0f; //for testing any quality is allowed
 #endif
 
-            return (Matrix4x4.Translate(calibrationData.Offset) * xrOriginTLocationOrigin, matchingDeviation < allowedMatchingDeviation);
+            return (calibrationData.Offset * xrOriginTLocationOrigin, matchingDeviation < allowedMatchingDeviation);
         }
 
         private static (Matrix4x4, float) CalculateTransformFromAToB(IList<Vector3> pointsInA,
@@ -64,7 +64,7 @@ namespace ff.ar_rh_spurlab.Calibration
     public class CalibrationData
     {
         public string Name;
-        public Vector3 Offset;
+        public Matrix4x4 Offset;
         public List<Vector3> PointsInWorldMap;
 
         // matched anchors are stored here to be able to simulate anchors in editor.
@@ -74,7 +74,7 @@ namespace ff.ar_rh_spurlab.Calibration
         public CalibrationData(string name)
         {
             Name = name;
-            Offset = Vector3.zero;
+            Offset = Matrix4x4.identity;
             PointsInWorldMap = new List<Vector3>();
         }
 

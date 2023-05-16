@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.Calibration
 {
-    public class CalibrationFineTuneUi : MonoBehaviour
+    public class CalibrationFineTuneRotationUi : MonoBehaviour
     {
         [Header("Prefab references")]
         [SerializeField]

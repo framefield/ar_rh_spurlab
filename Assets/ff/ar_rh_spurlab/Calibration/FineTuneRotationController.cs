@@ -7,10 +7,10 @@ using UnityEngine.XR.ARFoundation.Samples;
 
 namespace ff.ar_rh_spurlab.Calibration
 {
-    public class FineTuneController : PressInputBase, IActiveInStateContent
+    public class FineTuneRotationController : PressInputBase, IActiveInStateContent
     {
         [SerializeField]
-        private CalibrationFineTuneUi _calibrationFineTuneUiPrefab;
+        private CalibrationFineTuneRotationUi _calibrationFineTuneRotationUiPrefab;
 
         private readonly List<ARRaycastHit> _sHits = new();
         private CalibrationController _calibrationController;
@@ -18,11 +18,11 @@ namespace ff.ar_rh_spurlab.Calibration
         private bool _isActive;
 
         private bool _pressed;
-        private Vector3 _lastWorldPTouchPosition = Vector3.zero;
+        private Vector3 _lastWorldPTouchDirection = Vector3.zero;
         private bool _offsetValid = false;
 
         private StateMachine _stateMachine;
-        private CalibrationFineTuneUi _calibrationFineTuneUi;
+        private CalibrationFineTuneRotationUi _calibrationFineTuneRotationUi;
 
         private void Update()
         {
@@ -40,14 +40,20 @@ namespace ff.ar_rh_spurlab.Calibration
             var touchPosition = Pointer.current.position.ReadValue();
 
             var worldPTouchPosition = _mainCamera.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, _mainCamera.nearClipPlane));
-            var worldPOffset = worldPTouchPosition - _lastWorldPTouchPosition;
+            var worldPEyePosition = _mainCamera.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, 0));
+            var worldPTouchDirection = Vector3.Normalize(worldPTouchPosition - worldPEyePosition);
+
             if (_offsetValid)
             {
+                var deltaAngle = Vector3.Angle(_lastWorldPTouchDirection, worldPTouchDirection);
+                var moveToEye = Matrix4x4.Translate(-worldPEyePosition);
+                var moveToOrigin = moveToEye.inverse;
+                var deltaRotation = Matrix4x4.Rotate(Quaternion.AngleAxis(deltaAngle, Vector3.Cross(_lastWorldPTouchDirection, worldPTouchDirection)));
                 var calibration = _calibrationController.CalibrationData;
-                calibration.Offset += worldPOffset;
+                calibration.Offset = moveToOrigin * deltaRotation * moveToEye * calibration.Offset;
             }
 
-            _lastWorldPTouchPosition = worldPTouchPosition;
+            _lastWorldPTouchDirection = worldPTouchDirection;
             _offsetValid = true;
         }
 
@@ -63,9 +69,9 @@ namespace ff.ar_rh_spurlab.Calibration
                 _calibrationController = stateMachine.GetComponent<CalibrationController>();
             }
 
-            if (!_calibrationFineTuneUiPrefab)
+            if (!_calibrationFineTuneRotationUiPrefab)
             {
-                Debug.LogError("FineTuneController: CalibrationFineTuneUiPrefab is not set!");
+                Debug.LogError("FineTuneController: CalibrationFineTuneRoationUiPrefab is not set!");
                 return;
             }
 
@@ -75,15 +81,15 @@ namespace ff.ar_rh_spurlab.Calibration
             }
 
             _stateMachine = stateMachine;
-            _calibrationFineTuneUi = Instantiate(_calibrationFineTuneUiPrefab, transform);
-            _calibrationFineTuneUi.OnContinueButtonClicked += () => _stateMachine.Continue();
+            _calibrationFineTuneRotationUi = Instantiate(_calibrationFineTuneRotationUiPrefab, transform);
+            _calibrationFineTuneRotationUi.OnContinueButtonClicked += () => _stateMachine.Continue();
             _isActive = true;
             _offsetValid = false;
         }
 
         public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
         {
-            Destroy(_calibrationFineTuneUi.gameObject);
+            Destroy(_calibrationFineTuneRotationUi.gameObject);
             _isActive = false;
         }
 
