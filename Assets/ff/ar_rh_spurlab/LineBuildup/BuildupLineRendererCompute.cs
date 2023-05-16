@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ff.ar_rh_spurlab.LineBuildup
 {
     [RequireComponent(typeof(MeshRenderer), typeof(MeshFilter))]
-    public class BuildupLineRenderer : MonoBehaviour
+    public class BuildupLineRendererCompute : MonoBehaviour
     {
         #region Serialized Fields
 
@@ -31,13 +30,13 @@ namespace ff.ar_rh_spurlab.LineBuildup
         {
             if (!_pointList)
             {
-                Debug.LogError("No point list assigned to BuildupLineRenderer", this);
+                Debug.LogError("No point list assigned to BuildupLineRendererCompute", this);
                 enabled = false;
                 return;
             }
             
             _pointsBuffer = new ComputeBuffer(_pointList.Points.Length, 8 * sizeof(float));
-            _pointsBuffer.SetData(_pointList.Points);
+            _pointList.Fill(_pointsBuffer);
             _meshFilter = GetComponent<MeshFilter>();
             _builder = new MeshBuilder(_triangleBudget);
         }

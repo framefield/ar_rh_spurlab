@@ -4,14 +4,32 @@ using UnityEngine;
 
 namespace ff.ar_rh_spurlab.LineBuildup
 {
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
+    public struct PointPosition
+    {
+        public float X;
+        public float Y;
+        public float Z;
+    }
+    
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
+    public struct PointQuaternion
+    {
+        public float X;
+        public float Y;
+        public float Z;
+        public float W;
+    }
     
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Point 
     {
-        public Vector3 Position;
+        public PointPosition Position;
         public float W;
-        public Vector4 Rotation;
+        public PointQuaternion Rotation;
     }
     
     [Serializable]
@@ -19,5 +37,23 @@ namespace ff.ar_rh_spurlab.LineBuildup
     {
         [SerializeField]
         public Point[] Points;
+
+        public void Fill(ComputeBuffer pointsBuffer)
+        {
+            var data = new float[Points.Length * 8];
+            for (var i = 0; i < Points.Length; i++)
+            {
+                var point = Points[i];
+                data[i * 8 + 0] = point.Position.X;
+                data[i * 8 + 1] = point.Position.Y;
+                data[i * 8 + 2] = point.Position.Z;
+                data[i * 8 + 3] = point.W;
+                data[i * 8 + 4] = point.Rotation.X;
+                data[i * 8 + 5] = point.Rotation.Y;
+                data[i * 8 + 6] = point.Rotation.Z;
+                data[i * 8 + 7] = point.Rotation.W;
+            }
+            pointsBuffer.SetData(data);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEditor.AssetImporters;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace ff.ar_rh_spurlab.LineBuildup.Editor
 {
@@ -16,7 +17,7 @@ namespace ff.ar_rh_spurlab.LineBuildup.Editor
     {
         public override void OnImportAsset(AssetImportContext ctx)
         {
-            var points = JsonUtility.FromJson<PointListImport>(File.ReadAllText(ctx.assetPath));
+            var points = JsonConvert.DeserializeObject<PointListImport>(File.ReadAllText(ctx.assetPath));
             var pointList = ScriptableObject.CreateInstance<PointList>();
             
             pointList.Points = points.StructuredList;
