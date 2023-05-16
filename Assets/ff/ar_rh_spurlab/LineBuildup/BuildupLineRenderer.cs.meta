@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 7af1ab050c384745be90a2120a03be54
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _lineRendererCompute: {fileID: 7200000, guid: 07448bbb7d3543c88133158688b7aa1d,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

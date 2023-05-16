@@ -27,3 +27,4 @@
 *LightingData.asset filter=lfs diff=lfs merge=lfs -text
 *OcclussionCullingData.asset filter=lfs diff=lfs merge=lfs -text
 *.arobject filter=lfs diff=lfs merge=lfs -text
+*.points filter=lfs diff=lfs merge=lfs -text
