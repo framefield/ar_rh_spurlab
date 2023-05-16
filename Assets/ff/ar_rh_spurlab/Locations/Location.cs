@@ -24,7 +24,7 @@ namespace ff.ar_rh_spurlab.Locations
 
             transform.position = xrOriginTLocationOrigin.GetPosition();
             transform.rotation = xrOriginTLocationOrigin.rotation;
-            _content.gameObject.SetActive(true);
+            _content.gameObject.SetActive(isValid);
         }
 
         public void Initialize(CalibrationData calibrationData, LocationData locationData)

@@ -18,8 +18,6 @@ namespace ff.ar_rh_spurlab.Calibration
         [SerializeField]
         private PointSelectionUi _pointSelectionUiPrefab;
 
-        private readonly List<ARAnchor> _placedAnchors = new();
-
         private readonly List<ARRaycastHit> _sHits = new();
 
         private CalibrationController _calibrationController;
@@ -30,7 +28,8 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private StateMachine _stateMachine;
 
-        public bool IsReady => _placedAnchors.Count == LocationData.NumberOfReferencePoints;
+        public bool IsReady => _calibrationController != null && _calibrationController.CalibrationData != null &&
+            _calibrationController.CalibrationData.MatchedAnchors.Count == LocationData.NumberOfReferencePoints;
 
         private void Update()
         {
@@ -53,28 +52,25 @@ namespace ff.ar_rh_spurlab.Calibration
 
             // Raycast hits are sorted by distance, so the first one will be the closest hit.
             var hitPose = _sHits[0].pose;
-
-            var draggedAnchor = (from placedAnchor in _placedAnchors
-                where Vector3.Distance(placedAnchor.transform.position, hitPose.position) < 0.1f
+            var calibrationData = _calibrationController.CalibrationData;
+            var draggedAnchor = (from placedAnchor in calibrationData.MatchedAnchors
+                                 where Vector3.Distance(placedAnchor.transform.position, hitPose.position) < 0.1f
                 select placedAnchor.transform).FirstOrDefault();
 
             if (draggedAnchor)
             {
                 draggedAnchor.position = hitPose.position;
-                return;
             }
-
-            if (IsReady)
+            else if (!IsReady)
             {
-                return;
+                var marker = Instantiate(_markerPrefab, hitPose.position, hitPose.rotation,
+                    _calibrationController.XrOrigin);
+
+                marker.name = $"ARMarkerAnchor {calibrationData.MatchedAnchors.Count}";
+                _calibrationController.CalibrationData.MatchedAnchors.Add(marker);
             }
 
-            var marker = Instantiate(_markerPrefab, hitPose.position, hitPose.rotation,
-                _calibrationController.XrOrigin);
-
-            marker.name = "ARMarkerAnchor";
-            _placedAnchors.Add(marker);
-            _calibrationController.CalibrationData.MatchedAnchors.Add(marker);
+            calibrationData.UpdatePointsFromsAnchors();
         }
 
 
@@ -101,7 +97,9 @@ namespace ff.ar_rh_spurlab.Calibration
             _pointSelectionUi.SetPointSelectionController(this);
             _pointSelectionUi.OnContinueButtonClicked += () => _stateMachine.Continue();
 
-            foreach (var placedAnchor in _placedAnchors)
+            var calibrationData = _calibrationController.CalibrationData;
+
+            foreach (var placedAnchor in calibrationData.MatchedAnchors)
             {
                 if (placedAnchor || placedAnchor.gameObject)
                 {
@@ -109,9 +107,8 @@ namespace ff.ar_rh_spurlab.Calibration
                 }
             }
 
-            _placedAnchors.Clear();
-
-            _calibrationController.CalibrationData.MatchedAnchors.Clear();
+            calibrationData.MatchedAnchors.Clear();
+            calibrationData.UpdatePointsFromsAnchors();
         }
 
         public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
@@ -123,7 +120,6 @@ namespace ff.ar_rh_spurlab.Calibration
                 Destroy(_pointSelectionUi.gameObject);
             }
         }
-
 
         protected override void OnPress(Vector3 position)
         {

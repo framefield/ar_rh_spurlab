@@ -16,7 +16,12 @@ namespace ff.ar_rh_spurlab.Calibration
             var (xrOriginTLocationOrigin, matchingDeviation) =
                 CalculateTransformFromAToB(locationData._pointsInLocationOrigin, calibrationData.PointsInWorldMap);
 
-            return (Matrix4x4.Translate(calibrationData.Offset) * xrOriginTLocationOrigin, true);
+            float allowedMatchingDeviation = 0.5f;
+#if UNITY_EDITOR
+            allowedMatchingDeviation = 100.0f; //for testing any quality is allowed
+#endif
+
+            return (Matrix4x4.Translate(calibrationData.Offset) * xrOriginTLocationOrigin, matchingDeviation < allowedMatchingDeviation);
         }
 
         private static (Matrix4x4, float) CalculateTransformFromAToB(IList<Vector3> pointsInA,
@@ -24,6 +29,16 @@ namespace ff.ar_rh_spurlab.Calibration
         {
             if (pointsInA.Count != pointsInB.Count || pointsInA.Count != 3)
             {
+                Debug.LogError("failed to calculate transform: number of points does not match");
+                return (Matrix4x4.identity, Mathf.Infinity);
+            }
+
+            if (Vector3.Distance(pointsInA[0], pointsInA[1]) < 0.1f ||
+                Vector3.Distance(pointsInA[0], pointsInA[2]) < 0.1f ||
+                Vector3.Distance(pointsInB[0], pointsInB[1]) < 0.1f ||
+                Vector3.Distance(pointsInB[0], pointsInB[2]) < 0.1f)
+            {
+                Debug.LogError("failed to calculate transform: points are too close to each other");
                 return (Matrix4x4.identity, Mathf.Infinity);
             }
 
@@ -38,7 +53,7 @@ namespace ff.ar_rh_spurlab.Calibration
             var matchingDeviation = 0.0f;
             for (var i = 0; i < pointsInA.Count; ++i)
             {
-                matchingDeviation += (pointsInB[i] - bTA.MultiplyPoint(pointsInA[i])).magnitude;
+                matchingDeviation += Vector3.Distance(pointsInB[i], bTA.MultiplyPoint(pointsInA[i]));
             }
 
             return (bTA, matchingDeviation / pointsInA.Count);
@@ -50,19 +65,29 @@ namespace ff.ar_rh_spurlab.Calibration
     {
         public string Name;
         public Vector3 Offset;
-        public Vector3[] PointsInWorldMap;
+        public List<Vector3> PointsInWorldMap;
 
         // matched anchors are stored here to be able to simulate anchors in editor.
+        [NonSerialized]
         public List<ARAnchor> MatchedAnchors = new();
 
         public CalibrationData(string name)
         {
             Name = name;
             Offset = Vector3.zero;
-            PointsInWorldMap = new Vector3[LocationData.NumberOfReferencePoints];
+            PointsInWorldMap = new List<Vector3>();
         }
 
         public bool AreAnchorsReady => MatchedAnchors.Count == LocationData.NumberOfReferencePoints;
+
+        public void UpdatePointsFromsAnchors()
+        {
+            PointsInWorldMap.Clear();
+            for (var i = 0; i < MatchedAnchors.Count; i++)
+            {
+                PointsInWorldMap.Add(MatchedAnchors[i].transform.position);
+            }
+        }
 
         public static CalibrationData TryLoad(string name)
         {
@@ -136,11 +161,7 @@ namespace ff.ar_rh_spurlab.Calibration
                     throw new ArgumentOutOfRangeException();
             }
 
-
-            for (var i = 0; i < _calibrationData.MatchedAnchors.Count; i++)
-            {
-                _calibrationData.PointsInWorldMap[i] = _calibrationData.MatchedAnchors[i].transform.position;
-            }
+            _calibrationData.UpdatePointsFromsAnchors();
         }
 
         private void UpdateAnchorsInCalibration(ARAnchorsChangedEventArgs args)
@@ -231,6 +252,7 @@ namespace ff.ar_rh_spurlab.Calibration
             _allAnchors.Clear();
 
             _calibrationData?.MatchedAnchors.Clear();
+            _calibrationData?.UpdatePointsFromsAnchors();
         }
     }
 }
