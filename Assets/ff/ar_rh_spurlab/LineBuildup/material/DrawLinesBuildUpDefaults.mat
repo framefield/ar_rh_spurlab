@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DrawLinesBuildUp
+  m_Name: DrawLinesBuildUpDefaults
   m_Shader: {fileID: 4800000, guid: d9250a1a486247018a9f517536ce5de7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
