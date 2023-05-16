@@ -89,19 +89,23 @@
                     : pointB.position;
 
 
+                // TODO
                 float4 aaInScreen  = UnityObjectToClipPos(float4(pointAA.position,1)) * aspect;
                 aaInScreen /= aaInScreen.w;
+                // TODO
                 float4 aInScreen  = UnityObjectToClipPos(float4(pointA.position,1)) * aspect;
                 if(aInScreen.z < -0)
                     discardFactor = 0;
                 aInScreen /= aInScreen.w;
 
                 
+                // TODO
                 float4 bInScreen  = UnityObjectToClipPos(float4(pointB.position,1)) * aspect;
                 if(bInScreen.z < -0)
                     discardFactor = 0;
 
                 bInScreen /= bInScreen.w;
+                // TODO
                 float4 bbInScreen  = UnityObjectToClipPos(float4(pointBB.position,1)) * aspect;
                 bbInScreen /= bbInScreen.w;
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
 namespace ff.ar_rh_spurlab.LineBuildup
 {
@@ -9,9 +10,9 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
         [SerializeField]
         private PointList _pointList = null;
-        
+
         [SerializeField]
-        private Shader _shader = null;
+        private Material _baseMaterial = null;
 
         #endregion
 
@@ -27,8 +28,8 @@ namespace ff.ar_rh_spurlab.LineBuildup
                 return;
             }
             
-            if (!_shader) {
-                Debug.LogError("No shader assigned to BuildupLineRendererProcedural", this);
+            if (!_baseMaterial) {
+                Debug.LogError("No base material assigned to BuildupLineRendererProcedural", this);
                 enabled = false;
                 return;
             }
@@ -44,21 +45,50 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
         private void Update()
         {
-            if (_material == null || _material.shader != _shader)
+            if (_sharedMaterial == null)
             {
-                _material = new Material(_shader)
+                _sharedMaterial = new Material(_baseMaterial)
                 {
                     hideFlags = HideFlags.DontSave
                 };
             }
 
-            _material.SetBuffer(PointsPropId, _pointsBuffer);
+            if (_materialPropertyBlock == null)
+            {
+                _materialPropertyBlock = new MaterialPropertyBlock();
+                _materialPropertyBlock.SetBuffer(PointsPropId, _pointsBuffer);
+            }
             
+            // apply changes from base material
+#if UNITY_EDITOR
+            _materialPropertyBlock.SetColor("MainColor", _baseMaterial.GetColor("MainColor"));
+            var texture = _baseMaterial.GetTexture("MainTex");
+            if (texture)
+            {
+                _materialPropertyBlock.SetTexture("MainTex", texture);
+            }
+            _materialPropertyBlock.SetFloat("LineWidth", _baseMaterial.GetFloat("LineWidth"));
+            _materialPropertyBlock.SetFloat("ShrinkWithDistance", _baseMaterial.GetFloat("ShrinkWithDistance"));
+            _materialPropertyBlock.SetFloat("TransitionProgress", _baseMaterial.GetFloat("TransitionProgress"));
+            _materialPropertyBlock.SetFloat("VisibleRange", _baseMaterial.GetFloat("VisibleRange"));
+            _materialPropertyBlock.SetFloat("FogDistance", _baseMaterial.GetFloat("FogDistance"));
+            _materialPropertyBlock.SetFloat("FogBias", _baseMaterial.GetFloat("FogBias"));
+            _materialPropertyBlock.SetColor("FogColor", _baseMaterial.GetColor("FogColor"));
+#endif
+
             var localTransform = transform;
             Graphics.DrawProcedural(
-                _material,
-                new Bounds(localTransform.position, localTransform.lossyScale * 5),
-                MeshTopology.Points, _pointList.Points.Length
+                _sharedMaterial,
+                // TODO take correct bounds
+                new Bounds(localTransform.position, localTransform.lossyScale * 500),
+                MeshTopology.Points, 
+                _pointList.Points.Length,
+                1, 
+                null, 
+                _materialPropertyBlock, 
+                ShadowCastingMode.Off, 
+                false, 
+                gameObject.layer
             );
         }
 
@@ -67,9 +97,10 @@ namespace ff.ar_rh_spurlab.LineBuildup
         #region Private members
 
         private ComputeBuffer _pointsBuffer;
-        private Material _material;
+        private static Material _sharedMaterial;
         
         private static readonly int PointsPropId = Shader.PropertyToID("Points");
+        private MaterialPropertyBlock _materialPropertyBlock;
 
         #endregion
     }
