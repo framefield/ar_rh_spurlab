@@ -1,3 +1,6 @@
+#include "Assets/ff/ar_rh_spurlab/LineBuildup/shader/point.hlsl"
+
+
 #pragma kernel buildup_line_renderer
 #pragma kernel clear_unused
 
@@ -11,7 +14,7 @@ uint p_interpolation_steps;
 float p_time;
 
 // Input points
-StructuredBuffer<float> i_points;
+StructuredBuffer<Point> i_points;
 
 // Output buffer and counter
 

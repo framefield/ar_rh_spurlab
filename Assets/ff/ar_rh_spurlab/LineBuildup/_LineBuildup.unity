@@ -151,8 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af1ab050c384745be90a2120a03be54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interpolation: 1
+  _interpolationSteps: 1
   _triangleBudget: 65536
+  _pointList: {fileID: -1627658041094200601, guid: 7e7e78e9574488e48ae1c168b64d71eb,
+    type: 3}
   _lineRendererCompute: {fileID: 7200000, guid: 07448bbb7d3543c88133158688b7aa1d,
     type: 3}
 --- !u!33 &526184993

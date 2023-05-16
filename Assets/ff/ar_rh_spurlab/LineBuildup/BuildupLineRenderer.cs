@@ -14,6 +14,9 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
         [SerializeField]
         private int _triangleBudget = 65536;
+        
+        [SerializeField]
+        private PointList _pointList = null;
 
         #endregion
         
@@ -26,7 +29,15 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
         private void Start()
         {
-            _pointsBuffer = new ComputeBuffer(12, 8 * sizeof(float));
+            if (!_pointList)
+            {
+                Debug.LogError("No point list assigned to BuildupLineRenderer", this);
+                enabled = false;
+                return;
+            }
+            
+            _pointsBuffer = new ComputeBuffer(_pointList.Points.Length, 8 * sizeof(float));
+            _pointsBuffer.SetData(_pointList.Points);
             _meshFilter = GetComponent<MeshFilter>();
             _builder = new MeshBuilder(_triangleBudget);
         }
