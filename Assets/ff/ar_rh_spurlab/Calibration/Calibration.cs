@@ -14,7 +14,7 @@ namespace ff.ar_rh_spurlab.Calibration
             CalibrationData calibrationData, LocationData locationData)
         {
             var (xrOriginTLocationOrigin, matchingDeviation) =
-                CalculateTransformFromAToB(locationData._pointsInLocationOrigin, calibrationData.PointsInWorldMap);
+                CalculateTransformFromAToB(locationData.PointsInLocationOrigin, calibrationData.PointsInWorldMap);
 
             var allowedMatchingDeviation = 0.5f;
 #if UNITY_EDITOR
@@ -45,9 +45,11 @@ namespace ff.ar_rh_spurlab.Calibration
             var aPPointsCenter = (pointsInA[0] + pointsInA[1] + pointsInA[2]) / 3.0f;
             var bPPointsCenter = (pointsInB[0] + pointsInB[1] + pointsInB[2]) / 3.0f;
             var aTPoints = Matrix4x4.TRS(aPPointsCenter,
-                Quaternion.LookRotation(pointsInA[0] - pointsInA[2], pointsInA[0] - pointsInA[1]), Vector3.one);
+                Quaternion.LookRotation(pointsInA[0] - pointsInA[2], pointsInA[0] - pointsInA[1]),
+                Vector3.one);
             var bTPoints = Matrix4x4.TRS(bPPointsCenter,
-                Quaternion.LookRotation(pointsInB[0] - pointsInB[2], pointsInB[0] - pointsInB[1]), Vector3.one);
+                Quaternion.LookRotation(pointsInB[0] - pointsInB[2], pointsInB[0] - pointsInB[1]),
+                Vector3.one);
             var bTA = bTPoints * Matrix4x4.Inverse(aTPoints);
 
             var matchingDeviation = 0.0f;

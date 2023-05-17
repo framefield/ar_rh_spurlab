@@ -96,14 +96,14 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void SetLocation(LocationData locationData)
         {
-            CalibrationData = new CalibrationData(locationData._name);
+            CalibrationData = new CalibrationData(locationData.Title);
 
             if (_location)
             {
                 Destroy(_location.gameObject);
             }
 
-            _location = Instantiate(locationData._prefab, _xrOrigin);
+            _location = Instantiate(locationData.CalibrationPrefab, _xrOrigin);
             _location.Initialize(CalibrationData, locationData);
             _calibrationUi.SetCalibrationData(CalibrationData);
             _calibrationARAnchorManager.SetCalibrationData(CalibrationData);

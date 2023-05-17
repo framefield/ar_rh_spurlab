@@ -65,11 +65,11 @@ namespace ff.ar_rh_spurlab.Locations
 
         public void SetLocation(LocationData locationData)
         {
-            var calibrationData = CalibrationData.TryLoad(locationData._name);
+            var calibrationData = CalibrationData.TryLoad(locationData.Title);
 
             if (calibrationData == null)
             {
-                Debug.LogError($"Location is not calibrated: {locationData._name}", this);
+                Debug.LogError($"Location is not calibrated: {locationData.Title}", this);
                 return;
             }
 
@@ -78,7 +78,7 @@ namespace ff.ar_rh_spurlab.Locations
                 Destroy(_location.gameObject);
             }
 
-            _location = Instantiate(locationData._prefab, _xrOrigin);
+            _location = Instantiate(locationData.ContentPrefab, _xrOrigin);
             _location.Initialize(calibrationData, locationData);
             _calibrationARAnchorManager.SetCalibrationData(calibrationData);
 

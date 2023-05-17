@@ -44,8 +44,8 @@ namespace ff.ar_rh_spurlab.Locations
 
             foreach (var location in locationData)
             {
-                _dropdown.options.Add(new TMP_Dropdown.OptionData(location._name));
-                _locationDataByName.Add(location._name, location);
+                _dropdown.options.Add(new TMP_Dropdown.OptionData(location.Title));
+                _locationDataByName.Add(location.Title, location);
             }
         }
 

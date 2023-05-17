@@ -7,24 +7,25 @@ namespace ff.ar_rh_spurlab.Locations
     {
         public static readonly int NumberOfReferencePoints = 3;
 
-        public string _name = "Location Placeholder Name";
-        public Location _prefab;
-        public Vector3[] _pointsInLocationOrigin;
+        public string Title = "Location Placeholder Name";
+        public Location ContentPrefab;
+        public Location CalibrationPrefab;
+        public Vector3[] PointsInLocationOrigin;
 
         private void OnValidate()
         {
-            if (_pointsInLocationOrigin.Length == NumberOfReferencePoints)
+            if (PointsInLocationOrigin.Length == NumberOfReferencePoints)
             {
                 return;
             }
 
             var validPoints = new Vector3[NumberOfReferencePoints];
-            for (var i = 0; i < Mathf.Min(NumberOfReferencePoints, _pointsInLocationOrigin.Length); ++i)
+            for (var i = 0; i < Mathf.Min(NumberOfReferencePoints, PointsInLocationOrigin.Length); ++i)
             {
-                validPoints[i] = _pointsInLocationOrigin[i];
+                validPoints[i] = PointsInLocationOrigin[i];
             }
 
-            _pointsInLocationOrigin = validPoints;
+            PointsInLocationOrigin = validPoints;
         }
     }
 }
