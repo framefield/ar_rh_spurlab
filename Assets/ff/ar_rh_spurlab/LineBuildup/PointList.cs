@@ -12,7 +12,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
         public float Y;
         public float Z;
     }
-    
+
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct PointQuaternion
@@ -22,21 +22,45 @@ namespace ff.ar_rh_spurlab.LineBuildup
         public float Z;
         public float W;
     }
-    
+
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public struct Point 
+    public struct Point
     {
         public PointPosition Position;
         public float W;
         public PointQuaternion Rotation;
     }
-    
+
     [Serializable]
-    public class PointList: ScriptableObject
+    public class PointList : ScriptableObject
     {
         [SerializeField]
         public Point[] Points;
+
+        [SerializeField]
+        public Bounds Bounds;
+
+        public void GenerateBounds()
+        {
+            if (Points.Length == 0)
+            {
+                Bounds = new Bounds();
+                return;
+            }
+
+            Bounds = new Bounds(new Vector3(Points[0].Position.X, Points[0].Position.Y, Points[0].Position.Z),
+                Vector3.zero);
+            foreach (var point in Points)
+            {
+                if (float.IsNaN(point.W))
+                {
+                    continue;
+                }
+
+                Bounds.Encapsulate(new Vector3(point.Position.X, point.Position.Y, point.Position.Z));
+            }
+        }
 
         public void Fill(ComputeBuffer pointsBuffer)
         {
@@ -53,6 +77,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
                 data[i * 8 + 6] = point.Rotation.Z;
                 data[i * 8 + 7] = point.Rotation.W;
             }
+
             pointsBuffer.SetData(data);
         }
     }

@@ -1,8 +1,5 @@
-﻿using System;
-using JetBrains.Annotations;
-using NUnit.Framework;
+﻿using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering;
 
 namespace ff.ar_rh_spurlab.LineBuildup
@@ -17,100 +14,38 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
         [SerializeField]
         private Material _baseMaterial = null;
-        
+
         [SerializeField]
-        [UnityEngine.Range(0, 1)]
+        [Range(0, 1)]
         private float _transitionProgress = 1;
 
         #endregion
 
         #region Initialization & Teardown
-        
+
         private void Initialize()
         {
-            if (!_pointList)
+            if (!_pointList && Application.isPlaying)
             {
-                Debug.LogError("No point list assigned to BuildupLineRendererProcedural", this);       
-                if (Application.isPlaying) 
-                {
-                    enabled = false;
-                }
+                Debug.LogError("No point list assigned to BuildupLineRendererProcedural", this);
+                enabled = false;
                 return;
             }
-            
-            if (!_baseMaterial) {
+
+            if (!_baseMaterial && Application.isPlaying)
+            {
                 Debug.LogError("No base material assigned to BuildupLineRendererProcedural", this);
-                if (Application.isPlaying) 
-                {
-                    enabled = false;
-                }
+                enabled = false;
                 return;
             }
 
-            if (!_fullyInitialized)
+
+            if (_pointsBuffer == null)
             {
-                _pointsBuffer = new ComputeBuffer( _pointList.Points.Length, 8 * sizeof(float));
+                _pointsBuffer = new ComputeBuffer(_pointList.Points.Length, 8 * sizeof(float));
                 _pointList.Fill(_pointsBuffer);
-                _fullyInitialized = true;
-            }
-        }
-        
-        private void TearDown()
-        {
-            _fullyInitialized = false;
-            
-            _pointsBuffer?.Dispose();
-
-            if (_materialPropertyBlock != null)
-            {
-                _materialPropertyBlock.Clear();
-                _materialPropertyBlock = null;
             }
 
-            if (_sharedMaterial)
-            {
-                if (Application.isPlaying)
-                {
-                    
-                    Destroy(_sharedMaterial);
-                }
-                else
-                {
-                    DestroyImmediate(_sharedMaterial);
-                }
-                _sharedMaterial = null;
-            }
-        }
-
-        #endregion 
-
-
-        #region Unity Callbacks
-
-        private void Start()
-        {
-            Initialize();
-        }
-
-
-        private void Reset()
-        {
-            TearDown();
-            Initialize();
-        }
-
-        private void OnDestroy()
-        {
-            TearDown();
-        }
-
-        private void Update()
-        {
-            if (!_fullyInitialized)
-            {
-                return;
-            }
-            
             if (!_sharedMaterial)
             {
                 _sharedMaterial = new Material(_baseMaterial)
@@ -122,29 +57,116 @@ namespace ff.ar_rh_spurlab.LineBuildup
             if (_materialPropertyBlock == null)
             {
                 _materialPropertyBlock = new MaterialPropertyBlock();
-                _materialPropertyBlock.SetBuffer(PointsPropId, _pointsBuffer);
             }
-            
+        }
+
+        [ContextMenu("Reset")]
+        private void TearDown()
+        {
+            _pointsBuffer?.Dispose();
+            _pointsBuffer = null;
+
+            if (_materialPropertyBlock != null)
+            {
+                _materialPropertyBlock.Clear();
+                _materialPropertyBlock = null;
+            }
+
+            if (_sharedMaterial)
+            {
+                if (Application.isPlaying)
+                {
+                    Destroy(_sharedMaterial);
+                }
+                else
+                {
+                    DestroyImmediate(_sharedMaterial);
+                }
+
+                _sharedMaterial = null;
+            }
+        }
+
+        #endregion
+
+
+        #region Unity Callbacks
+
+        private void Reset()
+        {
+            TearDown();
+        }
+
+        private void OnDestroy()
+        {
+            TearDown();
+        }
+
+        private void Update()
+        {
+            if (!IsFullyInitialized)
+            {
+                Initialize();
+            }
+
 #if UNITY_EDITOR
             UpdateFromBaseMaterial();
 #endif
+            _materialPropertyBlock.SetBuffer(PointsPropId, _pointsBuffer);
             _materialPropertyBlock.SetFloat(TransitionProgressPropId, _transitionProgress);
 
             var localTransform = transform;
             Graphics.DrawProcedural(
                 _sharedMaterial,
-                // TODO take correct bounds
-                new Bounds(localTransform.position, localTransform.lossyScale * 500),
-                MeshTopology.Triangles, 
+                _pointList.Bounds,
+                MeshTopology.Triangles,
                 _pointList.Points.Length * 6,
-                1, 
-                null, 
-                _materialPropertyBlock, 
-                ShadowCastingMode.Off, 
-                false, 
+                1,
+                null,
+                _materialPropertyBlock,
+                ShadowCastingMode.Off,
+                false,
                 gameObject.layer
             );
         }
+
+#if UNITY_EDITOR
+
+        void OnDrawGizmosSelected()
+        {
+            if (!_pointList)
+            {
+                return;
+            }
+
+            Gizmos.color = Color.white;
+            Gizmos.DrawWireCube(_pointList.Bounds.center, _pointList.Bounds.size);
+        }
+
+        public bool HasFrameBounds()
+        {
+            return true;
+        }
+
+        public Bounds OnGetFrameBounds()
+        {
+            if (_pointList)
+            {
+                return _pointList.Bounds;
+            }
+
+            return new Bounds();
+        }
+
+
+        private void OnValidate()
+        {
+            if (_pointsBuffer == null || _pointList.Points.Length != _pointsBuffer.count)
+            {
+                TearDown();
+            }
+        }
+#endif
 
         private void UpdateFromBaseMaterial()
         {
@@ -152,7 +174,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
             {
                 return;
             }
-            
+
             _materialPropertyBlock.SetColor(MainColorPropId, _baseMaterial.GetColor(MainColorPropId));
             var texture = _baseMaterial.GetTexture(MainTexPropId);
             if (texture)
@@ -170,13 +192,17 @@ namespace ff.ar_rh_spurlab.LineBuildup
         }
 
         #endregion
-        
+
         #region Private members
+
+        private bool IsFullyInitialized => _materialPropertyBlock != null && _pointsBuffer != null && _sharedMaterial;
 
         [CanBeNull]
         private ComputeBuffer _pointsBuffer;
+
         [CanBeNull]
         private MaterialPropertyBlock _materialPropertyBlock;
+
         [CanBeNull]
         private static Material _sharedMaterial;
 
@@ -190,7 +216,6 @@ namespace ff.ar_rh_spurlab.LineBuildup
         private static readonly int FogDistancePropId = Shader.PropertyToID("FogDistance");
         private static readonly int FogBiasPropId = Shader.PropertyToID("FogBias");
         private static readonly int FogColorPropId = Shader.PropertyToID("FogColor");
-        private bool _fullyInitialized;
 
         #endregion
     }
