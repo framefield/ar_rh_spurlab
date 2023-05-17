@@ -49,7 +49,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
                 return;
             }
 
-            Bounds = new Bounds(new Vector3(Points[0].Position.X, Points[0].Position.Y, Points[0].Position.Z),
+            Bounds = new Bounds(new Vector3(-Points[0].Position.X, Points[0].Position.Y, Points[0].Position.Z),
                 Vector3.zero);
             foreach (var point in Points)
             {
@@ -58,7 +58,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
                     continue;
                 }
 
-                Bounds.Encapsulate(new Vector3(point.Position.X, point.Position.Y, point.Position.Z));
+                Bounds.Encapsulate(new Vector3(-point.Position.X, point.Position.Y, point.Position.Z));
             }
         }
 
@@ -68,7 +68,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
             for (var i = 0; i < Points.Length; i++)
             {
                 var point = Points[i];
-                data[i * 8 + 0] = point.Position.X;
+                data[i * 8 + 0] = -point.Position.X;
                 data[i * 8 + 1] = point.Position.Y;
                 data[i * 8 + 2] = point.Position.Z;
                 data[i * 8 + 3] = point.W;
