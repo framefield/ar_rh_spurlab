@@ -5,9 +5,6 @@ namespace ff.ar_rh_spurlab.Locations
 {
     public class Location : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject _content;
-
         public LocationData LocationData { get; private set; }
         public CalibrationData CalibrationData { get; private set; }
 
@@ -15,7 +12,11 @@ namespace ff.ar_rh_spurlab.Locations
         {
             if (CalibrationData?.AreAnchorsReady != true)
             {
-                _content.gameObject.SetActive(false);
+                foreach (var trackedLocationContent in _trackedLocationContents)
+                {
+                    trackedLocationContent.SetIsTracked(false);
+                }
+
                 return;
             }
 
@@ -24,13 +25,27 @@ namespace ff.ar_rh_spurlab.Locations
 
             transform.position = xrOriginTLocationOrigin.GetPosition();
             transform.rotation = xrOriginTLocationOrigin.rotation;
-            _content.gameObject.SetActive(isValid);
+
+            foreach (var trackedLocationContent in _trackedLocationContents)
+            {
+                trackedLocationContent.SetIsTracked(isValid);
+            }
         }
 
         public void Initialize(CalibrationData calibrationData, LocationData locationData)
         {
             CalibrationData = calibrationData;
             LocationData = locationData;
+
+            _trackedLocationContents = GetComponentsInChildren<ITrackedLocationContent>();
+            Debug.Log($"Location.Initialize: {name} has {_trackedLocationContents.Length} tracked location contents");
+
+            foreach (var trackedLocationContent in _trackedLocationContents)
+            {
+                trackedLocationContent.Initialize();
+            }
         }
+
+        private ITrackedLocationContent[] _trackedLocationContents;
     }
 }
