@@ -55,7 +55,6 @@
                 float2 texCoord : TEXCOORD;
                 float fog: FOG;
             };
-
             
             float4 MainColor;
             sampler2D MainTex;
@@ -69,16 +68,14 @@
             float FogBias;  
 
 
-            StructuredBuffer<Point> Points : t0;
+            uint SegmentCount;
+            StructuredBuffer<Point> Points;
             
             psInput vsMain(uint id: SV_VertexID)
             {                
                 psInput output;
                 float discardFactor = 1;
-
-                uint SegmentCount, Stride;
-                Points.GetDimensions(SegmentCount, Stride);
-
+                
                 float4 aspect = float4(_ScreenParams.x / _ScreenParams.y,1,1,1);
                 int quadIndex = id % 6;
                 uint particleId = id / 6;

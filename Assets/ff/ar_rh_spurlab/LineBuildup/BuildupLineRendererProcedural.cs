@@ -113,6 +113,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
             UpdateFromBaseMaterial();
 #endif
             _materialPropertyBlock.SetBuffer(PointsPropId, _pointsBuffer);
+            _materialPropertyBlock.SetInteger(SegmentCount, _pointList.Points.Length);
             _materialPropertyBlock.SetFloat(TransitionProgressPropId, _transitionProgress);
 
             var localTransform = transform;
@@ -207,6 +208,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
         private static Material _sharedMaterial;
 
         private static readonly int PointsPropId = Shader.PropertyToID("Points");
+        private static readonly int SegmentCount = Shader.PropertyToID("SegmentCount");
         private static readonly int MainColorPropId = Shader.PropertyToID("MainColor");
         private static readonly int MainTexPropId = Shader.PropertyToID("MainTex");
         private static readonly int LineWidthPropId = Shader.PropertyToID("LineWidth");
