@@ -289,7 +289,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: f990b37fb3e354e80ac97eb07699f67b, type: 2}
   m_InitialState: 0
-  m_WrapMode: 0
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7590f9372214df8b423b20c297e7fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _autoTriggerChapters: 1
   _autoPlay: 1
   _waitingTimeline: {fileID: 7734014496868547289}
   _chapterTimelines:

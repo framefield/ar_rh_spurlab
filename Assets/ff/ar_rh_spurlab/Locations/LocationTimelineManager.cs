@@ -65,6 +65,8 @@ namespace ff.ar_rh_spurlab.Locations
             _activePlayableDirector = director;
             _activePlayableDirector.Play();
             _activePlayableDirector.stopped += PlayableDirectorStoppedHandler;
+
+            Debug.Log($"LocationTimelineManager: Playing timeline {director.name}", director);
         }
 
         private void PlayableDirectorStoppedHandler(PlayableDirector director)
