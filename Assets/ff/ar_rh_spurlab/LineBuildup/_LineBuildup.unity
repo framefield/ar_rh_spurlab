@@ -149,10 +149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a060778aa44ea7be693b622fe4d033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointList: {fileID: -1627658041094200601, guid: 7e7e78e9574488e48ae1c168b64d71eb,
+  _pointList: {fileID: -1627658041094200601, guid: d058efd6fc6b62c4788daccc563804f9,
     type: 3}
   _baseMaterial: {fileID: 2100000, guid: b11dd6e0379763d4590efe32b1b89e3f, type: 2}
-  _transitionProgress: 0.339
+  _transitionProgress: 1
 --- !u!4 &280375737
 Transform:
   m_ObjectHideFlags: 0

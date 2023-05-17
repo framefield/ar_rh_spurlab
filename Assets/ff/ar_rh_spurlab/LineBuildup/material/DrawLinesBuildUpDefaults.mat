@@ -67,7 +67,7 @@ Material:
     m_Floats:
     - FogBias: 4.7
     - FogDistance: 117
-    - LineWidth: -0.16
+    - LineWidth: 0.06
     - ShrinkWithDistance: 0.76
     - TransitionProgress: 0.43
     - VisibleRange: 1
