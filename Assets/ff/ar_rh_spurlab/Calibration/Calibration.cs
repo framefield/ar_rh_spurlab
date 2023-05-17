@@ -16,7 +16,7 @@ namespace ff.ar_rh_spurlab.Calibration
             var (xrOriginTLocationOrigin, matchingDeviation) =
                 CalculateTransformFromAToB(locationData._pointsInLocationOrigin, calibrationData.PointsInWorldMap);
 
-            float allowedMatchingDeviation = 0.5f;
+            var allowedMatchingDeviation = 0.5f;
 #if UNITY_EDITOR
             allowedMatchingDeviation = 100.0f; //for testing any quality is allowed
 #endif
@@ -201,6 +201,7 @@ namespace ff.ar_rh_spurlab.Calibration
                 return;
             }
 
+            _calibrationData.MatchedAnchors ??= new List<ARAnchor>();
             _calibrationData.MatchedAnchors.Clear();
 
 #if UNITY_IOS && !UNITY_EDITOR
