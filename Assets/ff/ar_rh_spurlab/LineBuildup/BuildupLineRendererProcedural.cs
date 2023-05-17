@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using JetBrains.Annotations;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering;
-using UnityEngine.Serialization;
 
 namespace ff.ar_rh_spurlab.LineBuildup
 {
+    [ExecuteInEditMode]
     public class BuildupLineRendererProcedural : MonoBehaviour
     {
         #region Serialized Fields
@@ -13,39 +17,101 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
         [SerializeField]
         private Material _baseMaterial = null;
+        
+        [SerializeField]
+        [UnityEngine.Range(0, 1)]
+        private float _transitionProgress = 1;
 
         #endregion
+
+        #region Initialization & Teardown
+        
+        private void Initialize()
+        {
+            if (!_pointList)
+            {
+                Debug.LogError("No point list assigned to BuildupLineRendererProcedural", this);       
+                if (Application.isPlaying) 
+                {
+                    enabled = false;
+                }
+                return;
+            }
+            
+            if (!_baseMaterial) {
+                Debug.LogError("No base material assigned to BuildupLineRendererProcedural", this);
+                if (Application.isPlaying) 
+                {
+                    enabled = false;
+                }
+                return;
+            }
+
+            if (!_fullyInitialized)
+            {
+                _pointsBuffer = new ComputeBuffer( _pointList.Points.Length, 8 * sizeof(float));
+                _pointList.Fill(_pointsBuffer);
+                _fullyInitialized = true;
+            }
+        }
+        
+        private void TearDown()
+        {
+            _fullyInitialized = false;
+            
+            _pointsBuffer?.Dispose();
+
+            if (_materialPropertyBlock != null)
+            {
+                _materialPropertyBlock.Clear();
+                _materialPropertyBlock = null;
+            }
+
+            if (_sharedMaterial)
+            {
+                if (Application.isPlaying)
+                {
+                    
+                    Destroy(_sharedMaterial);
+                }
+                else
+                {
+                    DestroyImmediate(_sharedMaterial);
+                }
+                _sharedMaterial = null;
+            }
+        }
+
+        #endregion 
 
 
         #region Unity Callbacks
 
         private void Start()
         {
-            if (!_pointList)
-            {
-                Debug.LogError("No point list assigned to BuildupLineRendererProcedural", this);
-                enabled = false;
-                return;
-            }
-            
-            if (!_baseMaterial) {
-                Debug.LogError("No base material assigned to BuildupLineRendererProcedural", this);
-                enabled = false;
-                return;
-            }
-            
-            _pointsBuffer = new ComputeBuffer( _pointList.Points.Length, 8 * sizeof(float));
-            _pointList.Fill(_pointsBuffer);
+            Initialize();
+        }
+
+
+        private void Reset()
+        {
+            TearDown();
+            Initialize();
         }
 
         private void OnDestroy()
         {
-            _pointsBuffer.Dispose();
+            TearDown();
         }
 
         private void Update()
         {
-            if (_sharedMaterial == null)
+            if (!_fullyInitialized)
+            {
+                return;
+            }
+            
+            if (!_sharedMaterial)
             {
                 _sharedMaterial = new Material(_baseMaterial)
                 {
@@ -59,30 +125,18 @@ namespace ff.ar_rh_spurlab.LineBuildup
                 _materialPropertyBlock.SetBuffer(PointsPropId, _pointsBuffer);
             }
             
-            // apply changes from base material
 #if UNITY_EDITOR
-            _materialPropertyBlock.SetColor("MainColor", _baseMaterial.GetColor("MainColor"));
-            var texture = _baseMaterial.GetTexture("MainTex");
-            if (texture)
-            {
-                _materialPropertyBlock.SetTexture("MainTex", texture);
-            }
-            _materialPropertyBlock.SetFloat("LineWidth", _baseMaterial.GetFloat("LineWidth"));
-            _materialPropertyBlock.SetFloat("ShrinkWithDistance", _baseMaterial.GetFloat("ShrinkWithDistance"));
-            _materialPropertyBlock.SetFloat("TransitionProgress", _baseMaterial.GetFloat("TransitionProgress"));
-            _materialPropertyBlock.SetFloat("VisibleRange", _baseMaterial.GetFloat("VisibleRange"));
-            _materialPropertyBlock.SetFloat("FogDistance", _baseMaterial.GetFloat("FogDistance"));
-            _materialPropertyBlock.SetFloat("FogBias", _baseMaterial.GetFloat("FogBias"));
-            _materialPropertyBlock.SetColor("FogColor", _baseMaterial.GetColor("FogColor"));
+            UpdateFromBaseMaterial();
 #endif
+            _materialPropertyBlock.SetFloat(TransitionProgressPropId, _transitionProgress);
 
             var localTransform = transform;
             Graphics.DrawProcedural(
                 _sharedMaterial,
                 // TODO take correct bounds
                 new Bounds(localTransform.position, localTransform.lossyScale * 500),
-                MeshTopology.Points, 
-                _pointList.Points.Length,
+                MeshTopology.Triangles, 
+                _pointList.Points.Length * 6,
                 1, 
                 null, 
                 _materialPropertyBlock, 
@@ -92,15 +146,51 @@ namespace ff.ar_rh_spurlab.LineBuildup
             );
         }
 
+        private void UpdateFromBaseMaterial()
+        {
+            if (_materialPropertyBlock == null)
+            {
+                return;
+            }
+            
+            _materialPropertyBlock.SetColor(MainColorPropId, _baseMaterial.GetColor(MainColorPropId));
+            var texture = _baseMaterial.GetTexture(MainTexPropId);
+            if (texture)
+            {
+                _materialPropertyBlock.SetTexture(MainTexPropId, texture);
+            }
+
+            _materialPropertyBlock.SetFloat(LineWidthPropId, _baseMaterial.GetFloat(LineWidthPropId));
+            _materialPropertyBlock.SetFloat(ShrinkWithDistancePropId, _baseMaterial.GetFloat(ShrinkWithDistancePropId));
+            _materialPropertyBlock.SetFloat(TransitionProgressPropId, _baseMaterial.GetFloat(TransitionProgressPropId));
+            _materialPropertyBlock.SetFloat(VisibleRangePropId, _baseMaterial.GetFloat(VisibleRangePropId));
+            _materialPropertyBlock.SetFloat(FogDistancePropId, _baseMaterial.GetFloat(FogDistancePropId));
+            _materialPropertyBlock.SetFloat(FogBiasPropId, _baseMaterial.GetFloat(FogBiasPropId));
+            _materialPropertyBlock.SetColor(FogColorPropId, _baseMaterial.GetColor(FogColorPropId));
+        }
+
         #endregion
         
         #region Private members
 
+        [CanBeNull]
         private ComputeBuffer _pointsBuffer;
-        private static Material _sharedMaterial;
-        
-        private static readonly int PointsPropId = Shader.PropertyToID("Points");
+        [CanBeNull]
         private MaterialPropertyBlock _materialPropertyBlock;
+        [CanBeNull]
+        private static Material _sharedMaterial;
+
+        private static readonly int PointsPropId = Shader.PropertyToID("Points");
+        private static readonly int MainColorPropId = Shader.PropertyToID("MainColor");
+        private static readonly int MainTexPropId = Shader.PropertyToID("MainTex");
+        private static readonly int LineWidthPropId = Shader.PropertyToID("LineWidth");
+        private static readonly int ShrinkWithDistancePropId = Shader.PropertyToID("ShrinkWithDistance");
+        private static readonly int TransitionProgressPropId = Shader.PropertyToID("TransitionProgress");
+        private static readonly int VisibleRangePropId = Shader.PropertyToID("VisibleRange");
+        private static readonly int FogDistancePropId = Shader.PropertyToID("FogDistance");
+        private static readonly int FogBiasPropId = Shader.PropertyToID("FogBias");
+        private static readonly int FogColorPropId = Shader.PropertyToID("FogColor");
+        private bool _fullyInitialized;
 
         #endregion
     }

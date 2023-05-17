@@ -259,6 +259,7 @@ MonoBehaviour:
   _pointList: {fileID: -1627658041094200601, guid: 7e7e78e9574488e48ae1c168b64d71eb,
     type: 3}
   _baseMaterial: {fileID: 2100000, guid: b11dd6e0379763d4590efe32b1b89e3f, type: 2}
+  _transitionProgress: 1
 --- !u!4 &1795038633 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5f12a3f53575d4306a62083f8e683c85,
