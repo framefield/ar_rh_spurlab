@@ -8,8 +8,8 @@ namespace ff.ar_rh_spurlab.Locations
         public static readonly int NumberOfReferencePoints = 3;
 
         public string Title = "Location Placeholder Name";
-        public Location ContentPrefab;
-        public Location CalibrationPrefab;
+        public AugmentedLocation ContentPrefab;
+        public AugmentedLocation CalibrationPrefab;
         public Vector3[] PointsInLocationOrigin;
 
         private void OnValidate()

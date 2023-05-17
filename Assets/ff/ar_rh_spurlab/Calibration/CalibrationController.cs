@@ -35,10 +35,10 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private CalibrationUi _calibrationUi;
 
-        private Location _location;
+        private AugmentedLocation _augmentedLocation;
 
         public CalibrationData CalibrationData { get; private set; }
-        public LocationData LocationData => _location.LocationData;
+        public LocationData LocationData => _augmentedLocation.LocationData;
 
         public ARSession Session => _arSession;
         public ARRaycastManager RaycastManager => _arRaycastManager;
@@ -98,13 +98,13 @@ namespace ff.ar_rh_spurlab.Calibration
         {
             CalibrationData = new CalibrationData(locationData.Title);
 
-            if (_location)
+            if (_augmentedLocation)
             {
-                Destroy(_location.gameObject);
+                Destroy(_augmentedLocation.gameObject);
             }
 
-            _location = Instantiate(locationData.CalibrationPrefab, _xrOrigin);
-            _location.Initialize(CalibrationData, locationData);
+            _augmentedLocation = Instantiate(locationData.CalibrationPrefab, _xrOrigin);
+            _augmentedLocation.Initialize(CalibrationData, locationData);
             _calibrationUi.SetCalibrationData(CalibrationData);
             _calibrationARAnchorManager.SetCalibrationData(CalibrationData);
         }

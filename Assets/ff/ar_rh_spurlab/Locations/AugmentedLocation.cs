@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ff.ar_rh_spurlab.Locations
 {
-    public class Location : MonoBehaviour
+    public class AugmentedLocation : MonoBehaviour
     {
         public LocationData LocationData { get; private set; }
         public CalibrationData CalibrationData { get; private set; }

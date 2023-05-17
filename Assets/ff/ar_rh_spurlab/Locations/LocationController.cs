@@ -28,7 +28,7 @@ namespace ff.ar_rh_spurlab.Locations
         private CalibrationARAnchorManager _calibrationARAnchorManager;
 
 
-        private Location _location;
+        private AugmentedLocation _augmentedLocation;
         public LocationData[] AvailableLocations => _availableLocations;
 
 
@@ -73,13 +73,13 @@ namespace ff.ar_rh_spurlab.Locations
                 return;
             }
 
-            if (_location)
+            if (_augmentedLocation)
             {
-                Destroy(_location.gameObject);
+                Destroy(_augmentedLocation.gameObject);
             }
 
-            _location = Instantiate(locationData.ContentPrefab, _xrOrigin);
-            _location.Initialize(calibrationData, locationData);
+            _augmentedLocation = Instantiate(locationData.ContentPrefab, _xrOrigin);
+            _augmentedLocation.Initialize(calibrationData, locationData);
             _calibrationARAnchorManager.SetCalibrationData(calibrationData);
 
 #if UNITY_IOS

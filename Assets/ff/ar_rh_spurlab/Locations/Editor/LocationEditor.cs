@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace ff.ar_rh_spurlab.Locations.Editor
 {
-    [CustomEditor(typeof(Location))]
+    [CustomEditor(typeof(AugmentedLocation))]
     public class LocationEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
