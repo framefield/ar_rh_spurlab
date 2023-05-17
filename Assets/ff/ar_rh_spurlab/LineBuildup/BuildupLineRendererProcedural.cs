@@ -120,7 +120,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
                 _sharedMaterial,
                 _pointList.Bounds,
                 MeshTopology.Triangles,
-                _pointList.Points.Length * 6,
+                _pointList.Points.Length * 6 - 6,
                 1,
                 null,
                 _materialPropertyBlock,

@@ -1,23 +1,28 @@
-﻿Shader "framefield/DrawLinesBuildup" {
-    
+﻿Shader "framefield/DrawLinesBuildup" 
+{
     Properties
     {
          MainColor("MainColor", Color)  = (1,1,1,1)
          MainTex("MainTex", 2D) = "white" {}
          LineWidth("LineWidth", float) = 0.039
          ShrinkWithDistance("ShrinkWithDistance", float) = 0.550
-         TransitionProgress("TransitionProgress", float) = 1
-         VisibleRange("VisibleRange", float) = 1
+         TransitionProgress("TransitionProgress", float) = 1.0
+         VisibleRange("VisibleRange", float) = 1.0
          FogDistance("FogDistance", float) = 117.0
          FogBias("FogBias", float) = 4.700
-         FogColor("FogColor", Color) = (0.17, 0.17, 0.17, 1)
+         FogColor("FogColor", Color) = (0.17, 0.17, 0.17, 1.0)
     }
     
     SubShader
     {
-        Tags{ "RenderType"="Opaque" "Queue"="Geometry" }
+        Tags {"RenderType"="Transparent"}
 
-        Cull Off
+        Lighting Off
+	    ZWrite Off
+        ZTest Always
+	    AlphaTest Off
+	    Cull Off
+	    Blend SrcAlpha OneMinusSrcAlpha 
         
         Pass
         {
@@ -74,7 +79,7 @@
                 uint SegmentCount, Stride;
                 Points.GetDimensions(SegmentCount, Stride);
 
-                float4 aspect = float4(_ScreenParams.y / _ScreenParams.x,1,1,1);
+                float4 aspect = float4(_ScreenParams.x / _ScreenParams.y,1,1,1);
                 int quadIndex = id % 6;
                 uint particleId = id / 6;
                 float3 cornerFactors = Corners[quadIndex];
