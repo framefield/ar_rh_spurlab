@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: dabb387dcc19116409afd0453a32182b
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _textureY: {fileID: 2800000, guid: 3d4929198fd877e409f52d5cac621349, type: 3}
+  - _textureCbCr: {fileID: 2800000, guid: 392edba2e8f002e40aad5722b0364ea4, type: 3}
+  - _textureDepth: {fileID: 2800000, guid: 48574972181fa164ca5505a31c4ec125, type: 3}
+  - _textureStencil: {fileID: 2800000, guid: 48574972181fa164ca5505a31c4ec125, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
