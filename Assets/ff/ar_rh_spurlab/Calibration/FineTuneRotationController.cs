@@ -49,7 +49,9 @@ namespace ff.ar_rh_spurlab.Calibration
                 var deltaAngle = Vector3.Angle(_lastWorldPTouchDirection, worldPTouchDirection);
                 var moveToEye = Matrix4x4.Translate(-worldPEyePosition);
                 var moveToOrigin = moveToEye.inverse;
-                var deltaRotation = Matrix4x4.Rotate(Quaternion.AngleAxis(deltaAngle, Vector3.Cross(_lastWorldPTouchDirection, worldPTouchDirection)));
+                var worldPRotationAxis = Vector3.Cross(_lastWorldPTouchDirection, worldPTouchDirection);
+                var worldPProjectedRotationAxisOnNearPlane = Vector3.ProjectOnPlane(worldPRotationAxis, _mainCamera.transform.forward).normalized;
+                var deltaRotation = Matrix4x4.Rotate(Quaternion.AngleAxis(deltaAngle, worldPProjectedRotationAxisOnNearPlane));
                 var calibration = _calibrationController.CalibrationData;
                 calibration.Offset = moveToOrigin * deltaRotation * moveToEye * calibration.Offset;
             }
