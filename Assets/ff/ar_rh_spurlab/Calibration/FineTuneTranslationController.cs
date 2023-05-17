@@ -16,6 +16,7 @@ namespace ff.ar_rh_spurlab.Calibration
         private CalibrationController _calibrationController;
         private Camera _mainCamera;
         private bool _isActive;
+        private Matrix4x4 _previousOffset;
 
         private bool _pressed;
         private Vector3 _lastWorldPTouchPosition = Vector3.zero;
@@ -75,9 +76,15 @@ namespace ff.ar_rh_spurlab.Calibration
                 _mainCamera = Camera.main;
             }
 
+            _previousOffset = _calibrationController.CalibrationData.Offset;
+
             _stateMachine = stateMachine;
             _calibrationFineTuneTranslationUi = Instantiate(_calibrationFineTuneTranslationUiPrefab, transform);
             _calibrationFineTuneTranslationUi.OnContinueButtonClicked += () => _stateMachine.Continue();
+            _calibrationFineTuneTranslationUi.OnBackButtonClicked += delegate() {
+                _calibrationController.CalibrationData.Offset = _previousOffset;
+                _stateMachine.Back();
+            };
             _isActive = true;
             _offsetValid = false;
         }
