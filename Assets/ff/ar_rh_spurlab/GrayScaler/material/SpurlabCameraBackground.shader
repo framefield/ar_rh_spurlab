@@ -7,11 +7,17 @@ Shader "framefield/SpurlabCameraBackground"
         _HumanStencil ("HumanStencil", 2D) = "black" {}
         _HumanDepth ("HumanDepth", 2D) = "black" {}
         _EnvironmentDepth ("EnvironmentDepth", 2D) = "black" {}
-        _grayScaleStrength ("GrayScaleStrength", range(0, 1)) = 1
-        
+
+        _baseGrayScaleStrength ("BaseGrayScaleStrength", range(0, 1)) = 1
+        _cameraViewportScale ("CameraViewportWidthInRadians", range(0.1, 6)) = 4
+
+        _fadeOutColor ("FadeOutColor", Color) = (0,0,0,1)
+        _maxFadeOut ("MaxFadeout", range(0, 1)) = 0.2
+
+        [KeywordEnum(GuideToPortal, InPortal)] _Mode ("Mode", Float) = 0 
         
         [KeywordEnum(None, HumanSegmentation, Depth)] _ForceArKitFeature ("Force", Float) = 0 
-        
+        [KeywordEnum(None, AngularDifference)] _Debug ("Debug", Float) = 0 
     }
 
     SubShader
@@ -42,6 +48,8 @@ Shader "framefield/SpurlabCameraBackground"
             #pragma fragment frag
 
             #pragma multi_compile_local __ ARKIT_BACKGROUND_URP
+            #pragma multi_compile_local __ _DEBUG_NONE _DEBUG_ANGULARDIFFERENCE
+            #pragma multi_compile_local __ _MODE_GUIDETOPORTAL _MODE_INPORTAL
             #pragma multi_compile_local __ ARKIT_HUMAN_SEGMENTATION_ENABLED ARKIT_ENVIRONMENT_DEPTH_ENABLED
             #pragma multi_compile_local __ _FORCEARKITFEATURE_NONE _FORCEARKITFEATURE_HUMANSEGMENTATION _FORCEARKITFEATURE_DEPTH
 
@@ -151,7 +159,18 @@ Shader "framefield/SpurlabCameraBackground"
 #endif // ARKIT_HUMAN_SEGMENTATION_ENABLED
 
 
-            float _grayScaleStrength;
+            half _baseGrayScaleStrength;
+            
+            half _maxFadeOut;
+            half _fadeOutColor;
+            
+            half _cameraViewportWidthInRadians;
+            half _cameraViewportHeightInRadians;
+            half _cameraViewportRadius;
+            half4 _CameraForward;
+            half4 _CameraRight;
+            half4 _CameraUp;
+            float4x4 _PointsOfInterest;
             
 
             fragment_output frag (v2f i)
@@ -194,11 +213,65 @@ Shader "framefield/SpurlabCameraBackground"
 
                 fragment_output o;
 
+                const half4 grayScaleVideo = dot(videoColor.xyz, float3(0.3, 0.59, 0.11));
+                const half grayScaleAmount = max(0, min(1, _baseGrayScaleStrength) - humanFound);
+                const half4 mixedVideo = lerp(videoColor, grayScaleVideo, grayScaleAmount);
 
-                const half4 gray_scale = dot(videoColor.xyz, float3(0.3, 0.59, 0.11));
-                const float gray_scale_amount = max(0, min(1, _grayScaleStrength) - humanFound);
+                half inverseFadeOutStrength = 1;
+
                 
-                o.color = lerp(videoColor, gray_scale, gray_scale_amount);
+#if _MODE_GUIDETOPORTAL
+                const half3 viewDir = _CameraForward +
+                    (i.texcoord.x - 0.5) * _CameraRight +
+                        (i.texcoord.y - 0.5) * _CameraUp;
+
+                
+                if (_PointsOfInterest._m03 > 0)
+                {
+                    const half3 poiPos = half3(_PointsOfInterest._m00, _PointsOfInterest._m01, _PointsOfInterest._m02);
+                    const half3 poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
+                    const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
+                    inverseFadeOutStrength *= angleDistance;
+                }
+                if (_PointsOfInterest._m13 > 0)
+                {
+                    const half3 poiPos = half3(_PointsOfInterest._m10, _PointsOfInterest._m11, _PointsOfInterest._m12);
+                    const half3 poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
+                    const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
+                    inverseFadeOutStrength *= angleDistance;
+                }
+                if (_PointsOfInterest._m23 > 0)
+                {
+                    const half3 poiPos = half3(_PointsOfInterest._m20, _PointsOfInterest._m21, _PointsOfInterest._m22);
+                    const half3 poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
+                    const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
+                    inverseFadeOutStrength *= angleDistance;
+                }
+                if (_PointsOfInterest._m33 > 0)
+                {
+                    const half3 poiPos = half3(_PointsOfInterest._m30, _PointsOfInterest._m31, _PointsOfInterest._m32);
+                    const half3 poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
+                    const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
+                    inverseFadeOutStrength *= angleDistance;
+                }
+#endif
+                
+                const half4 darkenedMixedVideo = lerp(_fadeOutColor, mixedVideo, max(max(inverseFadeOutStrength, _maxFadeOut), humanFound));
+#if _DEBUG_ANGULAR_DIFFERENCE
+                if (i.texcoord.x % 0.1 < 0.05 ? i.texcoord.y % 0.1 < 0.05 : i.texcoord.y % 0.1 > 0.05 )
+                {
+                    o.color = half4(angleDistance, angleDistance, angleDistance, 1);
+                }
+                else  if (i.texcoord.x % 0.1 < 0.075 ? i.texcoord.y % 0.1 < 0.075 : i.texcoord.y % 0.1 > 0.075 )
+                {
+                    o.color = half4((viewDir + float3(1,1,1))/2, 1);
+                }
+                else {
+                    o.color = half4((poiToCameraDir + float3(1,1,1))/2, 1);
+                }
+#else 
+                o.color = darkenedMixedVideo;
+#endif
                 o.depth = depthValue;
                 return o;
             }
