@@ -21,6 +21,8 @@ TagManager:
   - 
   - 
   - 
+  - Portal
+  - Occluder
   - 
   - 
   - 
@@ -33,9 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - XRSimulation
   - 
   m_SortingLayers:
   - name: Default

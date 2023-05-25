@@ -7,6 +7,8 @@ Shader "framefield/SpurlabCameraBackground"
         _HumanStencil ("HumanStencil", 2D) = "black" {}
         _HumanDepth ("HumanDepth", 2D) = "black" {}
         _EnvironmentDepth ("EnvironmentDepth", 2D) = "black" {}
+        
+        _portalMask ("PortalMask", 2D) = "black" {}
 
         _baseGrayScaleStrength ("BaseGrayScaleStrength", range(0, 1)) = 1
         _cameraViewportScale ("CameraViewportWidthInRadians", range(0.1, 6)) = 4
@@ -17,7 +19,7 @@ Shader "framefield/SpurlabCameraBackground"
         [KeywordEnum(GuideToPortal, InPortal)] _Mode ("Mode", Float) = 0 
         
         [KeywordEnum(None, HumanSegmentation, Depth)] _ForceArKitFeature ("Force", Float) = 0 
-        [KeywordEnum(None, AngularDifference)] _Debug ("Debug", Float) = 0 
+        [KeywordEnum(None, AngularDifference, PortalMask)] _Debug ("Debug", Float) = 0 
     }
 
     SubShader
@@ -48,7 +50,7 @@ Shader "framefield/SpurlabCameraBackground"
             #pragma fragment frag
 
             #pragma multi_compile_local __ ARKIT_BACKGROUND_URP
-            #pragma multi_compile_local __ _DEBUG_NONE _DEBUG_ANGULARDIFFERENCE
+            #pragma multi_compile_local __ _DEBUG_NONE _DEBUG_ANGULARDIFFERENCE _DEBUG_PORTALMASK
             #pragma multi_compile_local __ _MODE_GUIDETOPORTAL _MODE_INPORTAL
             #pragma multi_compile_local __ ARKIT_HUMAN_SEGMENTATION_ENABLED ARKIT_ENVIRONMENT_DEPTH_ENABLED
             #pragma multi_compile_local __ _FORCEARKITFEATURE_NONE _FORCEARKITFEATURE_HUMANSEGMENTATION _FORCEARKITFEATURE_DEPTH
@@ -157,19 +159,18 @@ Shader "framefield/SpurlabCameraBackground"
             ARKIT_TEXTURE2D_FLOAT(_HumanDepth);
             ARKIT_SAMPLER_FLOAT(sampler_HumanDepth);
 #endif // ARKIT_HUMAN_SEGMENTATION_ENABLED
-
+            
+            ARKIT_TEXTURE2D_HALF(_portalMask);
+            ARKIT_SAMPLER_HALF(sampler_portalMask);
 
             half _baseGrayScaleStrength;
             
             half _maxFadeOut;
-            half _fadeOutColor;
+            half4 _fadeOutColor;
             
-            half _cameraViewportWidthInRadians;
-            half _cameraViewportHeightInRadians;
-            half _cameraViewportRadius;
-            half4 _CameraForward;
-            half4 _CameraRight;
-            half4 _CameraUp;
+            half4 _cameraForward;
+            half4 _cameraRight;
+            half4 _cameraUp;
             float4x4 _PointsOfInterest;
             
 
@@ -190,7 +191,8 @@ Shader "framefield/SpurlabCameraBackground"
 
                 // Assume the background depth is the back of the depth clipping volume.
                 float depthValue = 0.0f;
-                float humanFound = 0.0f;
+                float humanMask = 0.0f;
+                float portalMask = ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.texcoord).b;
                 
 #if ARKIT_ENVIRONMENT_DEPTH_ENABLED || _FORCEARKITFEATURE_DEPTH
                 // Sample the environment depth (in meters).
@@ -202,7 +204,7 @@ Shader "framefield/SpurlabCameraBackground"
                 // Check the human stencil, and skip non-human pixels.
                 if (ARKIT_SAMPLE_TEXTURE2D(_HumanStencil, sampler_HumanStencil, i.texcoord).r > 0.5h)
                 {
-                    humanFound = 1.0f;
+                    humanMask = 1.0f;
                     // Sample the human depth (in meters).
                     float humanDistance = ARKIT_SAMPLE_TEXTURE2D(_HumanDepth, sampler_HumanDepth, i.texcoord).r;
 
@@ -214,53 +216,56 @@ Shader "framefield/SpurlabCameraBackground"
                 fragment_output o;
 
                 const half4 grayScaleVideo = dot(videoColor.xyz, float3(0.3, 0.59, 0.11));
-                const half grayScaleAmount = max(0, min(1, _baseGrayScaleStrength) - humanFound);
+                
+                const half grayScaleAmount = max(0, min(1, _baseGrayScaleStrength - max(humanMask, 1 - portalMask)));
                 const half4 mixedVideo = lerp(videoColor, grayScaleVideo, grayScaleAmount);
 
                 half inverseFadeOutStrength = 1;
-
+                half3 poiToCameraDir;
                 
 #if _MODE_GUIDETOPORTAL
-                const half3 viewDir = _CameraForward +
-                    (i.texcoord.x - 0.5) * _CameraRight +
-                        (i.texcoord.y - 0.5) * _CameraUp;
-
+                // TODO allow scaling of camera size
+                const half3 viewDir = _cameraForward +
+                    (i.texcoord.x - 0.5) * _cameraRight +
+                        (i.texcoord.y - 0.5) * _cameraUp;
                 
                 if (_PointsOfInterest._m03 > 0)
                 {
                     const half3 poiPos = half3(_PointsOfInterest._m00, _PointsOfInterest._m01, _PointsOfInterest._m02);
-                    const half3 poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
+                    poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
                     const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
                     inverseFadeOutStrength *= angleDistance;
                 }
                 if (_PointsOfInterest._m13 > 0)
                 {
                     const half3 poiPos = half3(_PointsOfInterest._m10, _PointsOfInterest._m11, _PointsOfInterest._m12);
-                    const half3 poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
+                    poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
                     const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
                     inverseFadeOutStrength *= angleDistance;
                 }
                 if (_PointsOfInterest._m23 > 0)
                 {
                     const half3 poiPos = half3(_PointsOfInterest._m20, _PointsOfInterest._m21, _PointsOfInterest._m22);
-                    const half3 poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
+                    poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
                     const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
                     inverseFadeOutStrength *= angleDistance;
                 }
                 if (_PointsOfInterest._m33 > 0)
                 {
                     const half3 poiPos = half3(_PointsOfInterest._m30, _PointsOfInterest._m31, _PointsOfInterest._m32);
-                    const half3 poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
+                    poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
                     const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
                     inverseFadeOutStrength *= angleDistance;
                 }
 #endif
+
+
                 
-                const half4 darkenedMixedVideo = lerp(_fadeOutColor, mixedVideo, max(max(inverseFadeOutStrength, _maxFadeOut), humanFound));
-#if _DEBUG_ANGULAR_DIFFERENCE
+                const half4 fadeoutVideo = lerp(_fadeOutColor, mixedVideo, max(max(inverseFadeOutStrength, _maxFadeOut), humanMask));
+#if _DEBUG_ANGULARDIFFERENCE
                 if (i.texcoord.x % 0.1 < 0.05 ? i.texcoord.y % 0.1 < 0.05 : i.texcoord.y % 0.1 > 0.05 )
                 {
-                    o.color = half4(angleDistance, angleDistance, angleDistance, 1);
+                    o.color = half4(inverseFadeOutStrength, inverseFadeOutStrength, inverseFadeOutStrength, 1);
                 }
                 else  if (i.texcoord.x % 0.1 < 0.075 ? i.texcoord.y % 0.1 < 0.075 : i.texcoord.y % 0.1 > 0.075 )
                 {
@@ -269,8 +274,10 @@ Shader "framefield/SpurlabCameraBackground"
                 else {
                     o.color = half4((poiToCameraDir + float3(1,1,1))/2, 1);
                 }
+#elif _DEBUG_PORTALMASK
+                o.color = portalMask;
 #else 
-                o.color = darkenedMixedVideo;
+                o.color = fadeoutVideo;
 #endif
                 o.depth = depthValue;
                 return o;
