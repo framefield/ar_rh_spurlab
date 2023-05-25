@@ -10,11 +10,9 @@ Shader "framefield/SpurlabCameraBackground"
         
         _portalMask ("PortalMask", 2D) = "black" {}
 
-        _baseGrayScaleStrength ("BaseGrayScaleStrength", range(0, 1)) = 1
-        _cameraViewportScale ("CameraViewportWidthInRadians", range(0.1, 6)) = 4
+        _cameraViewportScale ("CameraViewportScale", range(0.1, 6)) = 1
 
-        _fadeOutColor ("FadeOutColor", Color) = (0,0,0,1)
-        _maxFadeOut ("MaxFadeout", range(0, 1)) = 0.2
+        _fadeoutGradient ("FadeOutGradient", 2D) = "black" {}
 
         [KeywordEnum(GuideToPortal, InPortal)] _Mode ("Mode", Float) = 0 
         
@@ -148,29 +146,32 @@ Shader "framefield/SpurlabCameraBackground"
 
             ARKIT_TEXTURE2D_HALF(_textureY);
             ARKIT_SAMPLER_HALF(sampler_textureY);
+            
             ARKIT_TEXTURE2D_HALF(_textureCbCr);
             ARKIT_SAMPLER_HALF(sampler_textureCbCr);
+            
 #if ARKIT_ENVIRONMENT_DEPTH_ENABLED || _FORCEARKITFEATURE_DEPTH
             ARKIT_TEXTURE2D_FLOAT(_EnvironmentDepth);
             ARKIT_SAMPLER_FLOAT(sampler_EnvironmentDepth);
 #elif ARKIT_HUMAN_SEGMENTATION_ENABLED || _FORCEARKITFEATURE_HUMANSEGMENTATION
             ARKIT_TEXTURE2D_HALF(_HumanStencil);
             ARKIT_SAMPLER_HALF(sampler_HumanStencil);
+            
             ARKIT_TEXTURE2D_FLOAT(_HumanDepth);
             ARKIT_SAMPLER_FLOAT(sampler_HumanDepth);
 #endif // ARKIT_HUMAN_SEGMENTATION_ENABLED
             
+            
+            ARKIT_TEXTURE2D_HALF(_fadeoutGradient);
+            ARKIT_SAMPLER_HALF(sampler_fadeoutGradient);
+            
             ARKIT_TEXTURE2D_HALF(_portalMask);
             ARKIT_SAMPLER_HALF(sampler_portalMask);
-
-            half _baseGrayScaleStrength;
-            
-            half _maxFadeOut;
-            half4 _fadeOutColor;
             
             half4 _cameraForward;
             half4 _cameraRight;
             half4 _cameraUp;
+            half _cameraViewportScale;
             float4x4 _PointsOfInterest;
             
 
@@ -217,17 +218,19 @@ Shader "framefield/SpurlabCameraBackground"
 
                 const half4 grayScaleVideo = dot(videoColor.xyz, float3(0.3, 0.59, 0.11));
                 
-                const half grayScaleAmount = max(0, min(1, _baseGrayScaleStrength - max(humanMask, 1 - portalMask)));
+                const half grayScaleAmount = max(0, min(1, 1 - max(humanMask, 1 - portalMask)));
                 const half4 mixedVideo = lerp(videoColor, grayScaleVideo, grayScaleAmount);
 
                 half inverseFadeOutStrength = 1;
                 half3 poiToCameraDir;
                 
 #if _MODE_GUIDETOPORTAL
-                // TODO allow scaling of camera size
-                const half3 viewDir = _cameraForward +
-                    (i.texcoord.x - 0.5) * _cameraRight +
-                        (i.texcoord.y - 0.5) * _cameraUp;
+                const half aspectX = min(1, _ScreenParams.x / _ScreenParams.y);
+                const half aspectY = min(1, _ScreenParams.y / _ScreenParams.x);
+                
+                const half3 viewDir = normalize(_cameraForward +
+                    (i.texcoord.x - 0.5) * aspectX * _cameraViewportScale * _cameraRight +
+                        (i.texcoord.y - 0.5) * aspectY * _cameraViewportScale * _cameraUp);
                 
                 if (_PointsOfInterest._m03 > 0)
                 {
@@ -260,8 +263,8 @@ Shader "framefield/SpurlabCameraBackground"
 #endif
 
 
-                
-                const half4 fadeoutVideo = lerp(_fadeOutColor, mixedVideo, max(max(inverseFadeOutStrength, _maxFadeOut), humanMask));
+                const half4 fadeOutColor = ARKIT_SAMPLE_TEXTURE2D(_fadeoutGradient, sampler_fadeoutGradient, half2(1 - inverseFadeOutStrength, 0.5));
+                const half4 fadeoutVideo = lerp(half4(fadeOutColor.rgb, 1), mixedVideo, max(1 - fadeOutColor.a, humanMask));
 #if _DEBUG_ANGULARDIFFERENCE
                 if (i.texcoord.x % 0.1 < 0.05 ? i.texcoord.y % 0.1 < 0.05 : i.texcoord.y % 0.1 > 0.05 )
                 {
