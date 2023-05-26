@@ -193,7 +193,7 @@ Shader "framefield/SpurlabCameraBackground"
                 // Assume the background depth is the back of the depth clipping volume.
                 float depthValue = 0.0f;
                 float humanMask = 0.0f;
-                float portalMask = ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.texcoord).b;
+                
                 
 #if ARKIT_ENVIRONMENT_DEPTH_ENABLED || _FORCEARKITFEATURE_DEPTH
                 // Sample the environment depth (in meters).
@@ -218,13 +218,19 @@ Shader "framefield/SpurlabCameraBackground"
 
                 const half4 grayScaleVideo = dot(videoColor.xyz, float3(0.3, 0.59, 0.11));
                 
-                const half grayScaleAmount = max(0, min(1, 1 - max(humanMask, 1 - portalMask)));
-                const half4 mixedVideo = lerp(videoColor, grayScaleVideo, grayScaleAmount);
 
-                half inverseFadeOutStrength = 1;
-                half3 poiToCameraDir;
+                half4 portalMask = ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.texcoord);
+        #if _MODE_GUIDETOPORTAL
+            portalMask = 1 - portalMask;
+        #endif
                 
+                const half grayScaleAmount = max(0, min(1, 1 - max(humanMask, portalMask.g)));
+                
+                half4 mixedVideo = lerp(videoColor, grayScaleVideo, grayScaleAmount);
+                
+                half3 poiToCameraDir;
 #if _MODE_GUIDETOPORTAL
+                half inverseFadeOutStrength = 1;
                 const half aspectX = min(1, _ScreenParams.x / _ScreenParams.y);
                 const half aspectY = min(1, _ScreenParams.y / _ScreenParams.x);
                 
@@ -260,11 +266,12 @@ Shader "framefield/SpurlabCameraBackground"
                     const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
                     inverseFadeOutStrength *= angleDistance;
                 }
+                
+                const half4 fadeOutColor = ARKIT_SAMPLE_TEXTURE2D(_fadeoutGradient, sampler_fadeoutGradient, half2(1 - inverseFadeOutStrength, 0.5));
+                mixedVideo = lerp(half4(fadeOutColor.rgb, 1), mixedVideo, max(1 - fadeOutColor.a, humanMask));
 #endif
 
 
-                const half4 fadeOutColor = ARKIT_SAMPLE_TEXTURE2D(_fadeoutGradient, sampler_fadeoutGradient, half2(1 - inverseFadeOutStrength, 0.5));
-                const half4 fadeoutVideo = lerp(half4(fadeOutColor.rgb, 1), mixedVideo, max(1 - fadeOutColor.a, humanMask));
 #if _DEBUG_ANGULARDIFFERENCE
                 if (i.texcoord.x % 0.1 < 0.05 ? i.texcoord.y % 0.1 < 0.05 : i.texcoord.y % 0.1 > 0.05 )
                 {
@@ -280,7 +287,7 @@ Shader "framefield/SpurlabCameraBackground"
 #elif _DEBUG_PORTALMASK
                 o.color = portalMask;
 #else 
-                o.color = fadeoutVideo;
+                o.color = mixedVideo;
 #endif
                 o.depth = depthValue;
                 return o;

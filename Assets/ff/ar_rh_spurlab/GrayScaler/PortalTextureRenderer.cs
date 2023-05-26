@@ -16,7 +16,9 @@ namespace ff.ar_rh_spurlab.GrayScaler
 
 
         private bool _isInitialized;
+
         private Camera _portalCamera;
+        private SphereCollider _portalCollider;
 
         private RenderTexture _portalRenderTexture;
         private Texture2D _portalTexture;
@@ -32,7 +34,7 @@ namespace ff.ar_rh_spurlab.GrayScaler
 
             // Currently assuming the main camera is being set to the correct settings for rendering to the target device
             _xrCamera.ResetProjectionMatrix();
-            CopyLimitedSettingsToCamera(_xrCamera, _portalCamera);
+            CopyLimitedSettingsToCamera(_xrCamera, _portalCamera, _portalCollider);
 
             _portalCamera.Render();
 
@@ -82,6 +84,14 @@ namespace ff.ar_rh_spurlab.GrayScaler
 
             var go = GameObjectUtils.Create("Portal Camera");
             //go.hideFlags = HideFlags.HideAndDontSave;
+            go.layer = _portalLayer;
+
+            var rigidBody = go.AddComponent<Rigidbody>();
+            rigidBody.isKinematic = true;
+            rigidBody.useGravity = false;
+
+            _portalCollider = go.AddComponent<SphereCollider>();
+            _portalCollider.radius = 0.025f;
 
             _portalCamera = go.AddComponent<Camera>();
             _portalCamera.enabled = false;
@@ -93,7 +103,7 @@ namespace ff.ar_rh_spurlab.GrayScaler
 
             _xrCamera = xrCamera;
 
-            CopyLimitedSettingsToCamera(_xrCamera, _portalCamera);
+            CopyLimitedSettingsToCamera(_xrCamera, _portalCamera, _portalCollider);
 
             var descriptor = new RenderTextureDescriptor(_xrCamera.scaledPixelWidth, _xrCamera.scaledPixelHeight);
 
@@ -132,8 +142,9 @@ namespace ff.ar_rh_spurlab.GrayScaler
         }
 
 
-        private static void CopyLimitedSettingsToCamera(Camera source, Camera destination)
+        private static void CopyLimitedSettingsToCamera(Camera source, Camera destination, SphereCollider collider)
         {
+            var layer = destination.gameObject.layer;
             var scene = destination.scene;
             var cullingMask = destination.cullingMask;
             var clearFlags = destination.clearFlags;
@@ -144,6 +155,9 @@ namespace ff.ar_rh_spurlab.GrayScaler
             destination.CopyFrom(source);
             destination.projectionMatrix = source.projectionMatrix;
 
+            collider.center = new Vector3(0, 0, source.nearClipPlane);
+
+            destination.gameObject.layer = layer;
             destination.scene = scene;
             destination.cullingMask = cullingMask;
             destination.clearFlags = clearFlags;

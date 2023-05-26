@@ -1,18 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using ff.ar_rh_spurlab.GrayScaler;
 using UnityEngine;
+
+
+[Serializable]
+public enum TriggerType
+{
+    Enter,
+    Exit
+}
 
 public class PortalTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TriggerType TriggerType => _triggerType;
+
+    [SerializeField]
+    private TriggerType _triggerType = TriggerType.Enter;
+
+    private Portal _portal;
+
+    private void Awake()
     {
-        
+        var renderer = GetComponent<Renderer>();
+        if (renderer)
+        {
+            Destroy(renderer);
+        }
+
+        _portal = GetComponentInParent<Portal>();
+        if (!_portal)
+        {
+            Debug.LogError("PortalTrigger must be a child of a Portal", this);
+            enabled = false;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider otherCollider)
     {
-        
+        _portal.HandleTrigger(this, otherCollider, true);
+    }
+
+    private void OnTriggerExit(Collider otherCollider)
+    {
+        _portal.HandleTrigger(this, otherCollider, false);
     }
 }

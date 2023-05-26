@@ -7,17 +7,27 @@ namespace ff.ar_rh_spurlab.GrayScaler
     /// </summary>
     public class GrayScaleScenePointOfInterest : MonoBehaviour, IGrayScalePointOfInterest
     {
-        private CameraBackgroundRenderParams _renderParams;
+        private CameraBackgroundRenderer _backgroundRenderer;
 
         private void Awake()
         {
-            _renderParams = FindFirstObjectByType<CameraBackgroundRenderParams>();
-            _renderParams.RegisterPointOfInterest(this);
+            _backgroundRenderer = FindFirstObjectByType<CameraBackgroundRenderer>();
+            if (_backgroundRenderer)
+            {
+                _backgroundRenderer.RegisterPointOfInterest(this);
+            }
+            else
+            {
+                Debug.LogWarning("Could not find CameraBackgroundRenderer in scene.", this);
+            }
         }
 
         private void OnDestroy()
         {
-            _renderParams.UnregisterPointOfInterest(this);
+            if (_backgroundRenderer)
+            {
+                _backgroundRenderer.UnregisterPointOfInterest(this);
+            }
         }
 
         public Vector3 WorldPosition => transform.position;

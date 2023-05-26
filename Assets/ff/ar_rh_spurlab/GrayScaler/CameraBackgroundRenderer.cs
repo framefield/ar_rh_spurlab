@@ -6,14 +6,8 @@ using UnityEngine.XR.ARFoundation;
 namespace ff.ar_rh_spurlab.GrayScaler
 {
     [RequireComponent(typeof(PortalTextureRenderer))]
-    public class CameraBackgroundRenderParams : MonoBehaviour
+    public class CameraBackgroundRenderer : MonoBehaviour
     {
-        private static readonly int PointsOfInterestPropId = Shader.PropertyToID("_PointsOfInterest");
-        private static readonly int CameraForwardPropId = Shader.PropertyToID("_cameraForward");
-        private static readonly int CameraRightPropId = Shader.PropertyToID("_cameraRight");
-        private static readonly int CameraUpPropId = Shader.PropertyToID("_cameraLeft");
-        private static readonly int PortalMaskPropId = Shader.PropertyToID("_portalMask");
-
         [SerializeField]
         private ARCameraBackground _arCameraBackground;
 
@@ -24,24 +18,11 @@ namespace ff.ar_rh_spurlab.GrayScaler
 
         private PortalTextureRenderer _portalTextureRenderer;
 
+        private bool _isInsidePortal;
+
         private void Start()
         {
             Initialize();
-        }
-
-        private void Update()
-        {
-            var material = _arCameraBackground.material;
-
-#if UNITY_EDITOR
-            _desktopBackgroundRenderer.sharedMaterial = material;
-#endif
-
-            material.SetMatrix(PointsOfInterestPropId, GetPointsOfInterestMatrix());
-            material.SetVector(CameraForwardPropId, _arCameraBackground.transform.forward);
-            material.SetVector(CameraRightPropId, _arCameraBackground.transform.right);
-            material.SetVector(CameraUpPropId, _arCameraBackground.transform.up);
-            material.SetTexture(PortalMaskPropId, _portalTextureRenderer.PortalTexture);
         }
 
         private void Initialize()
@@ -56,6 +37,51 @@ namespace ff.ar_rh_spurlab.GrayScaler
             {
                 Debug.LogWarning("Could not initialize portal texture renderer.", this);
                 enabled = false;
+            }
+        }
+
+        private void OnEnable()
+        {
+            Portal.OnPortalTriggered += OnPortalTriggeredHandler;
+            _isInsidePortal = Portal.ActivePortal != null;
+        }
+
+        private void OnDisable()
+        {
+            Portal.OnPortalTriggered -= OnPortalTriggeredHandler;
+            _isInsidePortal = false;
+        }
+
+        private void OnPortalTriggeredHandler(Portal portal, bool shouldActivate)
+        {
+            _isInsidePortal = shouldActivate;
+        }
+
+        private void Update()
+        {
+            var material = _arCameraBackground.material;
+
+#if UNITY_EDITOR
+            _desktopBackgroundRenderer.sharedMaterial = material;
+#endif
+
+            material.SetMatrix(PointsOfInterestPropId, GetPointsOfInterestMatrix());
+            material.SetVector(CameraForwardPropId, _arCameraBackground.transform.forward);
+            material.SetVector(CameraRightPropId, _arCameraBackground.transform.right);
+            material.SetVector(CameraUpPropId, _arCameraBackground.transform.up);
+
+            // does not have to be updated each frame, we do it anyway for simplicity
+            material.SetTexture(PortalMaskPropId, _portalTextureRenderer.PortalTexture);
+
+            if (_isInsidePortal)
+            {
+                material.EnableKeyword("_MODE_INPORTAL");
+                material.DisableKeyword("_MODE_GUIDETOPORTAL");
+            }
+            else
+            {
+                material.DisableKeyword("_MODE_INPORTAL");
+                material.EnableKeyword("_MODE_GUIDETOPORTAL");
             }
         }
 
@@ -89,5 +115,11 @@ namespace ff.ar_rh_spurlab.GrayScaler
         {
             _pointOfInterests.Remove(pointOfInterest);
         }
+
+        private static readonly int PointsOfInterestPropId = Shader.PropertyToID("_PointsOfInterest");
+        private static readonly int CameraForwardPropId = Shader.PropertyToID("_cameraForward");
+        private static readonly int CameraRightPropId = Shader.PropertyToID("_cameraRight");
+        private static readonly int CameraUpPropId = Shader.PropertyToID("_cameraLeft");
+        private static readonly int PortalMaskPropId = Shader.PropertyToID("_portalMask");
     }
 }
