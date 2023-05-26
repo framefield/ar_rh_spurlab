@@ -19,9 +19,6 @@ namespace ff.ar_rh_spurlab.GrayScaler
         private GameObject[] _deactivatedContent;
 
         [SerializeField]
-        private Renderer[] _portalRenderer;
-
-        [SerializeField]
         private UnityEvent OnActivated;
 
         [SerializeField]
@@ -57,24 +54,28 @@ namespace ff.ar_rh_spurlab.GrayScaler
         public void HandleTrigger(PortalTrigger trigger, Collider otherCollider, bool hasEntered)
         {
             var oldState = _triggerState;
-            if (trigger.TriggerType == TriggerType.Enter)
+            if (trigger.TriggerType == TriggerType.Front)
             {
-                _triggerState.IsInEnterTrigger = hasEntered;
+                _triggerState.IsInFrontTrigger = hasEntered;
             }
-            else if (trigger.TriggerType == TriggerType.Exit)
+            else if (trigger.TriggerType == TriggerType.Back)
             {
-                _triggerState.IsInExitTrigger = hasEntered;
+                _triggerState.IsInBackTrigger = hasEntered;
+            }
+            else if (trigger.TriggerType == TriggerType.Center)
+            {
+                _triggerState.IsInCenterTrigger = hasEntered;
             }
 
 
             // move into portal 
-            if (oldState.IsOutsideTriggers && _triggerState.IsInExitTrigger)
+            if (oldState.IsOutsideTriggers && _triggerState.IsInBackTrigger)
             {
                 Trigger();
             }
 
             // leave portal to inside
-            if (_triggerState.IsOutsideTriggers && oldState.IsInEnterTrigger)
+            if (_triggerState.IsOutsideTriggers && oldState.IsInFrontTrigger)
             {
                 if (!_isActivated)
                 {
@@ -83,19 +84,12 @@ namespace ff.ar_rh_spurlab.GrayScaler
             }
 
             // move out of portal 
-            if (_triggerState.IsOutsideTriggers && oldState.IsInExitTrigger)
+            if (_triggerState.IsOutsideTriggers && oldState.IsInBackTrigger)
             {
                 if (_isActivated)
                 {
                     Trigger();
                 }
-            }
-
-
-            var shouldPortalRendererBeVisible = _triggerState.IsOutsideTriggers;
-            foreach (var portalRenderer in _portalRenderer)
-            {
-                portalRenderer.enabled = shouldPortalRendererBeVisible;
             }
         }
 
@@ -169,11 +163,11 @@ namespace ff.ar_rh_spurlab.GrayScaler
 
         private struct TriggerState
         {
-            public bool IsInEnterTrigger;
-            public bool IsInExitTrigger;
+            public bool IsInFrontTrigger;
+            public bool IsInCenterTrigger;
+            public bool IsInBackTrigger;
 
-            public bool IsOutsideTriggers => !(IsInEnterTrigger || IsInExitTrigger);
-            public bool IsInBothTriggers => IsInEnterTrigger && IsInExitTrigger;
+            public bool IsOutsideTriggers => (!IsInFrontTrigger && !IsInBackTrigger && !IsInCenterTrigger);
         }
     }
 }

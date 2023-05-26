@@ -6,8 +6,9 @@ using UnityEngine;
 [Serializable]
 public enum TriggerType
 {
-    Enter,
-    Exit
+    Front,
+    Center,
+    Back
 }
 
 public class PortalTrigger : MonoBehaviour
@@ -15,7 +16,7 @@ public class PortalTrigger : MonoBehaviour
     public TriggerType TriggerType => _triggerType;
 
     [SerializeField]
-    private TriggerType _triggerType = TriggerType.Enter;
+    private TriggerType _triggerType = TriggerType.Center;
 
     private Portal _portal;
 

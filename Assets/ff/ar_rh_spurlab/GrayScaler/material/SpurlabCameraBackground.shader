@@ -219,12 +219,13 @@ Shader "framefield/SpurlabCameraBackground"
                 const half4 grayScaleVideo = dot(videoColor.xyz, float3(0.3, 0.59, 0.11));
                 
 
-                half4 portalMask = ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.texcoord);
-        #if _MODE_GUIDETOPORTAL
-            portalMask = 1 - portalMask;
-        #endif
+#if _MODE_GUIDETOPORTAL
+                half portalMask = 1 - ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.texcoord).b;
+#else
+                half portalMask = ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.texcoord).r;
+#endif
                 
-                const half grayScaleAmount = max(0, min(1, 1 - max(humanMask, portalMask.g)));
+                const half grayScaleAmount = max(0, min(1, 1 - max(humanMask, portalMask)));
                 
                 half4 mixedVideo = lerp(videoColor, grayScaleVideo, grayScaleAmount);
                 
