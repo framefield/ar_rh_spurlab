@@ -14,7 +14,7 @@ Material:
   m_ValidKeywords:
   - _DEBUG_NONE
   - _FORCEARKITFEATURE_HUMANSEGMENTATION
-  - _MODE_INPORTAL
+  - _MODE_GUIDETOPORTAL
   m_InvalidKeywords:
   - _FORCE_FORCEALL
   m_LightmapFlags: 4
