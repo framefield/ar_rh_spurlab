@@ -73,6 +73,12 @@ namespace ff.ar_rh_spurlab.GrayScaler
             // does not have to be updated each frame, we do it anyway for simplicity
             material.SetTexture(PortalMaskPropId, _portalTextureRenderer.PortalTexture);
 
+#if UNITY_EDITOR
+            material.EnableKeyword("XR_SIMULATION");
+#else
+            material.DisableKeyword("XR_SIMULATION");
+#endif
+
             if (_isInsidePortal)
             {
                 material.EnableKeyword("_MODE_INPORTAL");
