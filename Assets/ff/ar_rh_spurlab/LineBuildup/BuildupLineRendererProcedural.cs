@@ -16,7 +16,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
         private Material _baseMaterial = null;
 
         [SerializeField]
-        [Range(0, 1)]
+        [Range(0, 2)]
         private float _transitionProgress = 1;
 
         #endregion
@@ -115,8 +115,10 @@ namespace ff.ar_rh_spurlab.LineBuildup
             _materialPropertyBlock.SetBuffer(PointsPropId, _pointsBuffer);
             _materialPropertyBlock.SetInteger(SegmentCount, _pointList.Points.Length);
             _materialPropertyBlock.SetFloat(TransitionProgressPropId, _transitionProgress);
+            // we have to build our own mvp in the shader, draw procedural does not care 
+            // https://forum.unity.com/threads/how-to-get-model-matrix-into-graphics-drawprocedural-custom-shader.489304/#post-3535125
+            _materialPropertyBlock.SetMatrix(ObjectToWorldPropId, transform.localToWorldMatrix);
 
-            var localTransform = transform;
             Graphics.DrawProcedural(
                 _sharedMaterial,
                 _pointList.Bounds,
@@ -218,6 +220,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
         private static readonly int FogDistancePropId = Shader.PropertyToID("FogDistance");
         private static readonly int FogBiasPropId = Shader.PropertyToID("FogBias");
         private static readonly int FogColorPropId = Shader.PropertyToID("FogColor");
+        private static readonly int ObjectToWorldPropId = Shader.PropertyToID("_ObjectToWorld");
 
         #endregion
     }

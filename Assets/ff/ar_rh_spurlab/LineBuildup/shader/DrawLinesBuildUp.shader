@@ -58,6 +58,7 @@
             
             float4 MainColor;
             sampler2D MainTex;
+            float4x4 _ObjectToWorld;
             
             float LineWidth;
             float ShrinkWithDistance;
@@ -70,6 +71,13 @@
 
             uint SegmentCount;
             StructuredBuffer<Point> Points;
+
+            // we have to build our own mvp in the shader, draw procedural does not care 
+            // https://forum.unity.com/threads/how-to-get-model-matrix-into-graphics-drawprocedural-custom-shader.489304/#post-3535125
+            inline float4 PointToClipPos(in float3 pos)
+            {
+                return mul(UNITY_MATRIX_VP, mul(_ObjectToWorld, float4(pos, 1.0)));
+            }
             
             psInput vsMain(uint id: SV_VertexID)
             {                
@@ -86,29 +94,27 @@
                 Point pointB = Points[particleId+1];
                 Point pointBB = Points[particleId > SegmentCount-2 ? SegmentCount-2: particleId+2];
 
+                
                 float3 posInObject = cornerFactors.x < 0.5
                     ? pointA.position
                     : pointB.position;
 
 
-                // TODO
-                float4 aaInScreen  = UnityObjectToClipPos(float4(pointAA.position,1)) * aspect;
+                float4 aaInScreen  = PointToClipPos(float4(pointAA.position,1)) * aspect;
                 aaInScreen /= aaInScreen.w;
-                // TODO
-                float4 aInScreen  = UnityObjectToClipPos(float4(pointA.position,1)) * aspect;
+                
+                float4 aInScreen  = PointToClipPos(float4(pointA.position,1)) * aspect;
                 if(aInScreen.z < -0)
                     discardFactor = 0;
                 aInScreen /= aInScreen.w;
 
                 
-                // TODO
-                float4 bInScreen  = UnityObjectToClipPos(float4(pointB.position,1)) * aspect;
+                float4 bInScreen  = PointToClipPos(float4(pointB.position,1)) * aspect;
                 if(bInScreen.z < -0)
                     discardFactor = 0;
-
                 bInScreen /= bInScreen.w;
-                // TODO
-                float4 bbInScreen  = UnityObjectToClipPos(float4(pointBB.position,1)) * aspect;
+                
+                float4 bbInScreen  = PointToClipPos(float4(pointBB.position,1)) * aspect;
                 bbInScreen /= bbInScreen.w;
 
                 float3 direction = (aInScreen - bInScreen).xyz;
