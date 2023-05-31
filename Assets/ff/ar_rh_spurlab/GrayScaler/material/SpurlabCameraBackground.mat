@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - XR_SIMULATION
   - _DEBUG_NONE
   - _FORCEARKITFEATURE_HUMANSEGMENTATION
   - _MODE_GUIDETOPORTAL
@@ -52,11 +53,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HumanDepth:
-        m_Texture: {fileID: 2800000, guid: 48574972181fa164ca5505a31c4ec125, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HumanStencil:
-        m_Texture: {fileID: 2800000, guid: 48574972181fa164ca5505a31c4ec125, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -88,11 +89,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _textureCbCr:
-        m_Texture: {fileID: 2800000, guid: 392edba2e8f002e40aad5722b0364ea4, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _textureSingle:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _textureY:
-        m_Texture: {fileID: 2800000, guid: 3d4929198fd877e409f52d5cac621349, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

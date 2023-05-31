@@ -2,8 +2,13 @@ Shader "framefield/SpurlabCameraBackground"
 {
     Properties
     {
+        // ios
         _textureY ("TextureY", 2D) = "white" {}
         _textureCbCr ("TextureCbCr", 2D) = "black" {}
+        
+        // simulation
+        _textureSingle ("TextureSingle", 2D) = "white" {}
+        
         _HumanStencil ("HumanStencil", 2D) = "black" {}
         _HumanDepth ("HumanDepth", 2D) = "black" {}
         _EnvironmentDepth ("EnvironmentDepth", 2D) = "black" {}
@@ -48,6 +53,7 @@ Shader "framefield/SpurlabCameraBackground"
             #pragma fragment frag
 
             #pragma multi_compile_local __ ARKIT_BACKGROUND_URP
+            #pragma multi_compile_local __ XR_SIMULATION
             #pragma multi_compile_local __ _DEBUG_NONE _DEBUG_ANGULARDIFFERENCE _DEBUG_PORTALMASK
             #pragma multi_compile_local __ _MODE_GUIDETOPORTAL _MODE_INPORTAL
             #pragma multi_compile_local __ ARKIT_HUMAN_SEGMENTATION_ENABLED ARKIT_ENVIRONMENT_DEPTH_ENABLED
@@ -143,12 +149,17 @@ Shader "framefield/SpurlabCameraBackground"
                 return (d < _ProjectionParams.y) ? 0.0f : ((1.0f / _ZBufferParams.z) * ((1.0f / d) - _ZBufferParams.w));
             }
 
-
+#if XR_SIMULATION
+            ARKIT_TEXTURE2D_HALF(_textureSingle);
+            ARKIT_SAMPLER_HALF(sampler_textureSingle);
+#else
             ARKIT_TEXTURE2D_HALF(_textureY);
             ARKIT_SAMPLER_HALF(sampler_textureY);
             
             ARKIT_TEXTURE2D_HALF(_textureCbCr);
             ARKIT_SAMPLER_HALF(sampler_textureCbCr);
+#endif
+            
             
 #if ARKIT_ENVIRONMENT_DEPTH_ENABLED || _FORCEARKITFEATURE_DEPTH
             ARKIT_TEXTURE2D_FLOAT(_EnvironmentDepth);
@@ -177,6 +188,9 @@ Shader "framefield/SpurlabCameraBackground"
 
             fragment_output frag (v2f i)
             {
+#if XR_SIMULATION
+                real4 videoColor = ARKIT_SAMPLE_TEXTURE2D(_textureSingle, sampler_textureSingle, i.texcoord);
+#else
                 // Sample the video textures (in YCbCr).
                 real4 ycbcr = real4(ARKIT_SAMPLE_TEXTURE2D(_textureY, sampler_textureY, i.texcoord).r,
                                     ARKIT_SAMPLE_TEXTURE2D(_textureCbCr, sampler_textureCbCr, i.texcoord).rg,
@@ -189,7 +203,8 @@ Shader "framefield/SpurlabCameraBackground"
                 // If rendering in linear color space, convert from sRGB to RGB.
                 videoColor.xyz = FastSRGBToLinear(videoColor.xyz);
 #endif // !UNITY_COLORSPACE_GAMMA
-
+#endif                
+                
                 // Assume the background depth is the back of the depth clipping volume.
                 float depthValue = 0.0f;
                 float humanMask = 0.0f;
