@@ -2,15 +2,20 @@
 {
     Properties
     {
-         MainColor("MainColor", Color)  = (1,1,1,1)
-         MainTex("MainTex", 2D) = "white" {}
-         LineWidth("LineWidth", float) = 0.039
-         ShrinkWithDistance("ShrinkWithDistance", float) = 0.550
-         TransitionProgress("TransitionProgress", float) = 1.0
-         VisibleRange("VisibleRange", float) = 1.0
-         FogDistance("FogDistance", float) = 117.0
-         FogBias("FogBias", float) = 4.700
-         FogColor("FogColor", Color) = (0.17, 0.17, 0.17, 1.0)
+        MainColor("MainColor", Color)  = (1,1,1,1)
+        MainTex("MainTex", 2D) = "white" {}
+        LineWidth("LineWidth", float) = 0.039
+        ShrinkWithDistance("ShrinkWithDistance", float) = 0.550
+        TransitionProgress("TransitionProgress", float) = 1.0
+        VisibleRange("VisibleRange", float) = 1.0
+        FogDistance("FogDistance", float) = 117.0
+        FogBias("FogBias", float) = 4.700
+        FogColor("FogColor", Color) = (0.17, 0.17, 0.17, 1.0)
+        
+        NoiseAmount("NoiseAmount", float) = 10
+        NoiseVariation("NoiseVariation", float) = 0.01
+        NoiseFrequency("NoiseFrequency", float) = 3
+        NoisePhase("NoisePhase", float) = 3
     }
     
     SubShader
@@ -35,6 +40,7 @@
  
             #include "UnityCG.cginc"
             #include "Assets/ff/ar_rh_spurlab/LineBuildup/shader/point.hlsl"
+            #include "Assets/ff/ar_rh_spurlab/LineBuildup/shader/noise.hlsl"
             
 
             static const float3 Corners[] = 
@@ -66,7 +72,13 @@
             float VisibleRange;
             float4 FogColor;
             float FogDistance;
-            float FogBias;  
+            float FogBias;
+
+            float NoiseAmount;
+            float NoiseVariation;
+            float NoiseFrequency;
+            float NoisePhase;
+            
 
 
             uint SegmentCount;
@@ -93,29 +105,48 @@
                 Point pointA = Points[particleId];
                 Point pointB = Points[particleId+1];
                 Point pointBB = Points[particleId > SegmentCount-2 ? SegmentCount-2: particleId+2];
+                
+                // float amount =100;
+                // float variation = 0.01;
+                // float phase = NoisePhase + _Time.x;
+                // float frequency = 0.1;
 
+                float phase = NoisePhase + _Time.x;
+                
+                float3 posAA = AddNoise(particleId, pointAA.position,   NoiseAmount, NoiseVariation, phase, NoiseFrequency);
+                float3 posA  = AddNoise(particleId, pointA.position,    NoiseAmount, NoiseVariation, phase, NoiseFrequency);
+                float3 posB  = AddNoise(particleId+1, pointB.position,  NoiseAmount, NoiseVariation, phase, NoiseFrequency);
+                float3 posBB = AddNoise(particleId+1, pointBB.position, NoiseAmount, NoiseVariation, phase, NoiseFrequency);
                 
                 float3 posInObject = cornerFactors.x < 0.5
-                    ? pointA.position
-                    : pointB.position;
+                    ? posA
+                    : posB;
 
-
-                float4 aaInScreen  = PointToClipPos(float4(pointAA.position,1)) * aspect;
+                float tz= 0;
+                float4 aaInScreen  = PointToClipPos(float4(posAA,1)) * aspect;
                 aaInScreen /= aaInScreen.w;
-                
-                float4 aInScreen  = PointToClipPos(float4(pointA.position,1)) * aspect;
-                if(aInScreen.z < -0)
+                if(aaInScreen.z < tz)
                     discardFactor = 0;
+                
+                
+                float4 aInScreen  = PointToClipPos(float4(posA,1)) * aspect;
                 aInScreen /= aInScreen.w;
+                if(aInScreen.z < tz)
+                    discardFactor = 0;
+                
 
                 
-                float4 bInScreen  = PointToClipPos(float4(pointB.position,1)) * aspect;
-                if(bInScreen.z < -0)
-                    discardFactor = 0;
+                float4 bInScreen  = PointToClipPos(float4(posB,1)) * aspect;
                 bInScreen /= bInScreen.w;
+                if(bInScreen.z < tz)
+                    discardFactor = 0;
                 
-                float4 bbInScreen  = PointToClipPos(float4(pointBB.position,1)) * aspect;
+                
+                float4 bbInScreen  = PointToClipPos(float4(posBB,1)) * aspect;
                 bbInScreen /= bbInScreen.w;
+                if(bbInScreen.z < tz)
+                    discardFactor = 0;
+                
 
                 float3 direction = (aInScreen - bInScreen).xyz;
                 float3 directionA = particleId > 0 
@@ -135,13 +166,12 @@
                     normalB =normal;
                 }
 
-                float3 neighboarNormal = lerp(normalA, normalB, cornerFactors.x);
-                float3 meterNormal = (normal + neighboarNormal) / 2;
+                float3 neighbourNormal = lerp(normalA, normalB, cornerFactors.x);
+                float3 meterNormal = (normal + neighbourNormal) / 2;
                 float4 pos = lerp(aInScreen, bInScreen, cornerFactors.x);
 
 
                 // TODO
-                // float4 posInCamSpace = mul(float4(posInObject,1), ObjectToCamera);
                 float4 posInCamSpace = mul(mul(float4(posInObject,1), unity_ObjectToWorld), unity_CameraProjection);
                 posInCamSpace.xyz /= posInCamSpace.w;
                 posInCamSpace.w = 1;
@@ -163,8 +193,8 @@
                 output.position = pos / aspect;
                 
                 float3 n = cornerFactors.x < 0.5 
-                    ? cross(pointA.position - pointAA.position, pointA.position - pointB.position)
-                    : cross(pointB.position - pointA.position, pointB.position - pointBB.position);
+                    ? cross(posA - posAA, posA - posB)
+                    : cross(posB - posA, posB - posBB);
                 n =normalize(n);
 
                 output.fog = pow(saturate(-posInCamSpace.z/FogDistance), FogBias);
@@ -176,12 +206,17 @@
 
             float4 psMain(psInput input) : SV_TARGET
             {
-                float u = (input.texCoord.x + VisibleRange);
-                float4 imgColor = tex2D(MainTex, float2(u, input.texCoord.y)) * MainColor;
+                //float u = (input.texCoord.x + VisibleRange);
+                //float4 imgColor = tex2D(MainTex, float2(u, input.texCoord.y)) * MainColor;
 
-                float f1 = saturate((input.texCoord.x + VisibleRange) * 100  );
-                float f2 = 1-saturate( (input.texCoord.x ) * 100);
+                float4 imgColor =1;
+                float f1 = saturate((input.texCoord.x + VisibleRange) * 1000  );
+                float f2 = 1-saturate( input.texCoord.x * 1000);
                 float t = f1*f2;
+                if(t < 0.01)
+                    discard;
+                
+                //return float4(t,0,0,1);
 
                 return float4(lerp(imgColor.rgb, FogColor.rgb, input.fog * FogColor.a), imgColor.a * t);
             }

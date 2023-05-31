@@ -192,6 +192,12 @@ namespace ff.ar_rh_spurlab.LineBuildup
             _materialPropertyBlock.SetFloat(FogDistancePropId, _baseMaterial.GetFloat(FogDistancePropId));
             _materialPropertyBlock.SetFloat(FogBiasPropId, _baseMaterial.GetFloat(FogBiasPropId));
             _materialPropertyBlock.SetColor(FogColorPropId, _baseMaterial.GetColor(FogColorPropId));
+            
+            _materialPropertyBlock.SetFloat(NoiseAmountId, _baseMaterial.GetFloat(NoiseAmountId));
+            _materialPropertyBlock.SetFloat(NoiseVariationId, _baseMaterial.GetFloat(NoiseVariationId));
+            _materialPropertyBlock.SetFloat(NoiseFrequencyId, _baseMaterial.GetFloat(NoiseFrequencyId));
+            _materialPropertyBlock.SetFloat(NoisePhaseId, _baseMaterial.GetFloat(NoisePhaseId));
+            
         }
 
         #endregion
@@ -221,6 +227,10 @@ namespace ff.ar_rh_spurlab.LineBuildup
         private static readonly int FogBiasPropId = Shader.PropertyToID("FogBias");
         private static readonly int FogColorPropId = Shader.PropertyToID("FogColor");
         private static readonly int ObjectToWorldPropId = Shader.PropertyToID("_ObjectToWorld");
+        private static readonly int NoiseAmountId = Shader.PropertyToID("NoiseAmount");
+        private static readonly int NoiseVariationId = Shader.PropertyToID("NoiseVariation");
+        private static readonly int NoiseFrequencyId = Shader.PropertyToID("NoiseFrequency");
+        private static readonly int NoisePhaseId = Shader.PropertyToID("NoisePhase");
 
         #endregion
     }
