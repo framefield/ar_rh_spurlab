@@ -167,8 +167,9 @@ GameObject:
   m_Component:
   - component: {fileID: 269027006}
   - component: {fileID: 269027007}
+  - component: {fileID: 269027008}
   m_Layer: 0
-  m_Name: Running - State
+  m_Name: LocationRunning - State
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,6 +214,19 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &269027008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269027005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd51d5f5e9294430b5f749bd00a271e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainMenuCanvas: {fileID: 284365665}
 --- !u!1 &275107516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2287,6 +2301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8cf7bbf25da4f3b98ed02501339c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pointCloudManager: {fileID: 275107517}
+  _planeManager: {fileID: 275107518}
   _locationSelectionUiPrefab: {fileID: 6635344559012655264, guid: 503d003bcc8894051b317b8d9cccf014,
     type: 3}
 --- !u!1 &1572054832

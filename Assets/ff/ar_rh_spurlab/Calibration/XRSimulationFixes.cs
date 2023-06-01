@@ -4,10 +4,10 @@ using UnityEngine.XR.ARFoundation;
 
 namespace ff.ar_rh_spurlab.Calibration
 {
-    public class XRSimulationFixes: MonoBehaviour
+    public class XRSimulationFixes : MonoBehaviour
     {
 #if UNITY_EDITOR
-        
+
         public void Awake()
         {
             _planeManager = GetComponent<ARPlaneManager>();
@@ -16,11 +16,14 @@ namespace ff.ar_rh_spurlab.Calibration
         public void OnEnable()
         {
             ARSession.stateChanged += ARSessionOnstateChanged;
-            
-            
-            // plane mgr gets stuck
-            _planeManager.enabled = false;
-            Invoke(nameof(ReEnable), 0.1f);
+
+
+            if (_planeManager.enabled)
+            {
+                // plane mgr gets stuck
+                _planeManager.enabled = false;
+                Invoke(nameof(ReEnable), 0.1f);
+            }
         }
 
         private void OnDisable()
@@ -30,7 +33,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private void ARSessionOnstateChanged(ARSessionStateChangedEventArgs args)
         {
-            if (args.state == ARSessionState.SessionInitializing)
+            if (args.state == ARSessionState.SessionInitializing && _planeManager.enabled)
             {
                 // plane mgr gets stuck
                 _planeManager.enabled = false;
