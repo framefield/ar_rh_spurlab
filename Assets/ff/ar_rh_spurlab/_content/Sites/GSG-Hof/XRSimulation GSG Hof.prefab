@@ -91,10 +91,10 @@ MonoBehaviour:
   m_RenderSettings:
     m_AmbientMode: 1
     m_AmbientSkyColor: {r: 1, g: 0.06132078, b: 0.60143715, a: 1}
-    m_AmbientEquatorColor: {r: 0.7264151, g: 0.5609403, b: 0, a: 1}
+    m_AmbientEquatorColor: {r: 0.82597244, g: 0.8490566, b: 0.29236382, a: 1}
     m_AmbientGroundColor: {r: 0.3085947, g: 0, b: 0.6792453, a: 1}
     m_AmbientIntensity: 1
-    m_AmbientLight: {r: 0.7264151, g: 0.5036935, b: 0.70050436, a: 1}
+    m_AmbientLight: {r: 0.9245283, g: 0.81519544, b: 0.24857599, a: 1}
     m_SubtractiveShadowColor: {r: 0.3224012, g: 0.41538474, b: 0.6509434, a: 1}
     m_ReflectionIntensity: 1
     m_ReflectionBounces: 1
@@ -105,7 +105,7 @@ MonoBehaviour:
     m_FlareFadeSpeed: 3
     m_Skybox: {fileID: 0}
     m_CustomReflection: {fileID: 0}
-    m_UseSceneSun: 0
+    m_UseSceneSun: 1
     m_Sun: {fileID: 0}
     m_AmbientProbe:
       'sh[ 0]': 0

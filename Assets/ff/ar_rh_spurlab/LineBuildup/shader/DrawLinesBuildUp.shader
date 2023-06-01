@@ -24,7 +24,7 @@
 
         Lighting Off
 	    ZWrite Off
-        ZTest Always
+        ZTest LEqual
 	    AlphaTest Off
 	    Cull Off
 	    Blend SrcAlpha OneMinusSrcAlpha 
@@ -38,7 +38,6 @@
             #pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
             #pragma target 4.5
  
-            #include "UnityCG.cginc"
             #include "Assets/ff/ar_rh_spurlab/LineBuildup/shader/point.hlsl"
             #include "Assets/ff/ar_rh_spurlab/LineBuildup/shader/noise.hlsl"
             
@@ -60,6 +59,10 @@
                 float4 color : COLOR;
                 float2 texCoord : TEXCOORD;
                 float fog: FOG;
+            };
+
+            struct fragOutput {
+                fixed4 color: SV_Target;
             };
             
             float4 MainColor;
@@ -171,8 +174,7 @@
                 float4 pos = lerp(aInScreen, bInScreen, cornerFactors.x);
 
 
-                // TODO
-                float4 posInCamSpace = mul(mul(float4(posInObject,1), unity_ObjectToWorld), unity_CameraProjection);
+                float4 posInCamSpace = mul(mul(float4(posInObject,1), _ObjectToWorld), unity_CameraProjection);
                 posInCamSpace.xyz /= posInCamSpace.w;
                 posInCamSpace.w = 1;
 
@@ -204,8 +206,9 @@
                 return output;    
             }
 
-            float4 psMain(psInput input) : SV_TARGET
+            fragOutput psMain(psInput input)
             {
+                fragOutput output;
                 //float u = (input.texCoord.x + VisibleRange);
                 //float4 imgColor = tex2D(MainTex, float2(u, input.texCoord.y)) * MainColor;
 
@@ -216,9 +219,12 @@
                 if(t < 0.01)
                     discard;
                 
-                //return float4(t,0,0,1);
+                //output.color = float4(t,0,0,1);
+                //return output;
 
-                return float4(lerp(imgColor.rgb, FogColor.rgb, input.fog * FogColor.a), imgColor.a * t);
+                output.color = float4(lerp(imgColor.rgb, FogColor.rgb, input.fog * FogColor.a), imgColor.a * t);
+
+                return output;
             }
 
  
