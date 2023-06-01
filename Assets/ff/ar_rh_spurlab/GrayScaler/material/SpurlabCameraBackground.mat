@@ -124,7 +124,7 @@ Material:
     - _baseGrayScaleStrength: 1
     - _cameraViewportHeightInRadians: 0.93
     - _cameraViewportRadius: 9
-    - _cameraViewportScale: 4.31
+    - _cameraViewportScale: 1
     - _cameraViewportWidthInRadians: 0.91
     - _grayScaleStrength: 1
     - _maxDarkening: 0

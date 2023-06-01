@@ -14,15 +14,16 @@ Shader "framefield/SpurlabCameraBackground"
         _EnvironmentDepth ("EnvironmentDepth", 2D) = "black" {}
         
         _portalMask ("PortalMask", 2D) = "black" {}
-
-        _cameraViewportScale ("CameraViewportScale", range(0.1, 6)) = 1
-
+        
         _fadeoutGradient ("FadeOutGradient", 2D) = "black" {}
+        
+        sphereRadius("sphereRadius", Float) = 10
+        degreesPerUv("degreesPerUv", Float) = 90
 
         [KeywordEnum(GuideToPortal, InPortal)] _Mode ("Mode", Float) = 0 
         
         [KeywordEnum(None, HumanSegmentation, Depth)] _ForceArKitFeature ("Force", Float) = 0 
-        [KeywordEnum(None, AngularDifference, PortalMask)] _Debug ("Debug", Float) = 0 
+        [KeywordEnum(None, AngularDifference, PortalMask, Sphere)] _Debug ("Debug", Float) = 0 
     }
 
     SubShader
@@ -54,7 +55,7 @@ Shader "framefield/SpurlabCameraBackground"
 
             #pragma multi_compile_local __ ARKIT_BACKGROUND_URP
             #pragma multi_compile_local __ XR_SIMULATION
-            #pragma multi_compile_local __ _DEBUG_NONE _DEBUG_ANGULARDIFFERENCE _DEBUG_PORTALMASK
+            #pragma multi_compile_local __ _DEBUG_NONE _DEBUG_ANGULARDIFFERENCE _DEBUG_PORTALMASK _DEBUG_SPHERE
             #pragma multi_compile_local __ _MODE_GUIDETOPORTAL _MODE_INPORTAL
             #pragma multi_compile_local __ ARKIT_HUMAN_SEGMENTATION_ENABLED ARKIT_ENVIRONMENT_DEPTH_ENABLED
             #pragma multi_compile_local __ _FORCEARKITFEATURE_NONE _FORCEARKITFEATURE_HUMANSEGMENTATION _FORCEARKITFEATURE_DEPTH
@@ -173,18 +174,17 @@ Shader "framefield/SpurlabCameraBackground"
 #endif // ARKIT_HUMAN_SEGMENTATION_ENABLED
             
             
-            ARKIT_TEXTURE2D_HALF(_fadeoutGradient);
-            ARKIT_SAMPLER_HALF(sampler_fadeoutGradient);
+            ARKIT_TEXTURE2D_FLOAT(_fadeoutGradient);
+            ARKIT_SAMPLER_FLOAT(sampler_fadeoutGradient);
             
             ARKIT_TEXTURE2D_HALF(_portalMask);
             ARKIT_SAMPLER_HALF(sampler_portalMask);
             
-            half4 _cameraForward;
-            half4 _cameraRight;
-            half4 _cameraUp;
-            half _cameraViewportScale;
+            float4x4 _cameraTransformMatrix;
             float4x4 _PointsOfInterest;
-            
+
+            half degreesPerUv = 170;
+            half sphereRadius = 30;
 
             fragment_output frag (v2f i)
             {
@@ -245,64 +245,82 @@ Shader "framefield/SpurlabCameraBackground"
                 half4 mixedVideo = lerp(videoColor, grayScaleVideo, grayScaleAmount);
                 
                 half3 poiToCameraDir;
+                half3 sphereToCameraDir;
+                float inverseFadeOutStrength = 1;
 #if _MODE_GUIDETOPORTAL
                 if (portalMask > 0.5)
                 {
-                    half inverseFadeOutStrength = 1;
                     const half aspectX = min(1, _ScreenParams.x / _ScreenParams.y);
                     const half aspectY = min(1, _ScreenParams.y / _ScreenParams.x);
                     
-                    const half3 viewDir = normalize(_cameraForward +
-                        (i.texcoord.x - 0.5) * aspectX * _cameraViewportScale * _cameraRight +
-                            (i.texcoord.y - 0.5) * aspectY * _cameraViewportScale * _cameraUp);
+                    const half t = degreesPerUv/90 * UNITY_HALF_PI * (i.texcoord.x - 0.5) * aspectX;
+                    const half s = degreesPerUv/90 * UNITY_HALF_PI * (i.texcoord.y - 0.5) * aspectY;
                     
+                    const half3 posOnSphere = half3(
+                          sphereRadius * cos(s) * sin(t),
+                          sphereRadius * sin(s) * sin(t),
+                          sphereRadius * cos(t)
+                    );
+
+                    const half3 sphereViewPosition = mul(_cameraTransformMatrix, posOnSphere);
+
+                    sphereToCameraDir = normalize(_WorldSpaceCameraPos.xyz - sphereViewPosition.xyz);
+#if _DEBUG_SPHERE
+                    mixedVideo = float4((fixed3(1,1,1) + sphereToCameraDir)/2, 1);
+#endif
+                    
+
                     if (_PointsOfInterest._m03 > 0)
                     {
                         const half3 poiPos = half3(_PointsOfInterest._m00, _PointsOfInterest._m01, _PointsOfInterest._m02);
-                        poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
-                        const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
+                        poiToCameraDir = normalize(_WorldSpaceCameraPos.xyz - poiPos.xyz);
+                        const float angleDistance = (1 + dot(poiToCameraDir, sphereToCameraDir)) / 2.0f;
                         inverseFadeOutStrength *= angleDistance;
                     }
                     if (_PointsOfInterest._m13 > 0)
                     {
                         const half3 poiPos = half3(_PointsOfInterest._m10, _PointsOfInterest._m11, _PointsOfInterest._m12);
-                        poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
-                        const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
+                        poiToCameraDir = normalize(_WorldSpaceCameraPos.xyz - poiPos.xyz);
+                        const float angleDistance = (1 + dot(poiToCameraDir, sphereToCameraDir)) / 2.0f;
                         inverseFadeOutStrength *= angleDistance;
                     }
                     if (_PointsOfInterest._m23 > 0)
                     {
                         const half3 poiPos = half3(_PointsOfInterest._m20, _PointsOfInterest._m21, _PointsOfInterest._m22);
-                        poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
-                        const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
+                        poiToCameraDir = normalize(_WorldSpaceCameraPos.xyz - poiPos.xyz);
+                        const float angleDistance = (1 + dot(poiToCameraDir, sphereToCameraDir)) / 2.0f;
                         inverseFadeOutStrength *= angleDistance;
                     }
                     if (_PointsOfInterest._m33 > 0)
                     {
                         const half3 poiPos = half3(_PointsOfInterest._m30, _PointsOfInterest._m31, _PointsOfInterest._m32);
-                        poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
-                        const half angleDistance = (1 + dot(poiToCameraDir, viewDir)) / 2.0f;
+                        poiToCameraDir = normalize(_WorldSpaceCameraPos.xyz - poiPos.xyz);
+                        const float angleDistance = (1 + dot(poiToCameraDir, sphereToCameraDir)) / 2.0f;
                         inverseFadeOutStrength *= angleDistance;
                     }
                     
+                    
                     const half4 fadeOutColor = ARKIT_SAMPLE_TEXTURE2D(_fadeoutGradient, sampler_fadeoutGradient, half2(1 - inverseFadeOutStrength, 0.5));
+#ifndef _DEBUG_SPHERE
                     mixedVideo = lerp(half4(fadeOutColor.rgb, 1), mixedVideo, max(1 - fadeOutColor.a, humanMask));
+#endif
+
                 } 
 #endif
 
 
 #if _DEBUG_ANGULARDIFFERENCE
-                if (i.texcoord.x % 0.1 < 0.05 ? i.texcoord.y % 0.1 < 0.05 : i.texcoord.y % 0.1 > 0.05 )
-                {
-                    o.color = half4(inverseFadeOutStrength, inverseFadeOutStrength, inverseFadeOutStrength, 1);
-                }
-                else  if (i.texcoord.x % 0.1 < 0.075 ? i.texcoord.y % 0.1 < 0.075 : i.texcoord.y % 0.1 > 0.075 )
-                {
-                    o.color = half4((viewDir + float3(1,1,1))/2, 1);
-                }
-                else {
-                    o.color = half4((poiToCameraDir + float3(1,1,1))/2, 1);
-                }
+               if (i.texcoord.x % 0.1 < 0.05 ? i.texcoord.y % 0.1 < 0.05 : i.texcoord.y % 0.1 > 0.05 )
+               {
+                   o.color = half4(inverseFadeOutStrength, inverseFadeOutStrength, inverseFadeOutStrength, 1);
+               }
+               else  if (i.texcoord.x % 0.1 < 0.075 ? i.texcoord.y % 0.1 < 0.075 : i.texcoord.y % 0.1 > 0.075 )
+               {
+                   o.color = half4((sphereToCameraDir + float3(1,1,1))/2, 1);
+               }
+               else {
+                   o.color = half4((poiToCameraDir + float3(1,1,1))/2, 1);
+               }
 #elif _DEBUG_PORTALMASK
                 o.color = portalMask;
 #else 

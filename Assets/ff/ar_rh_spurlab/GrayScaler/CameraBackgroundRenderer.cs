@@ -66,9 +66,7 @@ namespace ff.ar_rh_spurlab.GrayScaler
 #endif
 
             material.SetMatrix(PointsOfInterestPropId, GetPointsOfInterestMatrix());
-            material.SetVector(CameraForwardPropId, _arCameraBackground.transform.forward);
-            material.SetVector(CameraRightPropId, _arCameraBackground.transform.right);
-            material.SetVector(CameraUpPropId, _arCameraBackground.transform.up);
+            material.SetMatrix(CameraTransformId, _arCameraBackground.transform.localToWorldMatrix);
 
             // does not have to be updated each frame, we do it anyway for simplicity
             material.SetTexture(PortalMaskPropId, _portalTextureRenderer.PortalTexture);
@@ -123,9 +121,7 @@ namespace ff.ar_rh_spurlab.GrayScaler
         }
 
         private static readonly int PointsOfInterestPropId = Shader.PropertyToID("_PointsOfInterest");
-        private static readonly int CameraForwardPropId = Shader.PropertyToID("_cameraForward");
-        private static readonly int CameraRightPropId = Shader.PropertyToID("_cameraRight");
-        private static readonly int CameraUpPropId = Shader.PropertyToID("_cameraLeft");
+        private static readonly int CameraTransformId = Shader.PropertyToID("_cameraTransformMatrix");
         private static readonly int PortalMaskPropId = Shader.PropertyToID("_portalMask");
     }
 }
