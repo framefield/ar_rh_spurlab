@@ -6,7 +6,7 @@ namespace ff.ar_rh_spurlab.GrayScaler
 {
     internal class PortalTextureRenderer : MonoBehaviour
     {
-        public Texture2D PortalTexture => _portalTexture;
+        public Texture PortalTexture => _portalRenderTexture;
 
         [SerializeField]
         private int _portalLayer = 16;
@@ -21,7 +21,6 @@ namespace ff.ar_rh_spurlab.GrayScaler
         private SphereCollider _portalCollider;
 
         private RenderTexture _portalRenderTexture;
-        private Texture2D _portalTexture;
 
         private Camera _xrCamera;
 
@@ -32,8 +31,6 @@ namespace ff.ar_rh_spurlab.GrayScaler
                 return;
             }
 
-            // Currently assuming the main camera is being set to the correct settings for rendering to the target device
-            _xrCamera.ResetProjectionMatrix();
             CopyLimitedSettingsToCamera(_xrCamera, _portalCamera, _portalCollider);
 
             _portalCamera.Render();
@@ -42,18 +39,6 @@ namespace ff.ar_rh_spurlab.GrayScaler
             {
                 return;
             }
-
-            if (_portalTexture.width != _portalRenderTexture.width
-                || _portalTexture.height != _portalRenderTexture.height)
-            {
-                if (!_portalTexture.Reinitialize(_portalRenderTexture.width,
-                        _portalRenderTexture.height))
-                {
-                    return;
-                }
-            }
-
-            Graphics.CopyTexture(_portalRenderTexture, _portalTexture);
         }
 
         private void OnDestroy()
@@ -66,12 +51,6 @@ namespace ff.ar_rh_spurlab.GrayScaler
             if (_portalRenderTexture != null)
             {
                 _portalRenderTexture.Release();
-            }
-
-            if (_portalTexture != null)
-            {
-                Destroy(_portalTexture);
-                _portalTexture = null;
             }
         }
 
@@ -126,16 +105,6 @@ namespace ff.ar_rh_spurlab.GrayScaler
             if (_portalRenderTexture.Create())
             {
                 _portalCamera.targetTexture = _portalRenderTexture;
-            }
-
-            if (_portalTexture == null)
-            {
-                _portalTexture = new Texture2D(descriptor.width, descriptor.height,
-                    descriptor.graphicsFormat, 1, TextureCreationFlags.None)
-                {
-                    name = "Portal Texture",
-                    hideFlags = HideFlags.HideAndDontSave
-                };
             }
 
             _isInitialized = true;
