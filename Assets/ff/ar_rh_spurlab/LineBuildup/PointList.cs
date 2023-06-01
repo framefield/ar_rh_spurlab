@@ -36,6 +36,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
     public class PointList : ScriptableObject
     {
         [SerializeField]
+        [HideInInspector]
         public Point[] Points;
 
         [SerializeField]

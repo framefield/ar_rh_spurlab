@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -92,6 +93,29 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
         #region Unity Callbacks
 
+        private void OnEnable()
+        {
+#if UNITY_EDITOR
+            UnityEditor.SceneView.duringSceneGui += DrawEditorScene;
+#endif
+        }
+
+#if UNITY_EDITOR
+        private void DrawEditorScene(UnityEditor.SceneView view)
+        {
+            Draw(view.camera);
+        }
+#endif
+
+
+        private void OnDisable()
+        {
+#if UNITY_EDITOR
+            UnityEditor.SceneView.duringSceneGui -= DrawEditorScene;
+#endif
+        }
+
+
         private void Reset()
         {
             TearDown();
@@ -108,7 +132,6 @@ namespace ff.ar_rh_spurlab.LineBuildup
             {
                 Initialize();
             }
-
 #if UNITY_EDITOR
             UpdateFromBaseMaterial();
 #endif
@@ -119,13 +142,18 @@ namespace ff.ar_rh_spurlab.LineBuildup
             // https://forum.unity.com/threads/how-to-get-model-matrix-into-graphics-drawprocedural-custom-shader.489304/#post-3535125
             _materialPropertyBlock.SetMatrix(ObjectToWorldPropId, transform.localToWorldMatrix);
 
+            Draw();
+        }
+
+        private void Draw(Camera camera = null)
+        {
             Graphics.DrawProcedural(
                 _sharedMaterial,
                 _pointList.Bounds,
                 MeshTopology.Triangles,
                 _pointList.Points.Length * 6 - 6,
                 1,
-                null,
+                camera,
                 _materialPropertyBlock,
                 ShadowCastingMode.Off,
                 false,
@@ -135,7 +163,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
 #if UNITY_EDITOR
 
-        void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
         {
             if (!_pointList)
             {
@@ -192,12 +220,11 @@ namespace ff.ar_rh_spurlab.LineBuildup
             _materialPropertyBlock.SetFloat(FogDistancePropId, _baseMaterial.GetFloat(FogDistancePropId));
             _materialPropertyBlock.SetFloat(FogBiasPropId, _baseMaterial.GetFloat(FogBiasPropId));
             _materialPropertyBlock.SetColor(FogColorPropId, _baseMaterial.GetColor(FogColorPropId));
-            
+
             _materialPropertyBlock.SetFloat(NoiseAmountId, _baseMaterial.GetFloat(NoiseAmountId));
             _materialPropertyBlock.SetFloat(NoiseVariationId, _baseMaterial.GetFloat(NoiseVariationId));
             _materialPropertyBlock.SetFloat(NoiseFrequencyId, _baseMaterial.GetFloat(NoiseFrequencyId));
             _materialPropertyBlock.SetFloat(NoisePhaseId, _baseMaterial.GetFloat(NoisePhaseId));
-            
         }
 
         #endregion
