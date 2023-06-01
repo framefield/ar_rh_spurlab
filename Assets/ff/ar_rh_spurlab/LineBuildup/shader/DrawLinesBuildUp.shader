@@ -108,18 +108,13 @@
                 Point pointA = Points[particleId];
                 Point pointB = Points[particleId+1];
                 Point pointBB = Points[particleId > SegmentCount-2 ? SegmentCount-2: particleId+2];
-                
-                // float amount =100;
-                // float variation = 0.01;
-                // float phase = NoisePhase + _Time.x;
-                // float frequency = 0.1;
 
                 float phase = NoisePhase + _Time.x;
                 
-                float3 posAA = AddNoise(particleId, pointAA.position,   NoiseAmount, NoiseVariation, phase, NoiseFrequency);
+                float3 posAA = AddNoise(particleId-1, pointAA.position,   NoiseAmount, NoiseVariation, phase, NoiseFrequency);
                 float3 posA  = AddNoise(particleId, pointA.position,    NoiseAmount, NoiseVariation, phase, NoiseFrequency);
                 float3 posB  = AddNoise(particleId+1, pointB.position,  NoiseAmount, NoiseVariation, phase, NoiseFrequency);
-                float3 posBB = AddNoise(particleId+1, pointBB.position, NoiseAmount, NoiseVariation, phase, NoiseFrequency);
+                float3 posBB = AddNoise(particleId+2, pointBB.position, NoiseAmount, NoiseVariation, phase, NoiseFrequency);
                 
                 float3 posInObject = cornerFactors.x < 0.5
                     ? posA
@@ -216,8 +211,8 @@
                 float f1 = saturate((input.texCoord.x + VisibleRange) * 1000  );
                 float f2 = 1-saturate( input.texCoord.x * 1000);
                 float t = f1*f2;
-                if(t < 0.01)
-                    discard;
+                // if(t < 0.01)
+                //     discard;
                 
                 //output.color = float4(t,0,0,1);
                 //return output;
