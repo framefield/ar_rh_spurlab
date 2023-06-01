@@ -1,3 +1,4 @@
+using System;
 using ff.ar_rh_spurlab.Calibration;
 using UnityEngine;
 
@@ -7,10 +8,25 @@ namespace ff.ar_rh_spurlab.Locations
     {
         public LocationData LocationData { get; private set; }
         public CalibrationData CalibrationData { get; private set; }
+        public bool IsTracking => _isTracking;
+
+        private bool _isTracking = false;
+
+        public event Action<bool> OnTrackingChanged;
 
         private void Update()
         {
-            if (CalibrationData?.AreAnchorsReady != true)
+            var isTracking = CalibrationData?.AreAnchorsReady == true;
+            if (isTracking == _isTracking)
+            {
+                return;
+            }
+
+            _isTracking = isTracking;
+            OnTrackingChanged?.Invoke(_isTracking);
+
+
+            if (!isTracking)
             {
                 foreach (var trackedLocationContent in _trackedLocationContents)
                 {

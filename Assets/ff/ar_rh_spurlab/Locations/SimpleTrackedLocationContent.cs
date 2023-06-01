@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System.Linq;
+using ff.ar_rh_spurlab.GrayScaler;
 using UnityEngine;
 
 namespace ff.ar_rh_spurlab.Locations
@@ -10,7 +10,12 @@ namespace ff.ar_rh_spurlab.Locations
         {
             _renderers = GetComponentsInChildren<Renderer>();
             _colliders = GetComponentsInChildren<Collider>();
-            _canvas = GetComponentsInChildren<Canvas>();
+            _behaviours = GetComponentsInChildren<Behaviour>().Where(b => b is Portal or Canvas).ToArray();
+
+            _rendererStateTuples = new (Renderer renderer, bool enabled)[_renderers.Length];
+            _colliderStateTuples = new (Collider renderer, bool enabled)[_renderers.Length];
+            _behavioursStateTuples = new (Behaviour renderer, bool enabled)[_renderers.Length];
+
 
             _isTracked = false;
             HideAllChildren();
@@ -35,23 +40,37 @@ namespace ff.ar_rh_spurlab.Locations
 
         private void HideAllChildren()
         {
-            _rendererStateTuples = _renderers.Select(r => (r, r.enabled)).ToArray();
-            _colliderStateTuples = _colliders.Select(c => (c, c.enabled)).ToArray();
-            _canvasStateTuples = _canvas.Select(c => (c, c.enabled)).ToArray();
-
-            foreach (var r in _renderers)
+            for (var index = 0; index < _renderers.Length; index++)
             {
-                r.enabled = false;
+                var r = _renderers[index];
+                _rendererStateTuples[index] = (r, r.enabled);
+
+                if (r)
+                {
+                    r.enabled = false;
+                }
             }
 
-            foreach (var c in _colliders)
+            for (var index = 0; index < _colliders.Length; index++)
             {
-                c.enabled = false;
+                var c = _colliders[index];
+                _colliderStateTuples[index] = (c, c.enabled);
+
+                if (c)
+                {
+                    c.enabled = false;
+                }
             }
 
-            foreach (var c in _canvas)
+            for (var index = 0; index < _behaviours.Length; index++)
             {
-                c.enabled = false;
+                var b = _behaviours[index];
+                _behavioursStateTuples[index] = (b, b.enabled);
+
+                if (b)
+                {
+                    b.enabled = false;
+                }
             }
         }
 
@@ -59,17 +78,27 @@ namespace ff.ar_rh_spurlab.Locations
         {
             foreach (var (r, rEnabled) in _rendererStateTuples)
             {
-                r.enabled = rEnabled;
+                if (r)
+                {
+                    r.enabled = rEnabled;
+                }
             }
 
             foreach (var (c, cEnabled) in _colliderStateTuples)
             {
-                c.enabled = cEnabled;
+                if (c)
+                {
+                    c.enabled = cEnabled;
+                }
             }
 
-            foreach (var (c, cEnabled) in _canvasStateTuples)
+
+            foreach (var (b, cEnabled) in _behavioursStateTuples)
             {
-                c.enabled = cEnabled;
+                if (b)
+                {
+                    b.enabled = cEnabled;
+                }
             }
         }
 
@@ -77,10 +106,10 @@ namespace ff.ar_rh_spurlab.Locations
 
         private (Renderer renderer, bool enabled)[] _rendererStateTuples;
         private (Collider collider, bool enabled)[] _colliderStateTuples;
-        private (Canvas canvas, bool enabled)[] _canvasStateTuples;
+        private (Behaviour portal, bool enabled)[] _behavioursStateTuples;
 
         private Renderer[] _renderers;
         private Collider[] _colliders;
-        private Canvas[] _canvas;
+        private Behaviour[] _behaviours;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using ff.ar_rh_spurlab.AR;
 using ff.ar_rh_spurlab.Calibration;
@@ -30,6 +31,9 @@ namespace ff.ar_rh_spurlab.Locations
 
         private AugmentedLocation _augmentedLocation;
         public LocationData[] AvailableLocations => _availableLocations;
+
+        public event Action LocationChanged;
+        public AugmentedLocation CurrentLocation => _augmentedLocation;
 
 
         private void Start()
@@ -76,11 +80,14 @@ namespace ff.ar_rh_spurlab.Locations
             if (_augmentedLocation)
             {
                 Destroy(_augmentedLocation.gameObject);
+                _augmentedLocation = null;
             }
 
             _augmentedLocation = Instantiate(locationData.ContentPrefab, _xrOrigin);
             _augmentedLocation.Initialize(calibrationData, locationData);
             _calibrationARAnchorManager.SetCalibrationData(calibrationData);
+
+            LocationChanged?.Invoke();
 
 #if UNITY_IOS
             var directoryPath = Path.Combine(Application.persistentDataPath, calibrationData.Name);

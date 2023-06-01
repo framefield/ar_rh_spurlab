@@ -67,12 +67,12 @@ Material:
     m_Floats:
     - FogBias: 8.4
     - FogDistance: 198.91
-    - LineWidth: 0.08
+    - LineWidth: 0.03
     - NoiseAmount: 5.86
     - NoiseFrequency: 8.42
     - NoisePhase: 2.5
     - NoiseVariation: -0.62
-    - ShrinkWithDistance: -0.56
+    - ShrinkWithDistance: 0.5
     - TransitionProgress: 3.79
     - VisibleRange: 1
     - _BumpScale: 1
