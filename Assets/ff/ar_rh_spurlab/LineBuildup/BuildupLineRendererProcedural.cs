@@ -103,6 +103,11 @@ namespace ff.ar_rh_spurlab.LineBuildup
 #if UNITY_EDITOR
         private void DrawEditorScene(UnityEditor.SceneView view)
         {
+            if (view.orthographic)
+            {
+                return;
+            }
+
             Draw(view.camera);
         }
 #endif
