@@ -298,66 +298,58 @@ Shader "framefield/SpurlabCameraBackground"
                 half4 mixedVideo = lerp(videoColor, grayScaleVideo, grayScaleAmount);
                 
                 half3 poiToCameraDir;
-                half3 sphereToCameraDir;
+                half3 pixelViewDir;
                 float inverseFadeOutStrength = 1;
 #if _MODE_GUIDETOPORTAL
                 if (portalMask > 0.5)
                 {
                     const half aspectX = min(1, _ScreenParams.x / _ScreenParams.y);
                     const half aspectY = min(1, _ScreenParams.y / _ScreenParams.x);
-                    
-                    const half t = degreesPerUv/90 * UNITY_HALF_PI * (i.texcoord.x - 0.5) * aspectX;
-                    const half s = degreesPerUv/90 * UNITY_HALF_PI * (i.texcoord.y - 0.5) * aspectY;
-                    
-                    const half3 posOnSphere = half3(
-                          sphereRadius * cos(s) * sin(t),
-                          sphereRadius * sin(s) * sin(t),
-                          sphereRadius * cos(t)
-                    );
 
-                    const half3 sphereViewPosition = mul(_cameraTransformMatrix, posOnSphere);
-
-                    sphereToCameraDir = normalize(_WorldSpaceCameraPos.xyz - sphereViewPosition.xyz);
+                    float2 uvInView = (i.texcoord -0.5 ) * 2;
+                    float4 posInView = float4(-uvInView, 0.1,1);
+                    
+                    float4 posInCam = mul(unity_CameraInvProjection, posInView);
+                    posInCam.xyz /= posInCam.w;  // <--- !
+                    float4 posInWorld = mul(unity_CameraToWorld, posInCam);
+                    posInWorld.xyz /= posInWorld.w;  // <--- !
+                    pixelViewDir = normalize( posInWorld.xyz - _WorldSpaceCameraPos.xyz);
+                    
 #if _DEBUG_SPHERE
-                    mixedVideo = float4((fixed3(1,1,1) + sphereToCameraDir)/2, 1);
-#endif
-                    
 
+                    
+#else
+
+#endif
+                    half3 poiPos =0;
                     if (_PointsOfInterest._m03 > 0)
                     {
-                        const half3 poiPos = half3(_PointsOfInterest._m00, _PointsOfInterest._m01, _PointsOfInterest._m02);
-                        poiToCameraDir = normalize(_WorldSpaceCameraPos.xyz - poiPos.xyz);
-                        const float angleDistance = (1 + dot(poiToCameraDir, sphereToCameraDir)) / 2.0f;
-                        inverseFadeOutStrength *= angleDistance;
+                         poiPos = half3(_PointsOfInterest._m00, _PointsOfInterest._m01, _PointsOfInterest._m02);
                     }
                     if (_PointsOfInterest._m13 > 0)
                     {
-                        const half3 poiPos = half3(_PointsOfInterest._m10, _PointsOfInterest._m11, _PointsOfInterest._m12);
-                        poiToCameraDir = normalize(_WorldSpaceCameraPos.xyz - poiPos.xyz);
-                        const float angleDistance = (1 + dot(poiToCameraDir, sphereToCameraDir)) / 2.0f;
-                        inverseFadeOutStrength *= angleDistance;
+                         poiPos = half3(_PointsOfInterest._m10, _PointsOfInterest._m11, _PointsOfInterest._m12);
                     }
                     if (_PointsOfInterest._m23 > 0)
                     {
-                        const half3 poiPos = half3(_PointsOfInterest._m20, _PointsOfInterest._m21, _PointsOfInterest._m22);
-                        poiToCameraDir = normalize(_WorldSpaceCameraPos.xyz - poiPos.xyz);
-                        const float angleDistance = (1 + dot(poiToCameraDir, sphereToCameraDir)) / 2.0f;
-                        inverseFadeOutStrength *= angleDistance;
+                         poiPos = half3(_PointsOfInterest._m20, _PointsOfInterest._m21, _PointsOfInterest._m22);
                     }
                     if (_PointsOfInterest._m33 > 0)
                     {
-                        const half3 poiPos = half3(_PointsOfInterest._m30, _PointsOfInterest._m31, _PointsOfInterest._m32);
-                        poiToCameraDir = normalize(_WorldSpaceCameraPos.xyz - poiPos.xyz);
-                        const float angleDistance = (1 + dot(poiToCameraDir, sphereToCameraDir)) / 2.0f;
-                        inverseFadeOutStrength *= angleDistance;
+                         poiPos = half3(_PointsOfInterest._m30, _PointsOfInterest._m31, _PointsOfInterest._m32);
                     }
-                    
-                    
-                    const half4 fadeOutColor = ARKIT_SAMPLE_TEXTURE2D(_fadeoutGradient, sampler_fadeoutGradient, half2(1 - inverseFadeOutStrength, 0.5));
-#ifndef _DEBUG_SPHERE
-                    mixedVideo = lerp(half4(fadeOutColor.rgb, 1), mixedVideo, max(1 - fadeOutColor.a, humanMask));
-#endif
 
+                    float distanceToPoi = length(_WorldSpaceCameraPos.xyz - poiPos);
+                    float focusSphereFactor = smoothstep(1, 7, distanceToPoi) + 0.5; 
+                    
+                    poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
+                    float normalized = (1 + dot(poiToCameraDir, pixelViewDir)) / 2.0f;
+                    const float angleDistance = saturate( normalized  * focusSphereFactor );
+
+                    // Animation experiment (too distracting)
+                    // float wave = pow(sin(normalized * 30 + _Time.x * 30) * 0.5 + 0.5, 5) * 0.1 * saturate(normalized );
+                    const half4 fadeOutColor = ARKIT_SAMPLE_TEXTURE2D(_fadeoutGradient, sampler_fadeoutGradient, half2(angleDistance, 0.5));
+                    mixedVideo = lerp(half4(fadeOutColor.rgb, 1), mixedVideo, max(1 - fadeOutColor.a , humanMask));
                 } 
 #endif
 
@@ -369,7 +361,7 @@ Shader "framefield/SpurlabCameraBackground"
                }
                else  if (i.texcoord.x % 0.1 < 0.075 ? i.texcoord.y % 0.1 < 0.075 : i.texcoord.y % 0.1 > 0.075 )
                {
-                   o.color = half4((sphereToCameraDir + float3(1,1,1))/2, 1);
+                   o.color = half4((pixelViewDir + float3(1,1,1))/2, 1);
                }
                else {
                    o.color = half4((poiToCameraDir + float3(1,1,1))/2, 1);
