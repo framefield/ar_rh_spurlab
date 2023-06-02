@@ -53,8 +53,11 @@ namespace ff.ar_rh_spurlab.Locations
 
         private void OnLocationSelected(LocationData locationData)
         {
-            _locationController.SetLocation(locationData);
-            _stateMachine.Continue();
+            var okay = _locationController.SetLocation(locationData);
+            if (okay)
+            {
+                _stateMachine.Continue();
+            }
         }
     }
 }

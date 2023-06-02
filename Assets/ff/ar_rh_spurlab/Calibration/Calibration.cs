@@ -82,7 +82,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public bool AreAnchorsReady => MatchedAnchors.Count == LocationData.NumberOfReferencePoints;
 
-        public void UpdatePointsFromsAnchors()
+        public void UpdatePointsFromAnchors()
         {
             PointsInWorldMap.Clear();
             for (var i = 0; i < MatchedAnchors.Count; i++)
@@ -91,10 +91,16 @@ namespace ff.ar_rh_spurlab.Calibration
             }
         }
 
+        public static bool CalibrationDataExists(string name)
+        {
+            var filePath = Path.Combine(Application.persistentDataPath, name, "calibrationdata.json");
+            return File.Exists(filePath);
+        }
+
         public static CalibrationData TryLoad(string name)
         {
             var filePath = Path.Combine(Application.persistentDataPath, name, "calibrationdata.json");
-            Debug.Log(filePath);
+            // Debug.Log(filePath);
             try
             {
                 var reader = new StreamReader(filePath);
@@ -165,7 +171,7 @@ namespace ff.ar_rh_spurlab.Calibration
                     throw new ArgumentOutOfRangeException();
             }
 
-            _calibrationData.UpdatePointsFromsAnchors();
+            _calibrationData.UpdatePointsFromAnchors();
         }
 
         private void UpdateAnchorsInCalibration(ARAnchorsChangedEventArgs args)
@@ -257,7 +263,7 @@ namespace ff.ar_rh_spurlab.Calibration
             _allAnchors.Clear();
 
             _calibrationData?.MatchedAnchors.Clear();
-            _calibrationData?.UpdatePointsFromsAnchors();
+            _calibrationData?.UpdatePointsFromAnchors();
         }
     }
 }

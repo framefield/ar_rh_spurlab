@@ -29,7 +29,8 @@ namespace ff.ar_rh_spurlab.Calibration
         private StateMachine _stateMachine;
 
         public bool IsReady => _calibrationController != null && _calibrationController.CalibrationData != null &&
-            _calibrationController.CalibrationData.MatchedAnchors.Count == LocationData.NumberOfReferencePoints;
+                               _calibrationController.CalibrationData.MatchedAnchors.Count ==
+                               LocationData.NumberOfReferencePoints;
 
         private void Update()
         {
@@ -54,7 +55,7 @@ namespace ff.ar_rh_spurlab.Calibration
             var hitPose = _sHits[0].pose;
             var calibrationData = _calibrationController.CalibrationData;
             var draggedAnchor = (from placedAnchor in calibrationData.MatchedAnchors
-                                 where Vector3.Distance(placedAnchor.transform.position, hitPose.position) < 0.1f
+                where Vector3.Distance(placedAnchor.transform.position, hitPose.position) < 0.1f
                 select placedAnchor.transform).FirstOrDefault();
 
             if (draggedAnchor)
@@ -70,7 +71,7 @@ namespace ff.ar_rh_spurlab.Calibration
                 _calibrationController.CalibrationData.MatchedAnchors.Add(marker);
             }
 
-            calibrationData.UpdatePointsFromsAnchors();
+            calibrationData.UpdatePointsFromAnchors();
         }
 
 
@@ -108,7 +109,7 @@ namespace ff.ar_rh_spurlab.Calibration
             }
 
             calibrationData.MatchedAnchors.Clear();
-            calibrationData.UpdatePointsFromsAnchors();
+            calibrationData.UpdatePointsFromAnchors();
         }
 
         public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)

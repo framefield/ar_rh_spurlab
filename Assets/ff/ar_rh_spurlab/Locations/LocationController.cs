@@ -67,14 +67,14 @@ namespace ff.ar_rh_spurlab.Locations
             _stateMachine.Initialize();
         }
 
-        public void SetLocation(LocationData locationData)
+        public bool SetLocation(LocationData locationData)
         {
             var calibrationData = CalibrationData.TryLoad(locationData.Title);
 
             if (calibrationData == null)
             {
                 Debug.LogError($"Location is not calibrated: {locationData.Title}", this);
-                return;
+                return false;
             }
 
             if (_augmentedLocation)
@@ -95,6 +95,7 @@ namespace ff.ar_rh_spurlab.Locations
 
             StartCoroutine(ARWorldMapController.Load(_arSession, filePath));
 #endif
+            return true;
         }
     }
 }

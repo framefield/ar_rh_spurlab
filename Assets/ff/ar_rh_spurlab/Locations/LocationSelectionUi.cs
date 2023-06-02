@@ -1,11 +1,24 @@
 using System;
 using System.Collections.Generic;
+using ff.ar_rh_spurlab.Calibration;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.Locations
 {
+    public class LocationOptionData : TMP_Dropdown.OptionData
+    {
+        public LocationOptionData(LocationData location)
+        {
+            LocationData = location;
+            var isCalibrated = CalibrationData.CalibrationDataExists(location.Title);
+            text = $"{location.Title}{(isCalibrated ? "" : " (not calibrated)")}";
+        }
+
+        public LocationData LocationData { get; set; }
+    }
+
     public class LocationSelectionUi : MonoBehaviour
     {
         [Header("Prefab references")]
@@ -18,9 +31,6 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private Button _selectButton;
 
-
-        private readonly Dictionary<string, LocationData> _locationDataByName = new();
-
         private void Start()
         {
             _selectButton.onClick.AddListener(OnSelectButtonClicked);
@@ -32,20 +42,20 @@ namespace ff.ar_rh_spurlab.Locations
         {
             var selectedOptionIndex = _dropdown.value;
             var selectedOption = _dropdown.options[selectedOptionIndex];
-            var locationName = selectedOption.text;
-            var locationData = _locationDataByName[locationName];
-            OnLocationSelected?.Invoke(locationData);
+
+            if (selectedOption is LocationOptionData locationOptionData)
+            {
+                OnLocationSelected?.Invoke(locationOptionData.LocationData);
+            }
         }
 
         public void SetOptions(IEnumerable<LocationData> locationData)
         {
             _dropdown.options.Clear();
-            _locationDataByName.Clear();
 
             foreach (var location in locationData)
             {
-                _dropdown.options.Add(new TMP_Dropdown.OptionData(location.Title));
-                _locationDataByName.Add(location.Title, location);
+                _dropdown.options.Add(new LocationOptionData(location));
             }
         }
 
