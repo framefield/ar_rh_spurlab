@@ -24,6 +24,12 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private PlayableDirector[] _chapterTimelines;
 
+        public bool AutoPlay
+        {
+            get => _autoPlay;
+            // todo trigger play if nothing is playing
+            set => _autoPlay = value;
+        }
 
         public void Initialize()
         {
