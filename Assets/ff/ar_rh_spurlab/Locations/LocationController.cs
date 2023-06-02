@@ -67,6 +67,16 @@ namespace ff.ar_rh_spurlab.Locations
             _stateMachine.Initialize();
         }
 
+        public void ResetLocation()
+        {
+            if (_augmentedLocation)
+            {
+                Destroy(_augmentedLocation.gameObject);
+                _augmentedLocation = null;
+                _calibrationARAnchorManager.Reset();
+            }
+        }
+
         public bool SetLocation(LocationData locationData)
         {
             var calibrationData = CalibrationData.TryLoad(locationData.Title);
@@ -86,15 +96,13 @@ namespace ff.ar_rh_spurlab.Locations
             _augmentedLocation = Instantiate(locationData.ContentPrefab, _xrOrigin);
             _augmentedLocation.Initialize(calibrationData, locationData);
             _calibrationARAnchorManager.SetCalibrationData(calibrationData);
-
-            LocationChanged?.Invoke();
-
 #if UNITY_IOS
             var directoryPath = Path.Combine(Application.persistentDataPath, calibrationData.Name);
             var filePath = Path.Combine(directoryPath, "my_session.worldmap");
 
             StartCoroutine(ARWorldMapController.Load(_arSession, filePath));
 #endif
+            LocationChanged?.Invoke();
             return true;
         }
     }

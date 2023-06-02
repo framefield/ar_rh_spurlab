@@ -34,6 +34,8 @@ namespace ff.ar_rh_spurlab.Locations
             _planeManager.enabled = true;
 
             _locationController = stateMachine.GetComponent<LocationController>();
+            _locationController.ResetLocation();
+
             _stateMachine = stateMachine;
             _locationSelectionUi.SetVisibility(true);
             _locationSelectionUi.SetOptions(_locationController.AvailableLocations);
