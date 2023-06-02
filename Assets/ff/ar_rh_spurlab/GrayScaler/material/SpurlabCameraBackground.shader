@@ -47,8 +47,10 @@ Shader "framefield/SpurlabCameraBackground"
                 "LightMode" = "Always"
             }
 
-
             HLSLPROGRAM
+
+
+            
 
             #pragma vertex vert
             #pragma fragment frag
@@ -90,6 +92,56 @@ Shader "framefield/SpurlabCameraBackground"
 #endif
 
 
+            static const float Exponent = 1;
+            static const float Brightness = 0;
+
+                
+            float hash12(float2 p)
+            {
+	            float3 p3  = frac(float3(p.xyx) * .1031);
+                p3 += dot(p3, p3.yzx + 33.33);
+                return frac((p3.x + p3.y) * p3.z);
+            }
+
+            float2 hash21(float p)
+            {
+	            float3 p3 = frac(float3(p,p,p) * float3(.1031, .1030, .0973));
+	            p3 += dot(p3, p3.yzx + 33.33);
+                return frac((p3.xx+p3.yz)*p3.zy);
+
+            }
+                
+            float4 GetNoiseFromUv(float2 uv) 
+            {
+                // Animation
+                float pxHash = hash12( uv * 431 + 111);
+
+                float sawTime = abs(_Time.x % 100 - 50);    // avoid large numbers because floating point precision
+                float t = sawTime * 80 + pxHash;
+
+                
+                const float hash1 = hash12(( uv * 431 + (int)t));
+                const float hash2 = hash12(( uv * 431 + (int)t+1));
+                float4 hash = lerp(hash1,hash2, t % 1);
+                float4 noise = float4(hash.xxx,1);
+
+                noise = noise < 0 
+                        ? -pow(-noise, Exponent)
+                        : pow(noise, Exponent);
+                
+                noise += Brightness ;
+                return noise;
+            }
+
+            float4 GetGrainyColor(float2 uv, float4 color, float strength )
+            {
+                const float4 noise = GetNoiseFromUv(uv) - 0.5;
+                const half4 gray = dot(color.rgb, float3(0.3, 0.59, 0.11));                
+                //const float gray = (color.r + color.g + color.b)/3;
+                const float grainyGray = 1-smoothstep(1,0,gray) + noise * 0.6;
+                return  lerp(color,  grainyGray, strength);
+            }
+            
             struct appdata
             {
                 float3 position : POSITION;
@@ -231,7 +283,8 @@ Shader "framefield/SpurlabCameraBackground"
 
                 fragment_output o;
 
-                const half4 grayScaleVideo = dot(videoColor.xyz, float3(0.3, 0.59, 0.11));
+                //const half4 grayScaleVideo = dot(videoColor.xyz, float3(0.3, 0.59, 0.11));
+                const half4 grayScaleVideo = GetGrainyColor(i.texcoord, videoColor, 1);
                 
 
 #if _MODE_GUIDETOPORTAL

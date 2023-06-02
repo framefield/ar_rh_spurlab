@@ -129,6 +129,8 @@ Material:
     - _grayScaleStrength: 1
     - _maxDarkening: 0
     - _maxFadeOut: 0.1
+    - degreesPerUv: 90
+    - sphereRadius: 10
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
