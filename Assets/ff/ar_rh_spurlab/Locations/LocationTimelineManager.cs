@@ -97,12 +97,17 @@ namespace ff.ar_rh_spurlab.Locations
             if (isWaitingForTrigger)
             {
                 if (_autoTriggerChapters)
+                {
                     PlayChapters();
+                }
+
                 return;
             }
 
             if (!_autoPlay)
+            {
                 return;
+            }
 
             var (currentIndex, isFound) = FindIndex(director, _chapterTimelines);
 
