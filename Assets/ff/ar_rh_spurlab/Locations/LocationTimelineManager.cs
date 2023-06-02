@@ -69,6 +69,28 @@ namespace ff.ar_rh_spurlab.Locations
             Debug.Log($"LocationTimelineManager: Playing timeline {director.name}", director);
         }
 
+        public void PlayNextChapter()
+        {
+            var (currentIndex, isFound) = FindIndex(_activePlayableDirector, _chapterTimelines);
+            currentIndex++;
+            if (currentIndex < _chapterTimelines.Length)
+            {
+                Play(_chapterTimelines[currentIndex]);
+            }
+        }
+
+        public void Stop()
+        {
+            if (_activePlayableDirector)
+            {
+                _activePlayableDirector.stopped -= PlayableDirectorStoppedHandler;
+                _activePlayableDirector.Stop();
+            }
+
+            _activePlayableDirector = null;
+            Play(_waitingTimeline);
+        }
+
         private void PlayableDirectorStoppedHandler(PlayableDirector director)
         {
             var isWaitingForTrigger = director == _waitingTimeline;
