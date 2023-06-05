@@ -99,7 +99,7 @@
                 psInput output;
                 float discardFactor = 1;
                 
-                float4 aspect = float4(_ScreenParams.x / _ScreenParams.y,1,1,1);
+                float4 aspect = float4(_ScreenParams.x / _ScreenParams.y, 1, 1, 1);
                 int quadIndex = id % 6;
                 uint particleId = id / 6;
                 float3 cornerFactors = Corners[quadIndex];
@@ -120,31 +120,38 @@
                     ? posA
                     : posB;
 
-                float tz= 0;
+                const float tz = 0;
                 float4 aaInScreen  = PointToClipPos(float4(posAA,1)) * aspect;
                 aaInScreen /= aaInScreen.w;
-                if(aaInScreen.z < tz)
+                if (aaInScreen.z < tz)
+                {
                     discardFactor = 0;
-                
-                
+                }
+
+
                 float4 aInScreen  = PointToClipPos(float4(posA,1)) * aspect;
                 aInScreen /= aInScreen.w;
-                if(aInScreen.z < tz)
+                if (aInScreen.z < tz)
+                {
                     discardFactor = 0;
-                
+                }
 
-                
+
                 float4 bInScreen  = PointToClipPos(float4(posB,1)) * aspect;
                 bInScreen /= bInScreen.w;
-                if(bInScreen.z < tz)
+                if (bInScreen.z < tz)
+                {
                     discardFactor = 0;
-                
-                
+                }
+
+
                 float4 bbInScreen  = PointToClipPos(float4(posBB,1)) * aspect;
                 bbInScreen /= bbInScreen.w;
-                if(bbInScreen.z < tz)
+                if (bbInScreen.z < tz)
+                {
                     discardFactor = 0;
-                
+                }
+
 
                 float3 direction = (aInScreen - bInScreen).xyz;
                 float3 directionA = particleId > 0 
@@ -157,10 +164,10 @@
                 float3 normal =  normalize( cross(direction, float3(0,0,1))); 
                 float3 normalA =  normalize( cross(directionA, float3(0,0,1))); 
                 float3 normalB =  normalize( cross(directionB, float3(0,0,1))); 
-                if(isnan(pointAA.w) || pointAA.w < 0.01) {
+                if (isnan(pointAA.w) || pointAA.w < 0.01) {
                     normalA =normal;
                 }
-                if(isnan(pointBB.w) || pointAA.w < 0.01) {
+                if (isnan(pointBB.w) || pointAA.w < 0.01) {
                     normalB =normal;
                 }
 
@@ -169,16 +176,16 @@
                 float4 pos = lerp(aInScreen, bInScreen, cornerFactors.x);
 
 
-                float4 posInCamSpace = mul(mul(float4(posInObject,1), _ObjectToWorld), unity_CameraProjection);
+                float4 posInCamSpace = mul(float4(posInObject,1), unity_CameraProjection);
                 posInCamSpace.xyz /= posInCamSpace.w;
                 posInCamSpace.w = 1;
 
 
-                float wAtPoint = lerp( pointA.w  , pointB.w , cornerFactors.x);
+                float wAtPoint = lerp(pointA.w  , pointB.w , cornerFactors.x);
 
                 // Buildup transition
 
-                if(!isnan(wAtPoint)) 
+                if (!isnan(wAtPoint)) 
                 {        
                     output.texCoord = float2(wAtPoint - TransitionProgress, cornerFactors.y /2 +0.5);
                 }
@@ -188,12 +195,6 @@
                 pos+= cornerFactors.y * 0.1f * thickness * float4(meterNormal,0) / clamp(miter, -2.0,-0.13) ;   
 
                 output.position = pos / aspect;
-                
-                float3 n = cornerFactors.x < 0.5 
-                    ? cross(posA - posAA, posA - posB)
-                    : cross(posB - posA, posB - posBB);
-                n =normalize(n);
-
                 output.fog = pow(saturate(-posInCamSpace.z/FogDistance), FogBias);
                 output.color.rgb =  MainColor.rgb;
 
@@ -211,7 +212,7 @@
                 float f1 = saturate((input.texCoord.x + VisibleRange) * 1000  );
                 float f2 = 1-saturate( input.texCoord.x * 1000);
                 float t = f1*f2;
-                // if(t < 0.01)
+                // if (t < 0.01)
                 //     discard;
                 
                 //output.color = float4(t,0,0,1);
