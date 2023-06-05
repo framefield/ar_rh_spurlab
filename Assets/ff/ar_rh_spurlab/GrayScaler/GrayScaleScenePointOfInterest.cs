@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ff.ar_rh_spurlab.GrayScaler
 {
@@ -12,6 +13,10 @@ namespace ff.ar_rh_spurlab.GrayScaler
         private void Awake()
         {
             _backgroundRenderer = FindFirstObjectByType<CameraBackgroundRenderer>();
+        }
+
+        private void OnEnable()
+        {
             if (_backgroundRenderer)
             {
                 _backgroundRenderer.RegisterPointOfInterest(this);
@@ -22,7 +27,7 @@ namespace ff.ar_rh_spurlab.GrayScaler
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (_backgroundRenderer)
             {

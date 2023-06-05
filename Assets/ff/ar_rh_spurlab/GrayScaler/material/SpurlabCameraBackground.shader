@@ -152,7 +152,7 @@ Shader "framefield/SpurlabCameraBackground"
             {
                 float4 position : SV_POSITION;
                 float2 texcoord : TEXCOORD0;
-                float2 rawTexcoord : TEXCOORD1;
+                float2 screenTexcoord : TEXCOORD1;
             };
 
             struct fragment_output
@@ -182,9 +182,9 @@ Shader "framefield/SpurlabCameraBackground"
                 o.texcoord = texcoord;
                 
 #if XR_SIMULATION
-                o.rawTexcoord = texcoord;
+                o.screenTexcoord = texcoord;
 #else
-                o.rawTexcoord = v.texcoord;
+                o.screenTexcoord = v.texcoord;
 #endif
                 return o;
             }
@@ -298,9 +298,9 @@ Shader "framefield/SpurlabCameraBackground"
                 
 
 #if _MODE_GUIDETOPORTAL
-                half portalMask = 1 - ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.rawTexcoord).b;
+                half portalMask = 1 - ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.screenTexcoord).b;
 #else
-                half portalMask = ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.rawTexcoord).r;
+                half portalMask = ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.screenTexcoord).r;
 #endif
                 
                 const half grayScaleAmount = max(0, min(1, 1 - max(humanMask, portalMask)));
@@ -313,10 +313,7 @@ Shader "framefield/SpurlabCameraBackground"
 #if _MODE_GUIDETOPORTAL
                 if (portalMask > 0.5)
                 {
-                    const half aspectX = min(1, _ScreenParams.x / _ScreenParams.y);
-                    const half aspectY = min(1, _ScreenParams.y / _ScreenParams.x);
-
-                    float2 uvInView = (i.texcoord -0.5 ) * 2;
+                    float2 uvInView = (i.screenTexcoord -0.5 ) * 2;
                     float4 posInView = float4(-uvInView, 0.1,1);
                     
                     float4 posInCam = mul(unity_CameraInvProjection, posInView);
@@ -325,7 +322,7 @@ Shader "framefield/SpurlabCameraBackground"
                     posInWorld.xyz /= posInWorld.w;  // <--- !
                     pixelViewDir = normalize( posInWorld.xyz - _WorldSpaceCameraPos.xyz);
                     
-                    half3 poiPos =0;
+                    half3 poiPos = 0;
                     if (_PointsOfInterest._m03 > 0)
                     {
                          poiPos = half3(_PointsOfInterest._m00, _PointsOfInterest._m01, _PointsOfInterest._m02);
