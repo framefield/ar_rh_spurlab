@@ -25,7 +25,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
 
         public void DeactivateAll()
         {
-            foreach (var reveal in _reveals)
+            foreach (var reveal in Reveals)
             {
                 if (reveal)
                     reveal.SetVisibility(false);
@@ -37,10 +37,10 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             var setImmediate = !Application.isPlaying;
 
             var i = 0;
-            for (; i < _reveals.Length; i++)
+            for (; i < Reveals.Length; i++)
             {
-                if (!_reveals[i]) continue;
-                _reveals[i].SetVisibility(definitions[i].IsActive, setImmediate);
+                if (!Reveals[i]) continue;
+                Reveals[i].SetVisibility(definitions[i].IsActive, setImmediate);
             }
         }
 

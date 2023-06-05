@@ -1,12 +1,15 @@
+using UnityEngine;
 using UnityEngine.Playables;
 
 namespace ff.ar_rh_spurlab.TimelineReveal
 {
     public class RevealTransitionGroupPlayable : PlayableBehaviour
     {
-        public void Initialize(RevealTransitionGroupAsset.GroupDefinition[] definitions)
+        public void Initialize(RevealTransitionGroupAsset.GroupDefinition[] definitions,
+            RevealTransitionGroupAsset asset)
         {
             _definitions = definitions;
+            _asset = asset;
         }
 
         public override void OnBehaviourPause(Playable playable, FrameData info)
@@ -21,13 +24,22 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         {
             _group = playerData as RevealTransitionGroup;
 
-            if (_definitions != null && _group)
+            if (!_group || _definitions == null)
+                return;
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
             {
-                _group.SetGroupDefinition(_definitions);
+                if (_definitions.Length != _group.Reveals.Length)
+                {
+                    _asset.UpdateDefinitions(_group);
+                }
             }
+#endif
+            _group.SetGroupDefinition(_definitions);
         }
 
         private RevealTransitionGroupAsset.GroupDefinition[] _definitions;
         private RevealTransitionGroup _group;
+        private RevealTransitionGroupAsset _asset;
     }
 }

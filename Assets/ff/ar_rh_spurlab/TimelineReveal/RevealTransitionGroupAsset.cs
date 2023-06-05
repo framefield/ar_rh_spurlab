@@ -46,6 +46,13 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                 return;
             }
 
+            UpdateDefinitions(group);
+#endif
+        }
+
+        public void UpdateDefinitions(RevealTransitionGroup group)
+        {
+#if UNITY_EDITOR
             var newDefinitions = new GroupDefinition[group.Reveals.Length];
 
             for (var i = 0; i < group.Reveals.Length; i++)
@@ -65,7 +72,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         {
             var playable = ScriptPlayable<RevealTransitionGroupPlayable>.Create(graph);
             var groupPlayable = playable.GetBehaviour();
-            groupPlayable.Initialize(_definitions);
+            groupPlayable.Initialize(_definitions, this);
             return playable;
         }
 
