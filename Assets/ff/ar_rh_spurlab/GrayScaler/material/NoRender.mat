@@ -7,17 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpurlabCameraBackground
-  m_Shader: {fileID: 4800000, guid: 40c287ef477001b4bb002afc213ab667, type: 3}
+  m_Name: NoRender
+  m_Shader: {fileID: 4800000, guid: b3e403e8fd5972f4c977118123903aa0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - XR_SIMULATION
-  - _DEBUG_NONE
-  - _FORCEARKITFEATURE_NONE
-  - _MODE_GUIDETOPORTAL
-  m_InvalidKeywords:
-  - _FORCE_FORCEALL
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -48,18 +43,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _EnvironmentDepth:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _HumanDepth:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _HumanStencil:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -76,44 +59,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _fadeOutGradient:
-        m_Texture: {fileID: 2800000, guid: 77b0486970990574fb73ed89248feac9, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _fadeoutGradient:
-        m_Texture: {fileID: 2800000, guid: 77b0486970990574fb73ed89248feac9, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _portalMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _textureCbCr:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _textureSingle:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _textureY:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Debug: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Force: 3
-    - _ForceArKitFeature: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _MaxDistance: 8
     - _Metallic: 0
-    - _Mode: 1
+    - _MinDistance: 0
+    - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
@@ -121,20 +79,9 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _baseGrayScaleStrength: 1
-    - _cameraViewportHeightInRadians: 0.93
-    - _cameraViewportRadius: 9
-    - _cameraViewportScale: 1
-    - _cameraViewportWidthInRadians: 0.91
-    - _grayScaleStrength: 1
-    - _maxDarkening: 0
-    - _maxFadeOut: 0.1
-    - degreesPerUv: 90
-    - sphereRadius: 10
+    - _tintAmount: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PointsOfInterest: {r: 1, g: 1, b: 1, a: 1}
-    - _fadeOutColor: {r: 0, g: 0.724138, b: 1, a: 1}
-    - _pointOfInterests: {r: 1, g: 1, b: 1, a: 1}
+    - _tintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
   m_BuildTextureStacks: []
