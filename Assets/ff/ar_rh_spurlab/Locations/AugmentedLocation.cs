@@ -17,14 +17,13 @@ namespace ff.ar_rh_spurlab.Locations
         private void Update()
         {
             var isTracking = CalibrationData?.AreAnchorsReady == true;
-            if (isTracking == _isTracking)
+
+
+            if (isTracking != _isTracking)
             {
-                return;
+                _isTracking = isTracking;
+                OnTrackingChanged?.Invoke(_isTracking);
             }
-
-            _isTracking = isTracking;
-            OnTrackingChanged?.Invoke(_isTracking);
-
 
             if (!isTracking)
             {
