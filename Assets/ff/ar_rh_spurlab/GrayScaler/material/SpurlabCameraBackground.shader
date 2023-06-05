@@ -20,7 +20,7 @@ Shader "framefield/SpurlabCameraBackground"
         sphereRadius("sphereRadius", Float) = 10
         degreesPerUv("degreesPerUv", Float) = 90
 
-        [KeywordEnum(GuideToPortal, InPortal)] _Mode ("Mode", Float) = 0 
+        [KeywordEnum(NoPortal, GuideToPortal, InPortal)] _Mode ("Mode", Float) = 0 
         
         [KeywordEnum(None, HumanSegmentation, Depth)] _ForceArKitFeature ("Force", Float) = 0 
         [KeywordEnum(None, AngularDifference, PortalMask, Sphere)] _Debug ("Debug", Float) = 0 
@@ -58,7 +58,7 @@ Shader "framefield/SpurlabCameraBackground"
             #pragma multi_compile_local __ ARKIT_BACKGROUND_URP
             #pragma multi_compile_local __ XR_SIMULATION
             #pragma multi_compile_local __ _DEBUG_NONE _DEBUG_ANGULARDIFFERENCE _DEBUG_PORTALMASK _DEBUG_SPHERE
-            #pragma multi_compile_local __ _MODE_GUIDETOPORTAL _MODE_INPORTAL
+            #pragma multi_compile_local __ _MODE_GUIDETOPORTAL _MODE_INPORTAL _MODE_NOPORTAL
             #pragma multi_compile_local __ ARKIT_HUMAN_SEGMENTATION_ENABLED ARKIT_ENVIRONMENT_DEPTH_ENABLED
             #pragma multi_compile_local __ _FORCEARKITFEATURE_NONE _FORCEARKITFEATURE_HUMANSEGMENTATION _FORCEARKITFEATURE_DEPTH
 
@@ -152,6 +152,7 @@ Shader "framefield/SpurlabCameraBackground"
             {
                 float4 position : SV_POSITION;
                 float2 texcoord : TEXCOORD0;
+                float2 rawTexcoord : TEXCOORD1;
             };
 
             struct fragment_output
@@ -179,6 +180,12 @@ Shader "framefield/SpurlabCameraBackground"
                 v2f o;
                 o.position = position;
                 o.texcoord = texcoord;
+                
+#if XR_SIMULATION
+                o.rawTexcoord = texcoord;
+#else
+                o.rawTexcoord = v.texcoord;
+#endif
                 return o;
             }
 
@@ -283,14 +290,17 @@ Shader "framefield/SpurlabCameraBackground"
 
                 fragment_output o;
 
-                //const half4 grayScaleVideo = dot(videoColor.xyz, float3(0.3, 0.59, 0.11));
+#if _MODE_NOPORTAL
+                const half4 grayScaleVideo = videoColor;
+#else
                 const half4 grayScaleVideo = GetGrainyColor(i.texcoord, videoColor, 1);
+#endif
                 
 
 #if _MODE_GUIDETOPORTAL
-                half portalMask = 1 - ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.texcoord).b;
+                half portalMask = 1 - ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.rawTexcoord).b;
 #else
-                half portalMask = ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.texcoord).r;
+                half portalMask = ARKIT_SAMPLE_TEXTURE2D(_portalMask, sampler_portalMask, i.rawTexcoord).r;
 #endif
                 
                 const half grayScaleAmount = max(0, min(1, 1 - max(humanMask, portalMask)));
@@ -315,12 +325,6 @@ Shader "framefield/SpurlabCameraBackground"
                     posInWorld.xyz /= posInWorld.w;  // <--- !
                     pixelViewDir = normalize( posInWorld.xyz - _WorldSpaceCameraPos.xyz);
                     
-#if _DEBUG_SPHERE
-
-                    
-#else
-
-#endif
                     half3 poiPos =0;
                     if (_PointsOfInterest._m03 > 0)
                     {

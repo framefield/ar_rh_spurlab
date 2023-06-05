@@ -61,8 +61,10 @@ namespace ff.ar_rh_spurlab.GrayScaler
                 return;
             }
 
-            var go = GameObjectUtils.Create("Portal Camera");
-            //go.hideFlags = HideFlags.HideAndDontSave;
+            var go = new GameObject("Portal Camera");
+            go.hideFlags = HideFlags.DontSave;
+            go.transform.SetParent(xrCamera.transform);
+
             go.layer = _portalLayer;
 
             var rigidBody = go.AddComponent<Rigidbody>();
@@ -122,7 +124,6 @@ namespace ff.ar_rh_spurlab.GrayScaler
             var targetTexture = destination.targetTexture;
 
             destination.CopyFrom(source);
-            destination.projectionMatrix = source.projectionMatrix;
 
             collider.center = new Vector3(0, 0, source.nearClipPlane);
 
@@ -133,6 +134,16 @@ namespace ff.ar_rh_spurlab.GrayScaler
             destination.backgroundColor = backgroundColor;
             destination.depth = depth;
             destination.targetTexture = targetTexture;
+        }
+
+        public void PrintDebugCameraMatrices()
+        {
+            Debug.Log("XR CAMERA");
+            Debug.Log(_xrCamera.projectionMatrix);
+            Debug.Log(_xrCamera.nonJitteredProjectionMatrix);
+            Debug.Log("PORTAL CAMERA");
+            Debug.Log(_portalCamera.projectionMatrix);
+            Debug.Log(_portalCamera.nonJitteredProjectionMatrix);
         }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.4440681, g: 0.49333978, b: 0.57238823, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -120,6 +120,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &38059173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1089412225894517255, guid: 7fce8598cc74f8c4080dfdaebb529f88,
+    type: 3}
+  m_PrefabInstance: {fileID: 62165988188214751}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66efed8a1b58a8d4f9d4d7eff2b1dd6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &67952099 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5056259430546438095, guid: 5784783c469a44243b8bf6c6047f1f03,
@@ -5616,6 +5628,23 @@ MonoBehaviour:
         - m_Target: {fileID: 3930488585771073894}
           m_TargetAssemblyTypeName: 
           m_MethodName: ToggleVisibility
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Name: DebugCameras
+    Action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 38059173}
+          m_TargetAssemblyTypeName: ff.ar_rh_spurlab.GrayScaler.PortalTextureRenderer,
+            Assembly-CSharp
+          m_MethodName: PrintDebugCameraMatrices
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

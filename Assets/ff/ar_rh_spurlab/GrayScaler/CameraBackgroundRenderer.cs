@@ -77,15 +77,26 @@ namespace ff.ar_rh_spurlab.GrayScaler
             material.DisableKeyword("XR_SIMULATION");
 #endif
 
-            if (_isInsidePortal)
+            if (_pointOfInterests.Count > 0)
             {
-                material.EnableKeyword("_MODE_INPORTAL");
-                material.DisableKeyword("_MODE_GUIDETOPORTAL");
+                if (_isInsidePortal)
+                {
+                    material.DisableKeyword("_MODE_NOPORTAL");
+                    material.EnableKeyword("_MODE_INPORTAL");
+                    material.DisableKeyword("_MODE_GUIDETOPORTAL");
+                }
+                else
+                {
+                    material.DisableKeyword("_MODE_NOPORTAL");
+                    material.DisableKeyword("_MODE_INPORTAL");
+                    material.EnableKeyword("_MODE_GUIDETOPORTAL");
+                }
             }
             else
             {
+                material.EnableKeyword("_MODE_NOPORTAL");
                 material.DisableKeyword("_MODE_INPORTAL");
-                material.EnableKeyword("_MODE_GUIDETOPORTAL");
+                material.DisableKeyword("_MODE_GUIDETOPORTAL");
             }
         }
 
