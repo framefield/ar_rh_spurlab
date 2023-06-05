@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2380368736838871375}
   - component: {fileID: 4295738227600371516}
   m_Layer: 0
-  m_Name: Calibration Location GSG Hof
+  m_Name: GSG-Hof - Calibration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

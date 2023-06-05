@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 2380368736838871375}
   - component: {fileID: 4295738227600371516}
   m_Layer: 0
-  m_Name: Location GSG Hof - Animated
+  m_Name: FF Lab - Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
