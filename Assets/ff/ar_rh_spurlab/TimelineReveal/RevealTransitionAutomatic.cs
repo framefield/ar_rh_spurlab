@@ -1,4 +1,5 @@
 ﻿using System;
+using ff.utils;
 using UnityEngine;
 
 namespace ff.common.TimelineReveal
@@ -9,7 +10,7 @@ namespace ff.common.TimelineReveal
     public class RevealTransitionAutomatic : MonoBehaviour
     {
         public RevealTransition RevealTransition => _revealTransition;
-        
+
         [SerializeField]
         private RevealTransition _revealTransition = default;
 
@@ -21,9 +22,9 @@ namespace ff.common.TimelineReveal
 
         public AnimationClip GetClip()
         {
-            return  _revealTransition.GetClip();
+            return _revealTransition.GetClip();
         }
-        
+
         public void SetVisibility(bool isVisible, bool immediate = false)
         {
             if (isVisible)
@@ -43,16 +44,15 @@ namespace ff.common.TimelineReveal
                 _revealTransition.UpdateNormalizedTime(1, State.FadeIn);
                 return;
             }
-            
+
             _state = State.FadeIn;
             _fadeDuration = _fadeInDuration;
-            _normalizedTimePosition = _revealTransition.GetNormalizedPosition();
 
             // Do nothing if it is already Fade in
-            if (Mathf.Approximately(_normalizedTimePosition, 1f))
+            if (_normalizedTimePosition >= 1f)
                 _state = State.None;
         }
-        
+
         public void FadeOut(bool immediate = false)
         {
             if (immediate)
@@ -63,10 +63,9 @@ namespace ff.common.TimelineReveal
 
             _state = State.FadeOut;
             _fadeDuration = _fadeOutDuration;
-            _normalizedTimePosition = _revealTransition.GetNormalizedPosition();
-            
+
             // Do nothing if it is already Fade out
-            if (Mathf.Approximately(_normalizedTimePosition, 0f))
+            if (_normalizedTimePosition <= 0f)
                 _state = State.None;
         }
 
@@ -84,16 +83,18 @@ namespace ff.common.TimelineReveal
             _normalizedTimePosition += _state == State.FadeIn ? delta : -delta;
             _revealTransition.UpdateNormalizedTime(_normalizedTimePosition, _state);
 
-            if (_normalizedTimePosition < 0 || _normalizedTimePosition > 1)
+            if (_normalizedTimePosition is < 0 or > 1)
             {
                 _state = State.None;
             }
         }
 
         private float _fadeDuration;
-        private float _normalizedTimePosition;
-        private State _state = State.None;
 
-    
+        [ReadOnly]
+        [SerializeField]
+        private float _normalizedTimePosition;
+
+        private State _state = State.None;
     }
 }

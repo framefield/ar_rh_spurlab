@@ -1,4 +1,6 @@
+using System;
 using ff.common.TimelineReveal;
+using ff.utils;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -7,16 +9,26 @@ namespace ff.ar_rh_spurlab.TimelineReveal
 {
     public class RevealTransitionGroup : MonoBehaviour
     {
-        [SerializeField]
-        private RevealTransitionAutomatic[] _reveals = default;
-
-        public RevealTransitionAutomatic[] Reveals => _reveals;
+        public RevealTransitionAutomatic[] Reveals
+        {
+            get
+            {
+#if UNITY_EDITOR
+                if (!Application.isPlaying)
+                {
+                    _reveals = GetComponentsInChildren<RevealTransitionAutomatic>();
+                }
+#endif
+                return _reveals;
+            }
+        }
 
         public void DeactivateAll()
         {
             foreach (var reveal in _reveals)
             {
-                if (reveal) reveal.SetVisibility(false);
+                if (reveal)
+                    reveal.SetVisibility(false);
             }
         }
 
@@ -32,14 +44,19 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             }
         }
 
-
         public void GatherProperties(PlayableDirector director, IPropertyCollector driver)
         {
-            foreach (var reveal in _reveals)
+            foreach (var reveal in Reveals)
             {
                 if (reveal)
                     driver.AddFromClip(reveal.gameObject, reveal.GetClip());
             }
         }
+
+        private bool _isInitialized;
+
+        [ReadOnly]
+        [SerializeField]
+        private RevealTransitionAutomatic[] _reveals;
     }
 }

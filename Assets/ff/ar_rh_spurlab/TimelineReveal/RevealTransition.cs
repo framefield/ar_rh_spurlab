@@ -101,7 +101,7 @@ namespace ff.common.TimelineReveal
             Initialize();
             float t;
             State = state;
-            
+
             switch (state)
             {
                 case State.None:
@@ -126,11 +126,6 @@ namespace ff.common.TimelineReveal
             }
 
             _controller.SetNormalizedPosition(t);
-        }
-        
-        public float GetNormalizedPosition()
-        {
-            return _controller?.GetNormalizedPosition() ?? 0f;
         }
 
         private void UpdateRenderers(bool isRevealed, bool force = false)
