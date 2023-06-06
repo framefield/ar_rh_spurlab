@@ -351,14 +351,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f32f737a30a45a2a6f453753dea40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button: {fileID: 3550856014157861556}
+  _active: {fileID: 2221750421877367606}
+  _inactive: {fileID: 4377509850727719204}
   _titleTexts:
   - {fileID: 63271756399838444}
   - {fileID: 1503554744871287991}
   _labelTexts:
   - {fileID: 8019671090363526020}
   - {fileID: 2772502230465806640}
-  _active: {fileID: 2221750421877367606}
-  _inactive: {fileID: 4377509850727719204}
   _locationData: {fileID: 11400000, guid: 53100a4c1ba144d3d984376d9d22a690, type: 2}
 --- !u!114 &4616439226581473576
 MonoBehaviour:
@@ -449,7 +450,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: -1
+  m_PreferredWidth: 200
   m_PreferredHeight: 48
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1

@@ -1,14 +1,16 @@
 using System;
-using System.Collections;
+using ff.ar_rh_spurlab.Locations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Object = UnityEngine.Object;
 
 namespace ff.ar_rh_spurlab.UI.Site_Ui
 {
     public class SiteUi : MonoBehaviour
     {
+        public event Action<SiteData> OnMapButtonClicked;
+        public event Action<SiteData, LocationData> OnLocationButtonClicked;
+
         [Header("Prefab References")]
         [SerializeField]
         private TMP_Text _titleText;
@@ -23,8 +25,22 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
         [SerializeField]
         private LocationSelectionButton _locationButtonPrefab;
 
+        private void OnEnable()
+        {
+            _mapButton.onClick.AddListener(OnMapButtonClickedHandler);
+        }
 
-        public void SetSiteData(Locations.SiteData siteData)
+        private void OnDisable()
+        {
+            _mapButton.onClick.RemoveListener(OnMapButtonClickedHandler);
+        }
+
+        private void OnMapButtonClickedHandler()
+        {
+            OnMapButtonClicked?.Invoke(_siteData);
+        }
+
+        public void SetSiteData(SiteData siteData)
         {
             _siteData = siteData;
 
@@ -49,9 +65,11 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
                 var locationButton = Instantiate(_locationButtonPrefab, _locationsContainer);
                 locationButton.SetLabel(label++.ToString());
                 locationButton.SetLocationData(locationData);
+                locationButton.OnLocationButtonClicked +=
+                    data => OnLocationButtonClicked?.Invoke(_siteData, data);
             }
         }
 
-        private Locations.SiteData _siteData;
+        private SiteData _siteData;
     }
 }
