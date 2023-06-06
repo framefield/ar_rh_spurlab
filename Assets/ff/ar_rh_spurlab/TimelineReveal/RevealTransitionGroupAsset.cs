@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using ff.utils;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -81,13 +80,13 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         private GroupDefinition CreateDefinition(Component component)
         {
             var componentName = component.name;
-            var id = GlobalObjectId.GetGlobalObjectIdSlow(component).ToString();
-            var isActive = SetPreviousOrDefaultSettings(id);
+            var isActive = SetPreviousOrDefaultSettings(componentName);
+
             return new GroupDefinition()
             {
                 IsActive = isActive,
                 Name = componentName,
-                Id = id
+                Id = componentName
             };
         }
 #endif

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ff.common.TimelineReveal;
 using ff.utils;
 using UnityEngine;
@@ -17,6 +18,17 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                 if (!Application.isPlaying)
                 {
                     _reveals = GetComponentsInChildren<RevealTransitionAutomatic>();
+                    var names = new HashSet<string>();
+                    foreach (var reveal in _reveals)
+                    {
+                        if (names.Contains(reveal.name))
+                        {
+                            Debug.LogError(
+                                $"RevealTransitionGroup {name} has multiple children with the same name '{reveal.name}'");
+                        }
+
+                        names.Add(reveal.name);
+                    }
                 }
 #endif
                 return _reveals;
