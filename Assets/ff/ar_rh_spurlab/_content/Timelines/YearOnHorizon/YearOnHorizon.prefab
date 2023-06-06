@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2167127681008382098}
   - component: {fileID: 1117941988392514198}
-  - component: {fileID: 4258456736588316593}
+  - component: {fileID: 3264930823432641719}
   m_Layer: 0
   m_Name: YearOnHorizon
   m_TagString: Untagged
@@ -205,7 +205,7 @@ Transform:
   m_Children:
   - {fileID: 1383305659584979199}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1117941988392514198
 Animator:
@@ -229,7 +229,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4258456736588316593
+--- !u!114 &3264930823432641719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,12 +238,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5564023975562334029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2abb2471a695c411a874b5e76d005f8c, type: 3}
+  m_Script: {fileID: 11500000, guid: 70d71cb28a95433fb2e9b01a601aa8df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Active: 0
-  FadeDuration: 1
-  FadeOutDuration: -1
-  LayerName: visible
-  _activateOnStart: 0
-  _childrenDeactivatedWhenHidden: []
+  _layerName: visible
+  _playIdle: 0
+  _idleLayer: idle
+  _disableExpensiveChildComponentsWhenHidden: 1
