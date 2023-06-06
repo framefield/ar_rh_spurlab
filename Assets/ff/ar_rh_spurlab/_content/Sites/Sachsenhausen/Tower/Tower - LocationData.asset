@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be330f4e83f74955b8231f36a6acb7f3, type: 3}
   m_Name: Tower - LocationData
   m_EditorClassIdentifier: 
-  Title: Tower
   ContentPrefab: {fileID: 4295738227600371516, guid: e9fa1991cf6d54db394bcb3fcc722e71,
     type: 3}
   CalibrationPrefab: {fileID: 4295738227600371516, guid: 5b542b89de20e4b7fa4233f6b2e25fb1,
     type: 3}
   PointsInLocationOrigin:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: 1.1137677, y: 7.101349, z: 2.778401}
+  - {x: -2.2175517, y: 7.101347, z: -0.32177687}
+  - {x: 2.2018275, y: 7.101349, z: 0.6510434}
