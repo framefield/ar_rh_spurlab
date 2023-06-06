@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CameraStartingPose:
-    position: {x: 4.72, y: 8.32, z: 5.28}
+    position: {x: 6.198, y: 5.7862673, z: 1.654}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   m_CameraMovementBounds:
     m_Center: {x: 10.547306, y: 16.750877, z: -68.21976}

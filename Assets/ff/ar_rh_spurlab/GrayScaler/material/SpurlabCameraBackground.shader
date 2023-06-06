@@ -17,8 +17,11 @@ Shader "framefield/SpurlabCameraBackground"
         
         _fadeoutGradient ("FadeOutGradient", 2D) = "black" {}
         
-        sphereRadius("sphereRadius", Float) = 10
-        degreesPerUv("degreesPerUv", Float) = 90
+        BrightnessFactor("BrightnessFactor", Float) = 0
+        ContrastFactor("ContrastFactor", Float) = 0
+        NoiseAmount("NoiseAmount", Float) = 1
+        NoiseExponent("NoiseExponent", Float) = 1
+        NoiseSpeed("NoiseSpeed", Float) = 1
 
         [KeywordEnum(NoPortal, GuideToPortal, InPortal)] _Mode ("Mode", Float) = 0 
         
@@ -91,9 +94,13 @@ Shader "framefield/SpurlabCameraBackground"
 
 #endif
 
-
-            static const float Exponent = 1;
-            static const float Brightness = 0;
+            float BrightnessFactor = 0;
+            float ContrastFactor =0;
+            float NoiseAmount = 0;
+            float NoiseExponent = 2;
+            float NoiseSpeed = 1;
+            //static const float 
+            
 
                 
             float hash12(float2 p)
@@ -116,29 +123,35 @@ Shader "framefield/SpurlabCameraBackground"
                 // Animation
                 float pxHash = hash12( uv * 431 + 111);
 
-                float sawTime = abs(_Time.x % 100 - 50);    // avoid large numbers because floating point precision
-                float t = sawTime * 80 + pxHash;
+                float sawTime = abs(_Time.x * NoiseSpeed % 100 - 50);    // avoid large numbers because floating point precision
+                float t = sawTime * 80 *  + pxHash;
 
                 
                 const float hash1 = hash12(( uv * 431 + (int)t));
                 const float hash2 = hash12(( uv * 431 + (int)t+1));
-                float4 hash = lerp(hash1,hash2, t % 1);
+                float hash = lerp(hash1,hash2, t % 1) *2 -1;
                 float4 noise = float4(hash.xxx,1);
 
                 noise = noise < 0 
-                        ? -pow(-noise, Exponent)
-                        : pow(noise, Exponent);
+                        ? -pow(-noise, NoiseExponent)
+                        : pow(noise, NoiseExponent);
                 
-                noise += Brightness ;
+                noise = noise * NoiseAmount;
                 return noise;
             }
 
             float4 GetGrainyColor(float2 uv, float4 color, float strength )
             {
-                const float4 noise = GetNoiseFromUv(uv) - 0.5;
-                const half4 gray = dot(color.rgb, float3(0.3, 0.59, 0.11));                
-                //const float gray = (color.r + color.g + color.b)/3;
-                const float grainyGray = 1-smoothstep(1,0,gray) + noise * 0.6;
+                const float4 noise = GetNoiseFromUv(uv);
+                half4 gray = dot(color.rgb, float3(0.3, 0.59, 0.11));                
+
+                // adjust contrast
+                //gray.rgb = lerp( 1-smoothstep(1,0,gray), gray,2);
+                gray.rgb =  (gray.rgb - 0.5) * ContrastFactor + 0.5;
+                gray.rgb *= BrightnessFactor;
+                
+                //return gray;
+                const float grainyGray = gray + noise;
                 return  lerp(color,  grainyGray, strength);
             }
             
