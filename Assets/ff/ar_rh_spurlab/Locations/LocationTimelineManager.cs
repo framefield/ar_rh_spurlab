@@ -1,6 +1,10 @@
+using System;
 using System.Collections.Generic;
+using ff.ar_rh_spurlab.Localization;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
+using Object = UnityEngine.Object;
 
 namespace ff.ar_rh_spurlab.Locations
 {
@@ -8,7 +12,7 @@ namespace ff.ar_rh_spurlab.Locations
     ///     activates only one timeline at a time
     ///     active timeline is played or paused
     /// </summary>
-    public class LocationTimelineManager : MonoBehaviour, ITrackedLocationContent
+    public class LocationTimelineManager : AbstractLocalizable, ITrackedLocationContent
     {
         [Header("Settings")]
         [SerializeField]
@@ -57,6 +61,52 @@ namespace ff.ar_rh_spurlab.Locations
             else
             {
                 _activePlayableDirector.Pause();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var pair in _initialMuteStates)
+            {
+                pair.Key.muted = pair.Value;
+            }
+        }
+
+        protected override void OnLocaleChangedHandler(string locale)
+        {
+            SetLocalizedTracksMuted(_waitingTimeline, locale);
+            foreach (var chapterTimeline in _chapterTimelines)
+            {
+                SetLocalizedTracksMuted(chapterTimeline, locale);
+            }
+        }
+
+        private static void SetLocalizedTracksMuted(PlayableDirector director, string locale)
+        {
+            var timelineAsset = director.playableAsset as TimelineAsset;
+
+            if (!timelineAsset)
+            {
+                return;
+            }
+
+            var needsRebuild = false;
+            for (var trackIndex = 0; trackIndex < timelineAsset.outputTrackCount; trackIndex++)
+            {
+                var track = timelineAsset.GetOutputTrack(trackIndex);
+
+                if (track is ILocaleSpecificContent localeSpecificContent)
+                {
+                    _initialMuteStates.TryAdd(track, track.muted);
+
+                    track.muted = locale != null && localeSpecificContent.Locale != locale;
+                    needsRebuild = true;
+                }
+            }
+
+            if (needsRebuild)
+            {
+                director.RebuildGraph();
             }
         }
 
@@ -175,5 +225,7 @@ namespace ff.ar_rh_spurlab.Locations
 
             Play(_chapterTimelines[0]);
         }
+
+        private static readonly Dictionary<TrackAsset, bool> _initialMuteStates = new();
     }
 }

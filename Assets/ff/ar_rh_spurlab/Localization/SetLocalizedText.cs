@@ -1,12 +1,11 @@
-﻿using System;
-using ff.common.entity;
+﻿using ff.common.entity;
 using ff.common.tools;
 using TMPro;
 using UnityEngine;
 
 namespace ff.ar_rh_spurlab.Localization
 {
-    public class SetLocalizedText : MonoBehaviour
+    public class SetLocalizedText : AbstractLocalizable
     {
         [SerializeField]
         protected LocalizedString _localizedString;
@@ -14,17 +13,6 @@ namespace ff.ar_rh_spurlab.Localization
         [SerializeField]
         [OptionalField]
         private TMP_Text _textIfNotFirstFoundChild;
-
-        private void OnEnable()
-        {
-            ApplicationLocale.Instance.OnLocaleChange += OnLocaleChangedHandler;
-            OnLocaleChangedHandler(ApplicationLocale.Instance.CurrentLocale);
-        }
-
-        private void OnDisable()
-        {
-            ApplicationLocale.Instance.OnLocaleChange -= OnLocaleChangedHandler;
-        }
 
         private TMP_Text ResolveText()
         {
@@ -36,7 +24,7 @@ namespace ff.ar_rh_spurlab.Localization
             return GetComponentInChildren<TMP_Text>();
         }
 
-        protected void OnLocaleChangedHandler(string locale)
+        protected override void OnLocaleChangedHandler(string locale)
         {
             var text = ResolveText();
             if (!text)

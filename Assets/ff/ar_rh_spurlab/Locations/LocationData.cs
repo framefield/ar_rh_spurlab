@@ -13,10 +13,11 @@ namespace ff.ar_rh_spurlab.Locations
         public LocalizedString Title => _title;
 
         [FormerlySerializedAs("Title")]
-        private LocalizedString _title = new("Location Name");
-
-        [FormerlySerializedAs("Title")]
+        [SerializeField]
         private string _id = "location-placeholder-id";
+
+        [SerializeField]
+        private LocalizedString _title = new("Location Name");
 
         public AugmentedLocation ContentPrefab;
         public AugmentedLocation CalibrationPrefab;
