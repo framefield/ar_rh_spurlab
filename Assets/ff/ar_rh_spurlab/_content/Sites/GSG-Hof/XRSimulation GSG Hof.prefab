@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CameraStartingPose:
-    position: {x: 6.198, y: 5.7862673, z: 1.654}
+    position: {x: 6.198, y: 7.486267, z: 1.654}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   m_CameraMovementBounds:
     m_Center: {x: 10.547306, y: 16.750877, z: -68.21976}
@@ -252,7 +252,8 @@ PrefabInstance:
       value: ff--office-with-buildings-v01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3411328367939329048, guid: 5f12a3f53575d4306a62083f8e683c85, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f12a3f53575d4306a62083f8e683c85, type: 3}
