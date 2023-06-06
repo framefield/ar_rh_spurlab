@@ -41,13 +41,15 @@ PlayableDirector:
   m_GameObject: {fileID: 638807817709384055}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 3205440e244a3c24ab47bcfdcf956c96, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: b23b1479cecbb4150acc7b2a3ac80505, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 3887907092073702579, guid: 3205440e244a3c24ab47bcfdcf956c96, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3887907092073702579, guid: b23b1479cecbb4150acc7b2a3ac80505, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
@@ -208,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759057344513603181}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.2175517, y: 7.101347, z: -0.32177687}
+  m_LocalPosition: {x: 7.508609, y: 7.1013455, z: -2.2907526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -287,7 +289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3963596831507793834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1137677, y: 7.101349, z: 2.778401}
+  m_LocalPosition: {x: 2.3495317, y: 7.1013455, z: 0.4975891}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -758,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8758209979913687237
 Transform:
   m_ObjectHideFlags: 0
@@ -800,7 +802,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7673239737481665652}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.2018275, y: 7.101349, z: 0.6510434}
+  m_LocalPosition: {x: -0.15333223, y: 7.1013455, z: -1.8418342}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -848,7 +850,7 @@ PlayableDirector:
   m_GameObject: {fileID: 8208778530358120458}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 5d6ae239f5f141f4ca00b790644c63d8, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: a9028d8e0cd8f428c84aa4b5509e236c, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
