@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 8883614004084800774}
   - component: {fileID: 312531742885628770}
   - component: {fileID: 6434077642721610453}
+  - component: {fileID: 3383080787260868704}
   m_Layer: 5
   m_Name: IconButtonWithLabel
   m_TagString: Untagged
@@ -435,3 +436,23 @@ MonoBehaviour:
   _transition: 0
   _fadeDuration: 0.2
   _state: 2
+--- !u!114 &3383080787260868704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521235634548048856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8972a83ff9a4ea29f39a6eedd4976c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localizedString:
+    _values:
+    - Label
+    - Beschriftung
+    _locales:
+    - en
+    - de
+  _textIfNotFirstFoundChild: {fileID: 5577372164210468570}

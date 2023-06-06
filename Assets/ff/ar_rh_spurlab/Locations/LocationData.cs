@@ -1,13 +1,22 @@
+using ff.common.entity;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ff.ar_rh_spurlab.Locations
 {
     [CreateAssetMenu(fileName = "LocationData", menuName = "LocationData", order = 0)]
     public class LocationData : ScriptableObject
     {
-        public static readonly int NumberOfReferencePoints = 3;
+        public const int NumberOfReferencePoints = 3;
 
-        public string Title = "Location Placeholder Name";
+        public string Id => _id;
+
+        [FormerlySerializedAs("Title")]
+        public LocalizedString _title = new("Location Name");
+
+        [FormerlySerializedAs("Title")]
+        public string _id = "location-placeholder-id";
+
         public AugmentedLocation ContentPrefab;
         public AugmentedLocation CalibrationPrefab;
         public Vector3[] PointsInLocationOrigin;

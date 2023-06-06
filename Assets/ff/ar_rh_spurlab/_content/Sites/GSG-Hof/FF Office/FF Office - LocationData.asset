@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be330f4e83f74955b8231f36a6acb7f3, type: 3}
   m_Name: FF Office - LocationData
   m_EditorClassIdentifier: 
-  Title: FF Office
+  _title:
+    _values:
+    - FF Office
+    - FF Buero
+    _locales:
+    - en
+    - de
+  _id: ff-office
   ContentPrefab: {fileID: 4295738227600371516, guid: eede986ca58964543add4e7a37d6cb1b,
     type: 3}
   CalibrationPrefab: {fileID: 4295738227600371516, guid: 207ca6443033f4b4f9f56102fa2f7c04,

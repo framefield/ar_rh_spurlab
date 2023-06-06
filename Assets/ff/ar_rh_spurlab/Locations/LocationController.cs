@@ -79,11 +79,11 @@ namespace ff.ar_rh_spurlab.Locations
 
         public bool SetLocation(LocationData locationData)
         {
-            var calibrationData = CalibrationData.TryLoad(locationData.Title);
+            var calibrationData = CalibrationData.TryLoad(locationData._id);
 
             if (calibrationData == null)
             {
-                Debug.LogError($"Location is not calibrated: {locationData.Title}", this);
+                Debug.LogError($"Location is not calibrated: {locationData._id}", this);
                 return false;
             }
 

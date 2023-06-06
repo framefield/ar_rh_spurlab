@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4440681, g: 0.49333978, b: 0.57238823, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -502,6 +502,7 @@ GameObject:
   - component: {fileID: 390609800}
   - component: {fileID: 390609799}
   - component: {fileID: 390609798}
+  - component: {fileID: 390609802}
   m_Layer: 5
   m_Name: Choose Location Label (TMP)
   m_TagString: Untagged
@@ -664,6 +665,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390609796}
   m_CullTransparentMesh: 1
+--- !u!114 &390609802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390609796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8972a83ff9a4ea29f39a6eedd4976c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localizedString:
+    _values:
+    - 'Choose Location
+
+'
+    - 'Waehle Ort
+
+'
+    _locales:
+    - en
+    - de
+  _textIfNotFirstFoundChild: {fileID: 0}
 --- !u!1 &674210688 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7353321465078145001, guid: 5784783c469a44243b8bf6c6047f1f03,
@@ -846,6 +871,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383080787260868704, guid: ea841d818205846c5ba32af5fdb53c23,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383080787260868704, guid: ea841d818205846c5ba32af5fdb53c23,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[0]'
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 4488480585434762373, guid: ea841d818205846c5ba32af5fdb53c23,
         type: 3}
@@ -1093,7 +1128,9 @@ PrefabInstance:
     - target: {fileID: 5577372164210468570, guid: ea841d818205846c5ba32af5fdb53c23,
         type: 3}
       propertyPath: m_text
-      value: Calibrate
+      value: 'Calibrate
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 5577372164210468570, guid: ea841d818205846c5ba32af5fdb53c23,
         type: 3}
@@ -3238,6 +3275,7 @@ GameObject:
   - component: {fileID: 1844494253}
   - component: {fileID: 1844494252}
   - component: {fileID: 1844494251}
+  - component: {fileID: 1844494255}
   m_Layer: 5
   m_Name: Scan Label (TMP)
   m_TagString: Untagged
@@ -3398,6 +3436,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844494249}
   m_CullTransparentMesh: 1
+--- !u!114 &1844494255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844494249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8972a83ff9a4ea29f39a6eedd4976c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localizedString:
+    _values:
+    - Scan Environment
+    - Scanne Umgebung
+    _locales:
+    - en
+    - de
+  _textIfNotFirstFoundChild: {fileID: 0}
 --- !u!1 &1955458092
 GameObject:
   m_ObjectHideFlags: 0

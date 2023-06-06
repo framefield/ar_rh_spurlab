@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6440076f81d467a8d1c609e0db17abe, type: 3}
   m_Name: Sachsenhausen - SiteData
   m_EditorClassIdentifier: 
-  _name: Sachsenhausen
+  _id: sachsenhausen
+  _title:
+    _values:
+    - Sachsenhausen
+    _locales:
+    - en
   _locations: []

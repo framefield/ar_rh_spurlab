@@ -26,7 +26,7 @@ namespace ff.ar_rh_spurlab.Locations
             if (_locationController && _text)
             {
                 _text.text = _locationController.CurrentLocation != null
-                    ? _locationController.CurrentLocation.LocationData.Title
+                    ? _locationController.CurrentLocation.LocationData._id
                     : "No Location";
             }
         }

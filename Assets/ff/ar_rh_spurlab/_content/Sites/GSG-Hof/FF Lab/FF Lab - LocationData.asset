@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be330f4e83f74955b8231f36a6acb7f3, type: 3}
   m_Name: FF Lab - LocationData
   m_EditorClassIdentifier: 
-  Title: FF Lab
+  _title:
+    _values:
+    - FF Lab
+    - FF Lab
+    _locales:
+    - en
+    - de
+  _id: ff-lab
   ContentPrefab: {fileID: 4295738227600371516, guid: feb6f32ec30c94ef7ac15f7129d90e69,
     type: 3}
   CalibrationPrefab: {fileID: 4295738227600371516, guid: eede986ca58964543add4e7a37d6cb1b,
