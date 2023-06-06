@@ -95,6 +95,8 @@ namespace ff.common.TimelineReveal
         [SerializeField]
         private float _normalizedTimePosition;
 
+        [ReadOnly]
+        [SerializeField]
         private State _state = State.None;
     }
 }

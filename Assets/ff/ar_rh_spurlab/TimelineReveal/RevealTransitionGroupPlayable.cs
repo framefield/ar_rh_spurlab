@@ -6,10 +6,11 @@ namespace ff.ar_rh_spurlab.TimelineReveal
     public class RevealTransitionGroupPlayable : PlayableBehaviour
     {
         public void Initialize(RevealTransitionGroupAsset.GroupDefinition[] definitions,
-            RevealTransitionGroupAsset asset)
+            RevealTransitionGroupAsset asset, RevealTransitionGroup group)
         {
             _definitions = definitions;
             _asset = asset;
+            _group = group;
         }
 
         public override void OnBehaviourPause(Playable playable, FrameData info)
@@ -22,7 +23,10 @@ namespace ff.ar_rh_spurlab.TimelineReveal
 
         public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
-            _group = playerData as RevealTransitionGroup;
+            if (!_group)
+            {
+                _group = playerData as RevealTransitionGroup;
+            }
 
             if (!_group || _definitions == null)
                 return;
@@ -38,8 +42,8 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             _group.SetGroupDefinition(_definitions);
         }
 
-        private RevealTransitionGroupAsset.GroupDefinition[] _definitions;
         private RevealTransitionGroup _group;
         private RevealTransitionGroupAsset _asset;
+        private RevealTransitionGroupAsset.GroupDefinition[] _definitions;
     }
 }

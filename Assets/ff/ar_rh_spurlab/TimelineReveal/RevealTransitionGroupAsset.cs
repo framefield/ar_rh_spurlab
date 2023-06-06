@@ -48,6 +48,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
 
             UpdateDefinitions(group);
 #endif
+            _group = group;
         }
 
         public void UpdateDefinitions(RevealTransitionGroup group)
@@ -72,7 +73,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         {
             var playable = ScriptPlayable<RevealTransitionGroupPlayable>.Create(graph);
             var groupPlayable = playable.GetBehaviour();
-            groupPlayable.Initialize(_definitions, this);
+            groupPlayable.Initialize(_definitions, this, _group);
             return playable;
         }
 
@@ -115,5 +116,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             [HideInInspector]
             public string Id;
         }
+
+        private RevealTransitionGroup _group;
     }
 }
