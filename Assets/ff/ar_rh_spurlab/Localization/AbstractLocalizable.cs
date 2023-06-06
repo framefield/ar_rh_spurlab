@@ -5,13 +5,13 @@ namespace ff.ar_rh_spurlab.Localization
 {
     public abstract class AbstractLocalizable : MonoBehaviour
     {
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             ApplicationLocale.Instance.OnLocaleChange += OnLocaleChangedHandler;
             OnLocaleChangedHandler(ApplicationLocale.Instance.CurrentLocale);
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             ApplicationLocale.Instance.OnLocaleChange -= OnLocaleChangedHandler;
         }
