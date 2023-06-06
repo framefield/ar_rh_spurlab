@@ -9,7 +9,7 @@ namespace ff.ar_rh_spurlab.Localization
     public class SetLocalizedText : MonoBehaviour
     {
         [SerializeField]
-        private LocalizedString _localizedString;
+        protected LocalizedString _localizedString;
 
         [SerializeField]
         [OptionalField]
@@ -36,7 +36,7 @@ namespace ff.ar_rh_spurlab.Localization
             return GetComponentInChildren<TMP_Text>();
         }
 
-        private void OnLocaleChangedHandler(string locale)
+        protected void OnLocaleChangedHandler(string locale)
         {
             var text = ResolveText();
             if (!text)

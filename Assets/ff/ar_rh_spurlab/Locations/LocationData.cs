@@ -10,12 +10,13 @@ namespace ff.ar_rh_spurlab.Locations
         public const int NumberOfReferencePoints = 3;
 
         public string Id => _id;
+        public LocalizedString Title => _title;
 
         [FormerlySerializedAs("Title")]
-        public LocalizedString _title = new("Location Name");
+        private LocalizedString _title = new("Location Name");
 
         [FormerlySerializedAs("Title")]
-        public string _id = "location-placeholder-id";
+        private string _id = "location-placeholder-id";
 
         public AugmentedLocation ContentPrefab;
         public AugmentedLocation CalibrationPrefab;

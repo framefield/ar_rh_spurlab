@@ -882,6 +882,11 @@ PrefabInstance:
       propertyPath: '_localizedString._values.Array.data[0]'
       value: Back
       objectReference: {fileID: 0}
+    - target: {fileID: 3383080787260868704, guid: ea841d818205846c5ba32af5fdb53c23,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[1]'
+      value: Zurueck
+      objectReference: {fileID: 0}
     - target: {fileID: 4488480585434762373, guid: ea841d818205846c5ba32af5fdb53c23,
         type: 3}
       propertyPath: m_Sprite
@@ -1118,6 +1123,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383080787260868704, guid: ea841d818205846c5ba32af5fdb53c23,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[0]'
+      value: Calibrate
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383080787260868704, guid: ea841d818205846c5ba32af5fdb53c23,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[1]'
+      value: Kalibrieren
       objectReference: {fileID: 0}
     - target: {fileID: 4488480585434762373, guid: ea841d818205846c5ba32af5fdb53c23,
         type: 3}
@@ -3262,6 +3277,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655f6f93ad83450080c04b79ca3e9803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _localizedString:
+    _values:
+    - Location
+    _locales:
+    - en
+  _textIfNotFirstFoundChild: {fileID: 0}
+  _noLocationString:
+    _values:
+    - No Location Selected
+    - Kein Ort gewaehlt
+    _locales:
+    - en
+    - en
 --- !u!1 &1844494249
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,8 +12,8 @@ namespace ff.ar_rh_spurlab.Locations
         public LocationOptionData(LocationData location)
         {
             LocationData = location;
-            var isCalibrated = CalibrationData.CalibrationDataExists(location._id);
-            text = $"{location._id}{(isCalibrated ? "" : " (not calibrated)")}";
+            var isCalibrated = CalibrationData.CalibrationDataExists(location.Id);
+            text = $"{location.Id}{(isCalibrated ? "" : " (not calibrated)")}";
         }
 
         public LocationData LocationData { get; set; }

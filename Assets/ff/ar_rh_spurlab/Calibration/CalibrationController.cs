@@ -96,7 +96,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void SetLocation(LocationData locationData)
         {
-            CalibrationData = new CalibrationData(locationData._id);
+            CalibrationData = new CalibrationData(locationData.Id);
 
             if (_augmentedLocation)
             {
