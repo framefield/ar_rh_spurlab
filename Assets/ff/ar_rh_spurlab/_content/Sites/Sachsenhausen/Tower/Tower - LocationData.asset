@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be330f4e83f74955b8231f36a6acb7f3, type: 3}
   m_Name: Tower - LocationData
   m_EditorClassIdentifier: 
+  _id: tower
+  _title:
+    _values:
+    - Tower
+    - Turm
+    _locales:
+    - en
+    - de
   ContentPrefab: {fileID: 4295738227600371516, guid: e9fa1991cf6d54db394bcb3fcc722e71,
     type: 3}
   CalibrationPrefab: {fileID: 4295738227600371516, guid: 5b542b89de20e4b7fa4233f6b2e25fb1,
