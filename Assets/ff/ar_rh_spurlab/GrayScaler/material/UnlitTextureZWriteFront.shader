@@ -16,6 +16,8 @@ SubShader {
     Lighting Off
     ZWrite On
     AlphaTest Off
+    ZTest LEqual
+    Offset -0.01, -0.01
     //Cull Off
     Blend SrcAlpha OneMinusSrcAlpha 
     
