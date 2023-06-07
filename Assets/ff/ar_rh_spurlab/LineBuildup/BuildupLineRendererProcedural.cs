@@ -94,6 +94,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
         private void OnEnable()
         {
+            transform.hasChanged = true;
 #if UNITY_EDITOR
             UnityEditor.SceneView.duringSceneGui += DrawEditorScene;
 #endif
@@ -139,25 +140,52 @@ namespace ff.ar_rh_spurlab.LineBuildup
 #if UNITY_EDITOR
             UpdateFromBaseMaterial();
 #endif
+            var localToWorldMatrix = transform.localToWorldMatrix;
+
             _materialPropertyBlock.SetBuffer(PointsPropId, _pointsBuffer);
             _materialPropertyBlock.SetInteger(SegmentCount, _pointList.Points.Length);
             _materialPropertyBlock.SetFloat(TransitionProgressPropId, _transitionProgress);
             // we have to build our own mvp in the shader, draw procedural does not care 
             // https://forum.unity.com/threads/how-to-get-model-matrix-into-graphics-drawprocedural-custom-shader.489304/#post-3535125
-            _materialPropertyBlock.SetMatrix(ObjectToWorldPropId, transform.localToWorldMatrix);
+            _materialPropertyBlock.SetMatrix(ObjectToWorldPropId, localToWorldMatrix);
+
+            if (transform.hasChanged)
+            {
+                transform.hasChanged = false;
+                UpdateBounds(ref localToWorldMatrix);
+            }
 
             Draw();
         }
 
-        private void Draw(Camera camera = null)
+        private readonly Vector3[] _cornerPoints = new Vector3[8];
+
+        private void UpdateBounds(ref Matrix4x4 localToWorldMatrix)
+        {
+            var center = _pointList.Bounds.center;
+            var extents = _pointList.Bounds.extents;
+
+            _cornerPoints[0] = center + new Vector3(extents.x, extents.y, extents.z);
+            _cornerPoints[1] = center + new Vector3(extents.x, extents.y, -extents.z);
+            _cornerPoints[2] = center + new Vector3(extents.x, -extents.y, extents.z);
+            _cornerPoints[3] = center + new Vector3(extents.x, -extents.y, -extents.z);
+            _cornerPoints[4] = center + new Vector3(-extents.x, extents.y, extents.z);
+            _cornerPoints[5] = center + new Vector3(-extents.x, extents.y, -extents.z);
+            _cornerPoints[6] = center + new Vector3(-extents.x, -extents.y, extents.z);
+            _cornerPoints[7] = center + new Vector3(-extents.x, -extents.y, -extents.z);
+
+            _localBounds = GeometryUtility.CalculateBounds(_cornerPoints, localToWorldMatrix);
+        }
+
+        private void Draw(Camera renderCamera = null)
         {
             Graphics.DrawProcedural(
                 _sharedMaterial,
-                _pointList.Bounds,
+                _localBounds,
                 MeshTopology.Triangles,
                 _pointList.Points.Length * 6 - 6,
                 1,
-                camera,
+                renderCamera,
                 _materialPropertyBlock,
                 ShadowCastingMode.Off,
                 false,
@@ -175,7 +203,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
             }
 
             Gizmos.color = Color.white;
-            Gizmos.DrawWireCube(_pointList.Bounds.center, _pointList.Bounds.size);
+            Gizmos.DrawWireCube(_localBounds.center, _localBounds.size);
         }
 
         public bool HasFrameBounds()
@@ -245,6 +273,8 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
         [CanBeNull]
         private static Material _sharedMaterial;
+
+        private Bounds _localBounds;
 
         private static readonly int PointsPropId = Shader.PropertyToID("Points");
         private static readonly int SegmentCount = Shader.PropertyToID("SegmentCount");

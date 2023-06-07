@@ -50,6 +50,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
                 return;
             }
 
+
             Bounds = new Bounds(new Vector3(-Points[0].Position.X, Points[0].Position.Y, Points[0].Position.Z),
                 Vector3.zero);
             foreach (var point in Points)
