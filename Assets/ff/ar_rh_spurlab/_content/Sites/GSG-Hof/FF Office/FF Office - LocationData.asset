@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be330f4e83f74955b8231f36a6acb7f3, type: 3}
   m_Name: FF Office - LocationData
   m_EditorClassIdentifier: 
+  _id: ff-office
   _title:
     _values:
     - FF Office
@@ -19,7 +20,6 @@ MonoBehaviour:
     _locales:
     - en
     - de
-  _id: ff-office
   ContentPrefab: {fileID: 4295738227600371516, guid: eede986ca58964543add4e7a37d6cb1b,
     type: 3}
   CalibrationPrefab: {fileID: 4295738227600371516, guid: 207ca6443033f4b4f9f56102fa2f7c04,
@@ -28,3 +28,31 @@ MonoBehaviour:
   - {x: 6.198, y: 5.7862673, z: 1.654}
   - {x: 1.942, y: 5.7862673, z: 3.711}
   - {x: 5.154, y: 5.7862673, z: 8.097}
+  PointsInformation:
+  - Id: column
+    Title:
+      _values:
+      - Column
+      - Saeule
+      _locales:
+      - en
+      - de
+    ScreenImage: {fileID: 2800000, guid: 242336863c9ed5940bc6487451f7e317, type: 3}
+  - Id: door
+    Title:
+      _values:
+      - CEO Door
+      - CEO Tuer
+      _locales:
+      - en
+      - de
+    ScreenImage: {fileID: 2800000, guid: 87a212a43fdfef74eafbbf6a90f6bf7b, type: 3}
+  - Id: entry
+    Title:
+      _values:
+      - Office Entry
+      - Buero Eingang
+      _locales:
+      - en
+      - de
+    ScreenImage: {fileID: 2800000, guid: 6b8aef01fad89244a853eeef8ee35f46, type: 3}

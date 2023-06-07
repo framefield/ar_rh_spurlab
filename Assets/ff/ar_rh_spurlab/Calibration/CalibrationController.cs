@@ -114,7 +114,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void SaveCalibrationData()
         {
-            var directoryPath = Path.Combine(Application.persistentDataPath, CalibrationData.Name);
+            var directoryPath = Path.Combine(Application.persistentDataPath, CalibrationData.Id);
             var filePath = Path.Combine(directoryPath, "my_session.worldmap");
 
 #if UNITY_IOS

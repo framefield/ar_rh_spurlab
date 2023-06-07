@@ -48,14 +48,29 @@ namespace ff.ar_rh_spurlab.Locations
 
         public void SetIsTracked(bool isTracked)
         {
+            _isTracked = isTracked;
+
             if (!_activePlayableDirector)
             {
+                if (isTracked)
+                {
+                    PlayNextChapter();
+                }
+
                 return;
             }
 
             if (isTracked)
             {
-                _activePlayableDirector.Resume();
+                if (_activePlayableDirector.time >= _activePlayableDirector.duration)
+                {
+                    PlayNextChapter();
+                }
+                else
+                {
+                    _activePlayableDirector.Resume();
+                }
+
                 // todo if the timeline is paused by user do not resume
             }
             else
@@ -159,7 +174,7 @@ namespace ff.ar_rh_spurlab.Locations
             var isWaitingForTrigger = director == _waitingTimeline;
             if (isWaitingForTrigger)
             {
-                if (_autoTriggerChapters)
+                if (_autoTriggerChapters && _isTracked)
                 {
                     PlayChapters();
                 }
@@ -167,7 +182,7 @@ namespace ff.ar_rh_spurlab.Locations
                 return;
             }
 
-            if (!_autoPlay)
+            if (!_autoPlay || !_isTracked)
             {
                 return;
             }
@@ -234,5 +249,6 @@ namespace ff.ar_rh_spurlab.Locations
         }
 
         private static readonly Dictionary<TrackAsset, bool> _initialMuteStates = new();
+        private bool _isTracked;
     }
 }

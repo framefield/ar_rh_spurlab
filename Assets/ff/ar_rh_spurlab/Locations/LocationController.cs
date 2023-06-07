@@ -1,6 +1,4 @@
 using System;
-using System.IO;
-using ff.ar_rh_spurlab.AR;
 using ff.ar_rh_spurlab.Calibration;
 using ff.ar_rh_spurlab.UI;
 using ff.ar_rh_spurlab.UI.Site_Ui;
@@ -123,7 +121,7 @@ namespace ff.ar_rh_spurlab.Locations
             _augmentedLocation.Initialize(calibrationData, locationData);
             _calibrationARAnchorManager.SetCalibrationData(calibrationData);
 #if UNITY_IOS
-            var directoryPath = Path.Combine(Application.persistentDataPath, calibrationData.Name);
+            var directoryPath = Path.Combine(Application.persistentDataPath, calibrationData.Id);
             var filePath = Path.Combine(directoryPath, "my_session.worldmap");
 
             StartCoroutine(ARWorldMapController.Load(_arSession, filePath));
@@ -142,5 +140,19 @@ namespace ff.ar_rh_spurlab.Locations
 
             SceneManager.LoadScene(_calibrationSceneName);
         }
+
+#if UNITY_EDITOR
+        [ContextMenu("Toggle Missing Point From Calibration")]
+        public void ToggleMissingPointFromCalibration()
+        {
+            _calibrationARAnchorManager.ToggleMissingPointFromCalibration();
+        }
+
+        [ContextMenu("Toggle Jitter Calibration")]
+        public void ToggleJitterCalibration()
+        {
+            _calibrationARAnchorManager.ToggleJitterCalibration();
+        }
+#endif
     }
 }

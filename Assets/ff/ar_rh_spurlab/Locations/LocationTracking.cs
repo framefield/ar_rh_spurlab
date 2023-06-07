@@ -12,7 +12,6 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private Trigger _untrackedTrigger;
 
-
         private LocationController _locationController;
         private AugmentedLocation _currentLocation;
         private StateMachine _stateMachine;
@@ -45,24 +44,25 @@ namespace ff.ar_rh_spurlab.Locations
         {
             if (_currentLocation)
             {
-                _currentLocation.OnTrackingChanged -= TrackingChangedHandler;
+                _currentLocation.OnTrackingStateChanged -= TrackingStateChangedHandler;
             }
 
             _currentLocation = _locationController.CurrentLocation;
             if (_currentLocation)
             {
-                _currentLocation.OnTrackingChanged += TrackingChangedHandler;
-                TrackingChangedHandler(_currentLocation.IsTracking);
+                _currentLocation.OnTrackingStateChanged += TrackingStateChangedHandler;
+                TrackingStateChangedHandler(_currentLocation.TrackingData.State);
             }
             else
             {
-                TrackingChangedHandler(false);
+                TrackingStateChangedHandler(LocationTrackingState.None);
             }
         }
 
-        private void TrackingChangedHandler(bool isTracking)
+        private void TrackingStateChangedHandler(LocationTrackingState state)
         {
-            _stateMachine.ProcessTrigger(this, isTracking ? _trackedTrigger : _untrackedTrigger);
+            _stateMachine.ProcessTrigger(this,
+                state == LocationTrackingState.TrackingCalibration ? _trackedTrigger : _untrackedTrigger);
         }
 
 

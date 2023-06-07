@@ -15,7 +15,7 @@ Material:
   - XR_SIMULATION
   - _DEBUG_NONE
   - _FORCEARKITFEATURE_NONE
-  - _MODE_NOPORTAL
+  - _MODE_GUIDETOPORTAL
   m_InvalidKeywords:
   - _FORCE_FORCEALL
   m_LightmapFlags: 4

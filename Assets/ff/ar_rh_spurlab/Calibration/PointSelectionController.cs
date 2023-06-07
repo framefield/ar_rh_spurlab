@@ -29,8 +29,7 @@ namespace ff.ar_rh_spurlab.Calibration
         private StateMachine _stateMachine;
 
         public bool IsReady => _calibrationController != null && _calibrationController.CalibrationData != null &&
-                               _calibrationController.CalibrationData.MatchedAnchors.Count ==
-                               LocationData.NumberOfReferencePoints;
+                               _calibrationController.CalibrationData.AreAnchorsReady;
 
         private void Update()
         {
@@ -67,8 +66,8 @@ namespace ff.ar_rh_spurlab.Calibration
                 var marker = Instantiate(_markerPrefab, hitPose.position, hitPose.rotation,
                     _calibrationController.XrOrigin);
 
-                marker.name = $"ARMarkerAnchor {calibrationData.MatchedAnchors.Count}";
-                _calibrationController.CalibrationData.MatchedAnchors.Add(marker);
+                marker.name = $"ARMarkerAnchor {calibrationData.MatchedAnchorsCount}";
+                _calibrationController.CalibrationData.AddInstantiatedAnchor(marker);
             }
 
             calibrationData.UpdatePointsFromAnchors();
@@ -100,15 +99,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
             var calibrationData = _calibrationController.CalibrationData;
 
-            foreach (var placedAnchor in calibrationData.MatchedAnchors)
-            {
-                if (placedAnchor || placedAnchor.gameObject)
-                {
-                    Destroy(placedAnchor.gameObject);
-                }
-            }
-
-            calibrationData.MatchedAnchors.Clear();
+            calibrationData.ClearInstantiatedAnchors();
             calibrationData.UpdatePointsFromAnchors();
         }
 

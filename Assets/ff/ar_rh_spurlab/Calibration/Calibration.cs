@@ -1,28 +1,69 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using ff.ar_rh_spurlab.Locations;
+using ff.common.entity;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace ff.ar_rh_spurlab.Calibration
 {
     public static class CalibrationCalculator
     {
-        public static (Matrix4x4 xrOriginTLocationOrigin, bool isValid) GetXrOriginTLocationOrigin(
+#if UNITY_EDITOR
+        //for testing any quality is allowed
+        const float allowedMatchingDeviation = 100.0f;
+        const float percentageDeviation = 0.5f;
+#else
+        const float allowedMatchingDeviation = 0.5f;
+        const float percentageDeviation = allowedMatchingDeviation;
+#endif
+
+        public static string GetCalibrationMessage(CalibrationData calibrationData, LocationData locationData)
+        {
+            if (calibrationData == null || locationData == null)
+            {
+                return "No calibration data available";
+            }
+
+            if (!calibrationData.AreAnchorsReady)
+            {
+                var sb = new StringBuilder();
+                sb.Append("Missing anchors: ");
+                for (var index = 0; index < calibrationData.MatchedAnchors.Count; index++)
+                {
+                    var arAnchor = calibrationData.MatchedAnchors[index];
+                    var pointInformation = locationData.PointsInformation[index];
+                    if (arAnchor == null)
+                    {
+                        sb.Append(
+                            $"#{index} ({pointInformation.Title.Value(ApplicationLocale.Instance.CurrentLocale)})");
+                    }
+                }
+
+
+                return sb.ToString();
+            }
+
+
+            return string.Empty;
+        }
+
+        public static (Matrix4x4 xrOriginTLocationOrigin, bool isValid, float quality) GetXrOriginTLocationOrigin(
             CalibrationData calibrationData, LocationData locationData)
         {
             var (xrOriginTLocationOrigin, matchingDeviation) =
                 CalculateTransformFromAToB(locationData.PointsInLocationOrigin, calibrationData.PointsInWorldMap);
 
-            var allowedMatchingDeviation = 0.5f;
-#if UNITY_EDITOR
-            allowedMatchingDeviation = 100.0f; //for testing any quality is allowed
-#endif
-
-            return (calibrationData.Offset * xrOriginTLocationOrigin, matchingDeviation < allowedMatchingDeviation);
+            var qualityLevelPercentage = Mathf.Clamp01(1.0f - matchingDeviation / percentageDeviation);
+            return (calibrationData.Offset * xrOriginTLocationOrigin, matchingDeviation < allowedMatchingDeviation,
+                qualityLevelPercentage);
         }
+
 
         private static (Matrix4x4, float) CalculateTransformFromAToB(IList<Vector3> pointsInA,
             IList<Vector3> pointsInB)
@@ -65,29 +106,41 @@ namespace ff.ar_rh_spurlab.Calibration
     [Serializable]
     public class CalibrationData
     {
-        public string Name;
+        public string Id;
+
+        [SerializeField]
+        private string Name;
+
         public Matrix4x4 Offset;
         public List<Vector3> PointsInWorldMap;
 
+        public IReadOnlyList<ARAnchor> MatchedAnchors => _matchedAnchors;
+
         // matched anchors are stored here to be able to simulate anchors in editor.
         [NonSerialized]
-        public List<ARAnchor> MatchedAnchors = new();
+        internal List<ARAnchor> _matchedAnchors;
 
-        public CalibrationData(string name)
+        public bool AreAnchorsReady => MatchedAnchorsCount == LocationData.NumberOfReferencePoints;
+        public int MatchedAnchorsCount => _matchedAnchors.Count(a => a != null);
+
+        public float Quality => LocationData.NumberOfReferencePoints > 0
+            ? (float)MatchedAnchorsCount / LocationData.NumberOfReferencePoints
+            : 0.0f;
+
+        public CalibrationData(string id)
         {
-            Name = name;
+            Id = id;
             Offset = Matrix4x4.identity;
             PointsInWorldMap = new List<Vector3>();
+            _matchedAnchors = new List<ARAnchor>();
         }
-
-        public bool AreAnchorsReady => MatchedAnchors.Count == LocationData.NumberOfReferencePoints;
 
         public void UpdatePointsFromAnchors()
         {
             PointsInWorldMap.Clear();
-            for (var i = 0; i < MatchedAnchors.Count; i++)
+            foreach (var t in _matchedAnchors)
             {
-                PointsInWorldMap.Add(MatchedAnchors[i].transform.position);
+                PointsInWorldMap.Add(t.transform.position);
             }
         }
 
@@ -105,12 +158,16 @@ namespace ff.ar_rh_spurlab.Calibration
             {
                 var reader = new StreamReader(filePath);
                 var readCalibrationData = JsonUtility.FromJson<CalibrationData>(reader.ReadToEnd());
-                readCalibrationData.MatchedAnchors = new List<ARAnchor>();
+                // JSONUtility does not initialize non-serialized fields
+                readCalibrationData._matchedAnchors = new List<ARAnchor>();
+                readCalibrationData.Id = readCalibrationData.Name;
+                readCalibrationData.ClearInstantiatedAnchors();
                 return readCalibrationData;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 Debug.LogError($"Failed to read file at {filePath}");
+                Debug.LogException(e);
             }
 
             return null;
@@ -128,6 +185,24 @@ namespace ff.ar_rh_spurlab.Calibration
             writer.Close();
 
             Debug.Log($"calibration data store to file {filePath}");
+        }
+
+        public void AddInstantiatedAnchor(ARAnchor marker)
+        {
+            _matchedAnchors.Add(marker);
+        }
+
+        public void ClearInstantiatedAnchors()
+        {
+            foreach (var placedAnchor in _matchedAnchors)
+            {
+                if (placedAnchor || placedAnchor.gameObject)
+                {
+                    Object.Destroy(placedAnchor.gameObject);
+                }
+            }
+
+            _matchedAnchors.Clear();
         }
     }
 
@@ -191,7 +266,7 @@ namespace ff.ar_rh_spurlab.Calibration
                 _allAnchors.Add(addedAnchor);
             }
 
-            if (args.removed.Count != 0 || args.added.Count != 0)
+            if (args.removed.Count != 0 || args.added.Count != 0 || args.updated.Count != 0)
             {
                 MatchExistingAnchors();
             }
@@ -209,35 +284,48 @@ namespace ff.ar_rh_spurlab.Calibration
                 return;
             }
 
-            _calibrationData.MatchedAnchors ??= new List<ARAnchor>();
-            _calibrationData.MatchedAnchors.Clear();
+            _calibrationData._matchedAnchors.Clear();
 
 #if UNITY_IOS && !UNITY_EDITOR
-            if (_allAnchors.Count < _calibrationData.PointsInWorldMap.Count)
-            {
-                return;
-            }
-
+            var availableAnchors = new List<ARAnchor>(_allAnchors);
             for (var i = 0; i < _calibrationData.PointsInWorldMap.Count; i++)
             {
-                foreach (var anchor in _allAnchors)
+                ARAnchor foundAnchor = null;
+                foreach (var anchor in availableAnchors)
                 {
                     if (Vector3.Distance(anchor.transform.position, _calibrationData.PointsInWorldMap[i]) < 0.1f)
                     {
-                        _calibrationData.MatchedAnchors.Add(anchor);
                         _calibrationData.PointsInWorldMap[i] = anchor.transform.position;
+                        availableAnchors.Remove(anchor);
+                        foundAnchor = anchor;
                         break;
                     }
                 }
+
+                _calibrationData._matchedAnchors.Add(foundAnchor);
             }
 #elif UNITY_EDITOR
             // simulate anchors in editor
-            foreach (var position in _calibrationData.PointsInWorldMap)
+            for (var index = 0; index < _calibrationData.PointsInWorldMap.Count; index++)
             {
-                var gameObject = Object.Instantiate(_arAnchorManager.anchorPrefab);
-                gameObject.transform.position = position;
-                var anchor = gameObject.GetComponent<ARAnchor>();
-                _calibrationData.MatchedAnchors.Add(anchor);
+                if (_simulateMissingPointFromCalibration && index == 1)
+                {
+                    _calibrationData._matchedAnchors.Add(null);
+                }
+                else
+                {
+                    var position = _calibrationData.PointsInWorldMap[index];
+                    if (_simulateJitterCalibration)
+                    {
+                        position += Random.insideUnitSphere * 0.25f;
+                    }
+
+                    var gameObject = Object.Instantiate(_arAnchorManager.anchorPrefab);
+                    gameObject.transform.position = position;
+                    var anchor = gameObject.GetComponent<ARAnchor>();
+                    _allAnchors.Add(anchor);
+                    _calibrationData._matchedAnchors.Add(anchor);
+                }
             }
 #endif
         }
@@ -262,8 +350,39 @@ namespace ff.ar_rh_spurlab.Calibration
 
             _allAnchors.Clear();
 
-            _calibrationData?.MatchedAnchors.Clear();
+            _calibrationData?._matchedAnchors.Clear();
             _calibrationData?.UpdatePointsFromAnchors();
         }
+
+#if UNITY_EDITOR
+        private bool _simulateMissingPointFromCalibration = false;
+        private bool _simulateJitterCalibration = false;
+
+        public void ToggleMissingPointFromCalibration()
+        {
+            _simulateMissingPointFromCalibration = !_simulateMissingPointFromCalibration;
+            foreach (var anchor in _allAnchors)
+            {
+                Object.Destroy(anchor.gameObject);
+            }
+
+            _allAnchors.Clear();
+            MatchExistingAnchors();
+        }
+
+
+        public void ToggleJitterCalibration()
+        {
+            _simulateJitterCalibration = !_simulateJitterCalibration;
+            foreach (var anchor in _allAnchors)
+            {
+                Object.Destroy(anchor.gameObject);
+            }
+
+            _allAnchors.Clear();
+            MatchExistingAnchors();
+            _calibrationData.UpdatePointsFromAnchors();
+        }
+#endif
     }
 }

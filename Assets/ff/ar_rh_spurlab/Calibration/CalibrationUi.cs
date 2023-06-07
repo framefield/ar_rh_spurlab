@@ -54,7 +54,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private void UpdateCalibrationDataStatusUi()
         {
-            _calibrationNameText.text = $"Name: '{_calibrationData?.Name}'";
+            _calibrationNameText.text = $"Id: '{_calibrationData?.Id}'";
             _calibrationValidText.text = $"Valid: {_calibrationData?.AreAnchorsReady}";
         }
 

@@ -43,33 +43,42 @@ namespace ff.ar_rh_spurlab.Locations
             for (var index = 0; index < _renderers.Length; index++)
             {
                 var r = _renderers[index];
-                _rendererStateTuples[index] = (r, r.enabled);
-
                 if (r)
                 {
+                    _rendererStateTuples[index] = (r, r.enabled);
                     r.enabled = false;
+                }
+                else
+                {
+                    _rendererStateTuples[index] = (null, false);
                 }
             }
 
             for (var index = 0; index < _colliders.Length; index++)
             {
                 var c = _colliders[index];
-                _colliderStateTuples[index] = (c, c.enabled);
-
                 if (c)
                 {
+                    _colliderStateTuples[index] = (c, c.enabled);
                     c.enabled = false;
+                }
+                else
+                {
+                    _colliderStateTuples[index] = (null, false);
                 }
             }
 
             for (var index = 0; index < _behaviours.Length; index++)
             {
                 var b = _behaviours[index];
-                _behavioursStateTuples[index] = (b, b.enabled);
-
                 if (b)
                 {
+                    _behavioursStateTuples[index] = (b, b.enabled);
                     b.enabled = false;
+                }
+                else
+                {
+                    _behavioursStateTuples[index] = (null, false);
                 }
             }
         }
