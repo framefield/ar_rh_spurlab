@@ -116,9 +116,9 @@
                 float3 posB  = AddNoise(particleId+1, pointB.position,  NoiseAmount, NoiseVariation, phase, NoiseFrequency);
                 float3 posBB = AddNoise(particleId+2, pointBB.position, NoiseAmount, NoiseVariation, phase, NoiseFrequency);
                 
-                float3 posInObject = cornerFactors.x < 0.5
-                    ? posA
-                    : posB;
+
+
+                
 
                 const float tz = 0;
                 float4 aaInScreen  = PointToClipPos(float4(posAA,1)) * aspect;
@@ -152,7 +152,6 @@
                     discardFactor = 0;
                 }
 
-
                 float3 direction = (aInScreen - bInScreen).xyz;
                 float3 directionA = particleId > 0 
                                         ? (aaInScreen - aInScreen).xyz
@@ -173,9 +172,10 @@
 
                 float4 pos = lerp(aInScreen, bInScreen, cornerFactors.x);
 
-                float4 posInCamSpace = mul(float4(posInObject,1), unity_CameraProjection);
-                posInCamSpace.xyz /= posInCamSpace.w;
-                posInCamSpace.w = 1;
+
+ 
+
+
                 
                 float wAtPoint = lerp(pointA.w, pointB.w, cornerFactors.x);
 
@@ -190,12 +190,20 @@
                     output.texCoord = float2(0, 0);
                 }
 
+                float3 posInObject = cornerFactors.x < 0.5
+                    ? posA
+                    : posB;
+
+                const float4 posInWorld = mul(_ObjectToWorld, float4(posInObject, 1.0));
+                float4 posInCamSpace = mul(unity_CameraProjection, posInWorld);
+                posInCamSpace.xyz /= posInCamSpace.w;
+
                 float3 neighbourNormal = lerp(normalA, normalB, cornerFactors.x);
                 float3 miterNormal = (normal + neighbourNormal) / 2;
-                float thickness = !isnan(wAtPoint) ? LineWidth * discardFactor * lerp(1, 1/(posInCamSpace.z), ShrinkWithDistance) : wAtPoint;
-                float miter = dot(-miterNormal, normal);
+                float thickness = !isnan(wAtPoint) ? LineWidth * discardFactor * saturate(lerp(1,saturate(10/posInCamSpace.w), ShrinkWithDistance)) : wAtPoint;
+                float miter = dot(-normalize(miterNormal), normalize(normal));
                 
-                pos += cornerFactors.y * 0.1f * thickness * float4(miterNormal,0) / clamp(miter, -2.0,-0.13);
+                pos += saturate(cornerFactors.y * 0.1f * thickness * float4(miterNormal,0) / clamp(miter, -2.0,-0.13));
 
                 output.position = pos / aspect;
                 output.fog = pow(saturate(-posInCamSpace.z/FogDistance), FogBias);
@@ -208,6 +216,7 @@
             fragOutput psMain(psInput input)
             {
                 fragOutput output;
+                
                 //float u = (input.texCoord.x + VisibleRange);
                 //float4 imgColor = tex2D(MainTex, float2(u, input.texCoord.y)) * MainColor;
 
