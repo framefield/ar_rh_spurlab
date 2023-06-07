@@ -528,7 +528,6 @@ MonoBehaviour:
   _chapterTimelines:
   - {fileID: 1659719286235176634}
   - {fileID: 2005600212777941286}
-  - {fileID: 0}
 --- !u!1 &7192351720333973121
 GameObject:
   m_ObjectHideFlags: 0

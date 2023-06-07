@@ -81,12 +81,19 @@ namespace ff.ar_rh_spurlab.Locations
             }
         }
 
-        private static void SetLocalizedTracksMuted(PlayableDirector director, string locale)
+        private void SetLocalizedTracksMuted(PlayableDirector director, string locale)
         {
+            if (!director)
+            {
+                Debug.LogWarning("LocationTimelineManager: Trying to set muted state on null director", this);
+                return;
+            }
+
             var timelineAsset = director.playableAsset as TimelineAsset;
 
             if (!timelineAsset)
             {
+                Debug.LogWarning("LocationTimelineManager: Trying to set muted state on null timeline asset", this);
                 return;
             }
 
