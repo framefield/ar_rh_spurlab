@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1972815094024356569}
-  m_Mesh: {fileID: -4019578505719052005, guid: 2a04b20ce74744d3096eca798659375c, type: 3}
+  m_Mesh: {fileID: -7076563918467866422, guid: 7aced89381f2c4f1496c997f5f983301, type: 3}
 --- !u!23 &8379747131974863996
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5408173271954152523}
   m_Layer: 0
-  m_Name: Block02-Long
+  m_Name: Block03-VeryLong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,5 +113,5 @@ Transform:
   m_Children:
   - {fileID: 4303512734369896736}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
