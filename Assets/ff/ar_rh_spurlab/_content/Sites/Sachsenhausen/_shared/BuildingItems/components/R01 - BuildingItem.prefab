@@ -68,6 +68,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Block02-Long
       objectReference: {fileID: 0}
+    - target: {fileID: 7336351726586575170, guid: 08f40dc4fe3a9ba4daee536f3db8e4e8,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2971281508765171189, guid: 1a200c7d8fd6a438b97bf0e17a8f6f56,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
