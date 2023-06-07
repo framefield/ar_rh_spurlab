@@ -2,13 +2,14 @@ using System;
 using ff.ar_rh_spurlab.Calibration;
 using ff.ar_rh_spurlab.Locations;
 using ff.ar_rh_spurlab.UI.Site_Ui;
+using ff.common.ui;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.UI
 {
-    public class AppMenuController : MonoBehaviour
+    public class AppMenuController : Hidable
     {
         [Header("Prefab References")]
         [SerializeField]
@@ -25,7 +26,8 @@ namespace ff.ar_rh_spurlab.UI
 
         [SerializeField]
         private AvailableSitesUi _availableSitesUi;
-
+        
+        public event Action OnClose;
         
         public void Initialize(LocationController locationController)
         {
@@ -65,7 +67,7 @@ namespace ff.ar_rh_spurlab.UI
 
         private void OnCloseButtonClickedHandler()
         {
-            Debug.Log("Close button clicked");
+            OnClose?.Invoke();
         }
 
         private void OnContactButtonClickedHandler()
