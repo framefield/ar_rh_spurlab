@@ -25,51 +25,42 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
         [SerializeField]
         private LocationSelectionButton _locationButtonPrefab;
 
-        private void OnEnable()
+
+        public void Initialize(SiteData siteData, LocationController locationController)
         {
             _mapButton.onClick.AddListener(OnMapButtonClickedHandler);
-        }
-
-        private void OnDisable()
-        {
-            _mapButton.onClick.RemoveListener(OnMapButtonClickedHandler);
-        }
-
-        private void OnMapButtonClickedHandler()
-        {
-            OnMapButtonClicked?.Invoke(_siteData);
-        }
-
-        public void SetSiteData(SiteData siteData)
-        {
+            
             _siteData = siteData;
-
+            
+            // TODO: is this necessary? Sites won't be added on run time
             foreach (Transform child in _locationsContainer)
             {
                 Destroy(child.gameObject);
             }
 
-            UpdateVisuals();
-        }
-
-        private void UpdateVisuals()
-        {
             if (_siteData == null)
+            {
+                Debug.LogWarning("can't initialize SiteUi without valid data", this);
                 return;
+            }
 
             _titleText.text = _siteData.Name.ToUpper();
 
             var label = 'A';
             foreach (var locationData in _siteData.Locations)
             {
-                var locationButton = Instantiate(_locationButtonPrefab, _locationsContainer);
-                locationButton.SetLabel(label++.ToString());
-                locationButton.SetLocationData(locationData);
-                locationButton.OnLocationButtonClicked +=
+                var newLocationButton = Instantiate(_locationButtonPrefab, _locationsContainer);
+                newLocationButton.Initialize(locationData, locationController, label++);
+                newLocationButton.OnLocationButtonClicked +=
                     data => OnLocationButtonClicked?.Invoke(_siteData, data);
             }
         }
-
+        
+        private void OnMapButtonClickedHandler()
+        {
+            OnMapButtonClicked?.Invoke(_siteData);
+        }
+        
         private SiteData _siteData;
     }
 }

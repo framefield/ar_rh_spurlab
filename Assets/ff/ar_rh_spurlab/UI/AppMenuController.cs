@@ -1,7 +1,9 @@
 using System;
+using ff.ar_rh_spurlab.Calibration;
 using ff.ar_rh_spurlab.Locations;
 using ff.ar_rh_spurlab.UI.Site_Ui;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.UI
@@ -24,25 +26,20 @@ namespace ff.ar_rh_spurlab.UI
         [SerializeField]
         private AvailableSitesUi _availableSitesUi;
 
-        private void OnEnable()
+        
+        public void Initialize(LocationController locationController)
         {
+            _locationController = locationController;
+            _availableSitesUi.Initialize(locationController);
+            
             _availableSitesUi.OnMapButtonClicked += OnMapButtonClickedHandler;
             _availableSitesUi.OnLocationButtonClicked += OnLocationButtonClickedHandler;
             _closeButton.onClick.AddListener(OnCloseButtonClickedHandler);
             _contactButton.onClick.AddListener(OnContactButtonClickedHandler);
             _termsButton.onClick.AddListener(OnTermsButtonClickedHandler);
             _resetButton.onClick.AddListener(OnResetButtonClickedHandler);
-        }
+        }        
 
-        private void OnDisable()
-        {
-            _availableSitesUi.OnMapButtonClicked -= OnMapButtonClickedHandler;
-            _availableSitesUi.OnLocationButtonClicked -= OnLocationButtonClickedHandler;
-            _closeButton.onClick.RemoveListener(OnCloseButtonClickedHandler);
-            _contactButton.onClick.RemoveListener(OnContactButtonClickedHandler);
-            _termsButton.onClick.RemoveListener(OnTermsButtonClickedHandler);
-            _resetButton.onClick.RemoveListener(OnResetButtonClickedHandler);
-        }
 
         private void OnMapButtonClickedHandler(SiteData data)
         {
@@ -52,6 +49,18 @@ namespace ff.ar_rh_spurlab.UI
         private void OnLocationButtonClickedHandler(SiteData siteData, LocationData locationData)
         {
             Debug.Log($"Location button clicked for site {siteData.Name} and location {locationData.Title}");
+            
+            var isCalibrated = CalibrationData.CalibrationDataExists(locationData.Title);
+            if (isCalibrated)
+            {
+                _locationController.SetLocation(locationData);
+            }
+            else
+            {
+                SharedCalibrationContext.ActiveLocation = locationData;
+                SceneManager.LoadScene("Calibration");
+            }
+            
         }
 
         private void OnCloseButtonClickedHandler()
@@ -73,5 +82,8 @@ namespace ff.ar_rh_spurlab.UI
         {
             Debug.Log("Reset button clicked");
         }
+
+        private LocationController _locationController;
+
     }
 }

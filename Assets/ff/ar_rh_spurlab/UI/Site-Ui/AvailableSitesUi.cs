@@ -16,14 +16,14 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
         [SerializeField]
         private SiteUi _siteUiPrefab;
 
-        private void Start()
+        public void Initialize(LocationController locationController)
         {
             foreach (var site in _availableSites.Sites)
             {
-                var siteUi = Instantiate(_siteUiPrefab, transform);
-                siteUi.SetSiteData(site);
-                siteUi.OnMapButtonClicked += (data) => OnMapButtonClicked?.Invoke(data);
-                siteUi.OnLocationButtonClicked += (siteData, locationData) =>
+                var newSiteUi = Instantiate(_siteUiPrefab, transform);
+                newSiteUi.Initialize(site, locationController);
+                newSiteUi.OnMapButtonClicked += (data) => OnMapButtonClicked?.Invoke(data);
+                newSiteUi.OnLocationButtonClicked += (siteData, locationData) =>
                     OnLocationButtonClicked?.Invoke(siteData, locationData);
             }
         }

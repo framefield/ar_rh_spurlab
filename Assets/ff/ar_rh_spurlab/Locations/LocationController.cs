@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using ff.ar_rh_spurlab.AR;
 using ff.ar_rh_spurlab.Calibration;
+using ff.ar_rh_spurlab.UI;
 using ff.common.statemachine;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -26,6 +27,9 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private Transform _xrOrigin;
 
+        [SerializeField]
+        private MainMenuController _mainMenuController;
+        
         private CalibrationARAnchorManager _calibrationARAnchorManager;
 
 
@@ -35,7 +39,8 @@ namespace ff.ar_rh_spurlab.Locations
         public event Action LocationChanged;
         public AugmentedLocation CurrentLocation => _augmentedLocation;
 
-
+        
+        
         private void Start()
         {
             if (!_stateMachine)
@@ -65,6 +70,7 @@ namespace ff.ar_rh_spurlab.Locations
             _calibrationARAnchorManager =
                 new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Tracking);
             _stateMachine.Initialize();
+            _mainMenuController.Initialize(this, _stateMachine);
         }
 
         public void ResetLocation()

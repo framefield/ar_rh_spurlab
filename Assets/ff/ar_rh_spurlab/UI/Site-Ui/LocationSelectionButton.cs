@@ -1,4 +1,5 @@
 using System;
+using ff.ar_rh_spurlab.Calibration;
 using ff.ar_rh_spurlab.Locations;
 using TMPro;
 using UnityEngine;
@@ -30,51 +31,42 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
         [SerializeField]
         private LocationData _locationData;
 
-
-#if UNITY_EDITOR
-        private void OnValidate()
+        public void Initialize(LocationData locationData, LocationController locationController, char labelChar)
         {
+            _locationController = locationController;
+            _locationData = locationData;
+            _label = labelChar.ToString();
+            locationController.LocationChanged += LocationChangedHandler;
             UpdateVisuals();
-        }
-#endif
-
-        private void OnEnable()
-        {
+            
             _button.onClick.AddListener(OnButtonClicked);
         }
 
-        private void OnDisable()
-        {
-            _button.onClick.RemoveListener(OnButtonClicked);
-        }
+        // TODO: Unclear, if this is required.
+// #if UNITY_EDITOR
+//         private void OnValidate()
+//         {
+//             UpdateVisuals();
+//         }
+// #endif
 
         private void OnButtonClicked()
         {
             OnLocationButtonClicked?.Invoke(_locationData);
         }
 
-        public void SetLocationData(Locations.LocationData locationData)
+
+
+        private void LocationChangedHandler()
         {
-            _locationData = locationData;
             UpdateVisuals();
         }
 
-        public void SetLabel(string label)
-        {
-            _label = label;
-            UpdateVisuals();
-        }
-
-        public void SetIsActive(bool isActive)
-        {
-            _isLocationActive = isActive;
-            UpdateVisuals();
-        }
 
         private void UpdateVisuals()
         {
-            _active.SetActive(_isLocationActive);
-            _inactive.SetActive(!_isLocationActive);
+            _active.SetActive(IsLocationActive);
+            _inactive.SetActive(!IsLocationActive);
 
             if (_locationData == null)
                 return;
@@ -86,11 +78,15 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
 
             foreach (var titleText in _titleTexts)
             {
-                titleText.text = _locationData.Title;
+                var calibrationMissingSuffix = CalibrationData.CalibrationDataExists(_locationData.Title) 
+                    ? string.Empty 
+                    : "\n(not calibrated)";            
+                titleText.text = _locationData.Title  + calibrationMissingSuffix;
             }
         }
 
-        private bool _isLocationActive;
+        private bool IsLocationActive => _locationController.CurrentLocation && _locationController.CurrentLocation.LocationData == _locationData;
         private string _label = "A";
+        private LocationController _locationController;
     }
 }
