@@ -165,23 +165,19 @@
                 float3 normalA =  normalize( cross(directionA, float3(0,0,1))); 
                 float3 normalB =  normalize( cross(directionB, float3(0,0,1))); 
                 if (isnan(pointAA.w) || pointAA.w < 0.01) {
-                    normalA =normal;
+                    normalA = normal;
                 }
                 if (isnan(pointBB.w) || pointAA.w < 0.01) {
-                    normalB =normal;
+                    normalB = normal;
                 }
 
-                float3 neighbourNormal = lerp(normalA, normalB, cornerFactors.x);
-                float3 meterNormal = (normal + neighbourNormal) / 2;
                 float4 pos = lerp(aInScreen, bInScreen, cornerFactors.x);
-
 
                 float4 posInCamSpace = mul(float4(posInObject,1), unity_CameraProjection);
                 posInCamSpace.xyz /= posInCamSpace.w;
                 posInCamSpace.w = 1;
-
-
-                float wAtPoint = lerp(pointA.w  , pointB.w , cornerFactors.x);
+                
+                float wAtPoint = lerp(pointA.w, pointB.w, cornerFactors.x);
 
                 // Buildup transition
 
@@ -189,10 +185,17 @@
                 {        
                     output.texCoord = float2(wAtPoint - TransitionProgress, cornerFactors.y /2 +0.5);
                 }
+                else
+                {
+                    output.texCoord = float2(0, 0);
+                }
 
+                float3 neighbourNormal = lerp(normalA, normalB, cornerFactors.x);
+                float3 miterNormal = (normal + neighbourNormal) / 2;
                 float thickness = !isnan(wAtPoint) ? LineWidth * discardFactor * lerp(1, 1/(posInCamSpace.z), ShrinkWithDistance) : wAtPoint;
-                float miter = dot(-meterNormal, normal);
-                pos+= cornerFactors.y * 0.1f * thickness * float4(meterNormal,0) / clamp(miter, -2.0,-0.13) ;   
+                float miter = dot(-miterNormal, normal);
+                
+                pos += cornerFactors.y * 0.1f * thickness * float4(miterNormal,0) / clamp(miter, -2.0,-0.13);
 
                 output.position = pos / aspect;
                 output.fog = pow(saturate(-posInCamSpace.z/FogDistance), FogBias);

@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEditor.AssetImporters;
 using System.IO;
 using Newtonsoft.Json;
+using UnityEditor;
 
-namespace ff.ar_rh_spurlab.LineBuildup.Editor
+namespace ff.ar_rh_spurlab.LineBuildup
 {
     [Serializable]
     public class PointListImport
@@ -26,6 +27,20 @@ namespace ff.ar_rh_spurlab.LineBuildup.Editor
 
             ctx.AddObjectToAsset("pointList", pointList);
             ctx.SetMainObject(pointList);
+        }
+    }
+
+    [CustomEditor(typeof(PointsImporter))]
+    public class PointsImporterEditor : ScriptedImporterEditor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            if (GUILayout.Button("Reimport"))
+            {
+                var importer = (PointsImporter)target;
+                importer.SaveAndReimport();
+            }
         }
     }
 }

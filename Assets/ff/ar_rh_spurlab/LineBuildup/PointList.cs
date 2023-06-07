@@ -11,6 +11,11 @@ namespace ff.ar_rh_spurlab.LineBuildup
         public float X;
         public float Y;
         public float Z;
+
+        public static implicit operator Vector3(PointPosition p)
+        {
+            return new Vector3(-p.X, p.Y, p.Z);
+        }
     }
 
     [Serializable]

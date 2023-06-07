@@ -204,6 +204,20 @@ namespace ff.ar_rh_spurlab.LineBuildup
 
             Gizmos.color = Color.white;
             Gizmos.DrawWireCube(_localBounds.center, _localBounds.size);
+
+            if (_pointList.Points.Length < 100)
+            {
+                var localToWorldMatrix = transform.localToWorldMatrix;
+                foreach (var point in _pointList.Points)
+                {
+                    if (float.IsNaN(point.W))
+                    {
+                        continue;
+                    }
+
+                    Gizmos.DrawIcon(localToWorldMatrix.MultiplyPoint(point.Position), "Favorite Icon", false);
+                }
+            }
         }
 
         public bool HasFrameBounds()
