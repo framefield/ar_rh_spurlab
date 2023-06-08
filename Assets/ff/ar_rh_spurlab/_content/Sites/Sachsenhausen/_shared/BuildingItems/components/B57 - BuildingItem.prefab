@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 3401114681325822825, guid: d6d6b3f3829b242e2aee697042c26026,
         type: 3}
       propertyPath: m_Name
-      value: Block03-Short
+      value: Block04-Short
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -90,12 +90,12 @@ PrefabInstance:
     - target: {fileID: 126709140919284063, guid: 1e85f5e35a8394e9ba59b6351cfdd825,
         type: 3}
       propertyPath: m_Name
-      value: B57 - BuildingItem Variant
+      value: B57 - BuildingItem
       objectReference: {fileID: 0}
     - target: {fileID: 2742119254907312361, guid: 1e85f5e35a8394e9ba59b6351cfdd825,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2742119254907312361, guid: 1e85f5e35a8394e9ba59b6351cfdd825,
         type: 3}
