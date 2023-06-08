@@ -89,7 +89,7 @@ namespace ff.ar_rh_spurlab.AR
             catch (FileNotFoundException)
             {
                 Debug.LogError(
-                    "No ARWorldMap was found. Make sure to save the ARWorldMap before attempting to load it.");
+                    $"No ARWorldMap was found in {worldMapFilePath}. Make sure to save the ARWorldMap before attempting to load it.");
                 yield break;
             }
 

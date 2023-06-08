@@ -121,10 +121,10 @@ namespace ff.ar_rh_spurlab.Locations
             _augmentedLocation.Initialize(calibrationData, locationData);
             _calibrationARAnchorManager.SetCalibrationData(calibrationData);
 #if UNITY_IOS
-            var directoryPath = Path.Combine(Application.persistentDataPath, calibrationData.Id);
-            var filePath = Path.Combine(directoryPath, "my_session.worldmap");
+            var directoryPath = System.IO.Path.Combine(Application.persistentDataPath, calibrationData.Id);
+            var filePath = System.IO.Path.Combine(directoryPath, "my_session.worldmap");
 
-            StartCoroutine(ARWorldMapController.Load(_arSession, filePath));
+            StartCoroutine(ff.ar_rh_spurlab.AR.ARWorldMapController.Load(_arSession, filePath));
 #endif
             LocationChanged?.Invoke();
             return true;

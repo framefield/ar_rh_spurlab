@@ -28,3 +28,19 @@ MonoBehaviour:
   - {x: 2.3495317, y: 7.1013455, z: 0.4975891}
   - {x: 7.508609, y: 7.1013455, z: -2.2907526}
   - {x: -0.15333223, y: 7.1013455, z: -1.8418342}
+  PointsInformation:
+  - Id: 
+    Title:
+      _values: []
+      _locales: []
+    ScreenImage: {fileID: 0}
+  - Id: 
+    Title:
+      _values: []
+      _locales: []
+    ScreenImage: {fileID: 0}
+  - Id: 
+    Title:
+      _values: []
+      _locales: []
+    ScreenImage: {fileID: 0}

@@ -74,7 +74,7 @@ namespace ff.ar_rh_spurlab.Locations
                 State = isValid ? LocationTrackingState.TrackingCalibration : LocationTrackingState.TrackingAnchors,
                 Quality = CalibrationData.MatchedAnchorsCount * (0.25f / LocationData.NumberOfReferencePoints) +
                           quality * 0.75f,
-                CalibrationMessage = isValid ? string.Empty : "Anchors do not match calibration data well enough"
+                CalibrationMessage = isValid ? string.Empty : "Anchors do not match calibration data enough"
             };
 
             // update tracked location contents
