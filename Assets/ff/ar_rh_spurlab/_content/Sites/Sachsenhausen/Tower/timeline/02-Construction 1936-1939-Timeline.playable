@@ -718,6 +718,23 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+--- !u!114 &-6807625928787340991
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 1917b1a1d769c4660a957b817a36a54e, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
 --- !u!114 &-6364950113431329828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1205,6 +1222,236 @@ MonoBehaviour:
   _exposedBinding:
     exposedName: 3abbf0d89b5fb4a13a016ec9fe51033c
     defaultValue: {fileID: 0}
+--- !u!114 &-4518931891091674482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efcf9f6ecba24fcf9ff35a3f71d61372, type: 3}
+  m_Name: Reveal Transition Group Track (1)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 0
+    m_ClipIn: 0
+    m_Asset: {fileID: 2856778213699577307}
+    m_Duration: 23.383333333333336
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -4518931891091674482}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: RevealTransitionGroupAsset
+  - m_Version: 1
+    m_Start: 23.383333333333336
+    m_ClipIn: 0
+    m_Asset: {fileID: 7975798270970249440}
+    m_Duration: 12.786666666666665
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -4518931891091674482}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: RevealTransitionGroupAsset
+  - m_Version: 1
+    m_Start: 36.17
+    m_ClipIn: 0
+    m_Asset: {fileID: 2334672289239204410}
+    m_Duration: 29.07027210884354
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -4518931891091674482}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: RevealTransitionGroupAsset
+  m_Markers:
+    m_Objects: []
 --- !u!114 &-4269781548073841494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1536,6 +1783,7 @@ MonoBehaviour:
   - {fileID: 2507015309241394808}
   - {fileID: -3370647798743650109}
   - {fileID: -4269781548073841494}
+  - {fileID: -4518931891091674482}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -2051,6 +2299,121 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+--- !u!114 &2334672289239204410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
+  m_Name: RevealTransitionGroupAsset(Clone)
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Name: PersonBlock (1)
+    IsActive: 0
+    Id: PersonBlock (1)
+  - Name: PersonBlock (2)
+    IsActive: 0
+    Id: PersonBlock (2)
+  - Name: PersonBlock (3)
+    IsActive: 0
+    Id: PersonBlock (3)
+  - Name: PersonBlock (4)
+    IsActive: 0
+    Id: PersonBlock (4)
+  - Name: PersonBlock (5)
+    IsActive: 0
+    Id: PersonBlock (5)
+  - Name: PersonBlock (6)
+    IsActive: 0
+    Id: PersonBlock (6)
+  - Name: PersonBlock (7)
+    IsActive: 0
+    Id: PersonBlock (7)
+  - Name: PersonBlock (9)
+    IsActive: 0
+    Id: PersonBlock (9)
+  - Name: PersonBlock (10)
+    IsActive: 0
+    Id: PersonBlock (10)
+  - Name: PersonBlock (11)
+    IsActive: 0
+    Id: PersonBlock (11)
+  - Name: PersonBlock (12)
+    IsActive: 0
+    Id: PersonBlock (12)
+  - Name: PersonBlock (13)
+    IsActive: 0
+    Id: PersonBlock (13)
+  - Name: PersonBlock (16)
+    IsActive: 0
+    Id: PersonBlock (16)
+  - Name: PersonBlock (17)
+    IsActive: 0
+    Id: PersonBlock (17)
+  - Name: PersonBlockHalf
+    IsActive: 0
+    Id: PersonBlockHalf
+  - Name: PersonBlockHalf (1)
+    IsActive: 0
+    Id: PersonBlockHalf (1)
+  - Name: PersonBlockHalf (2)
+    IsActive: 0
+    Id: PersonBlockHalf (2)
+  - Name: PersonBlock 1b
+    IsActive: 0
+    Id: PersonBlock 1b
+  - Name: PersonBlock 2b
+    IsActive: 0
+    Id: PersonBlock 2b
+  - Name: PersonBlock 3b
+    IsActive: 0
+    Id: PersonBlock 3b
+  - Name: PersonBlock 4b
+    IsActive: 0
+    Id: PersonBlock 4b
+  - Name: PersonBlock 5b
+    IsActive: 0
+    Id: PersonBlock 5b
+  - Name: PersonBlock 6b
+    IsActive: 0
+    Id: PersonBlock 6b
+  - Name: PersonBlock 7b
+    IsActive: 0
+    Id: PersonBlock 7b
+  - Name: PersonBlock 8b
+    IsActive: 0
+    Id: PersonBlock 8b
+  - Name: PersonBlock 9b
+    IsActive: 0
+    Id: PersonBlock 9b
+  - Name: PersonBlock 11b
+    IsActive: 0
+    Id: PersonBlock 11b
+  - Name: PersonBlock 12b
+    IsActive: 0
+    Id: PersonBlock 12b
+  - Name: PersonBlock 13b
+    IsActive: 0
+    Id: PersonBlock 13b
+  - Name: PersonBlock 16b
+    IsActive: 0
+    Id: PersonBlock 16b
+  - Name: PersonBlock 17b
+    IsActive: 0
+    Id: PersonBlock 17b
+  - Name: PersonBlockHalf 0b
+    IsActive: 0
+    Id: PersonBlockHalf 0b
+  - Name: PersonBlockHalf 1b
+    IsActive: 0
+    Id: PersonBlockHalf 1b
+  - Name: PersonBlockHalf 2b
+    IsActive: 0
+    Id: PersonBlockHalf 2b
 --- !u!114 &2507015309241394808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2780,6 +3143,121 @@ MonoBehaviour:
   _exposedBinding:
     exposedName: 1ec1bf8ef313947039fb53a875fe9120
     defaultValue: {fileID: 0}
+--- !u!114 &2856778213699577307
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
+  m_Name: RevealTransitionGroupAsset
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Name: PersonBlock (1)
+    IsActive: 0
+    Id: PersonBlock (1)
+  - Name: PersonBlock (2)
+    IsActive: 0
+    Id: PersonBlock (2)
+  - Name: PersonBlock (3)
+    IsActive: 0
+    Id: PersonBlock (3)
+  - Name: PersonBlock (4)
+    IsActive: 0
+    Id: PersonBlock (4)
+  - Name: PersonBlock (5)
+    IsActive: 0
+    Id: PersonBlock (5)
+  - Name: PersonBlock (6)
+    IsActive: 0
+    Id: PersonBlock (6)
+  - Name: PersonBlock (7)
+    IsActive: 0
+    Id: PersonBlock (7)
+  - Name: PersonBlock (9)
+    IsActive: 0
+    Id: PersonBlock (9)
+  - Name: PersonBlock (10)
+    IsActive: 0
+    Id: PersonBlock (10)
+  - Name: PersonBlock (11)
+    IsActive: 0
+    Id: PersonBlock (11)
+  - Name: PersonBlock (12)
+    IsActive: 0
+    Id: PersonBlock (12)
+  - Name: PersonBlock (13)
+    IsActive: 0
+    Id: PersonBlock (13)
+  - Name: PersonBlock (16)
+    IsActive: 0
+    Id: PersonBlock (16)
+  - Name: PersonBlock (17)
+    IsActive: 0
+    Id: PersonBlock (17)
+  - Name: PersonBlockHalf
+    IsActive: 0
+    Id: PersonBlockHalf
+  - Name: PersonBlockHalf (1)
+    IsActive: 0
+    Id: PersonBlockHalf (1)
+  - Name: PersonBlockHalf (2)
+    IsActive: 0
+    Id: PersonBlockHalf (2)
+  - Name: PersonBlock 1b
+    IsActive: 0
+    Id: PersonBlock 1b
+  - Name: PersonBlock 2b
+    IsActive: 0
+    Id: PersonBlock 2b
+  - Name: PersonBlock 3b
+    IsActive: 0
+    Id: PersonBlock 3b
+  - Name: PersonBlock 4b
+    IsActive: 0
+    Id: PersonBlock 4b
+  - Name: PersonBlock 5b
+    IsActive: 0
+    Id: PersonBlock 5b
+  - Name: PersonBlock 6b
+    IsActive: 0
+    Id: PersonBlock 6b
+  - Name: PersonBlock 7b
+    IsActive: 0
+    Id: PersonBlock 7b
+  - Name: PersonBlock 8b
+    IsActive: 0
+    Id: PersonBlock 8b
+  - Name: PersonBlock 9b
+    IsActive: 0
+    Id: PersonBlock 9b
+  - Name: PersonBlock 11b
+    IsActive: 0
+    Id: PersonBlock 11b
+  - Name: PersonBlock 12b
+    IsActive: 0
+    Id: PersonBlock 12b
+  - Name: PersonBlock 13b
+    IsActive: 0
+    Id: PersonBlock 13b
+  - Name: PersonBlock 16b
+    IsActive: 0
+    Id: PersonBlock 16b
+  - Name: PersonBlock 17b
+    IsActive: 0
+    Id: PersonBlock 17b
+  - Name: PersonBlockHalf 0b
+    IsActive: 0
+    Id: PersonBlockHalf 0b
+  - Name: PersonBlockHalf 1b
+    IsActive: 0
+    Id: PersonBlockHalf 1b
+  - Name: PersonBlockHalf 2b
+    IsActive: 0
+    Id: PersonBlockHalf 2b
 --- !u!114 &3093395270802054290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3465,7 +3943,58 @@ MonoBehaviour:
     m_Start: 45.333333333333336
     m_ClipIn: 7
     m_Asset: {fileID: -4718999040311844652}
-    m_Duration: 20.506938775510207
+    m_Duration: 10.199999999999996
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 5048952871559239738}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Sachsenhausen1-DE-02
+  - m_Version: 1
+    m_Start: 55.96666666666667
+    m_ClipIn: 18.77639455782311
+    m_Asset: {fileID: -6807625928787340991}
+    m_Duration: 8.730544217687097
     m_TimeScale: 1
     m_ParentTrack: {fileID: 5048952871559239738}
     m_EaseInDuration: 0
@@ -3591,6 +4120,121 @@ MonoBehaviour:
   _exposedBinding:
     exposedName: 139920d92cac44d9a9b8e46d2bf490e4
     defaultValue: {fileID: 0}
+--- !u!114 &7975798270970249440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
+  m_Name: RevealTransitionGroupAsset(Clone)
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Name: PersonBlock (1)
+    IsActive: 1
+    Id: PersonBlock (1)
+  - Name: PersonBlock (2)
+    IsActive: 1
+    Id: PersonBlock (2)
+  - Name: PersonBlock (3)
+    IsActive: 1
+    Id: PersonBlock (3)
+  - Name: PersonBlock (4)
+    IsActive: 1
+    Id: PersonBlock (4)
+  - Name: PersonBlock (5)
+    IsActive: 1
+    Id: PersonBlock (5)
+  - Name: PersonBlock (6)
+    IsActive: 1
+    Id: PersonBlock (6)
+  - Name: PersonBlock (7)
+    IsActive: 1
+    Id: PersonBlock (7)
+  - Name: PersonBlock (9)
+    IsActive: 1
+    Id: PersonBlock (9)
+  - Name: PersonBlock (10)
+    IsActive: 1
+    Id: PersonBlock (10)
+  - Name: PersonBlock (11)
+    IsActive: 1
+    Id: PersonBlock (11)
+  - Name: PersonBlock (12)
+    IsActive: 1
+    Id: PersonBlock (12)
+  - Name: PersonBlock (13)
+    IsActive: 1
+    Id: PersonBlock (13)
+  - Name: PersonBlock (16)
+    IsActive: 1
+    Id: PersonBlock (16)
+  - Name: PersonBlock (17)
+    IsActive: 1
+    Id: PersonBlock (17)
+  - Name: PersonBlockHalf
+    IsActive: 1
+    Id: PersonBlockHalf
+  - Name: PersonBlockHalf (1)
+    IsActive: 1
+    Id: PersonBlockHalf (1)
+  - Name: PersonBlockHalf (2)
+    IsActive: 1
+    Id: PersonBlockHalf (2)
+  - Name: PersonBlock 1b
+    IsActive: 1
+    Id: PersonBlock 1b
+  - Name: PersonBlock 2b
+    IsActive: 1
+    Id: PersonBlock 2b
+  - Name: PersonBlock 3b
+    IsActive: 1
+    Id: PersonBlock 3b
+  - Name: PersonBlock 4b
+    IsActive: 1
+    Id: PersonBlock 4b
+  - Name: PersonBlock 5b
+    IsActive: 1
+    Id: PersonBlock 5b
+  - Name: PersonBlock 6b
+    IsActive: 1
+    Id: PersonBlock 6b
+  - Name: PersonBlock 7b
+    IsActive: 1
+    Id: PersonBlock 7b
+  - Name: PersonBlock 8b
+    IsActive: 1
+    Id: PersonBlock 8b
+  - Name: PersonBlock 9b
+    IsActive: 1
+    Id: PersonBlock 9b
+  - Name: PersonBlock 11b
+    IsActive: 1
+    Id: PersonBlock 11b
+  - Name: PersonBlock 12b
+    IsActive: 1
+    Id: PersonBlock 12b
+  - Name: PersonBlock 13b
+    IsActive: 1
+    Id: PersonBlock 13b
+  - Name: PersonBlock 16b
+    IsActive: 1
+    Id: PersonBlock 16b
+  - Name: PersonBlock 17b
+    IsActive: 1
+    Id: PersonBlock 17b
+  - Name: PersonBlockHalf 0b
+    IsActive: 1
+    Id: PersonBlockHalf 0b
+  - Name: PersonBlockHalf 1b
+    IsActive: 1
+    Id: PersonBlockHalf 1b
+  - Name: PersonBlockHalf 2b
+    IsActive: 1
+    Id: PersonBlockHalf 2b
 --- !u!114 &8636632949009557715
 MonoBehaviour:
   m_ObjectHideFlags: 1

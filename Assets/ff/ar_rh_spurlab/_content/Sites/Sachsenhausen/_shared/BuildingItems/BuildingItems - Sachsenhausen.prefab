@@ -3392,6 +3392,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: B20 - BuildingItem
       objectReference: {fileID: 0}
+    - target: {fileID: 2708234346832704279, guid: 027d2187e084d4446ac4484806a17440,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3884776859566645650, guid: 027d2187e084d4446ac4484806a17440,
         type: 3}
       propertyPath: _pointList
