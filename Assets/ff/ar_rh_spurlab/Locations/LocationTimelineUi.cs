@@ -1,0 +1,46 @@
+using System;
+using ff.common.ui;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ff.ar_rh_spurlab.Locations
+{
+    public class LocationTimelineUi : MonoBehaviour
+    {
+        [Header("Prefab References")]
+        [SerializeField]
+        private Hidable _playingPanel;
+
+        [SerializeField]
+        private Hidable _pausedPanel;
+
+        [SerializeField]
+        private Button _pauseButton;
+
+        [SerializeField]
+        private Button _resumeButton;
+
+        public void Initialize(LocationTimelineManager timelineManager)
+        {
+            _pauseButton.onClick.AddListener(timelineManager.Pause);
+            _resumeButton.onClick.AddListener(timelineManager.Resume);
+
+            OnIsPlayingChanged(LocationTimelineManager.IsPlaying);
+            LocationTimelineManager.IsPlayingChanged += OnIsPlayingChanged;
+        }
+
+        private void OnDestroy()
+        {
+            LocationTimelineManager.IsPlayingChanged -= OnIsPlayingChanged;
+        }
+
+        private void OnIsPlayingChanged(bool isPlaying)
+        {
+            if (_playingPanel)
+                _playingPanel.IsVisible = isPlaying;
+
+            if (_pausedPanel)
+                _pausedPanel.IsVisible = !isPlaying;
+        }
+    }
+}

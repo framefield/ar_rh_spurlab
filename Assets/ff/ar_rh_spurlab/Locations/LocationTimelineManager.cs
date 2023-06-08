@@ -23,10 +23,14 @@ namespace ff.ar_rh_spurlab.Locations
 
         [Header("Prefab references")]
         [SerializeField]
+        private LocationTimelineUi _ui;
+
+        [SerializeField]
         private PlayableDirector _waitingTimeline;
 
         [SerializeField]
         private PlayableDirector[] _chapterTimelines;
+
 
         public bool AutoPlay
         {
@@ -35,6 +39,22 @@ namespace ff.ar_rh_spurlab.Locations
             set => _autoPlay = value;
         }
 
+        public static bool IsPlaying
+        {
+            get => _isPlaying;
+            private set
+            {
+                if (value != _isPlaying)
+                {
+                    IsPlayingChanged?.Invoke(value);
+                }
+
+                _isPlaying = value;
+            }
+        }
+
+        public static event Action<bool> IsPlayingChanged;
+
         public void Initialize()
         {
             if (!_waitingTimeline)
@@ -42,6 +62,11 @@ namespace ff.ar_rh_spurlab.Locations
                 Debug.LogError("LocationTimelineManager: Waiting timeline is not assigned", this);
                 return;
             }
+
+            if (_ui)
+                _ui.Initialize(this);
+
+            IsPlaying = false;
 
             Play(_waitingTimeline);
         }
@@ -66,12 +91,10 @@ namespace ff.ar_rh_spurlab.Locations
                 {
                     PlayNextChapter();
                 }
-                else
+                else if (!_isPausedByUser)
                 {
                     _activePlayableDirector.Resume();
                 }
-
-                // todo if the timeline is paused by user do not resume
             }
             else
             {
@@ -84,6 +107,20 @@ namespace ff.ar_rh_spurlab.Locations
             foreach (var pair in _initialMuteStates)
             {
                 pair.Key.muted = pair.Value;
+            }
+
+            IsPlaying = false;
+        }
+
+        private void Update()
+        {
+            if (_activePlayableDirector)
+            {
+                IsPlaying = _activePlayableDirector.state == PlayState.Playing;
+            }
+            else
+            {
+                IsPlaying = false;
             }
         }
 
@@ -248,7 +285,27 @@ namespace ff.ar_rh_spurlab.Locations
             Play(_chapterTimelines[0]);
         }
 
+        public void Pause()
+        {
+            if (!_activePlayableDirector)
+                return;
+
+            _activePlayableDirector.Pause();
+            _isPausedByUser = true;
+        }
+
+        public void Resume()
+        {
+            if (!_activePlayableDirector)
+                return;
+
+            _activePlayableDirector.Resume();
+            _isPausedByUser = false;
+        }
+
         private static readonly Dictionary<TrackAsset, bool> _initialMuteStates = new();
         private bool _isTracked;
+        private bool _isPausedByUser;
+        private static bool _isPlaying;
     }
 }

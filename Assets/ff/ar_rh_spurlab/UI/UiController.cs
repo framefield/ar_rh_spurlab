@@ -1,6 +1,7 @@
 using ff.ar_rh_spurlab.Locations;
 using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.statemachine;
+using ff.common.ui;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,8 +11,10 @@ namespace ff.ar_rh_spurlab.UI
     public class UiController : MonoBehaviour
     {
         [SerializeField]
-        private Button _appMenuButton;
+        private Hidable _canvasHidable;
 
+        [SerializeField]
+        private Button _appMenuButton;
 
         [SerializeField]
         private AppMenuController _appMenuController;
@@ -27,6 +30,13 @@ namespace ff.ar_rh_spurlab.UI
             _appMenuButton.onClick.AddListener(AppMenuButtonClickedHandler);
             _appMenuController.OnClose += () => ToggleAppMenuOpen(false);
 
+            OnIsPlayingChangedHandler(LocationTimelineManager.IsPlaying);
+            LocationTimelineManager.IsPlayingChanged += OnIsPlayingChangedHandler;
+        }
+
+        private void OnIsPlayingChangedHandler(bool isPlaying)
+        {
+            _canvasHidable.IsVisible = !isPlaying;
             ToggleAppMenuOpen(false);
         }
 
