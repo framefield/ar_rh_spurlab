@@ -303,6 +303,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e53881f494e40a5b5bf80302e033d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transition: 0
+  _fadeDuration: 0.2
+  _state: 2
   _closeButton: {fileID: 9161368685957637353}
   _contactButton: {fileID: 7978895022311563298}
   _termsButton: {fileID: 1119987120487218617}
@@ -847,6 +850,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[0]'
+      value: Contact
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[1]'
+      value: Kontakt
+      objectReference: {fileID: 0}
     - target: {fileID: 9171040844722676749, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_text
@@ -993,6 +1006,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: _localizedString._values.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: _localizedString._locales.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[0]'
+      value: Reset for next visitor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[1]'
+      value: Zuruecksetzen fuer den naechsten Besucher
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[2]'
+      value: "Zur\xFCcksetzen f\xFCr den n\xE4chsten Besucher"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: '_localizedString._locales.Array.data[2]'
+      value: de
+      objectReference: {fileID: 0}
     - target: {fileID: 9171040844722676749, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_text
@@ -1138,6 +1181,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[0]'
+      value: Terms of service
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: '_localizedString._values.Array.data[1]'
+      value: Nutzungsbedingungen
       objectReference: {fileID: 0}
     - target: {fileID: 9171040844722676749, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}

@@ -1,12 +1,14 @@
 using System;
+using ff.ar_rh_spurlab.Localization;
 using ff.ar_rh_spurlab.Locations;
+using ff.common.entity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.UI.Site_Ui
 {
-    public class SiteUi : MonoBehaviour
+    public class SiteUi : AbstractLocalizable
     {
         public event Action<SiteData> OnMapButtonClicked;
         public event Action<SiteData, LocationData> OnLocationButtonClicked;
@@ -32,20 +34,13 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
 
             _siteData = siteData;
 
-            // TODO: is this necessary? Sites won't be added on run time
-            foreach (Transform child in _locationsContainer)
-            {
-                Destroy(child.gameObject);
-            }
-
             if (_siteData == null)
             {
                 Debug.LogWarning("can't initialize SiteUi without valid data", this);
                 return;
             }
 
-            // todo use actual title
-            _titleText.text = _siteData.Id;
+            OnLocaleChangedHandler(ApplicationLocale.Instance.CurrentLocale);
 
             var label = 'A';
             foreach (var locationData in _siteData.Locations)
@@ -54,6 +49,17 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
                 newLocationButton.Initialize(locationData, locationController, label++);
                 newLocationButton.OnLocationButtonClicked +=
                     data => OnLocationButtonClicked?.Invoke(_siteData, data);
+            }
+        }
+
+        protected override void OnLocaleChangedHandler(string locale)
+        {
+            if (!_siteData)
+                return;
+
+            if (_siteData.Title.TryGetValue(locale, out var title))
+            {
+                _titleText.text = title;
             }
         }
 

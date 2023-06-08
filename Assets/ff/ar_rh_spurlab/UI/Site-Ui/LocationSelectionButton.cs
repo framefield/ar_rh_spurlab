@@ -1,13 +1,15 @@
 using System;
 using ff.ar_rh_spurlab.Calibration;
+using ff.ar_rh_spurlab.Localization;
 using ff.ar_rh_spurlab.Locations;
+using ff.common.entity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.UI.Site_Ui
 {
-    public class LocationSelectionButton : MonoBehaviour
+    public class LocationSelectionButton : AbstractLocalizable
     {
         public event Action<LocationData> OnLocationButtonClicked;
 
@@ -42,13 +44,23 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
             _button.onClick.AddListener(OnButtonClicked);
         }
 
-        // TODO: Unclear, if this is required.
-// #if UNITY_EDITOR
-//         private void OnValidate()
-//         {
-//             UpdateVisuals();
-//         }
-// #endif
+        protected override void OnLocaleChangedHandler(string locale)
+        {
+            if (!_locationData)
+                return;
+
+            if (!_locationData.Title.TryGetValue(locale, out var title))
+                return;
+
+            foreach (var titleText in _titleTexts)
+            {
+                var calibrationMissingSuffix = CalibrationData.CalibrationDataExists(_locationData.Id)
+                    ? string.Empty
+                    : "\n(not calibrated)";
+
+                titleText.text = title + calibrationMissingSuffix;
+            }
+        }
 
         private void OnButtonClicked()
         {
@@ -75,15 +87,7 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
                 labelText.text = _label;
             }
 
-            foreach (var titleText in _titleTexts)
-            {
-                var calibrationMissingSuffix = CalibrationData.CalibrationDataExists(_locationData.Id)
-                    ? string.Empty
-                    : "\n(not calibrated)";
-
-                // todo use title instead
-                titleText.text = _locationData.Id + calibrationMissingSuffix;
-            }
+            OnLocaleChangedHandler(ApplicationLocale.Instance.CurrentLocale);
         }
 
         private bool IsLocationActive => _locationController.CurrentLocation &&
