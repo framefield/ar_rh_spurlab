@@ -1,19 +1,14 @@
 using System;
-using ff.ar_rh_spurlab.Calibration;
 using ff.ar_rh_spurlab.Locations;
 using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.ui;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.UI
 {
     public class AppMenuController : MonoBehaviour
     {
-        [SerializeField]
-        private string _calibrationSceneName = "Calibration";
-
         [Header("Prefab References")]
         [SerializeField]
         private Hidable _hidable;
@@ -98,8 +93,7 @@ namespace ff.ar_rh_spurlab.UI
 
         private void OnCalibrateButtonClickedHandler()
         {
-            SharedCalibrationContext.ActiveLocation = _locationController.CurrentLocation.LocationData;
-            SceneManager.LoadScene(_calibrationSceneName);
+            _locationController.CalibrateActiveLocation();
         }
 
         private LocationController _locationController;

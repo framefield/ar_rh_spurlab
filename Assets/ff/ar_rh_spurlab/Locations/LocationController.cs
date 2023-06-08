@@ -15,6 +15,9 @@ namespace ff.ar_rh_spurlab.Locations
     public class LocationController : MonoBehaviour
     {
         [SerializeField]
+        private string _calibrationSceneName = "Calibration";
+
+        [SerializeField]
         private LocationData _defaultLocationData;
 
         [Header("Scene References")]
@@ -98,8 +101,7 @@ namespace ff.ar_rh_spurlab.Locations
             if (!isCalibrated)
             {
                 SharedCalibrationContext.ActiveLocation = locationData;
-                // todo use a variable for the scene name
-                SceneManager.LoadScene("Calibration");
+                CalibrateActiveLocation();
                 return false;
             }
 
@@ -128,6 +130,17 @@ namespace ff.ar_rh_spurlab.Locations
 #endif
             LocationChanged?.Invoke();
             return true;
+        }
+
+        public void CalibrateActiveLocation()
+        {
+            if (SharedCalibrationContext.ActiveLocation == null)
+            {
+                Debug.LogError("No active location set!", this);
+                return;
+            }
+
+            SceneManager.LoadScene(_calibrationSceneName);
         }
     }
 }
