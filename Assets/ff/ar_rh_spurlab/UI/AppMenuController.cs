@@ -11,6 +11,9 @@ namespace ff.ar_rh_spurlab.UI
 {
     public class AppMenuController : Hidable
     {
+        [SerializeField]
+        private string _calibrationSceneName = "Calibration";
+
         [Header("Prefab References")]
         [SerializeField]
         private Button _closeButton;
@@ -23,6 +26,9 @@ namespace ff.ar_rh_spurlab.UI
 
         [SerializeField]
         private Button _resetButton;
+
+        [SerializeField]
+        private Button _calibrateButton;
 
         [SerializeField]
         private AvailableSitesUi _availableSitesUi;
@@ -40,8 +46,14 @@ namespace ff.ar_rh_spurlab.UI
             _contactButton.onClick.AddListener(OnContactButtonClickedHandler);
             _termsButton.onClick.AddListener(OnTermsButtonClickedHandler);
             _resetButton.onClick.AddListener(OnResetButtonClickedHandler);
+            _calibrateButton.onClick.AddListener(OnCalibrateButtonClickedHandler);
         }
 
+
+        public void SetIsCalibrationPossible(bool isCalibrationPossible)
+        {
+            _calibrateButton.GetComponent<Hidable>().IsVisible = isCalibrationPossible; // TODO: save component?
+        }
 
         private void OnMapButtonClickedHandler(SiteData data)
         {
@@ -83,6 +95,12 @@ namespace ff.ar_rh_spurlab.UI
         private void OnResetButtonClickedHandler()
         {
             Debug.Log("Reset button clicked");
+        }
+
+        private void OnCalibrateButtonClickedHandler()
+        {
+            SharedCalibrationContext.ActiveLocation = _locationController.CurrentLocation.LocationData;
+            SceneManager.LoadScene(_calibrationSceneName);
         }
 
         private LocationController _locationController;
