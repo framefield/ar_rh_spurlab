@@ -13,9 +13,6 @@ namespace ff.ar_rh_spurlab.Calibration
         [SerializeField]
         private CalibrationUi _calibrationUiPrefab;
 
-        [SerializeField]
-        private LocationData[] _availableLocations;
-
         [Header("Scene References")]
         [SerializeField]
         private StateMachine _stateMachine;
@@ -44,12 +41,12 @@ namespace ff.ar_rh_spurlab.Calibration
         public ARSession Session => _arSession;
         public ARRaycastManager RaycastManager => _arRaycastManager;
         public ARAnchorManager AnchorManager => _arAnchorManager;
-        public LocationData[] AvailableLocations => _availableLocations;
-
         public Transform XrOrigin => _xrOrigin;
 
         private void Start()
         {
+            Debug.Log($"CalibrationController: will load location {SharedCalibrationContext.ActiveLocation.Id}");
+
             if (!_stateMachine)
             {
                 Debug.LogError("CalibrationController: StateMachine is not set!", this);
@@ -93,12 +90,13 @@ namespace ff.ar_rh_spurlab.Calibration
             _calibrationARAnchorManager =
                 new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Calibrating);
             SetLocation(SharedCalibrationContext.ActiveLocation);
-
             _stateMachine.Initialize();
         }
 
         public void SetLocation(LocationData locationData)
         {
+            Debug.Log($"CalibrationController: setting location {locationData.Id}");
+
             CalibrationData = new CalibrationData(locationData.Id);
 
             if (_augmentedLocation)

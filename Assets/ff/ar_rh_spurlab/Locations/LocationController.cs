@@ -98,10 +98,11 @@ namespace ff.ar_rh_spurlab.Locations
 
         public bool SetLocation(LocationData locationData)
         {
+            SharedCalibrationContext.ActiveLocation = locationData;
+
             var isCalibrated = CalibrationData.CalibrationDataExists(locationData.Id);
             if (!isCalibrated)
             {
-                SharedCalibrationContext.ActiveLocation = locationData;
                 CalibrateActiveLocation();
                 return false;
             }
