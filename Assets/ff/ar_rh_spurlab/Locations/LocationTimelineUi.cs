@@ -26,12 +26,12 @@ namespace ff.ar_rh_spurlab.Locations
             _resumeButton.onClick.AddListener(timelineManager.Resume);
 
             OnIsPlayingChanged(LocationTimelineManager.IsPlaying);
-            LocationTimelineManager.IsPlayingChanged += OnIsPlayingChanged;
+            LocationTimelineManager.OnIsPlayingChanged += OnIsPlayingChanged;
         }
 
         private void OnDestroy()
         {
-            LocationTimelineManager.IsPlayingChanged -= OnIsPlayingChanged;
+            LocationTimelineManager.OnIsPlayingChanged -= OnIsPlayingChanged;
         }
 
         private void OnIsPlayingChanged(bool isPlaying)

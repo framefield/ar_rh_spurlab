@@ -46,14 +46,14 @@ namespace ff.ar_rh_spurlab.Locations
             {
                 if (value != _isPlaying)
                 {
-                    IsPlayingChanged?.Invoke(value);
+                    OnIsPlayingChanged?.Invoke(value);
                 }
 
                 _isPlaying = value;
             }
         }
 
-        public static event Action<bool> IsPlayingChanged;
+        public static event Action<bool> OnIsPlayingChanged;
 
         public void Initialize()
         {

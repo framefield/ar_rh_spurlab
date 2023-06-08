@@ -31,7 +31,7 @@ namespace ff.ar_rh_spurlab.UI
             _appMenuController.OnClose += () => ToggleAppMenuOpen(false);
 
             OnIsPlayingChangedHandler(LocationTimelineManager.IsPlaying);
-            LocationTimelineManager.IsPlayingChanged += OnIsPlayingChangedHandler;
+            LocationTimelineManager.OnIsPlayingChanged += OnIsPlayingChangedHandler;
         }
 
         private void OnIsPlayingChangedHandler(bool isPlaying)
