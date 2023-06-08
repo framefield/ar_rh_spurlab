@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4176715566419475189
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 7d45f94544a6f472aac281dac1d7026b, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
 --- !u!114 &-3368704248436724449
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -24,8 +41,8 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: 4047810089164472167}
-    m_Duration: 5.851428571428571
+    m_Asset: {fileID: -3051752282900745693}
+    m_Duration: 7.948571428571428
     m_TimeScale: 1
     m_ParentTrack: {fileID: -3368704248436724449}
     m_EaseInDuration: 1
@@ -89,35 +106,11 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: Chair_43in_LR001
+    m_DisplayName: 1936-YearOnHorizon
   m_Markers:
     m_Objects: []
   _defaultFadeDuration: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
-  m_Name: 01-WelcomeCTA-Timeline
-  m_EditorClassIdentifier: 
-  m_Version: 0
-  m_Tracks:
-  - {fileID: 3887907092073702579}
-  - {fileID: 8092986353637653784}
-  - {fileID: -3368704248436724449}
-  - {fileID: 8427502853205762685}
-  m_FixedDuration: 0
-  m_EditorSettings:
-    m_Framerate: 60
-    m_ScenePreview: 1
-  m_DurationMode: 0
-  m_MarkerTrack: {fileID: 0}
---- !u!114 &399564505671113872
+--- !u!114 &-3051752282900745693
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,9 +123,9 @@ MonoBehaviour:
   m_Name: RevealTransitionAsset
   m_EditorClassIdentifier: 
   _exposedBinding:
-    exposedName: 87b89253c548c8e4886191c648812028
+    exposedName: cd90157961d134984a0dfc0375817422
     defaultValue: {fileID: 0}
---- !u!114 &3887907092073702579
+--- !u!114 &-1664740233835565783
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,8 +134,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b22792c3b570444eb18cb78c2af3a74, type: 3}
-  m_Name: Audio Track
+  m_Script: {fileID: 11500000, guid: d0fc6f5187a81dc47999eefade6f0935, type: 3}
+  m_Name: Voiceovers
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -151,15 +144,40 @@ MonoBehaviour:
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
+  m_Children:
+  - {fileID: 5220900216329966011}
+  - {fileID: -1265895565499389446}
+  m_Clips: []
+  m_Markers:
+    m_Objects: []
+--- !u!114 &-1265895565499389446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554677ee7cb04c0b851da5b1b1aa6f5e, type: 3}
+  m_Name: LocalizedAudioTrack (de)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: -1664740233835565783}
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0
+    m_Start: 1.0000000000000004
     m_ClipIn: 0
-    m_Asset: {fileID: 7894062535987712488}
+    m_Asset: {fileID: -4176715566419475189}
     m_Duration: 6.948571428571428
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 3887907092073702579}
+    m_ParentTrack: {fileID: -1265895565499389446}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
@@ -185,6 +203,106 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Willkommen
+  m_Markers:
+    m_Objects: []
+  m_TrackProperties:
+    volume: 1
+    stereoPan: 0
+    spatialBlend: 0
+  _locale: de
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
+  m_Name: 01-WelcomeCTA-Timeline
+  m_EditorClassIdentifier: 
+  m_Version: 0
+  m_Tracks:
+  - {fileID: -1664740233835565783}
+  - {fileID: 8092986353637653784}
+  - {fileID: -3368704248436724449}
+  - {fileID: 8427502853205762685}
+  m_FixedDuration: 0
+  m_EditorSettings:
+    m_Framerate: 60
+    m_ScenePreview: 1
+  m_DurationMode: 0
+  m_MarkerTrack: {fileID: 0}
+--- !u!114 &399564505671113872
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35e7731f69849b580d22192b8ccd0ef, type: 3}
+  m_Name: RevealTransitionAsset
+  m_EditorClassIdentifier: 
+  _exposedBinding:
+    exposedName: 87b89253c548c8e4886191c648812028
+    defaultValue: {fileID: 0}
+--- !u!114 &5220900216329966011
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554677ee7cb04c0b851da5b1b1aa6f5e, type: 3}
+  m_Name: LocalizedAudioTrack (en)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: -1664740233835565783}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 1.0000000000000004
+    m_ClipIn: 0
+    m_Asset: {fileID: 7894062535987712488}
+    m_Duration: 6.948571428571428
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 5220900216329966011}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -228,21 +346,7 @@ MonoBehaviour:
     volume: 1
     stereoPan: 0
     spatialBlend: 0
---- !u!114 &4047810089164472167
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e35e7731f69849b580d22192b8ccd0ef, type: 3}
-  m_Name: RevealTransitionAsset
-  m_EditorClassIdentifier: 
-  _exposedBinding:
-    exposedName: 2e118beea5cfa174db21271c9d65d5f7
-    defaultValue: {fileID: 0}
+  _locale: en
 --- !u!114 &5909294005330352402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -256,6 +360,9 @@ MonoBehaviour:
   m_Name: RevealTransitionGroupAsset
   m_EditorClassIdentifier: 
   _definitions:
+  - Name: AreaSquare - BuildingItem
+    IsActive: 0
+    Id: AreaSquare - BuildingItem
   - Name: R01 - BuildingItem
     IsActive: 0
     Id: R01 - BuildingItem
@@ -529,7 +636,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 5909294005330352402}
-    m_Duration: 6.948571428571428
+    m_Duration: 7.948571428571428
     m_TimeScale: 1
     m_ParentTrack: {fileID: 8092986353637653784}
     m_EaseInDuration: 0
@@ -621,7 +728,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 399564505671113872}
-    m_Duration: 5.851428571428571
+    m_Duration: 3
     m_TimeScale: 1
     m_ParentTrack: {fileID: 8427502853205762685}
     m_EaseInDuration: 1

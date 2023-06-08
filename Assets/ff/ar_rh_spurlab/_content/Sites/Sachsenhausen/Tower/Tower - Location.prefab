@@ -49,13 +49,16 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 3887907092073702579, guid: 3205440e244a3c24ab47bcfdcf956c96, type: 2}
     value: {fileID: 0}
-  - key: {fileID: 3887907092073702579, guid: b23b1479cecbb4150acc7b2a3ac80505, type: 2}
-    value: {fileID: 0}
   - key: {fileID: 8092986353637653784, guid: b23b1479cecbb4150acc7b2a3ac80505, type: 2}
     value: {fileID: 1159499575295301573}
+  - key: {fileID: 5220900216329966011, guid: b23b1479cecbb4150acc7b2a3ac80505, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1265895565499389446, guid: b23b1479cecbb4150acc7b2a3ac80505, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - f0cfa0b107bdb4de4b575411ca13750e: {fileID: 0}
+    - cd90157961d134984a0dfc0375817422: {fileID: 1416742904899413802}
     - 533ba112f738a4f578e95afc0505a7f2: {fileID: 0}
     - 32304dec81e11450a80ee9eed3e5cbd3: {fileID: 0}
     - 7e376a4baf0be4f3a96415a695c32fdb: {fileID: 0}
@@ -76,7 +79,7 @@ GameObject:
   - component: {fileID: 6957266007012701191}
   - component: {fileID: 5291812864398375828}
   m_Layer: 0
-  m_Name: '03-Expansion Phase 1939-1945-Timeline '
+  m_Name: '03-Expansion 1939-1945-Timeline '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,18 +119,18 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 6309460888122699887, guid: 6b0e3e85d81e7f048abf8e2adcb1e5b0, type: 2}
     value: {fileID: 0}
-  - key: {fileID: -3746330111247003524, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 0}
   - key: {fileID: -8500005720783524315, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
     value: {fileID: 1159499575295301573}
-  - key: {fileID: -212178907049048523, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: -3746330111247003524, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: -212178907049048523, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 0}
   - key: {fileID: -8500005720783524315, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
     value: {fileID: 1159499575295301573}
+  - key: {fileID: -3496512590649511321, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 112740627540051628, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - 3abbf0d89b5fb4a13a016ec9fe51033c: {fileID: 5386923471208942369}
@@ -313,7 +316,7 @@ GameObject:
   - component: {fileID: 4273006798993615750}
   - component: {fileID: 6668093488301492918}
   m_Layer: 0
-  m_Name: 04-Destruction and Demolition Phase 1945-Now-Timeline
+  m_Name: 04-Destruction and Demolition 1945-Now-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -353,24 +356,24 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 6309460888122699887, guid: 6b0e3e85d81e7f048abf8e2adcb1e5b0, type: 2}
     value: {fileID: 0}
-  - key: {fileID: -3746330111247003524, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 0}
   - key: {fileID: -8500005720783524315, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
     value: {fileID: 1159499575295301573}
-  - key: {fileID: -212178907049048523, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 0}
-  - key: {fileID: -3746330111247003524, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 0}
-  - key: {fileID: -212178907049048523, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 0}
   - key: {fileID: -8500005720783524315, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
     value: {fileID: 1159499575295301573}
-  - key: {fileID: -3746330111247003524, guid: 88e6ebb62134d4f61b176dd8f01a24a1, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: -212178907049048523, guid: 88e6ebb62134d4f61b176dd8f01a24a1, type: 2}
-    value: {fileID: 0}
   - key: {fileID: -8500005720783524315, guid: 88e6ebb62134d4f61b176dd8f01a24a1, type: 2}
     value: {fileID: 1159499575295301573}
+  - key: {fileID: 7060451349980270046, guid: 88e6ebb62134d4f61b176dd8f01a24a1, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3593834132979433186, guid: 88e6ebb62134d4f61b176dd8f01a24a1, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - 3abbf0d89b5fb4a13a016ec9fe51033c: {fileID: 5386923471208942369}
@@ -536,7 +539,7 @@ GameObject:
   - component: {fileID: 14405704690528027}
   - component: {fileID: 2005600212777941286}
   m_Layer: 0
-  m_Name: 02-Construction Phase 1936-1939-Timeline
+  m_Name: 02-Construction 1936-1939-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -576,11 +579,11 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 6309460888122699887, guid: 6b0e3e85d81e7f048abf8e2adcb1e5b0, type: 2}
     value: {fileID: 0}
-  - key: {fileID: -3746330111247003524, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
-    value: {fileID: 0}
   - key: {fileID: -8500005720783524315, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
     value: {fileID: 1159499575295301573}
-  - key: {fileID: -212178907049048523, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
+  - key: {fileID: -5487285040132737534, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5048952871559239738, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
@@ -1091,7 +1094,7 @@ PrefabInstance:
     - target: {fileID: 1698371688088322136, guid: f582f8e19692240ffbeeabbe16f0bf41,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4294967295
+      value: 16777215
       objectReference: {fileID: 0}
     - target: {fileID: 2167127681008382098, guid: f582f8e19692240ffbeeabbe16f0bf41,
         type: 3}
