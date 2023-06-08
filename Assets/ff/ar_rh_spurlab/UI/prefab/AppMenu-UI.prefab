@@ -301,7 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transition: 0
   _fadeDuration: 0.2
-  _state: 2
+  _state: 0
 --- !u!1 &3777905866981381252
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,9 +27,7 @@ namespace ff.ar_rh_spurlab.UI
             _appMenuButton.onClick.AddListener(AppMenuButtonClickedHandler);
             _appMenuController.OnClose += () => ToggleAppMenuOpen(false);
 
-            // Open by default to enforce location selection.
-            // This should probably be a setting in the long term 
-            ToggleAppMenuOpen(true);
+            ToggleAppMenuOpen(false);
         }
 
         private void LocationChangedHandler()

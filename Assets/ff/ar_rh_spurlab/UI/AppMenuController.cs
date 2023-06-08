@@ -73,17 +73,7 @@ namespace ff.ar_rh_spurlab.UI
         {
             Debug.Log($"Location button clicked for site {siteData.Id} and location {locationData.Title}");
 
-            var isCalibrated = CalibrationData.CalibrationDataExists(locationData.Id);
-            if (isCalibrated)
-            {
-                _locationController.SetLocation(locationData);
-            }
-            else
-            {
-                SharedCalibrationContext.ActiveLocation = locationData;
-                // todo use a variable for the scene name
-                SceneManager.LoadScene("Calibration");
-            }
+            _locationController.SetLocation(locationData);
         }
 
         private void OnCloseButtonClickedHandler()

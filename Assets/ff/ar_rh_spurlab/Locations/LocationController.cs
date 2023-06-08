@@ -3,8 +3,10 @@ using System.IO;
 using ff.ar_rh_spurlab.AR;
 using ff.ar_rh_spurlab.Calibration;
 using ff.ar_rh_spurlab.UI;
+using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.statemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.XR.ARFoundation;
 
@@ -13,7 +15,7 @@ namespace ff.ar_rh_spurlab.Locations
     public class LocationController : MonoBehaviour
     {
         [SerializeField]
-        private LocationData[] _availableLocations;
+        private LocationData _defaultLocationData;
 
         [Header("Scene References")]
         [SerializeField]
@@ -31,18 +33,15 @@ namespace ff.ar_rh_spurlab.Locations
         [FormerlySerializedAs("_mainMenuController")]
         [SerializeField]
         private UiController _uiController;
-        
+
         private CalibrationARAnchorManager _calibrationARAnchorManager;
 
 
         private AugmentedLocation _augmentedLocation;
-        public LocationData[] AvailableLocations => _availableLocations;
-
         public event Action LocationChanged;
         public AugmentedLocation CurrentLocation => _augmentedLocation;
 
-        
-        
+
         private void Start()
         {
             if (!_stateMachine)
@@ -71,8 +70,16 @@ namespace ff.ar_rh_spurlab.Locations
 
             _calibrationARAnchorManager =
                 new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Tracking);
-            _stateMachine.Initialize();
+
+            if (SharedCalibrationContext.ActiveLocation == null)
+            {
+                SharedCalibrationContext.ActiveLocation = _defaultLocationData;
+            }
+
             _uiController.Initialize(this, _stateMachine);
+            SetLocation(SharedCalibrationContext.ActiveLocation);
+
+            _stateMachine.Initialize();
         }
 
         public void ResetLocation()
@@ -87,6 +94,15 @@ namespace ff.ar_rh_spurlab.Locations
 
         public bool SetLocation(LocationData locationData)
         {
+            var isCalibrated = CalibrationData.CalibrationDataExists(locationData.Id);
+            if (!isCalibrated)
+            {
+                SharedCalibrationContext.ActiveLocation = locationData;
+                // todo use a variable for the scene name
+                SceneManager.LoadScene("Calibration");
+                return false;
+            }
+
             var calibrationData = CalibrationData.TryLoad(locationData.Id);
 
             if (calibrationData == null)
