@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.XR.ARFoundation;
 
 namespace ff.ar_rh_spurlab.GrayScaler
@@ -38,6 +40,12 @@ namespace ff.ar_rh_spurlab.GrayScaler
                 Debug.LogWarning("Could not initialize portal texture renderer.", this);
                 enabled = false;
             }
+
+            var shader = _arCameraBackground.material.shader;
+            _modeNoPortalKeyword = new LocalKeyword(shader, "_MODE_NOPORTAL");
+            _modeInPortalKeyword = new LocalKeyword(shader, "_MODE_INPORTAL");
+            _modeGuideToPortalKeyword = new LocalKeyword(shader, "_MODE_GUIDETOPORTAL");
+            _xrSimulationKeyword = new LocalKeyword(shader, "XR_SIMULATION");
         }
 
         private void OnEnable()
@@ -72,31 +80,31 @@ namespace ff.ar_rh_spurlab.GrayScaler
             material.SetTexture(PortalMaskPropId, _portalTextureRenderer.PortalTexture);
 
 #if UNITY_EDITOR
-            material.EnableKeyword("XR_SIMULATION");
+            material.EnableKeyword(_xrSimulationKeyword);
 #else
-            material.DisableKeyword("XR_SIMULATION");
+            material.DisableKeyword(_xrSimulationKeyword);
 #endif
 
             if (_pointOfInterests.Count > 0)
             {
                 if (_isInsidePortal)
                 {
-                    material.DisableKeyword("_MODE_NOPORTAL");
-                    material.EnableKeyword("_MODE_INPORTAL");
-                    material.DisableKeyword("_MODE_GUIDETOPORTAL");
+                    material.DisableKeyword(_modeNoPortalKeyword);
+                    material.EnableKeyword(_modeInPortalKeyword);
+                    material.DisableKeyword(_modeGuideToPortalKeyword);
                 }
                 else
                 {
-                    material.DisableKeyword("_MODE_NOPORTAL");
-                    material.DisableKeyword("_MODE_INPORTAL");
-                    material.EnableKeyword("_MODE_GUIDETOPORTAL");
+                    material.DisableKeyword(_modeNoPortalKeyword);
+                    material.DisableKeyword(_modeInPortalKeyword);
+                    material.EnableKeyword(_modeGuideToPortalKeyword);
                 }
             }
             else
             {
-                material.EnableKeyword("_MODE_NOPORTAL");
-                material.DisableKeyword("_MODE_INPORTAL");
-                material.DisableKeyword("_MODE_GUIDETOPORTAL");
+                material.EnableKeyword(_modeNoPortalKeyword);
+                material.DisableKeyword(_modeInPortalKeyword);
+                material.DisableKeyword(_modeGuideToPortalKeyword);
             }
         }
 
@@ -131,8 +139,23 @@ namespace ff.ar_rh_spurlab.GrayScaler
             _pointOfInterests.Remove(pointOfInterest);
         }
 
+        private void OnDestroy()
+        {
+            // reset the material to its original state for clean repo
+            var material = _arCameraBackground.material;
+
+            material.EnableKeyword(_modeNoPortalKeyword);
+            material.DisableKeyword(_modeInPortalKeyword);
+            material.DisableKeyword(_modeGuideToPortalKeyword);
+        }
+
         private static readonly int PointsOfInterestPropId = Shader.PropertyToID("_PointsOfInterest");
         private static readonly int CameraTransformId = Shader.PropertyToID("_cameraTransformMatrix");
         private static readonly int PortalMaskPropId = Shader.PropertyToID("_portalMask");
+
+        private LocalKeyword _modeNoPortalKeyword;
+        private LocalKeyword _modeInPortalKeyword;
+        private LocalKeyword _modeGuideToPortalKeyword;
+        private LocalKeyword _xrSimulationKeyword;
     }
 }
