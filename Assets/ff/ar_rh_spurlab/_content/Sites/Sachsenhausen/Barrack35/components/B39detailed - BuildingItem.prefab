@@ -68,10 +68,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3251298472068760697, guid: 1e85f5e35a8394e9ba59b6351cfdd825,
+        type: 3}
+      propertyPath: _pointList
+      value: 
+      objectReference: {fileID: -1627658041094200601, guid: f38c4844c7554634290ae52fcb775cf8,
+        type: 3}
     - target: {fileID: 5172946006083484188, guid: 1e85f5e35a8394e9ba59b6351cfdd825,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -100,7 +106,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -5528634725066599071, guid: 6aba3da59e8a84df7abde995200c7429,
+      objectReference: {fileID: 7674381969779721851, guid: 6d6429d7dd890274da86b92cb1d1fda3,
         type: 3}
     - target: {fileID: 1305610756537306619, guid: 87f663c2cfbce0648b9f70485437b811,
         type: 3}
@@ -111,6 +117,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3037037732030085694, guid: 87f663c2cfbce0648b9f70485437b811,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3037037732030085694, guid: 87f663c2cfbce0648b9f70485437b811,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3037037732030085694, guid: 87f663c2cfbce0648b9f70485437b811,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3037037732030085694, guid: 87f663c2cfbce0648b9f70485437b811,
         type: 3}
@@ -161,6 +182,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3037037732030085694, guid: 87f663c2cfbce0648b9f70485437b811,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
