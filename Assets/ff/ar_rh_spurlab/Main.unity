@@ -4219,7 +4219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _calibrationSceneName: Calibration
-  _defaultLocationData: {fileID: 11400000, guid: 53100a4c1ba144d3d984376d9d22a690,
+  _defaultLocationData: {fileID: 11400000, guid: 9b34e16ba6460443aa6b5f2969832138,
     type: 2}
   _stateMachine: {fileID: 2059743936}
   _arSession: {fileID: 2030565722}
