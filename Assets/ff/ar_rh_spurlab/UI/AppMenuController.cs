@@ -26,33 +26,33 @@ namespace ff.ar_rh_spurlab.UI
 
         [SerializeField]
         private AvailableSitesUi _availableSitesUi;
-        
+
         public event Action OnClose;
-        
+
         public void Initialize(LocationController locationController)
         {
             _locationController = locationController;
             _availableSitesUi.Initialize(locationController);
-            
+
             _availableSitesUi.OnMapButtonClicked += OnMapButtonClickedHandler;
             _availableSitesUi.OnLocationButtonClicked += OnLocationButtonClickedHandler;
             _closeButton.onClick.AddListener(OnCloseButtonClickedHandler);
             _contactButton.onClick.AddListener(OnContactButtonClickedHandler);
             _termsButton.onClick.AddListener(OnTermsButtonClickedHandler);
             _resetButton.onClick.AddListener(OnResetButtonClickedHandler);
-        }        
+        }
 
 
         private void OnMapButtonClickedHandler(SiteData data)
         {
-            Debug.Log($"Map button clicked for site {data.Name}");
+            Debug.Log($"Map button clicked for site {data.Id}");
         }
 
         private void OnLocationButtonClickedHandler(SiteData siteData, LocationData locationData)
         {
-            Debug.Log($"Location button clicked for site {siteData.Name} and location {locationData.Title}");
-            
-            var isCalibrated = CalibrationData.CalibrationDataExists(locationData.Title);
+            Debug.Log($"Location button clicked for site {siteData.Id} and location {locationData.Title}");
+
+            var isCalibrated = CalibrationData.CalibrationDataExists(locationData.Id);
             if (isCalibrated)
             {
                 _locationController.SetLocation(locationData);
@@ -60,9 +60,9 @@ namespace ff.ar_rh_spurlab.UI
             else
             {
                 SharedCalibrationContext.ActiveLocation = locationData;
+                // todo use a variable for the scene name
                 SceneManager.LoadScene("Calibration");
             }
-            
         }
 
         private void OnCloseButtonClickedHandler()
@@ -86,6 +86,5 @@ namespace ff.ar_rh_spurlab.UI
         }
 
         private LocationController _locationController;
-
     }
 }

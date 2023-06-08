@@ -91,15 +91,15 @@ namespace ff.ar_rh_spurlab.Calibration
             }
         }
 
-        public static bool CalibrationDataExists(string name)
+        public static bool CalibrationDataExists(string id)
         {
-            var filePath = Path.Combine(Application.persistentDataPath, name, "calibrationdata.json");
+            var filePath = Path.Combine(Application.persistentDataPath, id, "calibrationdata.json");
             return File.Exists(filePath);
         }
 
-        public static CalibrationData TryLoad(string name)
+        public static CalibrationData TryLoad(string id)
         {
-            var filePath = Path.Combine(Application.persistentDataPath, name, "calibrationdata.json");
+            var filePath = Path.Combine(Application.persistentDataPath, id, "calibrationdata.json");
             // Debug.Log(filePath);
             try
             {

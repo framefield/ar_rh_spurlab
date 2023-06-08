@@ -29,9 +29,9 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
         public void Initialize(SiteData siteData, LocationController locationController)
         {
             _mapButton.onClick.AddListener(OnMapButtonClickedHandler);
-            
+
             _siteData = siteData;
-            
+
             // TODO: is this necessary? Sites won't be added on run time
             foreach (Transform child in _locationsContainer)
             {
@@ -44,7 +44,8 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
                 return;
             }
 
-            _titleText.text = _siteData.Name.ToUpper();
+            // todo use actual title
+            _titleText.text = _siteData.Id;
 
             var label = 'A';
             foreach (var locationData in _siteData.Locations)
@@ -55,12 +56,12 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
                     data => OnLocationButtonClicked?.Invoke(_siteData, data);
             }
         }
-        
+
         private void OnMapButtonClickedHandler()
         {
             OnMapButtonClicked?.Invoke(_siteData);
         }
-        
+
         private SiteData _siteData;
     }
 }

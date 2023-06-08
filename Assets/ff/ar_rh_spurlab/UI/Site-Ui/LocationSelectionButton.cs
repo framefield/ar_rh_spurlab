@@ -38,7 +38,7 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
             _label = labelChar.ToString();
             locationController.LocationChanged += LocationChangedHandler;
             UpdateVisuals();
-            
+
             _button.onClick.AddListener(OnButtonClicked);
         }
 
@@ -54,7 +54,6 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
         {
             OnLocationButtonClicked?.Invoke(_locationData);
         }
-
 
 
         private void LocationChangedHandler()
@@ -78,14 +77,18 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
 
             foreach (var titleText in _titleTexts)
             {
-                var calibrationMissingSuffix = CalibrationData.CalibrationDataExists(_locationData.Title) 
-                    ? string.Empty 
-                    : "\n(not calibrated)";            
-                titleText.text = _locationData.Title  + calibrationMissingSuffix;
+                var calibrationMissingSuffix = CalibrationData.CalibrationDataExists(_locationData.Id)
+                    ? string.Empty
+                    : "\n(not calibrated)";
+
+                // todo use title instead
+                titleText.text = _locationData.Id + calibrationMissingSuffix;
             }
         }
 
-        private bool IsLocationActive => _locationController.CurrentLocation && _locationController.CurrentLocation.LocationData == _locationData;
+        private bool IsLocationActive => _locationController.CurrentLocation &&
+                                         _locationController.CurrentLocation.LocationData == _locationData;
+
         private string _label = "A";
         private LocationController _locationController;
     }
