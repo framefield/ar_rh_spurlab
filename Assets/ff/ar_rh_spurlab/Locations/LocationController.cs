@@ -78,7 +78,10 @@ namespace ff.ar_rh_spurlab.Locations
             }
 
             _uiController.Initialize(this, _stateMachine);
-            SetLocation(SharedCalibrationContext.ActiveLocation);
+            if (SharedCalibrationContext.ActiveLocation)
+            {
+                SetLocation(SharedCalibrationContext.ActiveLocation);
+            }
 
             _stateMachine.Initialize();
         }

@@ -53,7 +53,7 @@ namespace ff.ar_rh_spurlab.Calibration
         {
             var worldMappingState = "simulator";
             var notTrackingReason = ARSession.notTrackingReason;
-#if UNITY_IOS
+#if UNITY_IOS && !UNITY_EDITOR
             if (_arSession.subsystem is ARKitSessionSubsystem sessionSubsystem)
             {
                 worldMappingState = sessionSubsystem.worldMappingStatus.ToString();
