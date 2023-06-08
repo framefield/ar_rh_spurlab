@@ -20,3 +20,4 @@ MonoBehaviour:
     - en
   _locations:
   - {fileID: 11400000, guid: 9b34e16ba6460443aa6b5f2969832138, type: 2}
+  - {fileID: 11400000, guid: 322064df2b3514a23b79c9a640ca9800, type: 2}
