@@ -1,3 +1,4 @@
+using System;
 using ff.ar_rh_spurlab.Locations;
 using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.statemachine;
@@ -34,8 +35,16 @@ namespace ff.ar_rh_spurlab.UI
             LocationTimelineManager.OnIsPlayingChanged += OnIsPlayingChangedHandler;
         }
 
+        private void OnDestroy()
+        {
+            LocationTimelineManager.OnIsPlayingChanged -= OnIsPlayingChangedHandler;
+        }
+
         private void OnIsPlayingChangedHandler(bool isPlaying)
         {
+            if (!_canvasHidable)
+                return;
+            
             _canvasHidable.IsVisible = !isPlaying;
             ToggleAppMenuOpen(false);
         }
