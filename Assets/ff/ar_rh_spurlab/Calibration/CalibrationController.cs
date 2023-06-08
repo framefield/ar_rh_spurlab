@@ -1,6 +1,7 @@
 using System.IO;
 using ff.ar_rh_spurlab.AR;
 using ff.ar_rh_spurlab.Locations;
+using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.statemachine;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -92,6 +93,7 @@ namespace ff.ar_rh_spurlab.Calibration
             _calibrationARAnchorManager =
                 new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Calibrating);
             _stateMachine.Initialize();
+            SetLocation(SharedCalibrationContext.ActiveLocation);
         }
 
         public void SetLocation(LocationData locationData)

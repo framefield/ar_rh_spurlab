@@ -1,4 +1,5 @@
 using ff.ar_rh_spurlab.Locations;
+using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.statemachine;
 using UnityEngine;
 
@@ -23,13 +24,15 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void Activate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
         {
+            _stateMachine = stateMachine;
+            
             if (!_calibrationController)
             {
                 _calibrationController = stateMachine.GetComponent<CalibrationController>();
             }
-
-            _stateMachine = stateMachine;
-
+            
+            _calibrationController.SetLocation(SharedCalibrationContext.ActiveLocation);
+            
             _locationSelectionUi.SetVisibility(true);
             _locationSelectionUi.SetOptions(_calibrationController.AvailableLocations);
             _locationSelectionUi.OnLocationSelected += OnLocationSelected;
@@ -43,7 +46,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private void OnLocationSelected(LocationData locationData)
         {
-            _calibrationController.SetLocation(locationData);
+            _calibrationController.SetLocation(SharedCalibrationContext.ActiveLocation);
             _stateMachine.Continue();
         }
     }
