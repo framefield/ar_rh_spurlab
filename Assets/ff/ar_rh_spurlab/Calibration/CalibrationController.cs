@@ -92,8 +92,9 @@ namespace ff.ar_rh_spurlab.Calibration
 
             _calibrationARAnchorManager =
                 new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Calibrating);
-            _stateMachine.Initialize();
             SetLocation(SharedCalibrationContext.ActiveLocation);
+
+            _stateMachine.Initialize();
         }
 
         public void SetLocation(LocationData locationData)
