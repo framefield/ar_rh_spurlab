@@ -346,8 +346,18 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void SetCalibrationData(CalibrationData calibrationData)
         {
-            _calibrationData = calibrationData;
-            MatchExistingAnchors();
+            if (calibrationData != _calibrationData)
+            {
+                foreach (var anchor in _allAnchors)
+                {
+                    Object.Destroy(anchor.gameObject);
+                }
+
+                _allAnchors.Clear();
+
+                _calibrationData = calibrationData;
+                MatchExistingAnchors();
+            }
         }
 
         public void Reset()
