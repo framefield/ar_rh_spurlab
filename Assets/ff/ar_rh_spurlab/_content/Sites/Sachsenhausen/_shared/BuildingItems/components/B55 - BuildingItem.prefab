@@ -11,12 +11,12 @@ PrefabInstance:
     - target: {fileID: 126709140919284063, guid: 1e85f5e35a8394e9ba59b6351cfdd825,
         type: 3}
       propertyPath: m_Name
-      value: B55 - BuildingItem Variant
+      value: B55 - BuildingItem
       objectReference: {fileID: 0}
     - target: {fileID: 2742119254907312361, guid: 1e85f5e35a8394e9ba59b6351cfdd825,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2742119254907312361, guid: 1e85f5e35a8394e9ba59b6351cfdd825,
         type: 3}
@@ -99,7 +99,7 @@ PrefabInstance:
     - target: {fileID: 1305610756537306619, guid: 87f663c2cfbce0648b9f70485437b811,
         type: 3}
       propertyPath: m_Name
-      value: Block1 (4)
+      value: Block1
       objectReference: {fileID: 0}
     - target: {fileID: 3037037732030085694, guid: 87f663c2cfbce0648b9f70485437b811,
         type: 3}
