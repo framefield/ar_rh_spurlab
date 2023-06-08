@@ -61,6 +61,7 @@ PlayableDirector:
     - 32304dec81e11450a80ee9eed3e5cbd3: {fileID: 0}
     - 7e376a4baf0be4f3a96415a695c32fdb: {fileID: 0}
     - 2e118beea5cfa174db21271c9d65d5f7: {fileID: 0}
+    - 9e68ee367c3884da9919404e89ca2ced: {fileID: 7765902552408355576}
     - 3885f270b2a25514aabc8312a50e946d: {fileID: 0}
     - de6f561e62e974ee998a2116486540a1: {fileID: 0}
     - 8c782c707c2dc4cf7821842d7b84db0b: {fileID: 0}
@@ -880,6 +881,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2576358902476421532}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7765902552408355576 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5190143468153654116, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2576358902476421532}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d71cb28a95433fb2e9b01a601aa8df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4587059897783619955
 PrefabInstance:
   m_ObjectHideFlags: 0
