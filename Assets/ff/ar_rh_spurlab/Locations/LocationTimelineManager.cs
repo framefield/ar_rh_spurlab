@@ -64,7 +64,9 @@ namespace ff.ar_rh_spurlab.Locations
             }
 
             if (_ui)
+            {
                 _ui.Initialize(this);
+            }
 
             IsPlaying = false;
 
@@ -106,7 +108,7 @@ namespace ff.ar_rh_spurlab.Locations
         {
             foreach (var pair in _initialMuteStates)
             {
-                pair.Key.muted = pair.Value;
+                pair.Key.muted = pair.Value.isMuted;
             }
 
             IsPlaying = false;
@@ -122,6 +124,8 @@ namespace ff.ar_rh_spurlab.Locations
             {
                 IsPlaying = false;
             }
+
+            _initialMuteStates.Clear();
         }
 
         protected override void OnLocaleChangedHandler(string locale)
@@ -141,6 +145,11 @@ namespace ff.ar_rh_spurlab.Locations
                 return;
             }
 
+            if (!director.playableGraph.IsValid())
+            {
+                director.RebuildGraph();
+            }
+
             var timelineAsset = director.playableAsset as TimelineAsset;
 
             if (!timelineAsset)
@@ -156,7 +165,7 @@ namespace ff.ar_rh_spurlab.Locations
 
                 if (track is ILocaleSpecificContent localeSpecificContent)
                 {
-                    _initialMuteStates.TryAdd(track, track.muted);
+                    _initialMuteStates.TryAdd(track, (track.muted, director));
 
                     track.muted = locale != null && localeSpecificContent.Locale != locale;
                     needsRebuild = true;
@@ -303,7 +312,9 @@ namespace ff.ar_rh_spurlab.Locations
             _isPausedByUser = false;
         }
 
-        private static readonly Dictionary<TrackAsset, bool> _initialMuteStates = new();
+        private readonly Dictionary<TrackAsset, (bool isMuted, PlayableDirector director)> _initialMuteStates =
+            new();
+
         private bool _isTracked;
         private bool _isPausedByUser;
         private static bool _isPlaying;
