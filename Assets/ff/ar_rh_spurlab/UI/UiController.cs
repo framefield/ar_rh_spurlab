@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.UI
 {
-    public class MainMenuController : MonoBehaviour
+    public class UiController : MonoBehaviour
     {
         [SerializeField]
         private string _calibrationSceneName = "Calibration";

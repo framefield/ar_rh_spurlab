@@ -5,6 +5,7 @@ using ff.ar_rh_spurlab.Calibration;
 using ff.ar_rh_spurlab.UI;
 using ff.common.statemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.XR.ARFoundation;
 
 namespace ff.ar_rh_spurlab.Locations
@@ -27,8 +28,9 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private Transform _xrOrigin;
 
+        [FormerlySerializedAs("_mainMenuController")]
         [SerializeField]
-        private MainMenuController _mainMenuController;
+        private UiController _uiController;
         
         private CalibrationARAnchorManager _calibrationARAnchorManager;
 
@@ -70,7 +72,7 @@ namespace ff.ar_rh_spurlab.Locations
             _calibrationARAnchorManager =
                 new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Tracking);
             _stateMachine.Initialize();
-            _mainMenuController.Initialize(this, _stateMachine);
+            _uiController.Initialize(this, _stateMachine);
         }
 
         public void ResetLocation()
