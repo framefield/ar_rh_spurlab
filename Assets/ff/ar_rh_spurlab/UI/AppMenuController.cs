@@ -9,12 +9,15 @@ using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.UI
 {
-    public class AppMenuController : Hidable
+    public class AppMenuController : MonoBehaviour
     {
         [SerializeField]
         private string _calibrationSceneName = "Calibration";
 
         [Header("Prefab References")]
+        [SerializeField]
+        private Hidable _hidable;
+
         [SerializeField]
         private Button _closeButton;
 
@@ -34,6 +37,12 @@ namespace ff.ar_rh_spurlab.UI
         private AvailableSitesUi _availableSitesUi;
 
         public event Action OnClose;
+
+        public bool IsVisible
+        {
+            get => _hidable.IsVisible;
+            set => _hidable.IsVisible = value;
+        }
 
         public void Initialize(LocationController locationController)
         {
