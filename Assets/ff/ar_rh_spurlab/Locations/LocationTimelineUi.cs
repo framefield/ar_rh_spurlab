@@ -19,8 +19,10 @@ namespace ff.ar_rh_spurlab.Locations
 
         [SerializeField]
         private Button _resumeButton;
+        
+        
 
-        public void Initialize(LocationTimelineManager timelineManager)
+        public void Initialize(LocationTimelineManager timelineManager, LocationTimelineManager.Chapter[] chapters)
         {
             _pauseButton.onClick.AddListener(timelineManager.Pause);
             _resumeButton.onClick.AddListener(timelineManager.Resume);

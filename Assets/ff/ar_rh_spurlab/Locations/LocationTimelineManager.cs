@@ -4,7 +4,6 @@ using ff.ar_rh_spurlab.Localization;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
-using Object = UnityEngine.Object;
 
 namespace ff.ar_rh_spurlab.Locations
 {
@@ -26,8 +25,20 @@ namespace ff.ar_rh_spurlab.Locations
         private PlayableDirector _waitingTimeline;
 
         [SerializeField]
-        private PlayableDirector[] _chapterTimelines;
+        private Chapter[] _chapters;
 
+        [Serializable]
+        public class Chapter
+        {
+            public string Name;
+            public PlayableDirector Timeline;
+
+            [NonSerialized]
+            public bool IsActive;
+
+            [NonSerialized]
+            public bool HasPlayed;
+        }
 
         public bool AutoPlay
         {
@@ -62,7 +73,7 @@ namespace ff.ar_rh_spurlab.Locations
 
             if (_ui)
             {
-                _ui.Initialize(this);
+                _ui.Initialize(this, _chapters);
             }
 
             IsPlaying = false;
@@ -131,9 +142,9 @@ namespace ff.ar_rh_spurlab.Locations
         protected override void OnLocaleChangedHandler(string locale)
         {
             SetLocalizedTracksMuted(_waitingTimeline, locale);
-            foreach (var chapterTimeline in _chapterTimelines)
+            foreach (var chapter in _chapters)
             {
-                SetLocalizedTracksMuted(chapterTimeline, locale);
+                SetLocalizedTracksMuted(chapter.Timeline, locale);
             }
         }
 
@@ -178,6 +189,19 @@ namespace ff.ar_rh_spurlab.Locations
             }
         }
 
+        private void Play(Chapter chapter)
+        {
+            foreach (var c in _chapters)
+            {
+                c.IsActive = false;
+            }
+
+            chapter.IsActive = true;
+            chapter.HasPlayed = true;
+
+            Play(chapter.Timeline);
+        }
+
         private void Play(PlayableDirector director)
         {
             if (_activePlayableDirector)
@@ -195,11 +219,11 @@ namespace ff.ar_rh_spurlab.Locations
 
         public void PlayNextChapter()
         {
-            var (currentIndex, isFound) = FindIndex(_activePlayableDirector, _chapterTimelines);
+            var (currentIndex, isFound) = FindIndex(_activePlayableDirector, _chapters);
             currentIndex++;
-            if (currentIndex < _chapterTimelines.Length)
+            if (currentIndex < _chapters.Length)
             {
-                Play(_chapterTimelines[currentIndex]);
+                Play(_chapters[currentIndex]);
             }
         }
 
@@ -228,7 +252,7 @@ namespace ff.ar_rh_spurlab.Locations
                 return;
             }
 
-            var (currentIndex, isFound) = FindIndex(director, _chapterTimelines);
+            var (currentIndex, isFound) = FindIndex(director, _chapters);
 
             if (!isFound)
             {
@@ -239,18 +263,18 @@ namespace ff.ar_rh_spurlab.Locations
             }
 
             currentIndex++;
-            if (currentIndex < _chapterTimelines.Length)
+            if (currentIndex < _chapters.Length)
             {
-                Play(_chapterTimelines[currentIndex]);
+                Play(_chapters[currentIndex]);
             }
         }
 
-        private static (int, bool) FindIndex(Object searchedObject, IReadOnlyList<Object> objects)
+        private static (int, bool) FindIndex(PlayableDirector timeline, Chapter[] chapters)
         {
             var currentIndex = -1;
-            for (var i = 0; i < objects.Count; i++)
+            for (var i = 0; i < chapters.Length; i++)
             {
-                if (objects[i] == searchedObject)
+                if (chapters[i].Timeline == timeline)
                 {
                     currentIndex = i;
                     break;
@@ -280,13 +304,13 @@ namespace ff.ar_rh_spurlab.Locations
             }
 
 
-            if (_chapterTimelines.Length == 0)
+            if (+_chapters.Length == 0)
             {
                 Debug.LogError("No chapter timelines are assigned.", this);
                 return;
             }
 
-            Play(_chapterTimelines[0]);
+            Play(_chapters[0]);
         }
 
         public void Pause()
