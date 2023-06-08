@@ -727,7 +727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7590f9372214df8b423b20c297e7fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoTriggerChapters: 1
   _autoPlay: 0
   _ui: {fileID: 6606760361135690369}
   _waitingTimeline: {fileID: 6873018579674439453}
@@ -3949,6 +3948,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: ff.ar_rh_spurlab.Locations.LocationTimelineManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683971174754027662, guid: 9d1629e88a678f84b8a96046ac4f86b9,
+        type: 3}
+      propertyPath: OnActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4683971174754027662, guid: 9d1629e88a678f84b8a96046ac4f86b9,
         type: 3}

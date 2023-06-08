@@ -16,10 +16,7 @@ namespace ff.ar_rh_spurlab.Locations
     {
         [Header("Settings")]
         [SerializeField]
-        private bool _autoTriggerChapters = true;
-
-        [SerializeField]
-        private bool _autoPlay = true;
+        private bool _autoPlay = false;
 
         [Header("Prefab references")]
         [SerializeField]
@@ -77,6 +74,9 @@ namespace ff.ar_rh_spurlab.Locations
         {
             _isTracked = isTracked;
 
+            if (_isPausedByUser)
+                return;
+
             if (!_activePlayableDirector)
             {
                 if (isTracked)
@@ -89,11 +89,11 @@ namespace ff.ar_rh_spurlab.Locations
 
             if (isTracked)
             {
-                if (_activePlayableDirector.time >= _activePlayableDirector.duration)
+                if (_autoPlay && _activePlayableDirector.time >= _activePlayableDirector.duration)
                 {
                     PlayNextChapter();
                 }
-                else if (!_isPausedByUser)
+                else
                 {
                     _activePlayableDirector.Resume();
                 }
@@ -220,11 +220,6 @@ namespace ff.ar_rh_spurlab.Locations
             var isWaitingForTrigger = director == _waitingTimeline;
             if (isWaitingForTrigger)
             {
-                if (_autoTriggerChapters && _isTracked)
-                {
-                    PlayChapters();
-                }
-
                 return;
             }
 
