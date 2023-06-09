@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using ff.utils;
 using UnityEngine;
@@ -53,17 +55,41 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         public void UpdateDefinitions(RevealTransitionGroup group)
         {
 #if UNITY_EDITOR
-            var newDefinitions = new GroupDefinition[group.Reveals.Length];
+            var existingDefinitions = new Dictionary<string, (int index, GroupDefinition definition)>();
+            for (var index = 0; index < _definitions.Length; index++)
+            {
+                var definition = _definitions[index];
+                existingDefinitions.Add(definition.Id, (index, definition));
+            }
 
+            var newDefinitions = new GroupDefinition[group.Reveals.Length];
             for (var i = 0; i < group.Reveals.Length; i++)
             {
                 var reveal = group.Reveals[i];
                 if (!reveal)
+                {
                     continue;
+                }
 
-                newDefinitions[i] = CreateDefinition(reveal);
+                var id = reveal.name;
+                if (existingDefinitions.TryGetValue(id, out var existingDefinition))
+                {
+                    newDefinitions[i] = existingDefinition.definition;
+                }
+                else
+                {
+                    newDefinitions[i] = new GroupDefinition()
+                    {
+                        Id = reveal.name,
+                        Name = reveal.name,
+                        IsActive = false,
+                    };
+                    existingDefinitions.Add(id, (int.MaxValue, newDefinitions[i]));
+                }
             }
 
+            Array.Sort(newDefinitions,
+                (a, b) => existingDefinitions[a.Id].index.CompareTo(existingDefinitions[b.Id].index));
             _definitions = newDefinitions;
 #endif
         }
@@ -76,33 +102,6 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             return playable;
         }
 
-#if UNITY_EDITOR
-        private GroupDefinition CreateDefinition(Component component)
-        {
-            var componentName = component.name;
-            var isActive = SetPreviousOrDefaultSettings(componentName);
-
-            return new GroupDefinition()
-            {
-                IsActive = isActive,
-                Name = componentName,
-                Id = componentName
-            };
-        }
-#endif
-
-        private bool SetPreviousOrDefaultSettings(string id)
-        {
-            if (_definitions == null)
-            {
-                return false;
-            }
-
-            return (from definition in _definitions
-                    where definition.Id == id
-                    select (definition.IsActive))
-                .FirstOrDefault();
-        }
 
         [Serializable]
         public struct GroupDefinition
