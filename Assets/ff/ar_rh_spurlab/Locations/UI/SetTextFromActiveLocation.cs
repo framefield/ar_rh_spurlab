@@ -1,9 +1,8 @@
 using ff.ar_rh_spurlab.Localization;
 using ff.common.entity;
-using TMPro;
 using UnityEngine;
 
-namespace ff.ar_rh_spurlab.Locations
+namespace ff.ar_rh_spurlab.Locations.UI
 {
     public class SetTextFromActiveLocation : SetLocalizedText
     {

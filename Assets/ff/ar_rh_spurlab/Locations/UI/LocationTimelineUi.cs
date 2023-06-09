@@ -4,7 +4,7 @@ using ff.common.ui;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ff.ar_rh_spurlab.Locations
+namespace ff.ar_rh_spurlab.Locations.UI
 {
     public class LocationTimelineUi : MonoBehaviour
     {

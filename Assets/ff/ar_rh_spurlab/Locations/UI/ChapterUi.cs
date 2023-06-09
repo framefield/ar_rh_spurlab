@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ff.ar_rh_spurlab.Locations
+namespace ff.ar_rh_spurlab.Locations.UI
 {
     public class ChapterUi : AbstractLocalizable
     {
