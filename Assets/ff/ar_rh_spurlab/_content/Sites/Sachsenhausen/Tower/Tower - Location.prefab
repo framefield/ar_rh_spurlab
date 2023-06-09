@@ -731,13 +731,37 @@ MonoBehaviour:
   _ui: {fileID: 6606760361135690369}
   _waitingTimeline: {fileID: 6873018579674439453}
   _chapters:
-  - Name: Welcome
+  - Title:
+      _values:
+      - Welcome
+      - Wilkommen
+      _locales:
+      - en
+      - de
     Timeline: {fileID: 1659719286235176634}
-  - Name: 1936
+  - Title:
+      _values:
+      - 1939
+      - 1939
+      _locales:
+      - en
+      - de
     Timeline: {fileID: 2005600212777941286}
-  - Name: 1939
+  - Title:
+      _values:
+      - 1945
+      - 1945
+      _locales:
+      - em
+      - de
     Timeline: {fileID: 5291812864398375828}
-  - Name: Destruction
+  - Title:
+      _values:
+      - Demolition
+      - Vernichtung
+      _locales:
+      - en
+      - de
     Timeline: {fileID: 6668093488301492918}
 --- !u!1 &7192351720333973121
 GameObject:

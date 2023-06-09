@@ -530,8 +530,15 @@ MonoBehaviour:
   _autoPlay: 0
   _ui: {fileID: 0}
   _waitingTimeline: {fileID: 6873018579674439453}
-  _chapterTimelines:
-  - {fileID: 1659719286235176634}
+  _chapters:
+  - Title:
+      _values:
+      - Welcome
+      - Wilkommen
+      _locales:
+      - en
+      - de
+    Timeline: {fileID: 1659719286235176634}
 --- !u!1 &7192351720333973121
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +1001,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 2576358902476421532}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70d71cb28a95433fb2e9b01a601aa8df, type: 3}
   m_Name: 

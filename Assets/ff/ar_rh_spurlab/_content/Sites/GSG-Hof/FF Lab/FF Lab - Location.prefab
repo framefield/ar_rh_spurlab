@@ -409,13 +409,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7590f9372214df8b423b20c297e7fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoTriggerChapters: 1
   _autoPlay: 1
   _ui: {fileID: 4979716920556640123}
   _waitingTimeline: {fileID: 7734014496868547289}
-  _chapterTimelines:
-  - {fileID: 7579996722938202505}
-  - {fileID: 5575422335085710503}
+  _chapters:
+  - Title:
+      _values:
+      - Welcome
+      - Wilkommen
+      _locales:
+      - en
+      - de
+    Timeline: {fileID: 7579996722938202505}
+  - Title:
+      _values:
+      - Line
+      - Linie
+      _locales:
+      - en
+      - de
+    Timeline: {fileID: 5575422335085710503}
 --- !u!1 &8697102194822080716
 GameObject:
   m_ObjectHideFlags: 0

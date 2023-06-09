@@ -652,14 +652,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7590f9372214df8b423b20c297e7fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoTriggerChapters: 1
   _autoPlay: 0
   _ui: {fileID: 2352550462109145720}
   _waitingTimeline: {fileID: 6873018579674439453}
-  _chapterTimelines:
-  - {fileID: 1659719286235176634}
-  - {fileID: 2005600212777941286}
-  - {fileID: 5161035477522753284}
+  _chapters:
+  - Title:
+      _values:
+      - Welcome
+      - Wilkommen
+      _locales:
+      - en
+      - de
+    Timeline: {fileID: 1659719286235176634}
+  - Title:
+      _values:
+      - Window
+      - Fenster
+      _locales:
+      - en
+      - de
+    Timeline: {fileID: 2005600212777941286}
+  - Title:
+      _values:
+      - Future
+      - Zukunft
+      _locales:
+      - en
+      - de
+    Timeline: {fileID: 5161035477522753284}
 --- !u!1 &7026148600874766207
 GameObject:
   m_ObjectHideFlags: 0
