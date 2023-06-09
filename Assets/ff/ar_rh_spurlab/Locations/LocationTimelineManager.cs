@@ -167,6 +167,8 @@ namespace ff.ar_rh_spurlab.Locations
 
         private void PlayChapter(Chapter chapter)
         {
+            // todo check if user is in portal
+            // todo OR do not show chapter ui if user is not in portal
             var i = 0;
             var chapterIndex = -1;
 

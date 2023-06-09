@@ -88,7 +88,7 @@ namespace ff.ar_rh_spurlab.UI
 
         private void OnResetButtonClickedHandler()
         {
-            Debug.Log("Reset button clicked");
+            _locationController.ResetLocation();
         }
 
         private void OnCalibrateButtonClickedHandler()

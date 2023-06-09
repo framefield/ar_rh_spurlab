@@ -42,7 +42,6 @@ namespace ff.ar_rh_spurlab.Locations
         public event Action LocationChanged;
         public AugmentedLocation CurrentLocation => _augmentedLocation;
 
-
         private void Start()
         {
             if (!_stateMachine)
@@ -94,6 +93,8 @@ namespace ff.ar_rh_spurlab.Locations
                 _augmentedLocation = null;
                 _calibrationARAnchorManager.Reset();
             }
+
+            SetLocation(_defaultLocationData);
         }
 
         public bool SetLocation(LocationData locationData)
