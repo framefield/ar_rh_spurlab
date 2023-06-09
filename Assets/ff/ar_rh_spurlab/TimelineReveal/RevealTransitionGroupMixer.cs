@@ -88,6 +88,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                 if (revealStateTuplesById.TryGetValue(key, out var stateTuple))
                 {
                     var (weight, state) = stateTuple;
+                    // Debug.Log($"key: {key}, weight: {weight}, state: {state}");
                     value.SetNormalizedTime(weight, state);
                 }
                 else

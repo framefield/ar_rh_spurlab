@@ -63,7 +63,8 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         public static (float weight, State state) CalculateAbsoluteWeightAndState(TimelineClip clip, Playable playable,
             double fadeInDuration, double fadeOutDuration, bool existInPrev, bool existsInNext)
         {
-            var time = playable.GetTime();
+            // playable.GetTime() is not resetting when the clip is looping
+            var time = playable.GetGraph().GetRootPlayable(0).GetTime();
             var weight = 0d;
 
             State state;
