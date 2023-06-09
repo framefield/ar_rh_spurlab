@@ -156,7 +156,7 @@ RectTransform:
   - {fileID: 5548893093940164311}
   - {fileID: 5678910683685806381}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -241,6 +241,11 @@ MonoBehaviour:
   _pausedPanel: {fileID: 6114483144119588698}
   _pauseButton: {fileID: 2822966308208331701}
   _resumeButton: {fileID: 4508979077895247401}
+  _chaptersContainer: {fileID: 2551934257851964236}
+  _chapterUiPrefab: {fileID: 1996709288262711037, guid: ffd9862d44b404f7794859596f028fcd,
+    type: 3}
+  _chapterUiSeparatorPrefab: {fileID: 4190917457876984022, guid: d8de6a13c97e44375b748a3326580b7a,
+    type: 3}
 --- !u!1 &3704120981066511580
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,9 +302,9 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0

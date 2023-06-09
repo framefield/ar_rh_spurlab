@@ -17,6 +17,7 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private bool _autoPlay = false;
 
+
         [Header("Prefab references")]
         [SerializeField]
         private LocationTimelineUi _ui;
@@ -27,19 +28,6 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private Chapter[] _chapters;
 
-        [Serializable]
-        public class Chapter
-        {
-            public string Name;
-            public PlayableDirector Timeline;
-
-            [NonSerialized]
-            public bool IsActive;
-
-            [NonSerialized]
-            public bool HasPlayed;
-        }
-
         public bool AutoPlay
         {
             get => _autoPlay;
@@ -47,21 +35,8 @@ namespace ff.ar_rh_spurlab.Locations
             set => _autoPlay = value;
         }
 
-        public static bool IsPlaying
-        {
-            get => _isPlaying;
-            private set
-            {
-                if (value != _isPlaying)
-                {
-                    OnIsPlayingChanged?.Invoke(value);
-                }
+        public static ReactiveProperty<bool> IsPlaying = new();
 
-                _isPlaying = value;
-            }
-        }
-
-        public static event Action<bool> OnIsPlayingChanged;
 
         public void Initialize()
         {
@@ -74,9 +49,10 @@ namespace ff.ar_rh_spurlab.Locations
             if (_ui)
             {
                 _ui.Initialize(this, _chapters);
+                _ui.OnChapterClicked += PlayChapter;
             }
 
-            IsPlaying = false;
+            IsPlaying.Value = false;
 
             Play(_waitingTimeline);
         }
@@ -122,18 +98,18 @@ namespace ff.ar_rh_spurlab.Locations
                 pair.Key.muted = pair.Value.isMuted;
             }
 
-            IsPlaying = false;
+            IsPlaying.Value = false;
         }
 
         private void Update()
         {
             if (_activePlayableDirector)
             {
-                IsPlaying = _activePlayableDirector.state == PlayState.Playing;
+                IsPlaying.Value = _activePlayableDirector.state == PlayState.Playing;
             }
             else
             {
-                IsPlaying = false;
+                IsPlaying.Value = false;
             }
 
             _initialMuteStates.Clear();
@@ -189,15 +165,25 @@ namespace ff.ar_rh_spurlab.Locations
             }
         }
 
-        private void Play(Chapter chapter)
+        private void PlayChapter(Chapter chapter)
         {
+            var i = 0;
+            var chapterIndex = -1;
+
             foreach (var c in _chapters)
             {
-                c.IsActive = false;
+                c.IsActive.Value = false;
+                if (c == chapter)
+                {
+                    chapterIndex = i;
+                }
+
+                c.IsNext.Value = chapterIndex != -1 && i == chapterIndex + 1;
+                i++;
             }
 
-            chapter.IsActive = true;
-            chapter.HasPlayed = true;
+            chapter.IsActive.Value = true;
+            chapter.IsVisited.Value = true;
 
             Play(chapter.Timeline);
         }
@@ -223,7 +209,7 @@ namespace ff.ar_rh_spurlab.Locations
             currentIndex++;
             if (currentIndex < _chapters.Length)
             {
-                Play(_chapters[currentIndex]);
+                PlayChapter(_chapters[currentIndex]);
             }
         }
 
@@ -265,7 +251,7 @@ namespace ff.ar_rh_spurlab.Locations
             currentIndex++;
             if (currentIndex < _chapters.Length)
             {
-                Play(_chapters[currentIndex]);
+                PlayChapter(_chapters[currentIndex]);
             }
         }
 
@@ -310,7 +296,7 @@ namespace ff.ar_rh_spurlab.Locations
                 return;
             }
 
-            Play(_chapters[0]);
+            PlayChapter(_chapters[0]);
         }
 
         public void Pause()

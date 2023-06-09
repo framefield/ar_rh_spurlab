@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ff.common.ui;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,8 @@ namespace ff.ar_rh_spurlab.Locations
 {
     public class LocationTimelineUi : MonoBehaviour
     {
+        public event Action<Chapter> OnChapterClicked;
+
         [Header("Prefab References")]
         [SerializeField]
         private Hidable _playingPanel;
@@ -19,21 +22,32 @@ namespace ff.ar_rh_spurlab.Locations
 
         [SerializeField]
         private Button _resumeButton;
-        
-        
 
-        public void Initialize(LocationTimelineManager timelineManager, LocationTimelineManager.Chapter[] chapters)
+        [Header("Chapter UI")]
+        [SerializeField]
+        private Transform _chaptersContainer;
+
+        [SerializeField]
+        private ChapterUi _chapterUiPrefab;
+
+        [SerializeField]
+        private GameObject _chapterUiSeparatorPrefab;
+
+
+        public void Initialize(LocationTimelineManager timelineManager, Chapter[] chapters)
         {
             _pauseButton.onClick.AddListener(timelineManager.Pause);
             _resumeButton.onClick.AddListener(timelineManager.Resume);
 
-            OnIsPlayingChanged(LocationTimelineManager.IsPlaying);
-            LocationTimelineManager.OnIsPlayingChanged += OnIsPlayingChanged;
+            BuildChaptersUi(chapters);
+
+            OnIsPlayingChanged(LocationTimelineManager.IsPlaying.Value);
+            LocationTimelineManager.IsPlaying.OnValueChanged += OnIsPlayingChanged;
         }
 
         private void OnDestroy()
         {
-            LocationTimelineManager.OnIsPlayingChanged -= OnIsPlayingChanged;
+            LocationTimelineManager.IsPlaying.OnValueChanged -= OnIsPlayingChanged;
         }
 
         private void OnIsPlayingChanged(bool isPlaying)
@@ -43,6 +57,22 @@ namespace ff.ar_rh_spurlab.Locations
 
             if (_pausedPanel)
                 _pausedPanel.IsVisible = !isPlaying;
+        }
+
+
+        private void BuildChaptersUi(IReadOnlyList<Chapter> chapters)
+        {
+            for (var i = 0; i < chapters.Count; i++)
+            {
+                var newChapterUi = Instantiate(_chapterUiPrefab, _chaptersContainer);
+                newChapterUi.Initialize(chapters[i]);
+                newChapterUi.OnChapterClicked += c => OnChapterClicked?.Invoke(c);
+
+                if (i != chapters.Count - 1)
+                {
+                    Instantiate(_chapterUiSeparatorPrefab, _chaptersContainer);
+                }
+            }
         }
     }
 }
