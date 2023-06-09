@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -20,7 +21,12 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                 }
             }
 
-            return base.CreateTrackMixer(graph, go, inputCount);
+            var clips = GetClips();
+            var mixer = ScriptPlayable<RevealTransitionGroupMixer>.Create(graph);
+            mixer.SetInputCount(inputCount);
+            mixer.GetBehaviour().Clips = clips.ToArray();
+
+            return mixer;
         }
 
         public override void GatherProperties(PlayableDirector director, IPropertyCollector driver)
@@ -29,7 +35,9 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             var binding = director.GetGenericBinding(this);
 
             if (binding == null)
+            {
                 return;
+            }
 
             var group = binding as RevealTransitionGroup;
 

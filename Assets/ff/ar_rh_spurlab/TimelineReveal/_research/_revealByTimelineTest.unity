@@ -527,6 +527,7 @@ MonoBehaviour:
   _fadeInDuration: 0.3
   _fadeOutDuration: 0.3
   _normalizedTimePosition: 0
+  _state: 0
 --- !u!1 &1471536435
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,6 +684,7 @@ MonoBehaviour:
   _fadeInDuration: 0.3
   _fadeOutDuration: 0.3
   _normalizedTimePosition: 0
+  _state: 0
 --- !u!95 &1485865364
 Animator:
   serializedVersion: 7
@@ -1022,3 +1024,4 @@ MonoBehaviour:
   _fadeInDuration: 0.3
   _fadeOutDuration: 0.3
   _normalizedTimePosition: 0
+  _state: 0
