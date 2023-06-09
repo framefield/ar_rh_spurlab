@@ -14,8 +14,6 @@ namespace ff.ar_rh_spurlab.Calibration
 {
     public static class CalibrationCalculator
     {
-        const float anchorMatchingDistance = 1.0f;
-
 #if UNITY_EDITOR
         //for testing any quality is allowed
         const float allowedMatchingDeviation = 100.0f;
@@ -221,6 +219,8 @@ namespace ff.ar_rh_spurlab.Calibration
 
     public class CalibrationARAnchorManager
     {
+        const float anchorMatchingDistance = 1.0f;
+
         public enum Mode
         {
             Calibrating,
