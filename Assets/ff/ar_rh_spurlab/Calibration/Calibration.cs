@@ -14,6 +14,8 @@ namespace ff.ar_rh_spurlab.Calibration
 {
     public static class CalibrationCalculator
     {
+        const float anchorMatchingDistance = 1.0f;
+
 #if UNITY_EDITOR
         //for testing any quality is allowed
         const float allowedMatchingDeviation = 100.0f;
@@ -303,7 +305,7 @@ namespace ff.ar_rh_spurlab.Calibration
                 ARAnchor foundAnchor = null;
                 foreach (var anchor in availableAnchors)
                 {
-                    if (Vector3.Distance(anchor.transform.position, _calibrationData.PointsInWorldMap[i]) < 0.1f)
+                    if (Vector3.Distance(anchor.transform.position, _calibrationData.PointsInWorldMap[i]) < anchorMatchingDistance)
                     {
                         _calibrationData.PointsInWorldMap[i] = anchor.transform.position;
                         availableAnchors.Remove(anchor);
@@ -311,7 +313,6 @@ namespace ff.ar_rh_spurlab.Calibration
                         break;
                     }
                 }
-
                 _calibrationData._matchedAnchors.Add(foundAnchor);
             }
             _calibrationData._unmatchedAnchors = availableAnchors;
