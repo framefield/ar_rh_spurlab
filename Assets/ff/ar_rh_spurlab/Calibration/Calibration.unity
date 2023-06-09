@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlanePrefab: {fileID: 1568414836858200, guid: f0e0be81472ff1243aa2afa27e5d0e61,
+  m_PlanePrefab: {fileID: 1585201990951412, guid: 32a4e1c0d4c47eb488f932b9ed864b74,
     type: 3}
   m_DetectionMode: -1
 --- !u!114 &275107519
@@ -5170,10 +5170,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _calibrationUiPrefab: {fileID: 59770335312172965, guid: dcd0999ca55804ea7a8f05b628ff1f41,
     type: 3}
-  _availableLocations:
-  - {fileID: 11400000, guid: aae92e1daa2ef477591c98f9d3d30b33, type: 2}
-  - {fileID: 11400000, guid: 53100a4c1ba144d3d984376d9d22a690, type: 2}
-  - {fileID: 11400000, guid: 9b34e16ba6460443aa6b5f2969832138, type: 2}
   _stateMachine: {fileID: 6612144957398312631}
   _arSession: {fileID: 2030565722}
   _arRaycastManager: {fileID: 275107522}
