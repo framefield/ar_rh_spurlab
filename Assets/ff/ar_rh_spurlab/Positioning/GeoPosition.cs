@@ -111,7 +111,7 @@ namespace ff.ar_rh_spurlab.Positioning
             var e = -lonSin * delta.X + lonCos * delta.Y;
             var n = -lonCos * latSin * delta.X - latSin * lonSin * delta.Y + latCos * delta.Z;
 
-            return new Vector3Double(n, 0, e);
+            return new Vector3Double(e, 0, n);
         }
 
         public bool Equal(GeoPosition a, GeoPosition b, double epsilon = 0.0000001)

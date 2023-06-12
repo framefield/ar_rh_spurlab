@@ -66,7 +66,7 @@ namespace ff.ar_rh_spurlab.Positioning
 
         private void UpdateHeading()
         {
-            _targetRotation = Quaternion.Euler(0, _heading, 0);
+            _targetRotation = Quaternion.Euler(0, -_heading, 0);
         }
     }
 }
