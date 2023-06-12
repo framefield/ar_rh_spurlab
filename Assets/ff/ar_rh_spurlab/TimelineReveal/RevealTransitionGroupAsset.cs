@@ -39,15 +39,17 @@ namespace ff.ar_rh_spurlab.TimelineReveal
 
         public void SetBinding(RevealTransitionGroup group)
         {
-#if UNITY_EDITOR
-            if (!group || Application.isPlaying)
-            {
-                return;
-            }
-
-            UpdateDefinitions(group);
-#endif
             _group = group;
+#if UNITY_EDITOR
+            if (group && !Application.isPlaying)
+            {
+                UpdateDefinitions(group);
+            }
+#endif
+            if (Application.isPlaying)
+            {
+                RefreshCache();
+            }
         }
 
         public string GetActiveInfoText()
