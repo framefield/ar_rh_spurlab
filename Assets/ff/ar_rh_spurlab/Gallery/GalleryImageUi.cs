@@ -1,38 +1,53 @@
 using ff.ar_rh_spurlab._content.Timelines.ImageItem;
-using ff.ar_rh_spurlab.Localization;
-using ff.common.entity;
-using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.Gallery
 {
-    public class GalleryImageUi : AbstractLocalizable
+    public class GalleryImageUi : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField]
         private RawImage _rawImage;
 
         [SerializeField]
-        private TMP_Text _title;
+        private LayoutElement _layoutElement;
 
-        public void Initialize(ImageData imageData)
+        public ImageData Data { get; private set; }
+        public float PositionX => _rectTransform.anchoredPosition.x;
+
+        public void Initialize(ImageData imageData, float maxWidth, float maxHeight, float positionX)
         {
-            _imageData = imageData;
-            _rawImage.texture = _imageData.ImageTexture;
-            OnLocaleChangedHandler(ApplicationLocale.Instance.CurrentLocale);
-        }
+            Data = imageData;
+            _rawImage.texture = Data.ImageTexture;
+            var imageTransform = _rawImage.GetComponent<RectTransform>();
 
-        protected override void OnLocaleChangedHandler(string locale)
-        {
-            if (_imageData == null)
-                return;
+            float imageWidth = Data.ImageTexture.width;
+            float imageHeight = Data.ImageTexture.height;
 
-            if (_imageData.Title.TryGetValue(locale, out var title))
+            if (imageWidth > maxWidth || imageHeight > maxHeight)
             {
-                _title.text = title;
+                var widthRatio = maxWidth / imageWidth;
+                var heightRatio = maxHeight / imageHeight;
+                var ratio = Mathf.Min(widthRatio, heightRatio);
+                imageWidth *= ratio;
+                imageHeight *= ratio;
             }
+
+            imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, imageWidth);
+            imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, imageHeight);
+            _layoutElement.minWidth = imageWidth;
+            _layoutElement.minHeight = imageHeight;
+
+            _rectTransform = GetComponent<RectTransform>();
+            // _rectTransform.anchoredPosition = new Vector2(positionX, _rectTransform.anchoredPosition.y);
         }
 
-        private ImageData _imageData;
+
+        private RectTransform _rectTransform;
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+        }
     }
 }

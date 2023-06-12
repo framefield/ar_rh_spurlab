@@ -11,8 +11,20 @@ namespace ff.ar_rh_spurlab.Gallery
             if (!GalleryUiInstance)
                 return;
 
+            if (image == null)
+            {
+                Debug.LogWarning($"GalleryController: ShowImage({image}, {isZoomedIn}) image is null!");
+                return;
+            }
+
             GalleryUiInstance.SetImages(ImageDataList);
             GalleryUiInstance.ShowImage(image, isZoomedIn);
+        }
+
+        public static void ShowGallery()
+        {
+            GalleryUiInstance.SetImages(ImageDataList);
+            GalleryUiInstance.Show();
         }
 
         public static void AddImageData(ImageData imageData)
