@@ -718,6 +718,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.1
 --- !u!114 &-6807625928787340991
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1190,6 +1193,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 0
+    SequentialDelay: 0.2
 --- !u!114 &-4718999040311844652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2037,6 +2043,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.1
 --- !u!114 &953482700444142759
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2299,6 +2308,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.1
 --- !u!114 &2334672289239204410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2414,6 +2426,9 @@ MonoBehaviour:
   - Name: PersonBlockHalf 2b
     IsActive: 0
     Id: PersonBlockHalf 2b
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.1
 --- !u!114 &2507015309241394808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3258,6 +3273,9 @@ MonoBehaviour:
   - Name: PersonBlockHalf 2b
     IsActive: 0
     Id: PersonBlockHalf 2b
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.1
 --- !u!114 &3093395270802054290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3539,6 +3557,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.1
 --- !u!114 &4122040938103805000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3786,6 +3807,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.1
 --- !u!114 &5048952871559239738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4235,6 +4259,9 @@ MonoBehaviour:
   - Name: PersonBlockHalf 2b
     IsActive: 1
     Id: PersonBlockHalf 2b
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.1
 --- !u!114 &8636632949009557715
 MonoBehaviour:
   m_ObjectHideFlags: 1
