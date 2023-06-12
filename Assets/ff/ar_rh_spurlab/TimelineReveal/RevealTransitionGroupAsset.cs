@@ -1,8 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ff.common.TimelineReveal;
 using ff.utils;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -17,26 +18,23 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         [SerializeField]
         private GroupDefinition[] _definitions = default;
 
+        public GroupDefinition[] Definitions => _definitions;
 
-        public string GetActiveInfoText()
+        public struct GroupDefinitionWithReveal
         {
-            var actives = string.Empty;
-            if (_definitions == null)
-                return actives;
-
-            return _definitions.Where(definition => definition.IsActive).Aggregate(actives,
-                (current, definition) => $"{current} {definition.Name}\n");
+            public GroupDefinition Definition;
+            public RevealTransitionAutomatic Reveal;
         }
 
-        public void SetActiveAll(bool isActive)
-        {
-            if (_definitions == null)
-                return;
+        [CanBeNull]
+        public Dictionary<string, GroupDefinitionWithReveal> ActiveResolvedDefinitions { get; private set; }
 
-            for (var i = 0; i < _definitions.Length; i++)
-            {
-                _definitions[i].IsActive = isActive;
-            }
+        public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
+        {
+            var playable = ScriptPlayable<RevealTransitionGroupPlayable>.Create(graph);
+            var groupPlayable = playable.GetBehaviour();
+            groupPlayable.Initialize(this);
+            return playable;
         }
 
         public void SetBinding(RevealTransitionGroup group)
@@ -52,14 +50,46 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             _group = group;
         }
 
+        public string GetActiveInfoText()
+        {
+            var actives = string.Empty;
+            if (_definitions == null)
+            {
+                return actives;
+            }
+
+            return _definitions.Where(definition => definition.IsActive).Aggregate(actives,
+                (current, definition) => $"{current} {definition.Name}\n");
+        }
+
+        public void SetActiveAll(bool isActive)
+        {
+            if (_definitions == null)
+            {
+                return;
+            }
+
+            for (var i = 0; i < _definitions.Length; i++)
+            {
+                _definitions[i].IsActive = isActive;
+            }
+        }
+
+        public void UpdateDefinitions()
+        {
+            if (_group)
+            {
+                UpdateDefinitions(_group);
+            }
+        }
+
         public void UpdateDefinitions(RevealTransitionGroup group)
         {
-#if UNITY_EDITOR
             var existingDefinitions = new Dictionary<string, (int index, GroupDefinition definition)>();
             for (var index = 0; index < _definitions.Length; index++)
             {
                 var definition = _definitions[index];
-                existingDefinitions.Add(definition.Id, (index, definition));
+                existingDefinitions.TryAdd(definition.Id, (index, definition));
             }
 
             var newDefinitions = new GroupDefinition[group.Reveals.Length];
@@ -91,17 +121,28 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             Array.Sort(newDefinitions,
                 (a, b) => existingDefinitions[a.Id].index.CompareTo(existingDefinitions[b.Id].index));
             _definitions = newDefinitions;
-#endif
+            RefreshCache();
         }
 
-        public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
+        private void RefreshCache()
         {
-            var playable = ScriptPlayable<RevealTransitionGroupPlayable>.Create(graph);
-            var groupPlayable = playable.GetBehaviour();
-            groupPlayable.Initialize(_definitions, this, _group);
-            return playable;
+            if (_group && _definitions != null)
+            {
+                var revealById = _group.RevealsById;
+                ActiveResolvedDefinitions = _definitions
+                    .Where(definition => definition.IsActive && revealById.ContainsKey(definition.Id))
+                    .Select(d => new GroupDefinitionWithReveal
+                    {
+                        Definition = d,
+                        Reveal = revealById[d.Id]
+                    })
+                    .ToDictionary(d => d.Definition.Id);
+            }
+            else
+            {
+                ActiveResolvedDefinitions = null;
+            }
         }
-
 
         [Serializable]
         public struct GroupDefinition

@@ -1,11 +1,11 @@
-﻿using System;
+﻿using ff.common.TimelineReveal;
 using ff.utils;
 using UnityEngine;
 
-namespace ff.common.TimelineReveal
+namespace ff.ar_rh_spurlab.TimelineReveal
 {
     /// <summary>
-    /// Control of <see cref="TimelineReveal.RevealTransition"/> without timeline.
+    /// Control of <see cref="common.TimelineReveal.RevealTransition"/> without timeline.
     /// </summary>
     public class RevealTransitionAutomatic : MonoBehaviour
     {
@@ -19,6 +19,9 @@ namespace ff.common.TimelineReveal
 
         [SerializeField]
         private float _fadeOutDuration = 0.3f;
+
+        public float FadeInDuration => _fadeInDuration;
+        public float FadeOutDuration => _fadeOutDuration;
 
         public AnimationClip GetClip()
         {
@@ -37,6 +40,11 @@ namespace ff.common.TimelineReveal
             }
         }
 
+        public void SetNormalizedTime(float weight, State state)
+        {
+            _revealTransition.UpdateNormalizedTime(weight, state);
+        }
+
         public void FadeIn(bool immediate = false)
         {
             if (immediate)
@@ -50,7 +58,9 @@ namespace ff.common.TimelineReveal
 
             // Do nothing if it is already Fade in
             if (_normalizedTimePosition >= 1f)
+            {
                 _state = State.None;
+            }
         }
 
         public void FadeOut(bool immediate = false)
@@ -66,7 +76,9 @@ namespace ff.common.TimelineReveal
 
             // Do nothing if it is already Fade out
             if (_normalizedTimePosition <= 0f)
+            {
                 _state = State.None;
+            }
         }
 
         public void Stop()

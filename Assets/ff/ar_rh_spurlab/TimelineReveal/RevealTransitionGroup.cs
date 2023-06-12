@@ -35,26 +35,22 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             }
         }
 
-        public void DeactivateAll()
+        public Dictionary<string, RevealTransitionAutomatic> RevealsById
         {
-            var setImmediate = !Application.isPlaying;
-
-            foreach (var reveal in Reveals)
+            get
             {
-                if (reveal)
-                    reveal.SetVisibility(false, setImmediate);
-            }
-        }
+                if (Application.isPlaying && _cachedRevealsById != null)
+                {
+                    return _cachedRevealsById;
+                }
 
-        public void SetGroupDefinition(RevealTransitionGroupAsset.GroupDefinition[] definitions)
-        {
-            var setImmediate = !Application.isPlaying;
+                _cachedRevealsById = new Dictionary<string, RevealTransitionAutomatic>();
+                foreach (var reveal in Reveals)
+                {
+                    _cachedRevealsById.TryAdd(reveal.name, reveal);
+                }
 
-            var i = 0;
-            for (; i < Reveals.Length; i++)
-            {
-                if (!Reveals[i]) continue;
-                Reveals[i].SetVisibility(definitions[i].IsActive, setImmediate);
+                return _cachedRevealsById;
             }
         }
 
@@ -63,14 +59,19 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             foreach (var reveal in Reveals)
             {
                 if (reveal)
+                {
                     driver.AddFromClip(reveal.gameObject, reveal.GetClip());
+                }
             }
         }
+
 
         private bool _isInitialized;
 
         [ReadOnly]
         [SerializeField]
         private RevealTransitionAutomatic[] _reveals;
+
+        private Dictionary<string, RevealTransitionAutomatic> _cachedRevealsById;
     }
 }
