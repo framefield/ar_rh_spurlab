@@ -14,6 +14,9 @@ namespace ff.ar_rh_spurlab.Positioning
         [SerializeField]
         private float _heading;
 
+        private Vector3 _targetPosition;
+        private Quaternion _targetRotation;
+
         public float Heading
         {
             get => _heading;
@@ -34,25 +37,36 @@ namespace ff.ar_rh_spurlab.Positioning
             }
         }
 
-#if UNITY_EDITOR
         private void Update()
         {
+#if UNITY_EDITOR
             UpdateFromReference();
             UpdateHeading();
-        }
 #endif
+            Transform localTransform = transform;
+            if (Application.isPlaying)
+            {
+                localTransform.position = Vector3.Lerp(localTransform.position, _targetPosition, 0.2f);
+                localTransform.rotation = Quaternion.Lerp(localTransform.rotation, _targetRotation, 0.2f);
+            }
+            else
+            {
+                localTransform.position = _targetPosition;
+                localTransform.rotation = _targetRotation;
+            }
+        }
 
         private void UpdateFromReference()
         {
             if (_geoReference)
             {
-                transform.position = _geoReference.TransformToWorldPosition(_geoPosition);
+                _targetPosition = _geoReference.TransformToWorldPosition(_geoPosition);
             }
         }
 
         private void UpdateHeading()
         {
-            transform.rotation = Quaternion.Euler(0, -_heading, 0);
+            _targetRotation = Quaternion.Euler(0, _heading, 0);
         }
     }
 }
