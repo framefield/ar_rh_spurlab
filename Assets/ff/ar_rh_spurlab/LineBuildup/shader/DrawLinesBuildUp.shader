@@ -116,10 +116,7 @@
                 float3 posB  = AddNoise(particleId+1, pointB.position,  NoiseAmount, NoiseVariation, phase, NoiseFrequency);
                 float3 posBB = AddNoise(particleId+2, pointBB.position, NoiseAmount, NoiseVariation, phase, NoiseFrequency);
                 
-
-
                 
-
                 const float tz = 0;
                 float4 aaInScreen  = PointToClipPos(float4(posAA,1)) * aspect;
                 aaInScreen /= aaInScreen.w;
@@ -171,12 +168,6 @@
                 }
 
                 float4 pos = lerp(aInScreen, bInScreen, cornerFactors.x);
-
-
- 
-
-
-                
                 float wAtPoint = lerp(pointA.w, pointB.w, cornerFactors.x);
 
                 // Buildup transition
@@ -217,25 +208,20 @@
             {
                 fragOutput output;
                 
-                //float u = (input.texCoord.x + VisibleRange);
-                //float4 imgColor = tex2D(MainTex, float2(u, input.texCoord.y)) * MainColor;
+                float u = (input.texCoord.x + VisibleRange);
+                float4 imgColor = tex2D(MainTex, float2(input.texCoord.y,u)) * MainColor;
 
-                float4 imgColor =1;
+
                 float f1 = saturate((input.texCoord.x + VisibleRange) * 1000  );
                 float f2 = 1-saturate( input.texCoord.x * 1000);
                 float t = f1*f2;
-                // if (t < 0.01)
-                //     discard;
-                
-                //output.color = float4(t,0,0,1);
-                //return output;
+                if (t < 0.01)
+                    discard;
 
                 output.color = float4(lerp(imgColor.rgb, FogColor.rgb, input.fog * FogColor.a), imgColor.a * t);
-
                 return output;
             }
-
- 
+            
             ENDCG
         }
     }
