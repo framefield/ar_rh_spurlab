@@ -195,18 +195,18 @@
                     : posB;
 
                 const float4 posInWorld = mul(_ObjectToWorld, float4(posInObject, 1.0));
-                float4 posInCamSpace = mul(unity_CameraProjection, posInWorld);
-                posInCamSpace.xyz /= posInCamSpace.w;
+                float4 posInCamSpace = mul(unity_WorldToCamera, posInWorld);
+                const float distanceToCam = posInCamSpace.z;
 
                 float3 neighbourNormal = lerp(normalA, normalB, cornerFactors.x);
                 float3 miterNormal = (normal + neighbourNormal) / 2;
-                float thickness = !isnan(wAtPoint) ? LineWidth * discardFactor * saturate(lerp(1,saturate(10/posInCamSpace.w), ShrinkWithDistance)) : wAtPoint;
+                float thickness = !isnan(wAtPoint) ? LineWidth * discardFactor * saturate(lerp(1, 1-saturate(distanceToCam/FogDistance), ShrinkWithDistance)) : wAtPoint;
                 float miter = dot(-normalize(miterNormal), normalize(normal));
                 
                 pos += saturate(cornerFactors.y * 0.1f * thickness * float4(miterNormal,0) / clamp(miter, -2.0,-0.13));
 
                 output.position = pos / aspect;
-                output.fog = pow(saturate(-posInCamSpace.z/FogDistance), FogBias);
+                output.fog = pow(saturate(distanceToCam/FogDistance), FogBias);
                 output.color.rgb =  MainColor.rgb;
 
                 output.color.a = MainColor.a;
