@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 32
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 12
@@ -279,7 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e53881f494e40a5b5bf80302e033d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _calibrationSceneName: Calibration
   _hidable: {fileID: 6819816997956936885}
   _closeButton: {fileID: 9161368685957637353}
   _contactButton: {fileID: 7978895022311563298}
@@ -715,7 +714,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 32
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
