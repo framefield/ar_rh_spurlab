@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ff.common.TimelineReveal;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -36,6 +37,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
 
                     var currentClip = Clips[i];
                     var definitionAndRevealById = revealTransitionGroupPlayable.GetActiveDefinitions();
+                    var sequentialOptions = revealTransitionGroupPlayable.GetSequentialOptions();
 
                     if (definitionAndRevealById == null)
                     {
@@ -62,8 +64,8 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                         prevDefinitionsById = prevTransitionGroupPlayable.GetActiveDefinitions();
                     }
 
-
-                    foreach (var (id, value) in definitionAndRevealById)
+                    var offsetIndex = 0;
+                    foreach (var (id, value) in definitionAndRevealById.OrderBy(d => d.Value.Index))
                     {
                         var definition = value.Definition;
                         var reveal = value.Reveal;
@@ -72,11 +74,18 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                         var existsInNext = nextDefinitionsById != null && nextDefinitionsById.ContainsKey(id);
 
                         var (weight, state) =
-                            TimelineClipInfo.CalculateAbsoluteWeightAndState(currentClip, playable,
-                                reveal.FadeInDuration, reveal.FadeOutDuration,
-                                existInPrev, existsInNext);
+                            sequentialOptions.PlaySequentially
+                                ? TimelineClipInfo.CalculateSequentialWeightAndState(currentClip, playable,
+                                    sequentialOptions,
+                                    offsetIndex, reveal.FadeInDuration, reveal.FadeOutDuration,
+                                    existInPrev, existsInNext)
+                                : TimelineClipInfo.CalculateAbsoluteWeightAndState(currentClip, playable,
+                                    reveal.FadeInDuration, reveal.FadeOutDuration,
+                                    existInPrev, existsInNext);
 
                         revealStateTuplesById.Add(id, (weight, state));
+                        offsetIndex++;
+
                         // Debug.Log(
                         //     $"{Clips[i].displayName} - definition: {definition}, reveal: {reveal} existInPrev: {existInPrev}, existsInNext: {existsInNext}");
                     }

@@ -11,23 +11,32 @@ using UnityEngine.Timeline;
 
 namespace ff.ar_rh_spurlab.TimelineReveal
 {
+    [Serializable]
+    public struct SequentialOptions
+    {
+        public bool PlaySequentially;
+        public float SequentialDelay;
+    }
+
     public class RevealTransitionGroupAsset : PlayableAsset, ITimelineClipAsset
     {
         public ClipCaps clipCaps => ClipCaps.None;
 
         [SerializeField]
-        private GroupDefinition[] _definitions = default;
+        private GroupDefinition[] _definitions;
+
+        [SerializeField]
+        private SequentialOptions _sequentialOptions = new SequentialOptions
+        {
+            SequentialDelay = 0.2f
+        };
 
         public GroupDefinition[] Definitions => _definitions;
-
-        public struct GroupDefinitionWithReveal
-        {
-            public GroupDefinition Definition;
-            public RevealTransitionAutomatic Reveal;
-        }
+        public SequentialOptions SequentialOptions => _sequentialOptions;
 
         [CanBeNull]
         public Dictionary<string, GroupDefinitionWithReveal> ActiveResolvedDefinitions { get; private set; }
+
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
@@ -133,10 +142,11 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                 var revealById = _group.RevealsById;
                 ActiveResolvedDefinitions = _definitions
                     .Where(definition => definition.IsActive && revealById.ContainsKey(definition.Id))
-                    .Select(d => new GroupDefinitionWithReveal
+                    .Select((d, i) => new GroupDefinitionWithReveal
                     {
                         Definition = d,
-                        Reveal = revealById[d.Id]
+                        Reveal = revealById[d.Id],
+                        Index = i
                     })
                     .ToDictionary(d => d.Definition.Id);
             }
@@ -156,6 +166,13 @@ namespace ff.ar_rh_spurlab.TimelineReveal
 
             [HideInInspector]
             public string Id;
+        }
+
+        public struct GroupDefinitionWithReveal
+        {
+            public GroupDefinition Definition;
+            public RevealTransitionAutomatic Reveal;
+            public int Index;
         }
 
         private RevealTransitionGroup _group;

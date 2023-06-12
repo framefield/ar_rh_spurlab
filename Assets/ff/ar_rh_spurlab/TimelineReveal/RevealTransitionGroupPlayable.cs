@@ -19,6 +19,11 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             return _asset.ActiveResolvedDefinitions;
         }
 
+        public SequentialOptions GetSequentialOptions()
+        {
+            return _asset.SequentialOptions;
+        }
+
         private RevealTransitionGroup _group;
         private RevealTransitionGroupAsset _asset;
     }
