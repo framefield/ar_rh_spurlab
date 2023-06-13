@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 namespace ff.ar_rh_spurlab.Gallery
 {
     public class ScrollTransition : MonoBehaviour
     {
+        public event Action OnArrived;
+
         [SerializeField]
         private RectTransform _rectTransform;
 
@@ -13,8 +16,7 @@ namespace ff.ar_rh_spurlab.Gallery
         [SerializeField]
         private AnimationCurve _transitionCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-
-        public void ScrollTo(float targetPositionX)
+        public void ScrollTo(float targetPositionX, int index = 0)
         {
             _startPositionX = _rectTransform.anchoredPosition.x;
             _targetPositionX = targetPositionX;
@@ -25,9 +27,9 @@ namespace ff.ar_rh_spurlab.Gallery
         public void Update()
         {
             _time += Time.deltaTime;
-            enabled = _time < _duration;
+            var isArrived = _time >= _duration;
 
-            if (!enabled)
+            if (isArrived)
             {
                 _time = _duration;
             }
@@ -36,11 +38,12 @@ namespace ff.ar_rh_spurlab.Gallery
             var curveValue = _transitionCurve.Evaluate(t);
             var positionX = Mathf.Lerp(_startPositionX, _targetPositionX, curveValue);
             _rectTransform.anchoredPosition = new Vector2(positionX, _rectTransform.anchoredPosition.y);
-        }
 
-        public void Start()
-        {
+            if (!isArrived)
+                return;
+
             enabled = false;
+            OnArrived?.Invoke();
         }
 
         private float _targetPositionX;

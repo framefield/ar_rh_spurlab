@@ -1,13 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using ff.ar_rh_spurlab._content.Timelines.ImageItem;
+using ff.ar_rh_spurlab.Localization;
+using ff.common.entity;
 using ff.common.ui;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.Gallery
 {
-    public class GalleryUi : MonoBehaviour
+    public class GalleryUi : AbstractLocalizable
     {
         [Header("Settings")]
         [SerializeField]
@@ -17,7 +20,10 @@ namespace ff.ar_rh_spurlab.Gallery
         private float _maxImageHeight = 550;
 
         [SerializeField]
-        private float _gapBetweenImages = 70;
+        private float _galleryImageWidth = 1194;
+
+        [SerializeField]
+        private float _imageSpacing = 1020;
 
         [Header("Prefab References")]
         [SerializeField]
@@ -32,10 +38,20 @@ namespace ff.ar_rh_spurlab.Gallery
         [SerializeField]
         private ScrollSlotSnap _scrollSlotSnap;
 
+        [SerializeField]
+        private Hidable _imageTitleHidable;
+
+        [SerializeField]
+        private TMP_Text _imageTitleText;
+
         [Header("Asset References")]
         [SerializeField]
         private GalleryImageUi _galleryImageUiPrefab;
 
+        protected override void OnLocaleChangedHandler(string locale)
+        {
+            UpdateText();
+        }
 
         public void SetImages(List<ImageData> imageDataList)
         {
@@ -52,8 +68,12 @@ namespace ff.ar_rh_spurlab.Gallery
                 var newGalleryImageUi = Instantiate(_galleryImageUiPrefab, _imageContainer);
                 newGalleryImageUi.Initialize(imageData, _maxImageWidth, _maxImageHeight, sumOfWidth);
                 _galleryImageUiList.Add(newGalleryImageUi);
-                sumOfWidth += _maxImageWidth + _gapBetweenImages;
+                sumOfWidth += _imageSpacing;
             }
+
+            _scrollSlotSnap.SetSlotPositions(_galleryImageUiList.Select(x => -x.PositionX).ToArray());
+            _imageContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,
+                sumOfWidth + _galleryImageWidth - _imageSpacing);
         }
 
         public void ShowImage(ImageData image, bool isZoomedIn)
@@ -88,6 +108,41 @@ namespace ff.ar_rh_spurlab.Gallery
                     gameObject);
             else
                 GalleryController.GalleryUiInstance = this;
+
+            _scrollSlotSnap.OnScrollingChanged += OnScrollingChangedHandler;
+            _scrollSlotSnap.OnSlotChanged += OnSlotChangedHandler;
+        }
+
+        private void OnScrollingChangedHandler(bool isScrolling)
+        {
+            _imageTitleHidable.IsVisible = !isScrolling;
+        }
+
+        private void OnSlotChangedHandler(int index)
+        {
+            if (index < 0 || index >= _galleryImageUiList.Count)
+            {
+                Debug.LogError($"OnSlotChangedHandler({index}): Index out of range!");
+                return;
+            }
+
+
+            _activeImageData = _galleryImageUiList[index].Data;
+            UpdateText();
+        }
+
+        private void UpdateText()
+        {
+            if (_activeImageData == null)
+            {
+                _imageTitleText.text = string.Empty;
+                return;
+            }
+
+            _imageTitleText.text =
+                _activeImageData.Title.TryGetValue(ApplicationLocale.Instance.CurrentLocale, out var title)
+                    ? title
+                    : string.Empty;
         }
 
         private void Update()
@@ -147,5 +202,6 @@ namespace ff.ar_rh_spurlab.Gallery
 
         private readonly List<GalleryImageUi> _galleryImageUiList = new();
         private int _currentImageIndex = 0;
+        private ImageData _activeImageData;
     }
 }

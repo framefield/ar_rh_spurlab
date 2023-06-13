@@ -10,9 +10,6 @@ namespace ff.ar_rh_spurlab.Gallery
         [SerializeField]
         private RawImage _rawImage;
 
-        [SerializeField]
-        private LayoutElement _layoutElement;
-
         public ImageData Data { get; private set; }
         public float PositionX => _rectTransform.anchoredPosition.x;
 
@@ -36,11 +33,9 @@ namespace ff.ar_rh_spurlab.Gallery
 
             imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, imageWidth);
             imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, imageHeight);
-            _layoutElement.minWidth = imageWidth;
-            _layoutElement.minHeight = imageHeight;
 
             _rectTransform = GetComponent<RectTransform>();
-            // _rectTransform.anchoredPosition = new Vector2(positionX, _rectTransform.anchoredPosition.y);
+            _rectTransform.anchoredPosition = new Vector2(positionX, _rectTransform.anchoredPosition.y);
         }
 
 
