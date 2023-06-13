@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: GSG-Hof - SiteData
   m_EditorClassIdentifier: 
   _id: gsg-yard
+  _mapContentPrefab: {fileID: 5974380920444366944, guid: 7e9a68ba5c298408490684ce047731d6,
+    type: 3}
   _title:
     _values:
     - GSG Yard

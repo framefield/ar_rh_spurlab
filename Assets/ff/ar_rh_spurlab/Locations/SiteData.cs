@@ -1,3 +1,4 @@
+using ff.ar_rh_spurlab.Map;
 using ff.common.entity;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,6 +10,7 @@ namespace ff.ar_rh_spurlab.Locations
     {
         public string Id => _id;
         public LocalizedString Title => _title;
+        public MapContent MapContentPrefab => _mapContentPrefab;
 
         public LocationData[] Locations => _locations;
 
@@ -16,6 +18,8 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private string _id;
 
+        [SerializeField]
+        private MapContent _mapContentPrefab;
 
         [SerializeField]
         private LocalizedString _title;

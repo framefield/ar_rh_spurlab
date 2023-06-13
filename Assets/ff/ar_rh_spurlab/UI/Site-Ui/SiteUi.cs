@@ -40,6 +40,8 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
                 return;
             }
 
+            _mapButton.interactable = _siteData.MapContentPrefab;
+
             OnLocaleChangedHandler(ApplicationLocale.Instance.CurrentLocale);
 
             var label = 'A';

@@ -1,5 +1,6 @@
 using System;
 using ff.ar_rh_spurlab.Locations;
+using ff.ar_rh_spurlab.Map;
 using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.ui;
 using UnityEngine;
@@ -61,7 +62,7 @@ namespace ff.ar_rh_spurlab.UI
 
         private void OnMapButtonClickedHandler(SiteData data)
         {
-            Debug.Log($"Map button clicked for site {data.Id}");
+            MapUiController.ShowMap(data);
         }
 
         private void OnLocationButtonClickedHandler(SiteData siteData, LocationData locationData)
