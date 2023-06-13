@@ -11,6 +11,12 @@ namespace ff.ar_rh_spurlab._content.Timelines.ImageItem
         private LocalizedString _title;
 
         [SerializeField]
+        private string _year;
+
+        [SerializeField]
+        private string _copyright;
+
+        [SerializeField]
         private Renderer _imageRenderer;
 
         [SerializeField]
@@ -41,6 +47,8 @@ namespace ff.ar_rh_spurlab._content.Timelines.ImageItem
             return _imageData ??= new ImageData
             {
                 Title = _title,
+                Year = _year,
+                Copyright = _copyright,
                 ImageTexture = _imageRenderer.material.mainTexture
             };
         }

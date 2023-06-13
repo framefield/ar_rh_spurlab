@@ -134,7 +134,10 @@ namespace ff.ar_rh_spurlab.Gallery
 
         private void OnScrollingChangedHandler(bool isScrolling)
         {
-            _imageTitleHidable.IsVisible = !isScrolling;
+            if (isScrolling)
+            {
+                _imageTitleHidable.IsVisible = false;
+            }
         }
 
         private void OnSlotChangedHandler(int index)
@@ -148,6 +151,7 @@ namespace ff.ar_rh_spurlab.Gallery
 
             _activeImageData = _galleryImageUiList[index].Data;
             UpdateText();
+            _imageTitleHidable.IsVisible = true;
         }
 
         private void UpdateText()
@@ -158,10 +162,10 @@ namespace ff.ar_rh_spurlab.Gallery
                 return;
             }
 
-            _imageTitleText.text =
-                _activeImageData.Title.TryGetValue(ApplicationLocale.Instance.CurrentLocale, out var title)
-                    ? title
-                    : string.Empty;
+
+            _activeImageData.Title.TryGetValue(ApplicationLocale.Instance.CurrentLocale, out var title);
+
+            _imageTitleText.text = $"{title} {_activeImageData.Year} / {_activeImageData.Copyright}";
         }
 
         private void Update()
