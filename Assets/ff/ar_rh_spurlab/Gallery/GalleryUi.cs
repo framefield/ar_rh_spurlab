@@ -33,6 +33,9 @@ namespace ff.ar_rh_spurlab.Gallery
         private Button _closeButton;
 
         [SerializeField]
+        private Button _showButton;
+
+        [SerializeField]
         private RectTransform _imageContainer;
 
         [SerializeField]
@@ -116,6 +119,7 @@ namespace ff.ar_rh_spurlab.Gallery
         private void Start()
         {
             _closeButton.onClick.AddListener(Hide);
+            _showButton.onClick.AddListener(GalleryController.ShowGallery);
 
             if (GalleryController.GalleryUiInstance != null)
                 Debug.LogError(
