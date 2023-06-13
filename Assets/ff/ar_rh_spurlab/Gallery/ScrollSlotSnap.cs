@@ -1,11 +1,12 @@
 using System;
 using ff.ar_rh_spurlab.Locations;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.Gallery
 {
-    public class ScrollSlotSnap : MonoBehaviour
+    public class ScrollSlotSnap : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     {
         public event Action<int> OnSlotChanged;
         public event Action<bool> OnScrollingChanged;
@@ -54,8 +55,6 @@ namespace ff.ar_rh_spurlab.Gallery
 
         private void Update()
         {
-            _isUserScrolling.Value = Mathf.Abs(_scrollRect.velocity.x) > _snapVelocityThreshold;
-
             if (_isUserScrolling.Value)
             {
                 _scrollTransition.enabled = false;
@@ -64,6 +63,11 @@ namespace ff.ar_rh_spurlab.Gallery
             }
 
             if (_hasFoundSnapPosition)
+            {
+                return;
+            }
+
+            if (_slotPositions == null)
             {
                 return;
             }
@@ -97,5 +101,15 @@ namespace ff.ar_rh_spurlab.Gallery
         private readonly ReactiveProperty<bool> _isUserScrolling = new();
         private float[] _slotPositions;
         private int _targetIndex;
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            _isUserScrolling.Value = true;
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            _isUserScrolling.Value = false;
+        }
     }
 }
