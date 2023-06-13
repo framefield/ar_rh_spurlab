@@ -1,4 +1,5 @@
 using System;
+using ff.ar_rh_spurlab.Locations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,32 @@ namespace ff.ar_rh_spurlab.Calibration
         [SerializeField]
         private Button _continueButton;
 
-        private PointSelectionController _pointSelectionController;
+        [SerializeField]
+        private RawImage _referenceImage;
+
+        
+        public event Action OnContinueButtonClicked;
+
+        
+        public void Initialize(PointSelectionController pointSelectionController)
+        {
+            _pointSelectionController = pointSelectionController;
+        }
+        
+        
+        public void UpdateUi(LocationData locationData, int activePointIndex)
+        {
+            if (activePointIndex < locationData.PointsInformation.Length)
+            {
+                _referenceImage.gameObject.SetActive(true);
+                _referenceImage.texture = locationData.PointsInformation[activePointIndex].ScreenImage;
+            }
+            else
+            {
+                _referenceImage.gameObject.SetActive(false);
+                //_referenceImage.material.mainTexture = null;
+            }
+        }
 
         private void Start()
         {
@@ -27,16 +53,14 @@ namespace ff.ar_rh_spurlab.Calibration
             _continueButton.interactable = _pointSelectionController.IsReady;
         }
 
-        public event Action OnContinueButtonClicked;
 
         private void ContinueButtonClickedHandler()
         {
             OnContinueButtonClicked?.Invoke();
         }
 
-        public void SetPointSelectionController(PointSelectionController pointSelectionController)
-        {
-            _pointSelectionController = pointSelectionController;
-        }
+        private PointSelectionController _pointSelectionController;
+
+
     }
 }

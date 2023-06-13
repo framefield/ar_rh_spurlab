@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using ff.ar_rh_spurlab.Locations;
 using ff.common.statemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,20 +16,56 @@ namespace ff.ar_rh_spurlab.Calibration
 
         [SerializeField]
         private PointSelectionUi _pointSelectionUiPrefab;
-
-        private readonly List<ARRaycastHit> _sHits = new();
-
-        private CalibrationController _calibrationController;
-        private bool _isActive;
-        private PointSelectionUi _pointSelectionUi;
-
-        private bool _pressed;
-
-        private StateMachine _stateMachine;
-
+        
         public bool IsReady => _calibrationController != null && _calibrationController.CalibrationData != null &&
                                _calibrationController.CalibrationData.AreAnchorsReady;
 
+        
+        public void Initialize()
+        {
+
+        }
+        
+        public void Activate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
+        {
+            // TODO: This should be done in Initialize (where stateMachine should be added as optional parameter
+            _stateMachine = stateMachine;
+            
+            if (!_calibrationController)
+            {
+                _calibrationController = stateMachine.GetComponent<CalibrationController>();
+            }
+
+            if (_calibrationController.CalibrationData == null)
+            {
+                return;
+            }
+
+            _isActive = true;
+
+            _pointSelectionUi = Instantiate(_pointSelectionUiPrefab, transform);
+            _pointSelectionUi.Initialize(this);
+            _pointSelectionUi.OnContinueButtonClicked += () => _stateMachine.Continue();
+
+            var matchedCount = _calibrationController.CalibrationData.MatchedAnchors.Count;
+            _pointSelectionUi.UpdateUi(_calibrationController.LocationData, matchedCount);
+
+            var calibrationData = _calibrationController.CalibrationData;
+
+            calibrationData.ClearInstantiatedAnchors();
+            calibrationData.UpdatePointsFromAnchors();
+        }        
+        
+        public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
+        {
+            _isActive = false;
+
+            if (_pointSelectionUi)
+            {
+                Destroy(_pointSelectionUi.gameObject);
+            }
+        }        
+        
         private void Update()
         {
             if (!_isActive || !_calibrationController)
@@ -68,51 +103,14 @@ namespace ff.ar_rh_spurlab.Calibration
 
                 marker.name = $"ARMarkerAnchor {calibrationData.MatchedAnchorsCount}";
                 _calibrationController.CalibrationData.AddInstantiatedAnchor(marker);
+                var matchedCount = _calibrationController.CalibrationData.MatchedAnchors.Count;
+                _pointSelectionUi.UpdateUi(_calibrationController.LocationData, matchedCount);
             }
 
             calibrationData.UpdatePointsFromAnchors();
         }
 
-
-        public void Initialize()
-        {
-        }
-
-        public void Activate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
-        {
-            if (!_calibrationController)
-            {
-                _calibrationController = stateMachine.GetComponent<CalibrationController>();
-            }
-
-            if (_calibrationController.CalibrationData == null)
-            {
-                return;
-            }
-
-            _stateMachine = stateMachine;
-            _isActive = true;
-
-            _pointSelectionUi = Instantiate(_pointSelectionUiPrefab, transform);
-            _pointSelectionUi.SetPointSelectionController(this);
-            _pointSelectionUi.OnContinueButtonClicked += () => _stateMachine.Continue();
-
-            var calibrationData = _calibrationController.CalibrationData;
-
-            calibrationData.ClearInstantiatedAnchors();
-            calibrationData.UpdatePointsFromAnchors();
-        }
-
-        public void Deactivate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
-        {
-            _isActive = false;
-
-            if (_pointSelectionUi)
-            {
-                Destroy(_pointSelectionUi.gameObject);
-            }
-        }
-
+        
         protected override void OnPress(Vector3 position)
         {
             _pressed = true;
@@ -122,5 +120,16 @@ namespace ff.ar_rh_spurlab.Calibration
         {
             _pressed = false;
         }
+        
+        private readonly List<ARRaycastHit> _sHits = new();
+
+        private CalibrationController _calibrationController;
+        private PointSelectionUi _pointSelectionUi;
+
+        private bool _isActive;
+        private bool _pressed;
+
+        private StateMachine _stateMachine;
+
     }
 }
