@@ -63,17 +63,28 @@ namespace ff.ar_rh_spurlab.Gallery
             _galleryImageUiList.Clear();
 
             var sumOfWidth = 0f;
-            foreach (var imageData in imageDataList)
+            for (var i = 0; i < imageDataList.Count; i++)
             {
+                var imageData = imageDataList[i];
                 var newGalleryImageUi = Instantiate(_galleryImageUiPrefab, _imageContainer);
-                newGalleryImageUi.Initialize(imageData, _maxImageWidth, _maxImageHeight, sumOfWidth);
+                newGalleryImageUi.Initialize(imageData, _maxImageWidth, _maxImageHeight, sumOfWidth, i);
+                newGalleryImageUi.OnClick += GalleryImageClickHandler;
                 _galleryImageUiList.Add(newGalleryImageUi);
                 sumOfWidth += _imageSpacing;
             }
 
+
             _scrollSlotSnap.SetSlotPositions(_galleryImageUiList.Select(x => -x.PositionX).ToArray());
             _imageContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,
                 sumOfWidth + _galleryImageWidth - _imageSpacing);
+
+            _activeImageData = null;
+            UpdateText();
+        }
+
+        private void GalleryImageClickHandler(int index)
+        {
+            ScrollTo(index);
         }
 
         public void ShowImage(ImageData image, bool isZoomedIn)
@@ -93,7 +104,11 @@ namespace ff.ar_rh_spurlab.Gallery
 
         public void Show()
         {
-            ShowImage(_galleryImageUiList[0].Data, false);
+            if (_galleryImageUiList.Count > 0)
+            {
+                ScrollTo(0);
+            }
+
             SetVisibility(true);
         }
 

@@ -1,3 +1,4 @@
+using System;
 using ff.ar_rh_spurlab._content.Timelines.ImageItem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,15 +8,18 @@ namespace ff.ar_rh_spurlab.Gallery
 {
     public class GalleryImageUi : MonoBehaviour, IPointerClickHandler
     {
+        public event Action<int> OnClick;
+
         [SerializeField]
         private RawImage _rawImage;
 
         public ImageData Data { get; private set; }
         public float PositionX => _rectTransform.anchoredPosition.x;
 
-        public void Initialize(ImageData imageData, float maxWidth, float maxHeight, float positionX)
+        public void Initialize(ImageData imageData, float maxWidth, float maxHeight, float positionX, int index)
         {
             Data = imageData;
+            _index = index;
             _rawImage.texture = Data.ImageTexture;
             var imageTransform = _rawImage.GetComponent<RectTransform>();
 
@@ -40,9 +44,11 @@ namespace ff.ar_rh_spurlab.Gallery
 
 
         private RectTransform _rectTransform;
+        private int _index;
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            OnClick?.Invoke(_index);
         }
     }
 }
