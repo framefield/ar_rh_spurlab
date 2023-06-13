@@ -25,9 +25,9 @@ MonoBehaviour:
   CalibrationPrefab: {fileID: 4295738227600371516, guid: eac787e68b38748e782a2d86a0590872,
     type: 3}
   PointsInLocationOrigin:
-  - {x: 24.96, y: 0, z: 164.44}
-  - {x: 33.43, y: 0, z: 162.75}
-  - {x: 31.76, y: 0, z: 153.22}
+  - {x: 27.683668, y: 0.1, z: 153.80869}
+  - {x: 23.495, y: 0.1, z: 154.585}
+  - {x: 22.941006, y: 0.1, z: 151.59592}
   PointsInformation:
   - Id: 
     Title:
