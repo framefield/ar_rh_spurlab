@@ -11,9 +11,7 @@ namespace ff.ar_rh_spurlab.Calibration
     public class CalibrationUi : MonoBehaviour
     {
         [Header("Prefab references")]
-        [SerializeField]
-        private Button _restartButton;
-
+        
         [SerializeField]
         private string _mainSceneName = "Main";
 
@@ -37,7 +35,6 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private void Start()
         {
-            _restartButton.onClick.AddListener(RestartButtonClickedHandler);
             _goToMainSceneButton.onClick.AddListener(GoToMainSceneButtonClickedHandler);
         }
 
@@ -74,14 +71,7 @@ namespace ff.ar_rh_spurlab.Calibration
             _worldMapStatusText.text = $"Mapping Status: {sessionSubsystem.worldMappingStatus}";
 #endif
         }
-
-        public event Action OnRestartButtonClicked;
-
-        private void RestartButtonClickedHandler()
-        {
-            OnRestartButtonClicked?.Invoke();
-        }
-
+        
         public void SetCalibrationData(CalibrationData calibrationData)
         {
             _calibrationData = calibrationData;

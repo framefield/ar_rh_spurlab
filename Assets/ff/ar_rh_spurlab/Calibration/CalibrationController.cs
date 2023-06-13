@@ -1,5 +1,4 @@
 using System.IO;
-using ff.ar_rh_spurlab.AR;
 using ff.ar_rh_spurlab.Locations;
 using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.statemachine;
@@ -84,7 +83,6 @@ namespace ff.ar_rh_spurlab.Calibration
             }
 
             _calibrationUi = Instantiate(_calibrationUiPrefab, transform);
-            _calibrationUi.OnRestartButtonClicked += () => _stateMachine.Reset();
             _calibrationUi.SetSession(_arSession);
 
             _calibrationARAnchorManager =
