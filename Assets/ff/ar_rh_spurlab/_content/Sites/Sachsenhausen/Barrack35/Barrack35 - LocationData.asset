@@ -33,14 +33,14 @@ MonoBehaviour:
     Title:
       _values: []
       _locales: []
-    ScreenImage: {fileID: 0}
+    ScreenImage: {fileID: 2800000, guid: fba2aebbd6be842acbb3e43ed3cde428, type: 3}
   - Id: 
     Title:
       _values: []
       _locales: []
-    ScreenImage: {fileID: 0}
+    ScreenImage: {fileID: 2800000, guid: d196290c46f8a4965af0ff02b094fbb2, type: 3}
   - Id: 
     Title:
       _values: []
       _locales: []
-    ScreenImage: {fileID: 0}
+    ScreenImage: {fileID: 2800000, guid: 48cccbd684eed47ca892a1062141bcc0, type: 3}
