@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be330f4e83f74955b8231f36a6acb7f3, type: 3}
-  m_Name: Cantinerie-Patio - LocationData
+  m_Name: GSGYard-Patio - LocationData
   m_EditorClassIdentifier: 
-  _id: ff-lab
+  _id: GSGYard Patio
   _title:
     _values:
-    - FF Lab
-    - FF Lab
+    - GSG Yard - Patio
+    - GSG Hof - Patio
     _locales:
     - en
     - de
@@ -25,25 +25,25 @@ MonoBehaviour:
   CalibrationPrefab: {fileID: 4295738227600371516, guid: 2c3b56937dadc4194ba5fa60376652ab,
     type: 3}
   PointsInLocationOrigin:
-  - {x: 4.8878655, y: 6.139269, z: 3.8565965}
-  - {x: 0.20705831, y: 6.1394277, z: 4.3415003}
-  - {x: 1.8032568, y: 6.1394267, z: 9.487793}
+  - {x: 4.8300476, y: 0, z: -4.100975}
+  - {x: 2.8572326, y: 0, z: -5.114951}
+  - {x: 7.305457, y: 0, z: -8.876004}
   PointsInformation:
-  - Id: 
+  - Id: railscorner
     Title:
       _values: []
       _locales: []
-    ScreenImage: {fileID: 0}
-  - Id: 
+    ScreenImage: {fileID: 2800000, guid: 1fae4d38210534bc9bdbf7d32b7c7175, type: 3}
+  - Id: railsshortend
     Title:
       _values: []
       _locales: []
-    ScreenImage: {fileID: 0}
-  - Id: 
+    ScreenImage: {fileID: 2800000, guid: 85fad292afd6e4e6cb265c5a370b6831, type: 3}
+  - Id: railslongend
     Title:
       _values: []
       _locales: []
-    ScreenImage: {fileID: 0}
+    ScreenImage: {fileID: 2800000, guid: 7869cc3a48f2b4481aab95c237a995ad, type: 3}
   PreinstallCalibrationData: {fileID: 4900000, guid: 2cfc68fc9d7e01d41ac6e265588ea3d1,
     type: 3}
   PreinstallWorldMap: {fileID: 7408814040901012953, guid: 1c39e8d0172ce4640b05cbb11e920c38,
