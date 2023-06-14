@@ -51,7 +51,6 @@ namespace ff.ar_rh_spurlab.Positioning
 
     public static class GeoMath
     {
-        public const double EarthMeanRadiusInKM = 6372.8;
         public const double EarthEquatorialRadiusInKM = 6378.137;
         public const double EarthFirstEccentricitySquared = 0.00669437999014;
         public const double DegreeToRadian = Math.PI / 180;
@@ -112,6 +111,21 @@ namespace ff.ar_rh_spurlab.Positioning
             var n = -lonCos * latSin * delta.X - latSin * lonSin * delta.Y + latCos * delta.Z;
 
             return new Vector3Double(e, 0, n);
+        }
+
+        public double HaversineDistance(GeoPosition other)
+        {
+            var dLat = GeoMath.DegreeToRadian * (other.Latitude - Latitude);
+            var dLon = GeoMath.DegreeToRadian * (other.Longitude - Longitude);
+
+            var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                    Math.Cos(GeoMath.DegreeToRadian * Latitude) *
+                    Math.Cos(GeoMath.DegreeToRadian * other.Latitude) *
+                    Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+            var c = 2 * Math.Asin(Math.Min(1, Math.Sqrt(a)));
+
+            const double r = GeoMath.EarthEquatorialRadiusInKM * 1000;
+            return r * c;
         }
 
         public bool Equal(GeoPosition a, GeoPosition b, double epsilon = 0.0000001)

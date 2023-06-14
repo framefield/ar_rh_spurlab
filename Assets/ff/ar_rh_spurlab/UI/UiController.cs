@@ -43,13 +43,15 @@ namespace ff.ar_rh_spurlab.UI
         private void OnIsPlayingChangedHandler(bool isPlaying)
         {
             if (!_canvasHidable)
+            {
                 return;
+            }
 
             _canvasHidable.IsVisible = !isPlaying;
             ToggleAppMenuOpen(false);
         }
 
-        private void LocationChangedHandler()
+        private void LocationChangedHandler(ChangeSource changeSource)
         {
             var isCalibrationPossible = _locationController.CurrentLocation.LocationData != null;
             _appMenuController.SetIsCalibrationPossible(isCalibrationPossible);

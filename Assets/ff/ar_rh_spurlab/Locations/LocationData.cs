@@ -1,5 +1,6 @@
 using System;
 using ff.ar_rh_spurlab.Calibration;
+using ff.ar_rh_spurlab.Positioning;
 using ff.common.entity;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -36,6 +37,8 @@ namespace ff.ar_rh_spurlab.Locations
 
         public TextAsset PreinstallCalibrationData;
         public WorldMap PreinstallWorldMap;
+
+        public GeoPosition GeoPosition;
 
 
         private void OnValidate()

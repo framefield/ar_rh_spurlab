@@ -15,11 +15,10 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private static void Install()
         {
-            var availableSites = Resources.Load<AvailableSites>("AvailableSites");
+            var availableSites = AvailableSites.LoadFromResources();
 
             if (!availableSites)
             {
-                Debug.LogError("PreinstallCalibrationData - no sites available");
                 return;
             }
 

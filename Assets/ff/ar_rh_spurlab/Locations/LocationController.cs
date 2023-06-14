@@ -10,6 +10,14 @@ using UnityEngine.XR.ARFoundation;
 
 namespace ff.ar_rh_spurlab.Locations
 {
+    public enum ChangeSource
+    {
+        Unknown,
+        Start,
+        Gps,
+        User
+    }
+
     public class LocationController : MonoBehaviour
     {
         [SerializeField]
@@ -39,7 +47,7 @@ namespace ff.ar_rh_spurlab.Locations
 
 
         private AugmentedLocation _augmentedLocation;
-        public event Action LocationChanged;
+        public event Action<ChangeSource> LocationChanged;
         public AugmentedLocation CurrentLocation => _augmentedLocation;
 
         private void Start()
@@ -79,7 +87,7 @@ namespace ff.ar_rh_spurlab.Locations
             _uiController.Initialize(this, _stateMachine);
             if (SharedCalibrationContext.ActiveLocation)
             {
-                SetLocation(SharedCalibrationContext.ActiveLocation);
+                SetLocation(SharedCalibrationContext.ActiveLocation, ChangeSource.Start);
             }
 
             _stateMachine.Initialize();
@@ -94,10 +102,10 @@ namespace ff.ar_rh_spurlab.Locations
                 _calibrationARAnchorManager.Reset();
             }
 
-            SetLocation(_defaultLocationData);
+            SetLocation(_defaultLocationData, ChangeSource.Start);
         }
 
-        public bool SetLocation(LocationData locationData)
+        public bool SetLocation(LocationData locationData, ChangeSource changeSource = ChangeSource.User)
         {
             SharedCalibrationContext.ActiveLocation = locationData;
 
@@ -131,7 +139,7 @@ namespace ff.ar_rh_spurlab.Locations
 
             StartCoroutine(ff.ar_rh_spurlab.AR.ARWorldMapController.Load(_arSession, filePath));
 #endif
-            LocationChanged?.Invoke();
+            LocationChanged?.Invoke(changeSource);
             return true;
         }
 
@@ -159,5 +167,18 @@ namespace ff.ar_rh_spurlab.Locations
             _calibrationARAnchorManager.ToggleJitterCalibration();
         }
 #endif
+
+        private static LocationController _cachedController;
+
+        public static LocationController FindFirst()
+        {
+            if (_cachedController)
+            {
+                return _cachedController;
+            }
+
+            _cachedController = FindFirstObjectByType<LocationController>();
+            return _cachedController;
+        }
     }
 }

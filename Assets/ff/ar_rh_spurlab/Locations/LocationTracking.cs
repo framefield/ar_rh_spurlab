@@ -19,7 +19,7 @@ namespace ff.ar_rh_spurlab.Locations
 
         public void Initialize()
         {
-            _locationController = FindFirstObjectByType<LocationController>();
+            _locationController = LocationController.FindFirst();
         }
 
         public void Activate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
@@ -28,7 +28,7 @@ namespace ff.ar_rh_spurlab.Locations
             if (_locationController)
             {
                 _locationController.LocationChanged += OnLocationChangedHandler;
-                OnLocationChangedHandler();
+                OnLocationChangedHandler(ChangeSource.Unknown);
             }
         }
 
@@ -40,7 +40,7 @@ namespace ff.ar_rh_spurlab.Locations
             }
         }
 
-        private void OnLocationChangedHandler()
+        private void OnLocationChangedHandler(ChangeSource source)
         {
             if (_currentLocation)
             {

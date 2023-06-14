@@ -47,10 +47,14 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
         protected override void OnLocaleChangedHandler(string locale)
         {
             if (!_locationData)
+            {
                 return;
+            }
 
             if (!_locationData.Title.TryGetValue(locale, out var title))
+            {
                 return;
+            }
 
             foreach (var titleText in _titleTexts)
             {
@@ -68,7 +72,7 @@ namespace ff.ar_rh_spurlab.UI.Site_Ui
         }
 
 
-        private void LocationChangedHandler()
+        private void LocationChangedHandler(ChangeSource changeSource)
         {
             UpdateVisuals();
         }

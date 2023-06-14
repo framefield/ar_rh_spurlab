@@ -10,7 +10,7 @@ namespace ff.ar_rh_spurlab.Positioning
 
         private void OnEnable()
         {
-            _service = FindFirstObjectByType<PositioningService>();
+            _service = PositioningService.FindFirst();
             if (_service)
             {
                 _geoPositioned = GetComponent<GeoPositioned>();

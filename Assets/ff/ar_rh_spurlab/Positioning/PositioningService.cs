@@ -113,5 +113,18 @@ namespace ff.ar_rh_spurlab.Positioning
             OnStatusChanged?.Invoke(Status);
             OnPositionChanged?.Invoke(LastPosition);
         }
+
+        private static PositioningService _cachedService;
+
+        public static PositioningService FindFirst()
+        {
+            if (_cachedService)
+            {
+                return _cachedService;
+            }
+
+            _cachedService = FindFirstObjectByType<PositioningService>();
+            return _cachedService;
+        }
     }
 }

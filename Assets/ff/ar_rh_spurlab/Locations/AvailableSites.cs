@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace ff.ar_rh_spurlab.Locations
@@ -9,5 +10,17 @@ namespace ff.ar_rh_spurlab.Locations
 
         [SerializeField]
         private SiteData[] _sites;
+
+        [CanBeNull]
+        public static AvailableSites LoadFromResources()
+        {
+            var availableSites = Resources.Load<AvailableSites>("AvailableSites");
+            if (!availableSites)
+            {
+                Debug.LogError("AvailableSites.LoadFromResources could not load sites");
+            }
+
+            return availableSites;
+        }
     }
 }

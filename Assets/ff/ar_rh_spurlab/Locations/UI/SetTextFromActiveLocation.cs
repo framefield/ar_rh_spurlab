@@ -13,15 +13,15 @@ namespace ff.ar_rh_spurlab.Locations.UI
 
         private void Awake()
         {
-            _locationController = FindFirstObjectByType<LocationController>();
+            _locationController = LocationController.FindFirst();
             if (_locationController)
             {
                 _locationController.LocationChanged += OnLocationChangedHandler;
-                OnLocationChangedHandler();
+                OnLocationChangedHandler(ChangeSource.Unknown);
             }
         }
 
-        private void OnLocationChangedHandler()
+        private void OnLocationChangedHandler(ChangeSource source)
         {
             if (_locationController)
             {

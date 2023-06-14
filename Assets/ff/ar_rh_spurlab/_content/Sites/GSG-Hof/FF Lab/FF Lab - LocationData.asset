@@ -48,3 +48,7 @@ MonoBehaviour:
     type: 3}
   PreinstallWorldMap: {fileID: 7408814040901012953, guid: 1c39e8d0172ce4640b05cbb11e920c38,
     type: 3}
+  GeoPosition:
+    Latitude: 52.5409
+    Longitude: 13.3857
+    Altitude: 0
