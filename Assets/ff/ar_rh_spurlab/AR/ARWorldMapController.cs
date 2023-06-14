@@ -4,7 +4,10 @@ using System.IO;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+
+#if UNITY_IOS
 using UnityEngine.XR.ARKit;
+#endif
 
 namespace ff.ar_rh_spurlab.AR
 {
@@ -15,7 +18,7 @@ namespace ff.ar_rh_spurlab.AR
 #if UNITY_IOS
             return arSession.subsystem is ARKitSessionSubsystem && ARKitSessionSubsystem.worldMapSupported;
 #else
-                return false;
+            return false;
 #endif
         }
 

@@ -1,17 +1,18 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
+
+#if UNITY_IOS
 using UnityEngine.XR.ARKit;
+#endif
 
 namespace ff.ar_rh_spurlab.Calibration
 {
     public class CalibrationUi : MonoBehaviour
     {
         [Header("Prefab references")]
-        
         [SerializeField]
         private string _mainSceneName = "Main";
 
@@ -71,7 +72,7 @@ namespace ff.ar_rh_spurlab.Calibration
             _worldMapStatusText.text = $"Mapping Status: {sessionSubsystem.worldMappingStatus}";
 #endif
         }
-        
+
         public void SetCalibrationData(CalibrationData calibrationData)
         {
             _calibrationData = calibrationData;

@@ -1,4 +1,5 @@
 using System;
+using ff.ar_rh_spurlab.Calibration;
 using ff.common.entity;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -32,6 +33,10 @@ namespace ff.ar_rh_spurlab.Locations
         public AugmentedLocation CalibrationPrefab;
         public Vector3[] PointsInLocationOrigin;
         public PointInformation[] PointsInformation;
+
+        public TextAsset PreinstallCalibrationData;
+        public WorldMap PreinstallWorldMap;
+
 
         private void OnValidate()
         {

@@ -38,6 +38,7 @@ namespace ff.ar_rh_spurlab.LineBuildup
     }
 
     [Serializable]
+    [PreferBinarySerialization]
     public class PointList : ScriptableObject
     {
         [SerializeField]
