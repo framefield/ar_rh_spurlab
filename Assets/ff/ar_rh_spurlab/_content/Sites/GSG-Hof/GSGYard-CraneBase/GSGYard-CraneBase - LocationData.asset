@@ -25,9 +25,9 @@ MonoBehaviour:
   CalibrationPrefab: {fileID: 4295738227600371516, guid: c20cafb65c48f4f858dd275d3e4382eb,
     type: 3}
   PointsInLocationOrigin:
-  - {x: 56.325, y: 0, z: -27.275}
-  - {x: 53.298, y: 0, z: -28.854}
-  - {x: 54.235, y: 0, z: -30.639}
+  - {x: 56.3352, y: -0.10690954, z: -27.2323}
+  - {x: 53.251, y: -0.10690954, z: -28.835}
+  - {x: 54.21, y: -0.10690954, z: -30.68}
   PointsInformation:
   - Id: cranebase-longend
     Title:

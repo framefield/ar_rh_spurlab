@@ -33,7 +33,7 @@ Transform:
   - {fileID: 4916252956264231405}
   - {fileID: 4629813521166947704}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4850895934155423905
 Animator:
@@ -457,6 +457,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8868688781179866722, guid: 4f779f0133a1b425aabe06b112deb069,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 525787344ab47420db43abaf7b002b6c, type: 2}
+    - target: {fileID: 8942170048869915748, guid: 4f779f0133a1b425aabe06b112deb069,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942170048869915748, guid: 4f779f0133a1b425aabe06b112deb069,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942170048869915748, guid: 4f779f0133a1b425aabe06b112deb069,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

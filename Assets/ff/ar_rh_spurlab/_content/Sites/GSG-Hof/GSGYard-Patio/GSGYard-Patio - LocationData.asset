@@ -25,21 +25,21 @@ MonoBehaviour:
   CalibrationPrefab: {fileID: 4295738227600371516, guid: 2c3b56937dadc4194ba5fa60376652ab,
     type: 3}
   PointsInLocationOrigin:
-  - {x: 4.8300476, y: 0, z: -4.100975}
-  - {x: 2.8572326, y: 0, z: -5.114951}
-  - {x: 7.305457, y: 0, z: -8.876004}
+  - {x: 7.1822314, y: -0.13388675, z: -2.579554}
+  - {x: 6.956, y: -0.13388675, z: -2.136}
+  - {x: 6.5097327, y: -0.13388675, z: -2.3610463}
   PointsInformation:
-  - Id: railscorner
+  - Id: manhole-left
     Title:
       _values: []
       _locales: []
     ScreenImage: {fileID: 2800000, guid: 1fae4d38210534bc9bdbf7d32b7c7175, type: 3}
-  - Id: railsshortend
+  - Id: manhole-right
     Title:
       _values: []
       _locales: []
     ScreenImage: {fileID: 2800000, guid: 85fad292afd6e4e6cb265c5a370b6831, type: 3}
-  - Id: railslongend
+  - Id: manhole-rightback
     Title:
       _values: []
       _locales: []
