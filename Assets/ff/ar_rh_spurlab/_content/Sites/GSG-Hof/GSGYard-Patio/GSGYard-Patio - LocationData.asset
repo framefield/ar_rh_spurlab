@@ -25,9 +25,9 @@ MonoBehaviour:
   CalibrationPrefab: {fileID: 4295738227600371516, guid: 2c3b56937dadc4194ba5fa60376652ab,
     type: 3}
   PointsInLocationOrigin:
-  - {x: 4.8300476, y: 1, z: -4.100975}
-  - {x: 2.8572326, y: 1, z: -5.114951}
-  - {x: 7.305457, y: 1, z: -8.876004}
+  - {x: 4.8300476, y: 0, z: -4.100975}
+  - {x: 2.8572326, y: 0, z: -5.114951}
+  - {x: 7.305457, y: 0, z: -8.876004}
   PointsInformation:
   - Id: railscorner
     Title:
