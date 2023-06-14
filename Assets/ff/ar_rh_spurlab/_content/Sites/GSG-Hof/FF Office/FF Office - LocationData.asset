@@ -59,6 +59,6 @@ MonoBehaviour:
   PreinstallCalibrationData: {fileID: 0}
   PreinstallWorldMap: {fileID: 0}
   GeoPosition:
-    Latitude: 52.54092788696289
-    Longitude: 13.38579273223877
-    Altitude: 0
+    Latitude: 52.5408969276765
+    Longitude: 13.386392863868526
+    Altitude: 7
