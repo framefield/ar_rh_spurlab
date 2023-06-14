@@ -33,17 +33,17 @@ MonoBehaviour:
     Title:
       _values: []
       _locales: []
-    ScreenImage: {fileID: 2800000, guid: 1fae4d38210534bc9bdbf7d32b7c7175, type: 3}
+    ScreenImage: {fileID: 2800000, guid: 47e18c6aadb954a85b8c3212c1b53072, type: 3}
   - Id: cranebase-corner
     Title:
       _values: []
       _locales: []
-    ScreenImage: {fileID: 2800000, guid: 85fad292afd6e4e6cb265c5a370b6831, type: 3}
+    ScreenImage: {fileID: 2800000, guid: 47e18c6aadb954a85b8c3212c1b53072, type: 3}
   - Id: cranebase-shortend
     Title:
       _values: []
       _locales: []
-    ScreenImage: {fileID: 2800000, guid: 7869cc3a48f2b4481aab95c237a995ad, type: 3}
+    ScreenImage: {fileID: 2800000, guid: 47e18c6aadb954a85b8c3212c1b53072, type: 3}
   PreinstallCalibrationData: {fileID: 4900000, guid: 2cfc68fc9d7e01d41ac6e265588ea3d1,
     type: 3}
   PreinstallWorldMap: {fileID: 7408814040901012953, guid: 1c39e8d0172ce4640b05cbb11e920c38,
