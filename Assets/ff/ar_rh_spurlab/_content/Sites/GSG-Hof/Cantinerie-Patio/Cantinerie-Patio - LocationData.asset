@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be330f4e83f74955b8231f36a6acb7f3, type: 3}
-  m_Name: FF Lab - LocationData
+  m_Name: Cantinerie-Patio - LocationData
   m_EditorClassIdentifier: 
   _id: ff-lab
   _title:
@@ -20,14 +20,14 @@ MonoBehaviour:
     _locales:
     - en
     - de
-  ContentPrefab: {fileID: 4295738227600371516, guid: feb6f32ec30c94ef7ac15f7129d90e69,
+  ContentPrefab: {fileID: 4295738227600371516, guid: 2c3b56937dadc4194ba5fa60376652ab,
     type: 3}
-  CalibrationPrefab: {fileID: 4295738227600371516, guid: eede986ca58964543add4e7a37d6cb1b,
+  CalibrationPrefab: {fileID: 4295738227600371516, guid: 2c3b56937dadc4194ba5fa60376652ab,
     type: 3}
   PointsInLocationOrigin:
-  - {x: 10.615, y: 6.802, z: 2.355}
+  - {x: 4.8878655, y: 6.139269, z: 3.8565965}
   - {x: 0.20705831, y: 6.1394277, z: 4.3415003}
-  - {x: 8.734, y: 9.936, z: 2.708}
+  - {x: 1.8032568, y: 6.1394267, z: 9.487793}
   PointsInformation:
   - Id: 
     Title:
