@@ -79,7 +79,7 @@ Material:
     - _DistortionStrengthScaled: 0
     - _DstBlend: 1
     - _EmissionEnabled: 0
-    - _FadeInCameraDistance: 8
+    - _FadeInCameraDistance: 0
     - _FadeOutCameraDistance: 0
     - _FlipbookMode: 0
     - _GlossMapScale: 1
