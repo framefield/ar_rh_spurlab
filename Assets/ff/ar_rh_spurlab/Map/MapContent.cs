@@ -1,4 +1,3 @@
-using System;
 using ff.ar_rh_spurlab.Locations;
 using ff.ar_rh_spurlab.Positioning;
 using UnityEngine;
@@ -9,21 +8,21 @@ namespace ff.ar_rh_spurlab.Map
     {
         [Header("Prefab References")]
         [SerializeField]
-        private Camera _mapCamera;
+        private MapCamera _mapCamera;
 
         [SerializeField]
         private GeoReference _geoReference;
 
         public RenderTexture RenderTexture => GetRenderTexture();
 
-        public Camera MapCamera => _mapCamera;
+        public MapCamera MapCamera => _mapCamera;
 
         private RenderTexture GetRenderTexture()
         {
             if (!_renderTexture)
             {
                 _renderTexture = new RenderTexture(Screen.width, Screen.height, 24);
-                _mapCamera.targetTexture = _renderTexture;
+                _mapCamera.Camera.targetTexture = _renderTexture;
             }
 
             return _renderTexture;
@@ -31,7 +30,7 @@ namespace ff.ar_rh_spurlab.Map
 
         public void SetVisibility(bool isVisible)
         {
-            _mapCamera.enabled = isVisible;
+            _mapCamera.SetVisibility(isVisible);
 
             if (!_trackedLocationContent)
             {

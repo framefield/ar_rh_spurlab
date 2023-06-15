@@ -6,6 +6,7 @@ using ff.common.entity;
 using ff.common.ui;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.Map
@@ -31,6 +32,9 @@ namespace ff.ar_rh_spurlab.Map
         [SerializeField]
         private MapLocationUi _mapLocationUiPrefab;
 
+        [SerializeField]
+        private MapCameraInteraction _mapCameraInteraction;
+
         private void Start()
         {
             _closeButton.onClick.AddListener(CloseOnClickHandler);
@@ -45,6 +49,12 @@ namespace ff.ar_rh_spurlab.Map
 
         private void CloseOnClickHandler()
         {
+            if (_activeSiteData)
+            {
+                var mapContent = _mapContentBySiteId[_activeSiteData.Id];
+                mapContent.SetVisibility(false);
+            }
+
             _hidable.IsVisible = false;
         }
 
@@ -81,6 +91,7 @@ namespace ff.ar_rh_spurlab.Map
             var mapContent = _mapContentBySiteId[siteData.Id];
             mapContent.SetVisibility(true);
             _backgroundImage.texture = mapContent.RenderTexture;
+            _mapCameraInteraction.SetMapCamera(mapContent.MapCamera);
             UpdateText();
             ReplaceLocationUis(siteData, mapContent);
         }
@@ -107,7 +118,7 @@ namespace ff.ar_rh_spurlab.Map
 
             _mapLocationUis.Clear();
 
-            var placeableUiContainer = new PlaceableUIContainer(_locationsContainer, mapContent.MapCamera);
+            var placeableUiContainer = new PlaceableUIContainer(_locationsContainer, mapContent.MapCamera.Camera);
             var label = 'A';
             foreach (var locationData in siteData.Locations)
             {

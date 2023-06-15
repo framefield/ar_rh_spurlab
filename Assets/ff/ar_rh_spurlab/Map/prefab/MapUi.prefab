@@ -133,6 +133,7 @@ MonoBehaviour:
   _locationsContainer: {fileID: 1783211817571162498}
   _mapLocationUiPrefab: {fileID: 6368304913353479028, guid: b13501f98b65a412783635b3c56ba78b,
     type: 3}
+  _mapCameraInteraction: {fileID: 3544922712910854107}
 --- !u!1 &4380935213947051186
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +145,7 @@ GameObject:
   - component: {fileID: 2592569558726556221}
   - component: {fileID: 4767309464365388727}
   - component: {fileID: 6491160578975465335}
+  - component: {fileID: 3544922712910854107}
   m_Layer: 5
   m_Name: Background-RawImage
   m_TagString: Untagged
@@ -206,6 +208,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &3544922712910854107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380935213947051186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9b03505b06a4800baed754566a92f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5998784848476878973
 GameObject:
   m_ObjectHideFlags: 0
