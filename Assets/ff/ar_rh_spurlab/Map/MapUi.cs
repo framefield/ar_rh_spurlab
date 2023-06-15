@@ -25,6 +25,12 @@ namespace ff.ar_rh_spurlab.Map
         [SerializeField]
         private Button _closeButton;
 
+        [SerializeField]
+        private RectTransform _locationsContainer;
+
+        [SerializeField]
+        private MapLocationUi _mapLocationUiPrefab;
+
         private void Start()
         {
             _closeButton.onClick.AddListener(CloseOnClickHandler);
@@ -76,6 +82,7 @@ namespace ff.ar_rh_spurlab.Map
             mapContent.SetVisibility(true);
             _backgroundImage.texture = mapContent.RenderTexture;
             UpdateText();
+            ReplaceLocationUis(siteData, mapContent);
         }
 
         private void UpdateText()
@@ -90,6 +97,27 @@ namespace ff.ar_rh_spurlab.Map
             _siteTitleText.text = title;
         }
 
+        private void ReplaceLocationUis(SiteData siteData, MapContent mapContent)
+        {
+            // todo pooling
+            foreach (var mapLocationUi in _mapLocationUis)
+            {
+                Destroy(mapLocationUi.gameObject);
+            }
+
+            _mapLocationUis.Clear();
+
+            var placeableUiContainer = new PlaceableUIContainer(_locationsContainer, mapContent.MapCamera);
+            var label = 'A';
+            foreach (var locationData in siteData.Locations)
+            {
+                var mapLocationUi = Instantiate(_mapLocationUiPrefab, _locationsContainer);
+                var worldPosition = mapContent.GeoPositionToWorldPosition(locationData.GeoPosition);
+                mapLocationUi.Initialize(locationData, label++, placeableUiContainer, worldPosition);
+                _mapLocationUis.Add(mapLocationUi);
+            }
+        }
+
         protected override void OnLocaleChangedHandler(string locale)
         {
             UpdateText();
@@ -97,5 +125,6 @@ namespace ff.ar_rh_spurlab.Map
 
         private SiteData _activeSiteData;
         private readonly Dictionary<string, MapContent> _mapContentBySiteId = new();
+        private readonly List<MapLocationUi> _mapLocationUis = new();
     }
 }
