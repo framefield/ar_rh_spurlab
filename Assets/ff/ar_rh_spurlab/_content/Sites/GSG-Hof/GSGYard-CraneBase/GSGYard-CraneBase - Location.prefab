@@ -369,69 +369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931d56e29b794422bd86615435da155a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5297141632162780582
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7742306633296135681}
-  - component: {fileID: 1965486454584801967}
-  m_Layer: 0
-  m_Name: Waiting-Timeline (not in chapter tab)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7742306633296135681
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5297141632162780582}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1326363085964483616}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!320 &1965486454584801967
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5297141632162780582}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 5d6ae239f5f141f4ca00b790644c63d8, type: 2}
-  m_InitialState: 0
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 0}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References:
-    - 042479fc0247f534682ef51cb4169f53: {fileID: 0}
-    - 2b07e09b7279c584d8c9e329b035c4ca: {fileID: 0}
-    - f0cfa0b107bdb4de4b575411ca13750e: {fileID: 0}
-    - 533ba112f738a4f578e95afc0505a7f2: {fileID: 0}
-    - 32304dec81e11450a80ee9eed3e5cbd3: {fileID: 0}
-    - f46fa51419c27404e8ada6d725d29e01: {fileID: 0}
-    - 7e376a4baf0be4f3a96415a695c32fdb: {fileID: 0}
-    - 9cd840a8a5b86d44691966851d483929: {fileID: 0}
-    - de6f561e62e974ee998a2116486540a1: {fileID: 0}
-    - 8c782c707c2dc4cf7821842d7b84db0b: {fileID: 0}
-    - 247e292e302fb4d948d0481f04d8bf9d: {fileID: 0}
-    - ac7d47dceabfe0b41bf477fcfebc5fcc: {fileID: 0}
 --- !u!1 &6642312720825585451
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,7 +429,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7742306633296135681}
   - {fileID: 7983251208408309977}
   - {fileID: 3573907563574984136}
   - {fileID: 8688489325457272798}
@@ -513,16 +449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoPlay: 0
   _ui: {fileID: 4979716920556640123}
-  _waitingTimeline: {fileID: 1965486454584801967}
+  _waitingTimeline: {fileID: 7295632218456803282}
   _chapters:
-  - Title:
-      _values:
-      - WelcomeCB
-      - Wilkommen
-      _locales:
-      - en
-      - de
-    Timeline: {fileID: 7295632218456803282}
   - Title:
       _values:
       - WindowCB

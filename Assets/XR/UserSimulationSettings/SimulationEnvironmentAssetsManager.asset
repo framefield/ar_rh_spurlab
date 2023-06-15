@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SimulationEnvironmentAssetsManager
   m_EditorClassIdentifier: 
   m_EnvironmentPrefabPaths:
-  - Assets/ff/ar_rh_spurlab/_content/Sites/GSG-Hof/XRSimulation GSG Hof.prefab
+  - Assets/ff/ar_rh_spurlab/_content/Sites/GSG-Hof/_shared/GSG-Hof - XRSimulation.prefab
   - Assets/ff/ar_rh_spurlab/_content/Sites/Sachsenhausen/Barrack35/XR Simulation
     Barrack35.prefab
   - Assets/ff/ar_rh_spurlab/_content/Sites/Sachsenhausen/Tower/XR Simulation Tower.prefab

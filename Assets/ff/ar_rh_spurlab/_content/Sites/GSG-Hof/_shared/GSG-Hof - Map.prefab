@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 6006311898939577211}
   - component: {fileID: 5974380920444366944}
   m_Layer: 10
-  m_Name: GSG-Hof-Map
+  m_Name: GSG-Hof - Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

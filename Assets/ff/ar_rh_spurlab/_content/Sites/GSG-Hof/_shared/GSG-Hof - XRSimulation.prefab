@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 2985013547352963469}
   - component: {fileID: 5538708091295867650}
   m_Layer: 0
-  m_Name: XRSimulation GSG Hof
+  m_Name: GSG-Hof - XRSimulation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CameraStartingPose:
-    position: {x: 54.4, y: 1.8, z: -26.6}
+    position: {x: 0, y: 7, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   m_CameraMovementBounds:
     m_Center: {x: 10.547306, y: 16.750877, z: -68.21976}
