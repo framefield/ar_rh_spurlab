@@ -645,6 +645,12 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.05
 --- !u!114 &-5913409910897354522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -909,6 +915,12 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 0
+    SequentialDelay: 0.2
 --- !u!114 &-4237161462588225930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1156,6 +1168,12 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.1
 --- !u!114 &-3634802849923148907
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2155,6 +2173,12 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 0
+    SequentialDelay: 0.2
 --- !u!114 &2507015309241394808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3059,6 +3083,12 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.05
 --- !u!114 &5692273256369517510
 MonoBehaviour:
   m_ObjectHideFlags: 1

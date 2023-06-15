@@ -718,6 +718,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
     SequentialDelay: 0.1
@@ -1193,9 +1196,12 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 0
-    SequentialDelay: 0.2
+    SequentialDelay: 0.1
 --- !u!114 &-4718999040311844652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1786,10 +1792,10 @@ MonoBehaviour:
   m_Tracks:
   - {fileID: 6277789594774301872}
   - {fileID: -8500005720783524315}
+  - {fileID: -4518931891091674482}
   - {fileID: 2507015309241394808}
   - {fileID: -3370647798743650109}
   - {fileID: -4269781548073841494}
-  - {fileID: -4518931891091674482}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -2043,6 +2049,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
     SequentialDelay: 0.1
@@ -2308,6 +2317,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
     SequentialDelay: 0.1
@@ -3557,6 +3569,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
     SequentialDelay: 0.1
@@ -3807,6 +3822,9 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
     SequentialDelay: 0.1

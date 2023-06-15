@@ -31,6 +31,9 @@ MonoBehaviour:
   - Name: B12detailed - BuildingItem
     IsActive: 1
     Id: B12detailed - BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.1
 --- !u!114 &-8955946420901350599
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -860,6 +863,9 @@ MonoBehaviour:
   - Name: B12detailed - BuildingItem
     IsActive: 0
     Id: B12detailed - BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 0
+    SequentialDelay: 0.2
 --- !u!114 &8092986353637653784
 MonoBehaviour:
   m_ObjectHideFlags: 1

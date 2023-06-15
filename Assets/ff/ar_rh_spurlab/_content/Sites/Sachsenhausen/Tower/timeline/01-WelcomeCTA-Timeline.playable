@@ -578,6 +578,12 @@ MonoBehaviour:
   - Name: Obelisk - BuildingItem
     IsActive: 0
     Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 0
+    SequentialDelay: 0.2
 --- !u!114 &7894062535987712488
 MonoBehaviour:
   m_ObjectHideFlags: 1
