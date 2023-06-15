@@ -14,8 +14,8 @@ namespace ff.ar_rh_spurlab.Locations
                 .Where(b => b is Portal or Canvas or GrayScaleScenePointOfInterest).ToArray();
 
             _rendererStateTuples = new (Renderer renderer, bool enabled)[_renderers.Length];
-            _colliderStateTuples = new (Collider renderer, bool enabled)[_renderers.Length];
-            _behavioursStateTuples = new (Behaviour renderer, bool enabled)[_renderers.Length];
+            _colliderStateTuples = new (Collider renderer, bool enabled)[_colliders.Length];
+            _behavioursStateTuples = new (Behaviour renderer, bool enabled)[_behaviours.Length];
 
             _isTracked = false;
             HideAllChildren();
