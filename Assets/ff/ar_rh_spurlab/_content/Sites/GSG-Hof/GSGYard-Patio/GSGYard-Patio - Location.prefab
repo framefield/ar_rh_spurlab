@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7590f9372214df8b423b20c297e7fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoPlay: 1
+  _autoPlay: 0
   _ui: {fileID: 4979716920556640123}
   _waitingTimeline: {fileID: 1965486454584801967}
   _chapters:
