@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8688489325457272798}
   - component: {fileID: 9123260833107747037}
   m_Layer: 0
-  m_Name: Future-Timeline
+  m_Name: Future-CB-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 7983251208408309977}
   - component: {fileID: 7295632218456803282}
   m_Layer: 0
-  m_Name: WelcomeCTA-Timeline
+  m_Name: WelcomeCTA-CB-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 4958162475169426255}
   - component: {fileID: 1133144599054059114}
   m_Layer: 0
-  m_Name: Constant
+  m_Name: Constant-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,7 +517,7 @@ MonoBehaviour:
   _chapters:
   - Title:
       _values:
-      - Welcome
+      - WelcomeCB
       - Wilkommen
       _locales:
       - en
@@ -525,7 +525,7 @@ MonoBehaviour:
     Timeline: {fileID: 7295632218456803282}
   - Title:
       _values:
-      - Window
+      - WindowCB
       - Fenster
       _locales:
       - en
@@ -533,7 +533,7 @@ MonoBehaviour:
     Timeline: {fileID: 1126374830877447619}
   - Title:
       _values:
-      - Future
+      - FutureCB
       - Zukunft
       _locales:
       - en
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 3573907563574984136}
   - component: {fileID: 1126374830877447619}
   m_Layer: 0
-  m_Name: LookThroughWindow-Timeline
+  m_Name: LookThroughWindow-CB-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

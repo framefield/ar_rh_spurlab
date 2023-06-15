@@ -22,7 +22,7 @@ MonoBehaviour:
     - de
   ContentPrefab: {fileID: 4295738227600371516, guid: c20cafb65c48f4f858dd275d3e4382eb,
     type: 3}
-  CalibrationPrefab: {fileID: 4295738227600371516, guid: c20cafb65c48f4f858dd275d3e4382eb,
+  CalibrationPrefab: {fileID: 4295738227600371516, guid: 207ca6443033f4b4f9f56102fa2f7c04,
     type: 3}
   PointsInLocationOrigin:
   - {x: 56.3352, y: -0.10690954, z: -27.2323}
