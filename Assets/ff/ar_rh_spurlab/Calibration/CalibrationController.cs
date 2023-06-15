@@ -94,13 +94,25 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void SetLocation(LocationData locationData)
         {
-            Debug.Log($"CalibrationController: setting location {locationData.Id}");
+            Debug.Log($"CalibrationController: setting locationId '{locationData.Id}'");
 
             CalibrationData = new CalibrationData(locationData.Id);
 
             if (_augmentedLocation)
             {
                 Destroy(_augmentedLocation.gameObject);
+            }
+
+            if (!_xrOrigin)
+            {
+                Debug.LogError("XR origin not set!");
+                return;
+            }
+
+            if (!locationData.CalibrationPrefab)
+            {
+                Debug.LogError($"Location {locationData.Id} is has no calibrationPrefab!");
+                return;
             }
 
             _augmentedLocation = Instantiate(locationData.CalibrationPrefab, _xrOrigin);
