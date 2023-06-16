@@ -112,7 +112,11 @@ namespace ff.ar_rh_spurlab.Locations
             var isCalibrated = CalibrationData.CalibrationDataExists(locationData.Id);
             if (!isCalibrated)
             {
-                CalibrateActiveLocation();
+                if (changeSource == ChangeSource.User)
+                {
+                    CalibrateActiveLocation();
+                }
+
                 return false;
             }
 
