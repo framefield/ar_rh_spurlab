@@ -28,6 +28,9 @@ namespace ff.ar_rh_spurlab.Map
         [SerializeField]
         private TMP_Text _titleText;
 
+        [SerializeField]
+        private RectTransform _tiltedTransform;
+
         [Header("Asset References")]
         [SerializeField]
         private TMP_FontAsset _activeFontAsset;
@@ -36,13 +39,14 @@ namespace ff.ar_rh_spurlab.Map
         private TMP_FontAsset _inactiveFontAsset;
 
         public void Initialize(LocationData locationData, char label, PlaceableUIContainer placeableUiContainer,
-            Vector3 worldPosition)
+            Vector3 worldPosition, float tiltAngle)
         {
             _locationData = locationData;
             gameObject.name = $"{locationData.Id} - MapLocationUi";
             _labelText.text = label.ToString();
 
             _worldPosition = worldPosition;
+            _tiltedTransform.localRotation = Quaternion.Euler(tiltAngle, 0, 0);
             _placeableUiContainer = placeableUiContainer;
             _rectTransform = GetComponent<RectTransform>();
 

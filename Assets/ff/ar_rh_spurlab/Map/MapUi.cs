@@ -143,7 +143,11 @@ namespace ff.ar_rh_spurlab.Map
             {
                 var mapLocationUi = Instantiate(_mapLocationUiPrefab, _locationsContainer);
                 var worldPosition = mapContent.GeoPositionToWorldPosition(locationData.GeoPosition);
-                mapLocationUi.Initialize(locationData, label++, placeableUiContainer, worldPosition);
+                mapLocationUi.Initialize(locationData,
+                    label++,
+                    placeableUiContainer,
+                    worldPosition,
+                    mapContent.MapCamera.TiltAngle);
                 _mapLocationUis.Add(mapLocationUi);
             }
         }

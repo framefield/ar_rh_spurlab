@@ -115,7 +115,8 @@ namespace ff.ar_rh_spurlab.Map
             var angle = _headingAngleTransition.Update(Time.deltaTime, 5f, Mathf.LerpAngle);
 
 
-            _contentContainer.localRotation = Quaternion.Euler(0, 0, angle);
+            _contentContainer.localRotation =
+                Quaternion.Euler(_mapContent.MapCamera.TiltAngle, 0, angle);
         }
 
         private readonly ValueTransition<Vector2> _positionTransition = new(Vector2.zero);

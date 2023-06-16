@@ -131,7 +131,7 @@ MonoBehaviour:
   _hidable: {fileID: 1948700106919819165}
   _closeButton: {fileID: 6985593127095636967}
   _locationsContainer: {fileID: 1783211817571162498}
-  _mapLocationUiPrefab: {fileID: 6368304913353479028, guid: b13501f98b65a412783635b3c56ba78b,
+  _mapLocationUiPrefab: {fileID: 175261845521744752, guid: b13501f98b65a412783635b3c56ba78b,
     type: 3}
   _mapCameraInteraction: {fileID: 3544922712910854107}
   _mapPositionIndicator: {fileID: 1114671757664188225}

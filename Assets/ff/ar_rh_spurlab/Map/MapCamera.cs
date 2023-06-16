@@ -28,6 +28,8 @@ namespace ff.ar_rh_spurlab.Map
             }
         }
 
+        public float TiltAngle => Camera.transform.eulerAngles.x;
+
         public void SetVisibility(bool isVisible)
         {
             Camera.enabled = isVisible;
