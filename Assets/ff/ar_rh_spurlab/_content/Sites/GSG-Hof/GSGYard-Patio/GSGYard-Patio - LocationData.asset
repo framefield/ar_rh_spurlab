@@ -20,7 +20,7 @@ MonoBehaviour:
     _locales:
     - en
     - de
-  ContentPrefab: {fileID: 4295738227600371516, guid: 2c3b56937dadc4194ba5fa60376652ab,
+  ContentPrefab: {fileID: 4559401550302122108, guid: 2c3b56937dadc4194ba5fa60376652ab,
     type: 3}
   CalibrationPrefab: {fileID: 4295738227600371516, guid: 207ca6443033f4b4f9f56102fa2f7c04,
     type: 3}
