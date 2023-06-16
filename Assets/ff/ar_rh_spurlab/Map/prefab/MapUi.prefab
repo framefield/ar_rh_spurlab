@@ -134,6 +134,7 @@ MonoBehaviour:
   _mapLocationUiPrefab: {fileID: 6368304913353479028, guid: b13501f98b65a412783635b3c56ba78b,
     type: 3}
   _mapCameraInteraction: {fileID: 3544922712910854107}
+  _availableSites: {fileID: 11400000, guid: f45043b776b1f45c2a556ba1464d011b, type: 2}
 --- !u!1 &4380935213947051186
 GameObject:
   m_ObjectHideFlags: 0

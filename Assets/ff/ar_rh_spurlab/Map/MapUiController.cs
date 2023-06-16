@@ -6,11 +6,27 @@ namespace ff.ar_rh_spurlab.Map
     {
         public static MapUi MapUiInstance;
 
-        public static void ShowMap(SiteData siteData)
+        public static void ShowSiteMap(SiteData siteData)
         {
             if (MapUiInstance)
             {
-                MapUiInstance.ShowMap(siteData);
+                MapUiInstance.ShowSiteMap(siteData);
+            }
+        }
+
+        public static void ShowSiteMap(string siteId)
+        {
+            if (MapUiInstance)
+            {
+                MapUiInstance.ShowSiteMap(siteId);
+            }
+        }
+
+        public static void ShowLocationMap(string locationId)
+        {
+            if (MapUiInstance)
+            {
+                MapUiInstance.ShowLocationMap(locationId);
             }
         }
     }

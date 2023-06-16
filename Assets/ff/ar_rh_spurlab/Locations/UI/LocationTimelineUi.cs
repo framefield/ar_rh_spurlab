@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using ff.ar_rh_spurlab.Map;
+using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.ui;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +25,9 @@ namespace ff.ar_rh_spurlab.Locations.UI
         [SerializeField]
         private Button _resumeButton;
 
+        [SerializeField]
+        private Button _mapButton;
+
         [Header("Chapter UI")]
         [SerializeField]
         private Transform _chaptersContainer;
@@ -38,11 +43,17 @@ namespace ff.ar_rh_spurlab.Locations.UI
         {
             _pauseButton.onClick.AddListener(timelineManager.Pause);
             _resumeButton.onClick.AddListener(timelineManager.Resume);
+            _mapButton.onClick.AddListener(OnMapButtonClickedHandler);
 
             BuildChaptersUi(chapters);
 
             OnIsPlayingChanged(LocationTimelineManager.IsPlaying.Value);
             LocationTimelineManager.IsPlaying.OnValueChanged += OnIsPlayingChanged;
+        }
+
+        private void OnMapButtonClickedHandler()
+        {
+            MapUiController.ShowLocationMap(SharedCalibrationContext.ActiveLocation.Id);
         }
 
         private void OnDestroy()

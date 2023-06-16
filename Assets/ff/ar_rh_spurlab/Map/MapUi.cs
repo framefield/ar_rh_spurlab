@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ff.ar_rh_spurlab.Localization;
 using ff.ar_rh_spurlab.Locations;
 using ff.common.entity;
@@ -35,6 +36,10 @@ namespace ff.ar_rh_spurlab.Map
         [SerializeField]
         private MapCameraInteraction _mapCameraInteraction;
 
+        [Header("Asset References")]
+        [SerializeField]
+        private AvailableSites _availableSites;
+
         private void Start()
         {
             _closeButton.onClick.AddListener(CloseOnClickHandler);
@@ -58,7 +63,19 @@ namespace ff.ar_rh_spurlab.Map
             _hidable.IsVisible = false;
         }
 
-        public void ShowMap(SiteData siteData)
+        public void ShowLocationMap(string locationId)
+        {
+            var siteData = _availableSites.Sites.First(s => s.Locations.Any(l => l.Id == locationId));
+            ShowSiteMap(siteData);
+        }
+
+        public void ShowSiteMap(string siteId)
+        {
+            var siteData = _availableSites.Sites.First(s => s.Id == siteId);
+            ShowSiteMap(siteData);
+        }
+
+        public void ShowSiteMap(SiteData siteData)
         {
             if (siteData == null)
             {

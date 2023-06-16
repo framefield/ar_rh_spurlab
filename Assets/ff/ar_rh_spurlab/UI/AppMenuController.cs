@@ -62,7 +62,7 @@ namespace ff.ar_rh_spurlab.UI
 
         private void OnMapButtonClickedHandler(SiteData data)
         {
-            MapUiController.ShowMap(data);
+            MapUiController.ShowSiteMap(data);
         }
 
         private void OnLocationButtonClickedHandler(SiteData siteData, LocationData locationData)
