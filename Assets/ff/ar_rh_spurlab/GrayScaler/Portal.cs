@@ -12,29 +12,15 @@ namespace ff.ar_rh_spurlab.GrayScaler
         public static event PortalTriggeredDelegate OnPortalTriggered;
         public static Portal ActivePortal { get; private set; }
 
-        [SerializeField]
-        private GameObject[] _activatedContent;
+        public event Action OnEnter;
 
-        [SerializeField]
-        private GameObject[] _deactivatedContent;
-
-        [SerializeField]
-        private UnityEvent OnActivated;
-
-        [SerializeField]
-        private UnityEvent OnDeactivated;
+        public event Action OnExit;
 
         [SerializeField]
         [ReadOnly]
         private bool _isActivated = false;
 
-
         private TriggerState _triggerState;
-
-        private void Awake()
-        {
-            ApplyContentVisibility();
-        }
 
         private void OnEnable()
         {
@@ -121,8 +107,7 @@ namespace ff.ar_rh_spurlab.GrayScaler
 
             ActivePortal = this;
             _isActivated = true;
-            ApplyContentVisibility();
-            OnActivated?.Invoke();
+            OnEnter?.Invoke();
         }
 
         private void DeactivateContent()
@@ -138,22 +123,9 @@ namespace ff.ar_rh_spurlab.GrayScaler
             }
 
             _isActivated = false;
-            ApplyContentVisibility();
-            OnDeactivated?.Invoke();
+            OnExit?.Invoke();
         }
 
-        private void ApplyContentVisibility()
-        {
-            foreach (var go in _activatedContent)
-            {
-                go.SetActive(_isActivated);
-            }
-
-            foreach (var go in _deactivatedContent)
-            {
-                go.SetActive(!_isActivated);
-            }
-        }
 
         [ContextMenu("Trigger")]
         public void Trigger()

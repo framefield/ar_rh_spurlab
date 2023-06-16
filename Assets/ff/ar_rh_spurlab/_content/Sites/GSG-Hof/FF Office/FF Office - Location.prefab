@@ -572,7 +572,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoPlay: 0
   _ui: {fileID: 2352550462109145720}
-  _waitingTimeline: {fileID: 1659719286235176634}
   _chapters:
   - Title:
       _values:
@@ -582,6 +581,7 @@ MonoBehaviour:
       - en
       - de
     Timeline: {fileID: 1659719286235176634}
+    IsWelcomeChapter: 1
   - Title:
       _values:
       - Window FF
@@ -590,6 +590,7 @@ MonoBehaviour:
       - en
       - de
     Timeline: {fileID: 2005600212777941286}
+    IsWelcomeChapter: 0
   - Title:
       _values:
       - Future FF
@@ -598,6 +599,8 @@ MonoBehaviour:
       - en
       - de
     Timeline: {fileID: 5161035477522753284}
+    IsWelcomeChapter: 0
+  _portal: {fileID: 3638924951705396999}
 --- !u!1 &7673239737481665652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,6 +1847,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d1629e88a678f84b8a96046ac4f86b9, type: 3}
+--- !u!114 &3638924951705396999 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4683971174754027662, guid: 9d1629e88a678f84b8a96046ac4f86b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 8322863225395130249}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8f23aafa7422f45b4a17aa6c21d4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4786598536318322828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3597718610698446597, guid: 9d1629e88a678f84b8a96046ac4f86b9,

@@ -31,13 +31,13 @@ namespace ff.ar_rh_spurlab.UI
             _appMenuButton.onClick.AddListener(AppMenuButtonClickedHandler);
             _appMenuController.OnClose += () => ToggleAppMenuOpen(false);
 
-            OnIsPlayingChangedHandler(LocationTimelineManager.IsPlaying.Value);
-            LocationTimelineManager.IsPlaying.OnValueChanged += OnIsPlayingChangedHandler;
+            OnIsPlayingChangedHandler(LocationTimelineManager.IsAnyTimelineMgrPlaying.Value);
+            LocationTimelineManager.IsAnyTimelineMgrPlaying.OnValueChanged += OnIsPlayingChangedHandler;
         }
 
         private void OnDestroy()
         {
-            LocationTimelineManager.IsPlaying.OnValueChanged -= OnIsPlayingChangedHandler;
+            LocationTimelineManager.IsAnyTimelineMgrPlaying.OnValueChanged -= OnIsPlayingChangedHandler;
         }
 
         private void OnIsPlayingChangedHandler(bool isPlaying)

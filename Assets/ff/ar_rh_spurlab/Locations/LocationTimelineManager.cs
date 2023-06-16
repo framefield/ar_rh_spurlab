@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ff.ar_rh_spurlab.GrayScaler;
 using ff.ar_rh_spurlab.Localization;
 using ff.ar_rh_spurlab.Locations.UI;
 using UnityEngine;
@@ -26,6 +27,9 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private Chapter[] _chapters;
 
+        [SerializeField]
+        private Portal _portal;
+
         public bool AutoPlay
         {
             get => _autoPlay;
@@ -33,18 +37,43 @@ namespace ff.ar_rh_spurlab.Locations
             set => _autoPlay = value;
         }
 
-        public static ReactiveProperty<bool> IsPlaying = new();
+        public readonly static ReactiveProperty<bool> IsAnyTimelineMgrPlaying = new();
 
+        public readonly ReactiveProperty<bool> IsPlaying = new();
+        public readonly ReactiveProperty<Chapter> ActiveChapter = new();
 
         public void Initialize()
         {
+            if (!_portal)
+            {
+                Debug.LogError("Portal is not set", this);
+                enabled = false;
+                return;
+            }
+
             if (_ui)
             {
                 _ui.Initialize(this, _chapters);
                 _ui.OnChapterClicked += PlayChapter;
             }
 
+            _portal.OnExit += OnPortalExitHandler;
+            _portal.OnEnter += OnPortalEnterHandler;
+
             IsPlaying.Value = false;
+            SetTimelinePlaying(this, false);
+        }
+
+        private void OnPortalEnterHandler()
+        {
+            AutoPlay = true;
+            PlayNextChapter();
+        }
+
+        private void OnPortalExitHandler()
+        {
+            AutoPlay = false;
+            Stop();
         }
 
         public void SetIsTracked(bool isTracked)
@@ -91,6 +120,7 @@ namespace ff.ar_rh_spurlab.Locations
             }
 
             IsPlaying.Value = false;
+            SetTimelinePlaying(this, IsPlaying.Value);
         }
 
         private void Update()
@@ -104,6 +134,7 @@ namespace ff.ar_rh_spurlab.Locations
                 IsPlaying.Value = false;
             }
 
+            SetTimelinePlaying(this, IsPlaying.Value);
             _initialMuteStates.Clear();
         }
 
@@ -178,6 +209,7 @@ namespace ff.ar_rh_spurlab.Locations
             chapter.IsActive.Value = true;
             chapter.IsVisited.Value = true;
 
+            ActiveChapter.Value = chapter;
             Play(chapter.Timeline);
         }
 
@@ -215,6 +247,7 @@ namespace ff.ar_rh_spurlab.Locations
             }
 
             _activePlayableDirector = null;
+            ActiveChapter.Value = null;
         }
 
         private void PlayableDirectorStoppedHandler(PlayableDirector director)
@@ -256,8 +289,6 @@ namespace ff.ar_rh_spurlab.Locations
             return currentIndex == -1 ? (currentIndex, false) : (currentIndex, true);
         }
 
-        private PlayableDirector _activePlayableDirector;
-        private PlayableDirector[] _playableDirectors;
 
         public void PlayChapters()
         {
@@ -303,8 +334,26 @@ namespace ff.ar_rh_spurlab.Locations
             _isPausedByUser = false;
         }
 
+        public static void SetTimelinePlaying(LocationTimelineManager mgr, bool isPlaying)
+        {
+            if (!IsAnyTimelineMgrPlaying.Value && !isPlaying && _currentTimelineMgr == mgr)
+            {
+                _currentTimelineMgr = mgr;
+                IsAnyTimelineMgrPlaying.Value = true;
+            }
+            else if (IsAnyTimelineMgrPlaying.Value && !isPlaying && _currentTimelineMgr == mgr)
+            {
+                IsAnyTimelineMgrPlaying.Value = true;
+            }
+        }
+
+        private static LocationTimelineManager _currentTimelineMgr = null;
+
         private readonly Dictionary<TrackAsset, (bool isMuted, PlayableDirector director)> _initialMuteStates =
             new();
+
+        private PlayableDirector _activePlayableDirector;
+        private PlayableDirector[] _playableDirectors;
 
         private bool _isTracked;
         private bool _isPausedByUser;

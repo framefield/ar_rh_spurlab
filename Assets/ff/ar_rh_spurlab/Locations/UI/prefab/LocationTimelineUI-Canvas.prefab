@@ -180,6 +180,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -357,6 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5678910683685806381}
   - component: {fileID: 6114483144119588698}
+  - component: {fileID: 1371045186348648909}
   m_Layer: 5
   m_Name: Paused-Panel
   m_TagString: Untagged
@@ -400,8 +402,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transition: 2
-  _fadeDuration: 0.2
+  _fadeDuration: 1
   _state: 0
+--- !u!225 &1371045186348648909
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5563011334297248281}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8398969873496733854
 GameObject:
   m_ObjectHideFlags: 0
