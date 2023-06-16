@@ -29,6 +29,8 @@ namespace ff.ar_rh_spurlab.Positioning
         public PositioningStatus Status { get; private set; } = PositioningStatus.Stopped;
         public PositioningInfo LastPosition { get; private set; }
 
+        private float _lastAccuracyPrintTime;
+
         private void OnEnable()
         {
 #if UNITY_IOS
@@ -81,6 +83,12 @@ namespace ff.ar_rh_spurlab.Positioning
                     };
 
                     OnPositionChanged?.Invoke(LastPosition);
+
+                    if (_lastAccuracyPrintTime < Time.time - 1.0f)
+                    {
+                        _lastAccuracyPrintTime = Time.time;
+                        Debug.Log($"Accuracy: {LastPosition.HorizontalAccuracy} / {LastPosition.VerticalAccuracy}");
+                    }
                 }
             }
         }
@@ -110,6 +118,14 @@ namespace ff.ar_rh_spurlab.Positioning
                 HorizontalAccuracy = horizontalAccuracy,
                 VerticalAccuracy = verticalAccuracy
             };
+
+
+            if (_lastAccuracyPrintTime < Time.time - 1.0f)
+            {
+                _lastAccuracyPrintTime = Time.time;
+                Debug.Log($"Accuracy: {LastPosition.HorizontalAccuracy} / {LastPosition.VerticalAccuracy}");
+            }
+
             OnStatusChanged?.Invoke(Status);
             OnPositionChanged?.Invoke(LastPosition);
         }
