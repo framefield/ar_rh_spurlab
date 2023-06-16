@@ -1,6 +1,8 @@
 using System;
+using ff.ar_rh_spurlab.Localization;
 using ff.ar_rh_spurlab.Locations;
 using ff.ar_rh_spurlab.UI.Site_Ui;
+using ff.common.entity;
 using ff.common.ui;
 using TMPro;
 using UnityEngine;
@@ -8,14 +10,25 @@ using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.Map
 {
-    public class MapLocationUi : MonoBehaviour
+    public class MapLocationUi : AbstractLocalizable
     {
+        [Header("Prefab References")]
         [SerializeField]
         private TMP_Text _labelText;
 
         [SerializeField]
         private Hidable _visitedHidable;
 
+        [SerializeField]
+        private Button _toggleDetailsButton;
+
+        [SerializeField]
+        private Hidable _detailsHidable;
+
+        [SerializeField]
+        private TMP_Text _titleText;
+
+        [Header("Asset References")]
         [SerializeField]
         private TMP_FontAsset _activeFontAsset;
 
@@ -32,12 +45,34 @@ namespace ff.ar_rh_spurlab.Map
             _worldPosition = worldPosition;
             _placeableUiContainer = placeableUiContainer;
             _rectTransform = GetComponent<RectTransform>();
+
+            _toggleDetailsButton.onClick.AddListener(OnToggleDetailsButtonClickedHandler);
+            OnLocaleChangedHandler(ApplicationLocale.Instance.CurrentLocale);
             UpdateStates();
         }
 
-        private void OnEnable()
+        private void OnToggleDetailsButtonClickedHandler()
         {
+            _detailsHidable.IsVisible = !_detailsHidable.IsVisible;
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
             UpdateStates();
+        }
+
+        protected override void OnLocaleChangedHandler(string locale)
+        {
+            if (!_locationData)
+            {
+                return;
+            }
+
+            if (_locationData.Title.TryGetValue(locale, out var title))
+            {
+                _titleText.text = title;
+            }
         }
 
         private void UpdateStates()

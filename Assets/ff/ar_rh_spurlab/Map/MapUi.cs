@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ff.ar_rh_spurlab.Localization;
@@ -7,7 +6,6 @@ using ff.common.entity;
 using ff.common.ui;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.Map
@@ -35,6 +33,9 @@ namespace ff.ar_rh_spurlab.Map
 
         [SerializeField]
         private MapCameraInteraction _mapCameraInteraction;
+
+        [SerializeField]
+        private MapPositionIndicator _mapPositionIndicator;
 
         [Header("Asset References")]
         [SerializeField]
@@ -109,6 +110,7 @@ namespace ff.ar_rh_spurlab.Map
             mapContent.SetVisibility(true);
             _backgroundImage.texture = mapContent.RenderTexture;
             _mapCameraInteraction.SetMapCamera(mapContent.MapCamera);
+            _mapPositionIndicator.SetMapContent(mapContent);
             UpdateText();
             ReplaceLocationUis(siteData, mapContent);
         }
