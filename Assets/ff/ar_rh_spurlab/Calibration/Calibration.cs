@@ -38,11 +38,9 @@ namespace ff.ar_rh_spurlab.Calibration
                 for (var index = 0; index < calibrationData.MatchedAnchors.Count; index++)
                 {
                     var arAnchor = calibrationData.MatchedAnchors[index];
-                    var pointInformation = locationData.PointsInformation[index];
                     if (arAnchor == null)
                     {
-                        sb.Append(
-                            $"#{index} ({pointInformation.Title.Value(ApplicationLocale.Instance.CurrentLocale)}) ");
+                        sb.Append($"#{index}");
                     }
                 }
 
