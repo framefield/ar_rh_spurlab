@@ -576,16 +576,16 @@ MonoBehaviour:
   _chapters:
   - Title:
       _values:
-      - Window
-      - Fenster
+      - Window FF
+      - Fenster FF
       _locales:
       - en
       - de
     Timeline: {fileID: 2005600212777941286}
   - Title:
       _values:
-      - Future
-      - Zukunft
+      - Future FF
+      - Zukunft FF
       _locales:
       - en
       - de
