@@ -22,7 +22,7 @@ MonoBehaviour:
     - de
   ContentPrefab: {fileID: 4295738227600371516, guid: e9fa1991cf6d54db394bcb3fcc722e71,
     type: 3}
-  CalibrationPrefab: {fileID: 4295738227600371516, guid: 5b542b89de20e4b7fa4233f6b2e25fb1,
+  CalibrationPrefab: {fileID: 5320696708872061125, guid: 5b542b89de20e4b7fa4233f6b2e25fb1,
     type: 3}
   PointsInLocationOrigin:
   - {x: 2.3495317, y: 7.1013455, z: 0.4975891}
@@ -44,3 +44,9 @@ MonoBehaviour:
       _values: []
       _locales: []
     ScreenImage: {fileID: 2800000, guid: 471a41eaf8db540bdabcd78bb0ca4ddd, type: 3}
+  PreinstallCalibrationData: {fileID: 0}
+  PreinstallWorldMap: {fileID: 0}
+  GeoPosition:
+    Latitude: 0
+    Longitude: 0
+    Altitude: 0

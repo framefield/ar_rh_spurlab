@@ -438,8 +438,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoPlay: 0
   _ui: {fileID: 1705103923540181281}
-  _waitingTimeline: {fileID: 5048694961588186981}
   _chapters:
+  - Title:
+      _values:
+      - Welcome
+      - Willkommen
+      _locales:
+      - en
+      - de
+    Timeline: {fileID: 5048694961588186981}
+    IsWelcomeChapter: 1
   - Title:
       _values:
       - Window PA
@@ -448,6 +456,7 @@ MonoBehaviour:
       - en
       - de
     Timeline: {fileID: 639745121645722516}
+    IsWelcomeChapter: 0
   - Title:
       _values:
       - Future PA
@@ -456,6 +465,8 @@ MonoBehaviour:
       - en
       - de
     Timeline: {fileID: 6343759667951937024}
+    IsWelcomeChapter: 0
+  _portal: {fileID: 7210397231010715763}
 --- !u!1 &5591958668249227217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,6 +1090,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2670833466932236541}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7210397231010715763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4683971174754027662, guid: 9d1629e88a678f84b8a96046ac4f86b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 2670833466932236541}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8f23aafa7422f45b4a17aa6c21d4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2923745951797801403
 PrefabInstance:
   m_ObjectHideFlags: 0

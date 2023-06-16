@@ -44,10 +44,8 @@ MonoBehaviour:
       _values: []
       _locales: []
     ScreenImage: {fileID: 2800000, guid: e40faa098608a4d5885041e5daeca931, type: 3}
-  PreinstallCalibrationData: {fileID: 4900000, guid: 2cfc68fc9d7e01d41ac6e265588ea3d1,
-    type: 3}
-  PreinstallWorldMap: {fileID: 7408814040901012953, guid: 1c39e8d0172ce4640b05cbb11e920c38,
-    type: 3}
+  PreinstallCalibrationData: {fileID: 0}
+  PreinstallWorldMap: {fileID: 0}
   GeoPosition:
     Latitude: 52.54096944977583
     Longitude: 13.3863516268412
