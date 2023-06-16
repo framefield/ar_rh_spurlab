@@ -17,7 +17,17 @@ namespace ff.ar_rh_spurlab.Map
         [SerializeField]
         private RectTransform _accuracyContainer;
 
+        [Header("Transition")]
+        [SerializeField]
+        private float _radiusTransitionSpeed = 5f;
+
+        [SerializeField]
+        private float _headingTransitionSpeed = 5f;
+
         [Header("Debug")]
+        [SerializeField]
+        private Vector3 _debugWorldPosition = Vector3.zero;
+
         [SerializeField]
         private float _debugAccuracy = 20f;
 
@@ -75,7 +85,7 @@ namespace ff.ar_rh_spurlab.Map
         private void UpdateDebugPositioning()
         {
             _hidable.IsVisible = true;
-            _worldPosition = Vector3.zero;
+            _worldPosition = _debugWorldPosition;
 
             _accuracyReferencePosition = _worldPosition + Vector3.right * _debugAccuracy;
             _headingReferencePosition =
@@ -94,14 +104,13 @@ namespace ff.ar_rh_spurlab.Map
             }
 
             var screenPosition = _placeableUiContainer.WorldToUiPosition(_worldPosition);
-            _positionTransition.TargetValue = screenPosition;
-            _contentContainer.anchoredPosition = _positionTransition.Update(Time.deltaTime, 5f, Vector2.Lerp);
+            _contentContainer.anchoredPosition = screenPosition;
 
             var accuracyReferenceScreenPosition = _placeableUiContainer.WorldToUiPosition(_accuracyReferencePosition);
             var accuracyRadius = Vector2.Distance(screenPosition, accuracyReferenceScreenPosition);
 
             _accuracyValueTransition.TargetValue = accuracyRadius;
-            var radius = _accuracyValueTransition.Update(Time.deltaTime, 5f, Mathf.Lerp);
+            var radius = _accuracyValueTransition.Update(Time.deltaTime, _radiusTransitionSpeed, Mathf.Lerp);
 
             _accuracyContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, radius * 2f);
             _accuracyContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, radius * 2f);
@@ -112,14 +121,14 @@ namespace ff.ar_rh_spurlab.Map
             var heading = headingReferenceScreenPosition - screenPosition;
             var headingAngle = Vector3.SignedAngle(Vector2.up, heading, Vector3.forward);
             _headingAngleTransition.TargetValue = -headingAngle;
-            var angle = _headingAngleTransition.Update(Time.deltaTime, 5f, Mathf.LerpAngle);
+            var angle = _headingAngleTransition.Update(Time.deltaTime, _headingTransitionSpeed, Mathf.LerpAngle);
 
 
             _contentContainer.localRotation =
                 Quaternion.Euler(_mapContent.MapCamera.TiltAngle, 0, angle);
         }
 
-        private readonly ValueTransition<Vector2> _positionTransition = new(Vector2.zero);
+
         private readonly ValueTransition<float> _accuracyValueTransition = new(0f);
         private readonly ValueTransition<float> _headingAngleTransition = new(0f);
 
