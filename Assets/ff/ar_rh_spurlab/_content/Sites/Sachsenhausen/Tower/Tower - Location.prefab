@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1085632769309231304}
   - component: {fileID: 1659719286235176634}
   m_Layer: 0
-  m_Name: 01-WelcomeCTA-Timeline
+  m_Name: WelcomeCTA-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 6957266007012701191}
   - component: {fileID: 5291812864398375828}
   m_Layer: 0
-  m_Name: '03-Expansion 1939-1945-Timeline '
+  m_Name: '02-Expansion 1939-1945-Timeline '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 4273006798993615750}
   - component: {fileID: 6668093488301492918}
   m_Layer: 0
-  m_Name: 04-Destruction and Demolition 1945-Now-Timeline
+  m_Name: 03-Destruction and Demolition 1945-Now-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 14405704690528027}
   - component: {fileID: 2005600212777941286}
   m_Layer: 0
-  m_Name: 02-Construction 1936-1939-Timeline
+  m_Name: 01-Construction 1936-1939-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -748,8 +748,8 @@ MonoBehaviour:
     Timeline: {fileID: 5291812864398375828}
   - Title:
       _values:
-      - Demolition
-      - Vernichtung
+      - 1961
+      - 1961
       _locales:
       - en
       - de
