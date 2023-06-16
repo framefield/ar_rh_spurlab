@@ -113,11 +113,11 @@ namespace ff.ar_rh_spurlab.Locations
             var portal = GetComponentInChildren<Portal>();
             if (portal)
             {
-                portal.OnActivated.AddListener(OnPortalActivatedHandler);
+                portal.OnEnter += OnPortalEnterHandler;
             }
         }
 
-        private void OnPortalActivatedHandler()
+        private void OnPortalEnterHandler()
         {
             SharedLocationContext.VisitedLocationIds.Add(LocationData.Id);
         }
