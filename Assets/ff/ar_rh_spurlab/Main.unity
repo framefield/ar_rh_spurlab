@@ -541,12 +541,12 @@ PrefabInstance:
     - target: {fileID: 2296354345796178611, guid: 564b3c261fab14228b262d41beac3ce1,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2296354345796178611, guid: 564b3c261fab14228b262d41beac3ce1,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2810760945387693009, guid: 564b3c261fab14228b262d41beac3ce1,
         type: 3}
@@ -930,12 +930,12 @@ PrefabInstance:
     - target: {fileID: 6117466493665086804, guid: c9f4ee615ae444fb3b2ca35de50fbb37,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6117466493665086804, guid: c9f4ee615ae444fb3b2ca35de50fbb37,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6267512513676795214, guid: c9f4ee615ae444fb3b2ca35de50fbb37,
         type: 3}
@@ -3554,8 +3554,8 @@ MonoBehaviour:
   _activationDistanceInMeters: 50
   _accuracyFactor: -0.5
   _activationDistanceInMetersAfterUserLocationSelection: 15
-  _accuracyFactorAfterUserLocationSelection: 0.5
-  _maxAllowedAccuracyInMeters: 50
+  _accuracyFactorAfterUserLocationSelection: 0.14
+  _maxAllowedAccuracyInMeters: 100
 --- !u!114 &1820547445
 MonoBehaviour:
   m_ObjectHideFlags: 0
