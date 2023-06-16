@@ -127,7 +127,7 @@ namespace ff.ar_rh_spurlab.Calibration
         [NonSerialized]
         internal List<ARAnchor> _unmatchedAnchors;
 
-        public bool AreAnchorsReady => MatchedAnchorsCount == LocationData.NumberOfReferencePoints;
+        public bool AreAnchorsReady => MatchedAnchorsCount >= LocationData.NumberOfReferencePoints;
         public int MatchedAnchorsCount => _matchedAnchors.Count(a => a != null);
 
         public float Quality => LocationData.NumberOfReferencePoints > 0
@@ -296,25 +296,7 @@ namespace ff.ar_rh_spurlab.Calibration
             _calibrationData._matchedAnchors.Clear();
             _calibrationData._unmatchedAnchors.Clear();
 
-#if UNITY_IOS && !UNITY_EDITOR
-            var availableAnchors = new List<ARAnchor>(_allAnchors);
-            for (var i = 0; i < _calibrationData.PointsInWorldMap.Count; i++)
-            {
-                ARAnchor foundAnchor = null;
-                foreach (var anchor in availableAnchors)
-                {
-                    if (Vector3.Distance(anchor.transform.position, _calibrationData.PointsInWorldMap[i]) < anchorMatchingDistance)
-                    {
-                        _calibrationData.PointsInWorldMap[i] = anchor.transform.position;
-                        availableAnchors.Remove(anchor);
-                        foundAnchor = anchor;
-                        break;
-                    }
-                }
-                _calibrationData._matchedAnchors.Add(foundAnchor);
-            }
-            _calibrationData._unmatchedAnchors = availableAnchors;
-#elif UNITY_EDITOR
+#if UNITY_EDITOR
             // simulate anchors in editor
             for (var index = 0; index < _calibrationData.PointsInWorldMap.Count; index++)
             {
@@ -324,23 +306,43 @@ namespace ff.ar_rh_spurlab.Calibration
                     position += Random.insideUnitSphere * 0.25f;
                 }
 
+                if (_simulateMissingPointFromCalibration && index == 1)
+                {
+                    continue;
+                }
+
                 var gameObject = Object.Instantiate(_arAnchorManager.anchorPrefab);
                 gameObject.transform.position = position;
                 var anchor = gameObject.GetComponent<ARAnchor>();
                 _allAnchors.Add(anchor);
-
-                if (_simulateMissingPointFromCalibration && index == 1)
-                {
-                    gameObject.transform.localScale *= 0.2f;
-                    _calibrationData._matchedAnchors.Add(null);
-                    _calibrationData._unmatchedAnchors.Add(anchor);
-                }
-                else
-                {
-                    _calibrationData._matchedAnchors.Add(anchor);
-                }
             }
 #endif
+
+            var availableAnchors = new List<ARAnchor>(_allAnchors);
+            for (var i = 0; i < _calibrationData.PointsInWorldMap.Count; i++)
+            {
+                ARAnchor foundAnchor = null;
+                var bestDistance = float.MaxValue;
+                foreach (var anchor in availableAnchors)
+                {
+                    var distance = Vector3.Distance(anchor.transform.position, _calibrationData.PointsInWorldMap[i]);
+                    if (distance < anchorMatchingDistance && distance < bestDistance)
+                    {
+                        bestDistance = distance;
+                        foundAnchor = anchor;
+                    }
+                }
+
+                if (foundAnchor)
+                {
+                    availableAnchors.Remove(foundAnchor);
+                    _calibrationData.PointsInWorldMap[i] = foundAnchor.transform.position;
+                }
+
+                _calibrationData._matchedAnchors.Add(foundAnchor);
+            }
+
+            _calibrationData._unmatchedAnchors = availableAnchors;
         }
 
         public void SetCalibrationData(CalibrationData calibrationData)
