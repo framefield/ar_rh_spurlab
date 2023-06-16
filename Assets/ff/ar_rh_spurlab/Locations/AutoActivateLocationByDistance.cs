@@ -128,7 +128,8 @@ namespace ff.ar_rh_spurlab.Locations
                     }
                 }
 
-                //Debug.Log($"Distance to {location.Id} {distance:F1}m closeEnough:{closeEnough} {_lastChangeSource}", this);
+                Debug.Log($"Distance to {location.Id} {distance:F1}m closeEnough:{closeEnough} {_lastChangeSource}",
+                    this);
             }
 
             var shouldActivate =
