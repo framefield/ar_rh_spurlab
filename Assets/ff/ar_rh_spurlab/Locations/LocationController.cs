@@ -79,15 +79,15 @@ namespace ff.ar_rh_spurlab.Locations
             _calibrationARAnchorManager =
                 new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Tracking);
 
-            if (SharedCalibrationContext.ActiveLocation == null)
+            if (SharedLocationContext.ActiveLocation == null)
             {
-                SharedCalibrationContext.ActiveLocation = _defaultLocationData;
+                SharedLocationContext.ActiveLocation = _defaultLocationData;
             }
 
             _uiController.Initialize(this, _stateMachine);
-            if (SharedCalibrationContext.ActiveLocation)
+            if (SharedLocationContext.ActiveLocation)
             {
-                SetLocation(SharedCalibrationContext.ActiveLocation, ChangeSource.Start);
+                SetLocation(SharedLocationContext.ActiveLocation, ChangeSource.Start);
             }
 
             _stateMachine.Initialize();
@@ -102,12 +102,14 @@ namespace ff.ar_rh_spurlab.Locations
                 _calibrationARAnchorManager.Reset();
             }
 
+            SharedLocationContext.VisitedLocationIds.Clear();
+
             SetLocation(_defaultLocationData, ChangeSource.Start);
         }
 
         public bool SetLocation(LocationData locationData, ChangeSource changeSource = ChangeSource.User)
         {
-            SharedCalibrationContext.ActiveLocation = locationData;
+            SharedLocationContext.ActiveLocation = locationData;
 
             var isCalibrated = CalibrationData.CalibrationDataExists(locationData.Id);
             if (!isCalibrated)
@@ -149,7 +151,7 @@ namespace ff.ar_rh_spurlab.Locations
 
         public void CalibrateActiveLocation()
         {
-            if (SharedCalibrationContext.ActiveLocation == null)
+            if (SharedLocationContext.ActiveLocation == null)
             {
                 Debug.LogError("No active location set!", this);
                 return;

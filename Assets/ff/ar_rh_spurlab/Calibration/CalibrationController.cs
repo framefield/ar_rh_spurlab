@@ -45,13 +45,13 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private void Start()
         {
-            if (!SharedCalibrationContext.ActiveLocation)
+            if (!SharedLocationContext.ActiveLocation)
             {
                 Debug.LogError("CalibrationController: ActiveLocation is not set!", this);
                 return;
             }
 
-            Debug.Log($"CalibrationController: will load location {SharedCalibrationContext.ActiveLocation.Id}");
+            Debug.Log($"CalibrationController: will load location {SharedLocationContext.ActiveLocation.Id}");
 
             if (!_stateMachine)
             {
@@ -94,7 +94,7 @@ namespace ff.ar_rh_spurlab.Calibration
 
             _calibrationARAnchorManager =
                 new CalibrationARAnchorManager(_arAnchorManager, CalibrationARAnchorManager.Mode.Calibrating);
-            SetLocation(SharedCalibrationContext.ActiveLocation);
+            SetLocation(SharedLocationContext.ActiveLocation);
             _stateMachine.Initialize();
         }
 

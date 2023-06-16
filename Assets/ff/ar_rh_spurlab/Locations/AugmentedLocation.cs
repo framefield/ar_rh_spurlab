@@ -1,5 +1,7 @@
 using System;
 using ff.ar_rh_spurlab.Calibration;
+using ff.ar_rh_spurlab.GrayScaler;
+using ff.ar_rh_spurlab.UI.Site_Ui;
 using UnityEngine;
 
 namespace ff.ar_rh_spurlab.Locations
@@ -107,6 +109,17 @@ namespace ff.ar_rh_spurlab.Locations
             {
                 trackedLocationContent.Initialize();
             }
+
+            var portal = GetComponentInChildren<Portal>();
+            if (portal)
+            {
+                portal.OnActivated.AddListener(OnPortalActivatedHandler);
+            }
+        }
+
+        private void OnPortalActivatedHandler()
+        {
+            SharedLocationContext.VisitedLocationIds.Add(LocationData.Id);
         }
 
         private ITrackedLocationContent[] _trackedLocationContents;

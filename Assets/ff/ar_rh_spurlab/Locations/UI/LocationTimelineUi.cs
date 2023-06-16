@@ -74,7 +74,7 @@ namespace ff.ar_rh_spurlab.Locations.UI
 
         private void OnMapButtonClickedHandler()
         {
-            MapUiController.ShowLocationMap(SharedCalibrationContext.ActiveLocation.Id);
+            MapUiController.ShowLocationMap(SharedLocationContext.ActiveLocation.Id);
         }
 
         private void OnDestroy()
