@@ -576,6 +576,14 @@ MonoBehaviour:
   _chapters:
   - Title:
       _values:
+      - Welcome
+      - Willkommen
+      _locales:
+      - en
+      - de
+    Timeline: {fileID: 1659719286235176634}
+  - Title:
+      _values:
       - Window FF
       - Fenster FF
       _locales:

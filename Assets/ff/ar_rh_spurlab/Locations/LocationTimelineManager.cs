@@ -24,9 +24,6 @@ namespace ff.ar_rh_spurlab.Locations
         private LocationTimelineUi _ui;
 
         [SerializeField]
-        private PlayableDirector _waitingTimeline;
-
-        [SerializeField]
         private Chapter[] _chapters;
 
         public bool AutoPlay
@@ -41,12 +38,6 @@ namespace ff.ar_rh_spurlab.Locations
 
         public void Initialize()
         {
-            if (!_waitingTimeline)
-            {
-                Debug.LogError("LocationTimelineManager: Waiting timeline is not assigned", this);
-                return;
-            }
-
             if (_ui)
             {
                 _ui.Initialize(this, _chapters);
@@ -54,8 +45,6 @@ namespace ff.ar_rh_spurlab.Locations
             }
 
             IsPlaying.Value = false;
-
-            Play(_waitingTimeline);
         }
 
         public void SetIsTracked(bool isTracked)
@@ -63,7 +52,9 @@ namespace ff.ar_rh_spurlab.Locations
             _isTracked = isTracked;
 
             if (_isPausedByUser)
+            {
                 return;
+            }
 
             if (!_activePlayableDirector)
             {
@@ -118,7 +109,6 @@ namespace ff.ar_rh_spurlab.Locations
 
         protected override void OnLocaleChangedHandler(string locale)
         {
-            SetLocalizedTracksMuted(_waitingTimeline, locale);
             foreach (var chapter in _chapters)
             {
                 SetLocalizedTracksMuted(chapter.Timeline, locale);
@@ -225,17 +215,10 @@ namespace ff.ar_rh_spurlab.Locations
             }
 
             _activePlayableDirector = null;
-            Play(_waitingTimeline);
         }
 
         private void PlayableDirectorStoppedHandler(PlayableDirector director)
         {
-            var isWaitingForTrigger = director == _waitingTimeline;
-            if (isWaitingForTrigger)
-            {
-                return;
-            }
-
             if (!_autoPlay || !_isTracked)
             {
                 return;
@@ -285,7 +268,7 @@ namespace ff.ar_rh_spurlab.Locations
                 return;
             }
 
-            if (_activePlayableDirector != _waitingTimeline)
+            if (_activePlayableDirector)
             {
                 Debug.LogError("LocationTimelineManager: Play chapters are called when chapters are already playing",
                     this);
