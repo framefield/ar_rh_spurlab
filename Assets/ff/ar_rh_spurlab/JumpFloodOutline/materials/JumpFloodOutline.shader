@@ -17,6 +17,9 @@ Shader "Hidden/JumpFloodOutline"
 
         #define FLOOD_NULL_POS -1.0
         #define FLOOD_NULL_POS_FLOAT2 float2(FLOOD_NULL_POS, FLOOD_NULL_POS)
+        
+        #define ENCODE_POS(pos) pos * _MainTex_TexelSize.xy * FLOOD_ENCODE_SCALE - FLOOD_ENCODE_OFFSET
+        #define DECODE_POS(pos) (pos + FLOOD_ENCODE_OFFSET) * _MainTex_TexelSize.zw / FLOOD_ENCODE_SCALE;
         ENDCG
         
         Pass // 0
@@ -75,7 +78,7 @@ Shader "Hidden/JumpFloodOutline"
 
                 // flip the rendering "upside down" in non OpenGL to make things easier later
                 // you'll notice none of the later passes need to pass UVs
-                #ifdef UNITY_UV_STARTS_AT_TOP
+                #if (UNITY_UV_STARTS_AT_TOP && !(SHADER_API_MOBILE && SHADER_API_VULKAN))
                 pos.y = -pos.y;
                 #endif
 
@@ -228,8 +231,9 @@ Shader "Hidden/JumpFloodOutline"
                         offsetUV = clamp(offsetUV, int2(0,0), (int2)_MainTex_TexelSize.zw - 1);
 
                         // decode position from buffer
-                        float2 offsetPos = (_MainTex.Load(int3(offsetUV, 0)).rg + FLOOD_ENCODE_OFFSET) * _MainTex_TexelSize.zw / FLOOD_ENCODE_SCALE;
-
+                        float2 encodedPos = _MainTex.Load(int3(offsetUV, 0)).rg;
+                        float2 offsetPos = DECODE_POS(encodedPos);
+                        
                         // the offset from current position
                         float2 disp = i.pos.xy - offsetPos;
 
@@ -238,7 +242,7 @@ Shader "Hidden/JumpFloodOutline"
 
                         // if offset position isn't a null position or is closer than the best
                         // set as the new best and store the position
-                        if (offsetPos.y != FLOOD_NULL_POS && dist < bestDist)
+                        if (encodedPos.y != FLOOD_NULL_POS && dist < bestDist)
                         {
                             bestDist = dist;
                             bestCoord = offsetPos;
@@ -247,7 +251,7 @@ Shader "Hidden/JumpFloodOutline"
                 }
 
                 // if not valid best distance output null position, otherwise output encoded position
-                return isinf(bestDist) ? FLOOD_NULL_POS_FLOAT2 : bestCoord * _MainTex_TexelSize.xy * FLOOD_ENCODE_SCALE - FLOOD_ENCODE_OFFSET;
+                return isinf(bestDist) ? FLOOD_NULL_POS_FLOAT2 : ENCODE_POS(bestCoord);
             }
             ENDCG
         }
@@ -305,8 +309,9 @@ Shader "Hidden/JumpFloodOutline"
                     offsetUV = clamp(offsetUV, int2(0,0), (int2)_MainTex_TexelSize.zw - 1);
 
                     // decode position from buffer
-                    float2 offsetPos = (_MainTex.Load(int3(offsetUV, 0)).rg + FLOOD_ENCODE_OFFSET) * _MainTex_TexelSize.zw / FLOOD_ENCODE_SCALE;
-
+                    float2 encodedPos = _MainTex.Load(int3(offsetUV, 0)).rg;
+                    float2 offsetPos = DECODE_POS(encodedPos);
+                    
                     // the offset from current position
                     float2 disp = i.pos.xy - offsetPos;
 
@@ -315,7 +320,7 @@ Shader "Hidden/JumpFloodOutline"
 
                     // if offset position isn't a null position or is closer than the best
                     // set as the new best and store the position
-                    if (offsetPos.x != -1.0 && dist < bestDist)
+                    if (encodedPos.y != FLOOD_NULL_POS && dist < bestDist)
                     {
                         bestDist = dist;
                         bestCoord = offsetPos;
@@ -323,7 +328,7 @@ Shader "Hidden/JumpFloodOutline"
                 }
 
                 // if not valid best distance output null position, otherwise output encoded position
-                return isinf(bestDist) ? FLOOD_NULL_POS_FLOAT2 : bestCoord * _MainTex_TexelSize.xy * FLOOD_ENCODE_SCALE - FLOOD_ENCODE_OFFSET;
+                return isinf(bestDist) ? FLOOD_NULL_POS_FLOAT2 : ENCODE_POS(bestCoord);
             }
             ENDCG
         }

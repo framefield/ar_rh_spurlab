@@ -36,7 +36,7 @@ namespace ff.ar_rh_spurlab.Calibration
         private AugmentedLocation _augmentedLocation;
 
         public CalibrationData CalibrationData { get; private set; }
-        public LocationData LocationData => _augmentedLocation.LocationData;
+        public LocationData LocationData => _augmentedLocation ? _augmentedLocation.LocationData : null;
 
         public ARSession Session => _arSession;
         public ARRaycastManager RaycastManager => _arRaycastManager;
@@ -45,6 +45,12 @@ namespace ff.ar_rh_spurlab.Calibration
 
         private void Start()
         {
+            if (!SharedCalibrationContext.ActiveLocation)
+            {
+                Debug.LogError("CalibrationController: ActiveLocation is not set!", this);
+                return;
+            }
+
             Debug.Log($"CalibrationController: will load location {SharedCalibrationContext.ActiveLocation.Id}");
 
             if (!_stateMachine)
