@@ -25,9 +25,9 @@ MonoBehaviour:
   CalibrationPrefab: {fileID: 4295738227600371516, guid: 207ca6443033f4b4f9f56102fa2f7c04,
     type: 3}
   PointsInLocationOrigin:
-  - {x: 7.1822314, y: -0.13388675, z: -2.579554}
-  - {x: 6.956, y: -0.13388675, z: -2.136}
-  - {x: 6.5097327, y: -0.13388675, z: -2.3610463}
+  - {x: 7.266245, y: 0, z: -8.840893}
+  - {x: 4.8300476, y: 0, z: -4.1009746}
+  - {x: 2.8572326, y: 0, z: -5.114951}
   PointsInformation:
   - Id: manhole-left
     Title:
