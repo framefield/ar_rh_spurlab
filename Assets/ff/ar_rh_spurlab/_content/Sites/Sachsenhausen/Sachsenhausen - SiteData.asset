@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Sachsenhausen - SiteData
   m_EditorClassIdentifier: 
   _id: sachsenhausen
+  _mapContentPrefab: {fileID: 5974380920444366944, guid: 366aa2dfdfdd6428a9134b2645796e9d,
+    type: 3}
   _title:
     _values:
     - Sachsenhausen
