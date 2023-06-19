@@ -3339,232 +3339,232 @@ MonoBehaviour:
     IsActive: 0
     Id: AreaSquare - BuildingItem
   - Name: R01 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: R01 - BuildingItem
   - Name: R02 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: R02 - BuildingItem
   - Name: B01 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B01 - BuildingItem
   - Name: B21 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B21 - BuildingItem
   - Name: B02 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B02 - BuildingItem
   - Name: B22 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B22 - BuildingItem
   - Name: B03 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B03 - BuildingItem
   - Name: B04 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B04 - BuildingItem
   - Name: B23 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B23 - BuildingItem
   - Name: B24 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B24 - BuildingItem
   - Name: B25 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B25 - BuildingItem
   - Name: B43 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B43 - BuildingItem
   - Name: B44 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B44 - BuildingItem
   - Name: B05 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B05 - BuildingItem
   - Name: B26 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B26 - BuildingItem
   - Name: B27 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B27 - BuildingItem
   - Name: B45 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B45 - BuildingItem
   - Name: B06 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B06 - BuildingItem
   - Name: B28 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B28 - BuildingItem
   - Name: B46 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B46 - BuildingItem
   - Name: B47 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B47 - BuildingItem
   - Name: B63 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B63 - BuildingItem
   - Name: B64 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B64 - BuildingItem
   - Name: B - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B - BuildingItem
   - Name: Laundry - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: Laundry - BuildingItem
   - Name: B48 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B48 - BuildingItem
   - Name: B65 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B65 - BuildingItem
   - Name: B65c - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B65c - BuildingItem
   - Name: B49 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B49 - BuildingItem
   - Name: B65b - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B65b - BuildingItem
   - Name: B50 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B50 - BuildingItem
   - Name: B65d - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B65d - BuildingItem
   - Name: E - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: E - BuildingItem
   - Name: Kitchen - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: Kitchen - BuildingItem
   - Name: B51 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B51 - BuildingItem
   - Name: B66 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B66 - BuildingItem
   - Name: B67 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B67 - BuildingItem
   - Name: B52 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B52 - BuildingItem
   - Name: B68 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B68 - BuildingItem
   - Name: B07 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B07 - BuildingItem
   - Name: B29 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B29 - BuildingItem
   - Name: B53 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B53 - BuildingItem
   - Name: B30 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B30 - BuildingItem
   - Name: B54 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B54 - BuildingItem
   - Name: B08 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B08 - BuildingItem
   - Name: B31 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B31 - BuildingItem
   - Name: B09 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B09 - BuildingItem
   - Name: B32 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B32 - BuildingItem
   - Name: B55 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B55 - BuildingItem
   - Name: B56 - Delousing - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B56 - Delousing - BuildingItem
   - Name: B33 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B33 - BuildingItem
   - Name: B10 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B10 - BuildingItem
   - Name: B34 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B34 - BuildingItem
   - Name: B11 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B11 - BuildingItem
   - Name: B35 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B35 - BuildingItem
   - Name: B12 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B12 - BuildingItem
   - Name: B36 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B36 - BuildingItem
   - Name: B13 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B13 - BuildingItem
   - Name: B14 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B14 - BuildingItem
   - Name: Cells - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: Cells - BuildingItem
   - Name: B15 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B15 - BuildingItem
   - Name: B37 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B37 - BuildingItem
   - Name: B57 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B57 - BuildingItem
   - Name: B16 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B16 - BuildingItem
   - Name: B38 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B38 - BuildingItem
   - Name: B58 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B58 - BuildingItem
   - Name: B17 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B17 - BuildingItem
   - Name: B39 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B39 - BuildingItem
   - Name: B59 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B59 - BuildingItem
   - Name: B18 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B18 - BuildingItem
   - Name: B40 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B40 - BuildingItem
   - Name: B60 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B60 - BuildingItem
   - Name: B19 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B19 - BuildingItem
   - Name: B41 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B41 - BuildingItem
   - Name: B61 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B61 - BuildingItem
   - Name: B20 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B20 - BuildingItem
   - Name: Obelisk - BuildingItem
     IsActive: 0
@@ -3574,7 +3574,7 @@ MonoBehaviour:
     Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialDelay: 0.1
+    SequentialDelay: 0.05
 --- !u!114 &4122040938103805000
 MonoBehaviour:
   m_ObjectHideFlags: 1
