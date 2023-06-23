@@ -96,7 +96,10 @@ namespace ff.ar_rh_spurlab.Calibration
         {
             _progressIndicator.fillAmount = state.Quality;
             _percentageText.text = state.Quality.ToString("P0");
-            _calibrationMessageText.text = state.CalibrationMessage ?? "Calibrated";
+            _calibrationMessageText.text =
+                !_locationController || !_locationController.CurrentLocation
+                    ? "No Location"
+                    : state.CalibrationMessage ?? "Calibrated";
         }
     }
 }

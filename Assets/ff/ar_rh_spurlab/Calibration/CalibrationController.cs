@@ -1,4 +1,6 @@
+using System;
 using System.IO;
+using System.Threading.Tasks;
 using ff.ar_rh_spurlab.AR;
 using ff.ar_rh_spurlab.Locations;
 using ff.ar_rh_spurlab.UI.Site_Ui;
@@ -98,7 +100,7 @@ namespace ff.ar_rh_spurlab.Calibration
             _stateMachine.Initialize();
         }
 
-        public void SetLocation(LocationData locationData)
+        private void SetLocation(LocationData locationData)
         {
             Debug.Log($"CalibrationController: setting locationId '{locationData.Id}'");
 
@@ -127,16 +129,23 @@ namespace ff.ar_rh_spurlab.Calibration
             _calibrationARAnchorManager.SetCalibrationData(CalibrationData);
         }
 
-        public void SaveCalibrationData()
+        public async Task SaveCalibrationData()
         {
             var directoryPath = Path.Combine(Application.persistentDataPath, CalibrationData.Id);
             var filePath = Path.Combine(directoryPath, "my_session.worldmap");
 
+            try
+            {
+                _calibrationUi.SetIsSaving(true);
 #if UNITY_IOS
-            StartCoroutine(ARWorldMapController.Save(_arSession, filePath));
+                await ARWorldMapController.Save(_arSession, filePath);
 #endif
-
-            CalibrationData.Store(directoryPath);
+                await CalibrationData.Store(directoryPath);
+            }
+            finally
+            {
+                _calibrationUi.SetIsSaving(false);
+            }
         }
 
         public void ResetCalibration()

@@ -1,4 +1,5 @@
 using System;
+using ff.ar_rh_spurlab.AR;
 using ff.ar_rh_spurlab.Calibration;
 using ff.ar_rh_spurlab.UI;
 using ff.ar_rh_spurlab.UI.Site_Ui;
@@ -139,14 +140,35 @@ namespace ff.ar_rh_spurlab.Locations
             _augmentedLocation = Instantiate(locationData.ContentPrefab, _xrOrigin);
             _augmentedLocation.Initialize(calibrationData, locationData);
             _calibrationARAnchorManager.SetCalibrationData(calibrationData);
-#if UNITY_IOS
+
             var directoryPath = System.IO.Path.Combine(Application.persistentDataPath, calibrationData.Id);
             var filePath = System.IO.Path.Combine(directoryPath, "my_session.worldmap");
 
-            StartCoroutine(ff.ar_rh_spurlab.AR.ARWorldMapController.Load(_arSession, filePath));
-#endif
+            LoadWorldMap(filePath);
+
             LocationChanged?.Invoke(changeSource);
+
             return true;
+        }
+
+        private async void LoadWorldMap(string filePath)
+        {
+            try
+            {
+                _augmentedLocation.SetWorldMapState(WorldMapState.Loading);
+                var loaded = await ARWorldMapController.Load(_arSession, filePath);
+#if UNITY_EDITOR
+                _augmentedLocation.SetWorldMapState(WorldMapState.Loaded);
+#else
+                _augmentedLocation.SetWorldMapState(loaded ? WorldMapState.Loaded : WorldMapState.NotFound);
+#endif
+            }
+            catch (Exception e)
+            {
+                _augmentedLocation.SetWorldMapState(WorldMapState.Failed);
+                Debug.LogError($"Failed to load world map {filePath}: {e.Message}", this);
+                Debug.LogException(e, this);
+            }
         }
 
         public void CalibrateActiveLocation()

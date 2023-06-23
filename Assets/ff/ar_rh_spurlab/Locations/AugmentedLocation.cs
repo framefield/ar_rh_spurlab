@@ -6,9 +6,20 @@ using UnityEngine;
 
 namespace ff.ar_rh_spurlab.Locations
 {
+    public enum WorldMapState
+    {
+        None,
+        Loading,
+        Loaded,
+        Failed,
+        NotFound
+    }
+
     public enum LocationTrackingState
     {
         None,
+        WaitingForWorldMap,
+        WaitingForAnchors,
         TrackingAnchors,
         TrackingCalibration,
     }
@@ -30,24 +41,35 @@ namespace ff.ar_rh_spurlab.Locations
         public event Action<LocationTrackingState> OnTrackingStateChanged;
         public event Action<LocationTrackingData> OnTrackingDataChanged;
 
+
+        public void SetWorldMapState(WorldMapState worldMapState)
+        {
+            _worldMapState = worldMapState;
+        }
+
         private void Update()
         {
-            var isTracking = CalibrationData?.AreAnchorsReady == true;
+            var areAnchorsReady = CalibrationData is { AreAnchorsReady: true };
             var oldTrackingData = TrackingData;
 
-            if (!isTracking)
+            if (!areAnchorsReady || _worldMapState != WorldMapState.Loaded)
             {
                 // update tracking data
                 TrackingData = new LocationTrackingData
                 {
-                    State = LocationTrackingState.None,
+                    State =
+                        _worldMapState != WorldMapState.Loaded
+                            ? LocationTrackingState.WaitingForWorldMap
+                            : LocationTrackingState.WaitingForAnchors,
                     Quality = CalibrationData != null
                         ? CalibrationData.MatchedAnchorsCount * (0.25f / LocationData.NumberOfReferencePoints)
                         : 0,
-                    CalibrationMessage = CalibrationCalculator.GetCalibrationMessage(CalibrationData, LocationData)
+                    CalibrationMessage = _worldMapState != WorldMapState.Loaded
+                        ? $"ArWorldMap {_worldMapState}"
+                        : CalibrationCalculator.GetCalibrationMessage(CalibrationData, LocationData)
                 };
 
-                if (oldTrackingData.State != LocationTrackingState.None)
+                if (oldTrackingData.State > LocationTrackingState.WaitingForAnchors)
                 {
                     // update tracked location contents
                     foreach (var trackedLocationContent in _trackedLocationContents)
@@ -102,6 +124,13 @@ namespace ff.ar_rh_spurlab.Locations
             CalibrationData = calibrationData;
             LocationData = locationData;
 
+            TrackingData = new LocationTrackingData
+            {
+                State = LocationTrackingState.None,
+                Quality = 0,
+                CalibrationMessage = "Uninitialized"
+            };
+
             _trackedLocationContents = GetComponentsInChildren<ITrackedLocationContent>();
             Debug.Log($"Location.Initialize: {name} has {_trackedLocationContents.Length} tracked location contents");
 
@@ -123,5 +152,6 @@ namespace ff.ar_rh_spurlab.Locations
         }
 
         private ITrackedLocationContent[] _trackedLocationContents;
+        private WorldMapState _worldMapState;
     }
 }

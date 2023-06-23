@@ -19,13 +19,15 @@ namespace ff.ar_rh_spurlab.Calibration
         [SerializeField]
         private Button _goToMainSceneButton;
 
+        [SerializeField]
+        private TMP_Text _savingText;
+
         [Header("Calibration Data Texts")]
         [SerializeField]
         private TMP_Text _calibrationNameText;
 
         [SerializeField]
         private TMP_Text _calibrationValidText;
-
 
         [Header("World Map Texts")]
         [SerializeField]
@@ -37,12 +39,19 @@ namespace ff.ar_rh_spurlab.Calibration
         private void Start()
         {
             _goToMainSceneButton.onClick.AddListener(GoToMainSceneButtonClickedHandler);
+            _savingText.gameObject.SetActive(false);
         }
 
         private void Update()
         {
             UpdateCalibrationDataStatusUi();
             UpdateMappingStatusUi();
+        }
+
+        public void SetIsSaving(bool isSaving)
+        {
+            _goToMainSceneButton.interactable = !isSaving;
+            _savingText.gameObject.SetActive(isSaving);
         }
 
         private void GoToMainSceneButtonClickedHandler()

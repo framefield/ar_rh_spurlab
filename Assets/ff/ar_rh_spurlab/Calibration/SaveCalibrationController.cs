@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using ff.common.statemachine;
 using UnityEngine;
 
@@ -11,11 +13,25 @@ namespace ff.ar_rh_spurlab.Calibration
 
         public void Activate(StateMachine stateMachine, State from, State to, ITriggerSource source, Trigger trigger)
         {
-            var calibrationController = stateMachine.GetComponent<CalibrationController>();
+            PerformSave(stateMachine);
+        }
 
+        private async void PerformSave(StateMachine stateMachine)
+        {
+            var calibrationController = stateMachine.GetComponent<CalibrationController>();
             if (calibrationController)
             {
-                calibrationController.SaveCalibrationData();
+                try
+                {
+                    await calibrationController.SaveCalibrationData();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("CalibrationController: Calibration data could not be saved.", this);
+                    Debug.LogException(e);
+                }
+
+                stateMachine.Continue();
             }
         }
 
