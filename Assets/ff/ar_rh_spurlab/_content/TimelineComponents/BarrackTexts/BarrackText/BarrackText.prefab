@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7972897494428903355}
+  - component: {fileID: 8645238293787171419}
   - component: {fileID: 2050433708458103501}
-  - component: {fileID: 3205983557600277239}
   - component: {fileID: 8798063782593823313}
   m_Layer: 0
   m_Name: BarrackText
@@ -35,6 +35,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 10, z: 0}
+--- !u!114 &8645238293787171419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3453082721359569108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d71cb28a95433fb2e9b01a601aa8df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layerName: visible
+  _playIdle: 0
+  _idleLayer: idle
+  _disableExpensiveChildComponentsWhenHidden: 1
 --- !u!114 &2050433708458103501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,29 +63,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ea81e31bfe417ca2c7f2d6ef2f9e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _revealTransition: {fileID: 0}
+  _revealTransition: {fileID: 8645238293787171419}
   _fadeInDuration: 0.3
   _fadeOutDuration: 0.3
   _normalizedTimePosition: 0
   _state: 0
---- !u!114 &3205983557600277239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3453082721359569108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2abb2471a695c411a874b5e76d005f8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 0
-  FadeDuration: 1
-  FadeOutDuration: -1
-  LayerName: visible
-  _activateOnStart: 0
-  _childrenDeactivatedWhenHidden: []
 --- !u!95 &8798063782593823313
 Animator:
   serializedVersion: 7
