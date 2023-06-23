@@ -1,10 +1,9 @@
-using System;
 using ff.ar_rh_spurlab.Locations;
+using ff.ar_rh_spurlab.Map;
 using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.statemachine;
 using ff.common.ui;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ff.ar_rh_spurlab.UI
@@ -16,6 +15,9 @@ namespace ff.ar_rh_spurlab.UI
 
         [SerializeField]
         private Button _appMenuButton;
+
+        [SerializeField]
+        private Button _mapButton;
 
         [SerializeField]
         private AppMenuController _appMenuController;
@@ -31,9 +33,12 @@ namespace ff.ar_rh_spurlab.UI
             _appMenuButton.onClick.AddListener(AppMenuButtonClickedHandler);
             _appMenuController.OnClose += () => ToggleAppMenuOpen(false);
 
+            _mapButton.onClick.AddListener(MapButtonClickedHandler);
+
             OnIsPlayingChangedHandler(LocationTimelineManager.IsAnyTimelineMgrPlaying.Value);
             LocationTimelineManager.IsAnyTimelineMgrPlaying.OnValueChanged += OnIsPlayingChangedHandler;
         }
+
 
         private void OnDestroy()
         {
@@ -66,6 +71,11 @@ namespace ff.ar_rh_spurlab.UI
         {
             _appMenuController.IsVisible = shouldBeOpen;
             _appMenuButton.gameObject.SetActive(!shouldBeOpen);
+        }
+
+        private void MapButtonClickedHandler()
+        {
+            MapUiController.ShowLocationMap(SharedLocationContext.ActiveLocation.Id);
         }
 
         private StateMachine _stateMachine;
