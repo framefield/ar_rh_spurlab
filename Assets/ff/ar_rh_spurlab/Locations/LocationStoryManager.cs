@@ -40,14 +40,17 @@ namespace ff.ar_rh_spurlab.Locations
         {
             if (isActive)
             {
+                Story storyToDeactivate = null;
                 if (_activeStory != null && _activeStory != story)
                 {
-                    _activeStory.TimelineManager.Deactivate();
+                    storyToDeactivate = _activeStory;
                 }
 
                 _audioSource.Stop();
                 _activeStory = story;
                 _activeStory.IsVisited = true;
+
+                storyToDeactivate?.TimelineManager.Deactivate();
             }
             else
             {
@@ -63,7 +66,7 @@ namespace ff.ar_rh_spurlab.Locations
                 _ui.SetTimelineManager(_activeStory.TimelineManager, _activeStory.TimelineManager.Chapters);
             }
 
-            _ui.SetVisibility(_activeStory != null);
+            _ui.UpdateVisibility();
         }
 
         private void PlayCtaAudio()

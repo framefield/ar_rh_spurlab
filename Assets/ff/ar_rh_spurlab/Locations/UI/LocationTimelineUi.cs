@@ -14,9 +14,6 @@ namespace ff.ar_rh_spurlab.Locations.UI
 
         [Header("Prefab References")]
         [SerializeField]
-        private Hidable _overallPanel;
-
-        [SerializeField]
         private Hidable _playingPanel;
 
         [SerializeField]
@@ -38,9 +35,9 @@ namespace ff.ar_rh_spurlab.Locations.UI
         [SerializeField]
         private GameObject _chapterUiSeparatorPrefab;
 
-        public void SetVisibility(bool isVisible)
+        public void UpdateVisibility()
         {
-            _overallPanel.IsVisible = isVisible;
+            OnIsPlayingChanged(_timelineManager && _timelineManager.IsPlaying.Value);
         }
 
         public void SetTimelineManager(LocationTimelineManager timelineManager, Chapter[] chapters)
