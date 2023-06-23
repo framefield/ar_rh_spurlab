@@ -68,12 +68,22 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             var weight = 0d;
 
             State state;
-            if (time >= clip.start && time <= clip.start + fadeInDuration && !existInPrev)
+            if (time >= clip.start && existsInNext)
+            {
+                state = State.Idle;
+                weight = 1;
+            }
+            else if (time < (clip.end - fadeOutDuration) && existInPrev)
+            {
+                state = State.Idle;
+                weight = 1;
+            }
+            else if (time >= clip.start && time <= clip.start + fadeInDuration)
             {
                 state = State.FadeIn;
                 weight = (time - clip.start) / fadeInDuration;
             }
-            else if (time < clip.end && time >= (clip.end - fadeOutDuration) && !existsInNext)
+            else if (time < clip.end && time >= (clip.end - fadeOutDuration))
             {
                 state = State.FadeOut;
                 weight = (clip.end - time) / fadeOutDuration;
@@ -104,12 +114,22 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             var endOffsetTime = time + sequentialOptions.SequentialDelay * offsetIndex;
 
             State state;
-            if (startOffsetTime >= clip.start && startOffsetTime <= clip.start + fadeInDuration && !existInPrev)
+            if (startOffsetTime >= clip.start && existsInNext)
+            {
+                state = State.Idle;
+                weight = 1;
+            }
+            else if (endOffsetTime < (clip.end - fadeOutDuration) && existInPrev)
+            {
+                state = State.Idle;
+                weight = 1;
+            }
+            else if (startOffsetTime >= clip.start && startOffsetTime <= clip.start + fadeInDuration)
             {
                 state = State.FadeIn;
                 weight = (startOffsetTime - clip.start) / fadeInDuration;
             }
-            else if (endOffsetTime < clip.end && endOffsetTime >= (clip.end - fadeOutDuration) && !existsInNext)
+            else if (endOffsetTime < clip.end && endOffsetTime >= (clip.end - fadeOutDuration))
             {
                 state = State.FadeOut;
                 weight = (clip.end - endOffsetTime) / fadeOutDuration;
