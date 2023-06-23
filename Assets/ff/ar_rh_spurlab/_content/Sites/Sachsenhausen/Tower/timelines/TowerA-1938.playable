@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4176715566419475189
+--- !u!114 &-5342630386668826097
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
   m_Name: AudioPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 7d45f94544a6f472aac281dac1d7026b, type: 3}
+  m_Clip: {fileID: 8300000, guid: 85767d26e9e41405f87ddf58dc2e0380, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
@@ -32,7 +32,7 @@ MonoBehaviour:
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
-  m_Muted: 1
+  m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
   m_Parent: {fileID: 11400000}
@@ -42,7 +42,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: -3051752282900745693}
-    m_Duration: 7.948571428571428
+    m_Duration: 5
     m_TimeScale: 1
     m_ParentTrack: {fileID: -3368704248436724449}
     m_EaseInDuration: 1
@@ -107,6 +107,75 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: 1936-YearOnHorizon
+  - m_Version: 1
+    m_Start: 5
+    m_ClipIn: 0
+    m_Asset: {fileID: 7779915554002274653}
+    m_Duration: 5
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3368704248436724449}
+    m_EaseInDuration: 1
+    m_EaseOutDuration: 1
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: 1937-YearOnHorizon
   m_Markers:
     m_Objects: []
   _defaultFadeDuration: 1
@@ -125,6 +194,23 @@ MonoBehaviour:
   _exposedBinding:
     exposedName: cd90157961d134984a0dfc0375817422
     defaultValue: {fileID: 0}
+--- !u!114 &-2128497871073501255
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 6313834b3b0df4ba6a15d759761b3686, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
 --- !u!114 &-1664740233835565783
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,17 +251,17 @@ MonoBehaviour:
   m_Version: 3
   m_AnimClip: {fileID: 0}
   m_Locked: 0
-  m_Muted: 1
+  m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
   m_Parent: {fileID: -1664740233835565783}
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 1.0000000000000004
+    m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: -4176715566419475189}
-    m_Duration: 6.948571428571428
+    m_Asset: {fileID: -5342630386668826097}
+    m_Duration: 23.32734693877551
     m_TimeScale: 1
     m_ParentTrack: {fileID: -1265895565499389446}
     m_EaseInDuration: 0
@@ -208,7 +294,25 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -221,7 +325,76 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: Willkommen
+    m_DisplayName: A2.0 - 1938-Politische Verfolgung.DE
+  - m_Version: 1
+    m_Start: 24.516666666666666
+    m_ClipIn: 0
+    m_Asset: {fileID: -2128497871073501255}
+    m_Duration: 44.08333333333333
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -1265895565499389446}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: "A2.1 - 1938-wachsende Menge H\xE4ftlinge.DE"
   m_Markers:
     m_Objects: []
   m_TrackProperties:
@@ -229,6 +402,40 @@ MonoBehaviour:
     stereoPan: 0
     spatialBlend: 0
   _locale: de
+--- !u!114 &-506421673204570367
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 9eb0122a510ad42b1b0f92cab76f802e, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
+--- !u!114 &-364849149926532933
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 78429710577c14badacd44aa2ea10e07, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +446,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
-  m_Name: A0.0-LocationTowerA
+  m_Name: TowerA-1938
   m_EditorClassIdentifier: 
   m_Version: 0
   m_Tracks:
@@ -274,10 +481,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 1.0000000000000004
+    m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: 7894062535987712488}
-    m_Duration: 6.948571428571428
+    m_Asset: {fileID: -364849149926532933}
+    m_Duration: 21.15918367346939
     m_TimeScale: 1
     m_ParentTrack: {fileID: 5220900216329966011}
     m_EaseInDuration: 0
@@ -286,7 +493,25 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -323,7 +548,76 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: Welcome
+    m_DisplayName: A2.0 - 1938-Politische Verfolgung.EN
+  - m_Version: 1
+    m_Start: 24.516666666666666
+    m_ClipIn: 0
+    m_Asset: {fileID: -506421673204570367}
+    m_Duration: 38.034285714285716
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 5220900216329966011}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: "A2.1 - 1938-wachsende Menge H\xE4ftlinge.EN"
   m_Markers:
     m_Objects: []
   m_TrackProperties:
@@ -345,235 +639,235 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _definitions:
   - Name: AreaSquare - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: AreaSquare - BuildingItem
   - Name: R01 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: R01 - BuildingItem
   - Name: R02 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: R02 - BuildingItem
   - Name: B01 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B01 - BuildingItem
   - Name: B21 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B21 - BuildingItem
   - Name: B02 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B02 - BuildingItem
   - Name: B22 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B22 - BuildingItem
   - Name: B03 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B03 - BuildingItem
   - Name: B04 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B04 - BuildingItem
   - Name: B23 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B23 - BuildingItem
   - Name: B24 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B24 - BuildingItem
   - Name: B25 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B25 - BuildingItem
   - Name: B43 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B43 - BuildingItem
   - Name: B44 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B44 - BuildingItem
   - Name: B05 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B05 - BuildingItem
   - Name: B26 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B26 - BuildingItem
   - Name: B27 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B27 - BuildingItem
   - Name: B45 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B45 - BuildingItem
   - Name: B06 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B06 - BuildingItem
   - Name: B28 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B28 - BuildingItem
   - Name: B46 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B46 - BuildingItem
   - Name: B47 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B47 - BuildingItem
   - Name: B63 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B63 - BuildingItem
   - Name: B64 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B64 - BuildingItem
   - Name: B - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B - BuildingItem
   - Name: Laundry - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: Laundry - BuildingItem
   - Name: B48 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B48 - BuildingItem
   - Name: B65 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B65 - BuildingItem
   - Name: B65c - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B65c - BuildingItem
   - Name: B49 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B49 - BuildingItem
   - Name: B65b - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B65b - BuildingItem
   - Name: B50 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B50 - BuildingItem
   - Name: B65d - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B65d - BuildingItem
   - Name: E - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: E - BuildingItem
   - Name: Kitchen - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: Kitchen - BuildingItem
   - Name: B51 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B51 - BuildingItem
   - Name: B66 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B66 - BuildingItem
   - Name: B67 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B67 - BuildingItem
   - Name: B52 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B52 - BuildingItem
   - Name: B68 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B68 - BuildingItem
   - Name: B07 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B07 - BuildingItem
   - Name: B29 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B29 - BuildingItem
   - Name: B53 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B53 - BuildingItem
   - Name: B30 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B30 - BuildingItem
   - Name: B54 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B54 - BuildingItem
   - Name: B08 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B08 - BuildingItem
   - Name: B31 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B31 - BuildingItem
   - Name: B09 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B09 - BuildingItem
   - Name: B32 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B32 - BuildingItem
   - Name: B55 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B55 - BuildingItem
   - Name: B56 - Delousing - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B56 - Delousing - BuildingItem
   - Name: B33 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B33 - BuildingItem
   - Name: B10 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B10 - BuildingItem
   - Name: B34 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B34 - BuildingItem
   - Name: B11 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B11 - BuildingItem
   - Name: B35 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B35 - BuildingItem
   - Name: B12 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B12 - BuildingItem
   - Name: B36 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B36 - BuildingItem
   - Name: B13 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B13 - BuildingItem
   - Name: B14 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B14 - BuildingItem
   - Name: Cells - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: Cells - BuildingItem
   - Name: B15 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B15 - BuildingItem
   - Name: B37 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B37 - BuildingItem
   - Name: B57 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B57 - BuildingItem
   - Name: B16 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B16 - BuildingItem
   - Name: B38 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B38 - BuildingItem
   - Name: B58 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B58 - BuildingItem
   - Name: B17 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B17 - BuildingItem
   - Name: B39 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B39 - BuildingItem
   - Name: B59 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B59 - BuildingItem
   - Name: B18 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B18 - BuildingItem
   - Name: B40 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B40 - BuildingItem
   - Name: B60 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B60 - BuildingItem
   - Name: B19 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B19 - BuildingItem
   - Name: B41 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B41 - BuildingItem
   - Name: B61 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B61 - BuildingItem
   - Name: B20 - BuildingItem
-    IsActive: 0
+    IsActive: 1
     Id: B20 - BuildingItem
   - Name: Obelisk - BuildingItem
     IsActive: 0
@@ -582,9 +876,9 @@ MonoBehaviour:
     IsActive: 0
     Id: TowerSimple-BuildingItem
   _sequentialOptions:
-    PlaySequentially: 0
-    SequentialDelay: 0.2
---- !u!114 &7894062535987712488
+    PlaySequentially: 1
+    SequentialDelay: 0.1
+--- !u!114 &7779915554002274653
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -593,14 +887,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
-  m_Name: AudioPlayableAsset
+  m_Script: {fileID: 11500000, guid: e35e7731f69849b580d22192b8ccd0ef, type: 3}
+  m_Name: RevealTransitionAsset(Clone)
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: fed80a2757ad44d5eb7f3e43a99f1a44, type: 3}
-  m_Loop: 0
-  m_bufferingTime: 0.1
-  m_ClipProperties:
-    volume: 1
+  _exposedBinding:
+    exposedName: 3bb7ef47c6e344f4dae152c2dcdd70fa
+    defaultValue: {fileID: 0}
 --- !u!114 &8092986353637653784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,7 +918,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 5909294005330352402}
-    m_Duration: 7.948571428571428
+    m_Duration: 68.6
     m_TimeScale: 1
     m_ParentTrack: {fileID: 8092986353637653784}
     m_EaseInDuration: 0

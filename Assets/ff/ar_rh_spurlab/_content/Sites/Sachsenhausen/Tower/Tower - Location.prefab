@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6957266007012701191}
   - component: {fileID: 5291812864398375828}
   m_Layer: 0
-  m_Name: '02-Expansion 1939-1945-Timeline '
+  m_Name: TowerA-1938-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ PlayableDirector:
   m_GameObject: {fileID: 979504531602859687}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 621f168a8886b45e6ba7ecee145960d4, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -51,11 +51,11 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 0}
     value: {fileID: 0}
-  - key: {fileID: -8500005720783524315, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
+  - key: {fileID: 8092986353637653784, guid: 621f168a8886b45e6ba7ecee145960d4, type: 2}
     value: {fileID: 1159499575295301573}
-  - key: {fileID: -3496512590649511321, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
+  - key: {fileID: 5220900216329966011, guid: 621f168a8886b45e6ba7ecee145960d4, type: 2}
     value: {fileID: 0}
-  - key: {fileID: 112740627540051628, guid: 6753e748986c84122816ff0dedaf56c8, type: 2}
+  - key: {fileID: -1265895565499389446, guid: 621f168a8886b45e6ba7ecee145960d4, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
@@ -63,6 +63,7 @@ PlayableDirector:
     - df287be8cefc9f94997ff8093afa693a: {fileID: 0}
     - 934ba92fc44014a7c8473eaea566eb0d: {fileID: 2739516764139757259}
     - f0cfa0b107bdb4de4b575411ca13750e: {fileID: 0}
+    - cd90157961d134984a0dfc0375817422: {fileID: 1416742904899413802}
     - 533ba112f738a4f578e95afc0505a7f2: {fileID: 0}
     - a45a954a40f15744d9317a9fb35dbc28: {fileID: 8420929650578485890}
     - 8af4ac6d754b54796bb44f0a20e0a2e9: {fileID: 237752816180347635}
@@ -80,6 +81,7 @@ PlayableDirector:
     - 1ec1bf8ef313947039fb53a875fe9120: {fileID: 5386923471208942369}
     - f5a25e1a39a6f41ad98dc7d4e837812d: {fileID: 7765902552408355576}
     - 6f06ef30b6bad4b6b98d1f21b7431249: {fileID: 1322342094854361913}
+    - 3bb7ef47c6e344f4dae152c2dcdd70fa: {fileID: 2972316664890848804}
     - de6f561e62e974ee998a2116486540a1: {fileID: 0}
     - d47fbcdae41294b3491ce98056d63ff9: {fileID: 7765902552408355576}
     - 8c782c707c2dc4cf7821842d7b84db0b: {fileID: 0}
@@ -241,7 +243,7 @@ GameObject:
   - component: {fileID: 4273006798993615750}
   - component: {fileID: 6668093488301492918}
   m_Layer: 0
-  m_Name: 03-Destruction and Demolition 1945-Now-Timeline
+  m_Name: TowerA-1941-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +273,7 @@ PlayableDirector:
   m_GameObject: {fileID: 2473832752162452191}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 88e6ebb62134d4f61b176dd8f01a24a1, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 5f9de2ad53b454a1e8a5ec48efdb21da, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -285,18 +287,21 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 0}
     value: {fileID: 0}
-  - key: {fileID: -8500005720783524315, guid: 88e6ebb62134d4f61b176dd8f01a24a1, type: 2}
+  - key: {fileID: 8092986353637653784, guid: 5f9de2ad53b454a1e8a5ec48efdb21da, type: 2}
     value: {fileID: 1159499575295301573}
-  - key: {fileID: 7060451349980270046, guid: 88e6ebb62134d4f61b176dd8f01a24a1, type: 2}
+  - key: {fileID: 5220900216329966011, guid: 5f9de2ad53b454a1e8a5ec48efdb21da, type: 2}
     value: {fileID: 0}
-  - key: {fileID: 3593834132979433186, guid: 88e6ebb62134d4f61b176dd8f01a24a1, type: 2}
+  - key: {fileID: -1265895565499389446, guid: 5f9de2ad53b454a1e8a5ec48efdb21da, type: 2}
     value: {fileID: 0}
+  - key: {fileID: -635270851955954651, guid: 5f9de2ad53b454a1e8a5ec48efdb21da, type: 2}
+    value: {fileID: 6742980114730919250}
   m_ExposedReferences:
     m_References:
     - 3abbf0d89b5fb4a13a016ec9fe51033c: {fileID: 5386923471208942369}
     - df287be8cefc9f94997ff8093afa693a: {fileID: 0}
     - 934ba92fc44014a7c8473eaea566eb0d: {fileID: 2739516764139757259}
     - f0cfa0b107bdb4de4b575411ca13750e: {fileID: 0}
+    - cd90157961d134984a0dfc0375817422: {fileID: 1322342094854361913}
     - 533ba112f738a4f578e95afc0505a7f2: {fileID: 0}
     - a45a954a40f15744d9317a9fb35dbc28: {fileID: 8420929650578485890}
     - 8af4ac6d754b54796bb44f0a20e0a2e9: {fileID: 237752816180347635}
@@ -456,7 +461,7 @@ GameObject:
   - component: {fileID: 14405704690528027}
   - component: {fileID: 2005600212777941286}
   m_Layer: 0
-  m_Name: 01-Construction 1936-1939-Timeline
+  m_Name: TowerA-1936-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -486,20 +491,20 @@ PlayableDirector:
   m_GameObject: {fileID: 4214211836249606617}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: ea58e7f9799394a3fb1ac3309d9e4beb, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: -8500005720783524315, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
+  - key: {fileID: -8500005720783524315, guid: ea58e7f9799394a3fb1ac3309d9e4beb, type: 2}
     value: {fileID: 1159499575295301573}
-  - key: {fileID: -5487285040132737534, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: 5048952871559239738, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: -4518931891091674482, guid: 66bcb42f5480445c784ac9b20f7cea22, type: 2}
+  - key: {fileID: -4518931891091674482, guid: ea58e7f9799394a3fb1ac3309d9e4beb, type: 2}
     value: {fileID: 2111696830289450118}
+  - key: {fileID: -5487285040132737534, guid: ea58e7f9799394a3fb1ac3309d9e4beb, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5048952871559239738, guid: ea58e7f9799394a3fb1ac3309d9e4beb, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - 3abbf0d89b5fb4a13a016ec9fe51033c: {fileID: 5386923471208942369}
@@ -554,6 +559,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5141970370796764753}
+  - {fileID: 6998078763856583538}
   - {fileID: 4278920910165657655}
   - {fileID: 2374868458129263375}
   - {fileID: 1901565983865985537}
@@ -1887,6 +1893,97 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2167127681008382098, guid: f582f8e19692240ffbeeabbe16f0bf41,
     type: 3}
   m_PrefabInstance: {fileID: 3315766034994716228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3774192013434907118
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3160276497231690144}
+    m_Modifications:
+    - target: {fileID: 2883127239921256131, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_Name
+      value: BarackTexts
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f7bb6498fd1724d8694a1f73b27b52b0, type: 3}
+--- !u!114 &6742980114730919250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7634585515066936508, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3774192013434907118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b345bcbe5e4149119de34f812504b4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &6998078763856583538 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6160559446444946076, guid: f7bb6498fd1724d8694a1f73b27b52b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3774192013434907118}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4532333591727225757
 PrefabInstance:
@@ -3467,7 +3564,7 @@ PrefabInstance:
     - target: {fileID: 8290193097866938814, guid: 9d1629e88a678f84b8a96046ac4f86b9,
         type: 3}
       propertyPath: m_Name
-      value: Portal
+      value: Portal-TowerA
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
