@@ -1467,7 +1467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &275240315
 Transform:
   m_ObjectHideFlags: 0
@@ -3730,6 +3730,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Occluders - Sachsenhausen
       objectReference: {fileID: 0}
+    - target: {fileID: 7762469429711008900, guid: bdb41fbe6f37d4cce9dd3ba948a098be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3862,7 +3867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &853322564
 Transform:
   m_ObjectHideFlags: 0
@@ -4986,7 +4991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1111907106
 Transform:
   m_ObjectHideFlags: 0
@@ -6037,7 +6042,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5cacadca81520c0439c005402286b8d1,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5003638820086689883, guid: 5cacadca81520c0439c005402286b8d1,
         type: 3}
@@ -7598,7 +7603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1683216763
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -23290,7 +23295,7 @@ PrefabInstance:
     - target: {fileID: 1364758667551453674, guid: efcfc1bff85fb465d957e47689f2f85d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4052870041241358089, guid: efcfc1bff85fb465d957e47689f2f85d,
         type: 3}
