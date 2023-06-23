@@ -14,6 +14,9 @@ namespace ff.ar_rh_spurlab.Locations.UI
 
         [Header("Prefab References")]
         [SerializeField]
+        private Hidable _overallPanel;
+
+        [SerializeField]
         private Hidable _playingPanel;
 
         [SerializeField]
@@ -25,9 +28,6 @@ namespace ff.ar_rh_spurlab.Locations.UI
         [SerializeField]
         private Button _resumeButton;
 
-        [SerializeField]
-        private Button _mapButton;
-
         [Header("Chapter UI")]
         [SerializeField]
         private Transform _chaptersContainer;
@@ -38,15 +38,26 @@ namespace ff.ar_rh_spurlab.Locations.UI
         [SerializeField]
         private GameObject _chapterUiSeparatorPrefab;
 
-
-        public void Initialize(LocationTimelineManager timelineManager, Chapter[] chapters)
+        public void SetVisibility(bool isVisible)
         {
+            _overallPanel.IsVisible = isVisible;
+        }
+
+        public void SetTimelineManager(LocationTimelineManager timelineManager, Chapter[] chapters)
+        {
+            if (_timelineManager)
+            {
+                _timelineManager.IsPlaying.OnValueChanged -= OnIsPlayingChanged;
+                _timelineManager.ActiveChapter.OnValueChanged -= OnActiveChapterChangedHandler;
+                _pauseButton.onClick.RemoveAllListeners();
+                _resumeButton.onClick.RemoveAllListeners();
+            }
+
             _timelineManager = timelineManager;
             _pauseButton.onClick.AddListener(timelineManager.Pause);
             _resumeButton.onClick.AddListener(timelineManager.Resume);
-            _mapButton.onClick.AddListener(OnMapButtonClickedHandler);
 
-            BuildChaptersUi(chapters);
+            RebuildChaptersUi(chapters);
 
             OnIsPlayingChanged(timelineManager.IsPlaying.Value);
             timelineManager.IsPlaying.OnValueChanged += OnIsPlayingChanged;
@@ -72,11 +83,6 @@ namespace ff.ar_rh_spurlab.Locations.UI
             }
         }
 
-        private void OnMapButtonClickedHandler()
-        {
-            MapUiController.ShowLocationMap(SharedLocationContext.ActiveLocation.Id);
-        }
-
         private void OnDestroy()
         {
             if (_timelineManager)
@@ -99,8 +105,13 @@ namespace ff.ar_rh_spurlab.Locations.UI
         }
 
 
-        private void BuildChaptersUi(IReadOnlyList<Chapter> chapters)
+        private void RebuildChaptersUi(IReadOnlyList<Chapter> chapters)
         {
+            foreach (Transform child in _chaptersContainer)
+            {
+                Destroy(child.gameObject);
+            }
+
             for (var i = 0; i < chapters.Count; i++)
             {
                 var newChapterUi = Instantiate(_chapterUiPrefab, _chaptersContainer);

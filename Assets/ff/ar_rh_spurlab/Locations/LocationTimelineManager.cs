@@ -22,9 +22,6 @@ namespace ff.ar_rh_spurlab.Locations
 
         [Header("Prefab references")]
         [SerializeField]
-        private LocationTimelineUi _ui;
-
-        [SerializeField]
         private Chapter[] _chapters;
 
         [SerializeField]
@@ -37,10 +34,13 @@ namespace ff.ar_rh_spurlab.Locations
             set => _autoPlay = value;
         }
 
+        public Chapter[] Chapters => _chapters;
+
         public readonly static ReactiveProperty<bool> IsAnyTimelineMgrPlaying = new();
 
         public readonly ReactiveProperty<bool> IsPlaying = new();
         public readonly ReactiveProperty<Chapter> ActiveChapter = new();
+        public readonly ReactiveProperty<bool> IsActive = new();
 
         public void Initialize()
         {
@@ -49,12 +49,6 @@ namespace ff.ar_rh_spurlab.Locations
                 Debug.LogError("Portal is not set", this);
                 enabled = false;
                 return;
-            }
-
-            if (_ui)
-            {
-                _ui.Initialize(this, _chapters);
-                _ui.OnChapterClicked += PlayChapter;
             }
 
             _portal.OnExit += OnPortalExitHandler;
@@ -66,14 +60,26 @@ namespace ff.ar_rh_spurlab.Locations
 
         private void OnPortalEnterHandler()
         {
-            AutoPlay = true;
-            PlayNextChapter();
+            Activate();
         }
 
         private void OnPortalExitHandler()
         {
+            Deactivate();
+        }
+
+        public void Activate()
+        {
+            AutoPlay = true;
+            PlayNextChapter();
+            IsActive.Value = true;
+        }
+
+        public void Deactivate()
+        {
             AutoPlay = false;
             Stop();
+            IsActive.Value = false;
         }
 
         public void SetIsTracked(bool isTracked)
@@ -87,10 +93,10 @@ namespace ff.ar_rh_spurlab.Locations
 
             if (!_activePlayableDirector)
             {
-                if (isTracked)
-                {
-                    PlayNextChapter();
-                }
+                //  if (isTracked)
+                //  {
+                //      PlayNextChapter();
+                //  }
 
                 return;
             }
@@ -334,16 +340,23 @@ namespace ff.ar_rh_spurlab.Locations
             _isPausedByUser = false;
         }
 
-        public static void SetTimelinePlaying(LocationTimelineManager mgr, bool isPlaying)
+        private static void SetTimelinePlaying(LocationTimelineManager mgr, bool isPlaying)
         {
-            if (!IsAnyTimelineMgrPlaying.Value && !isPlaying && _currentTimelineMgr == mgr)
+            if (IsAnyTimelineMgrPlaying.Value == isPlaying)
+                return;
+
+            if (isPlaying)
             {
                 _currentTimelineMgr = mgr;
                 IsAnyTimelineMgrPlaying.Value = true;
             }
-            else if (IsAnyTimelineMgrPlaying.Value && !isPlaying && _currentTimelineMgr == mgr)
+            else
             {
-                IsAnyTimelineMgrPlaying.Value = true;
+                if (_currentTimelineMgr == mgr)
+                {
+                    _currentTimelineMgr = null;
+                    IsAnyTimelineMgrPlaying.Value = false;
+                }
             }
         }
 
