@@ -130,6 +130,11 @@ MonoBehaviour:
   _hidable: {fileID: 6582214033741424028}
   _contentContainer: {fileID: 4573758863429504999}
   _accuracyContainer: {fileID: 8489817158375339579}
+  _headingContainer: {fileID: 2120630375229228699}
+  _headingAccuracyThreshold: 45
+  _radiusTransitionSpeed: 5
+  _headingTransitionSpeed: 5
+  _debugWorldPosition: {x: 0, y: 0, z: 0}
   _debugAccuracy: 20
   _debugHeading: 0
   _debugImage: {fileID: 9015099503468095424}

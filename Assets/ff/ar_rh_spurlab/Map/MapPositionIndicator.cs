@@ -17,6 +17,12 @@ namespace ff.ar_rh_spurlab.Map
         [SerializeField]
         private RectTransform _accuracyContainer;
 
+        [SerializeField]
+        private GameObject _headingContainer;
+
+        [SerializeField]
+        private float _headingAccuracyThreshold = 45f;
+
         [Header("Transition")]
         [SerializeField]
         private float _radiusTransitionSpeed = 5f;
@@ -80,6 +86,8 @@ namespace ff.ar_rh_spurlab.Map
             _accuracyReferencePosition = _worldPosition + Vector3.right * info.HorizontalAccuracy;
             _headingReferencePosition =
                 _worldPosition + Quaternion.AngleAxis((float)-info.Heading, Vector3.up) * Vector3.forward;
+
+            _headingIsValid = info.HeadingAccuracy < _headingAccuracyThreshold;
         }
 
         private void UpdateDebugPositioning()
@@ -126,6 +134,8 @@ namespace ff.ar_rh_spurlab.Map
 
             _contentContainer.localRotation =
                 Quaternion.Euler(_mapContent.MapCamera.TiltAngle, 0, angle);
+
+            _headingContainer.SetActive(_headingIsValid);
         }
 
 
@@ -138,5 +148,6 @@ namespace ff.ar_rh_spurlab.Map
         private Vector3 _worldPosition;
         private Vector3 _accuracyReferencePosition;
         private Vector3 _headingReferencePosition;
+        private bool _headingIsValid;
     }
 }
