@@ -18,7 +18,7 @@ namespace ff.ar_rh_spurlab.Locations
     public enum LocationTrackingState
     {
         None,
-        AwaitingWorldMap,
+        WaitingForWorldMap,
         WaitingForAnchors,
         TrackingAnchors,
         TrackingCalibration,
@@ -49,7 +49,7 @@ namespace ff.ar_rh_spurlab.Locations
 
         private void Update()
         {
-            var areAnchorsReady = CalibrationData?.AreAnchorsReady == true;
+            var areAnchorsReady = CalibrationData is { AreAnchorsReady: true };
             var oldTrackingData = TrackingData;
 
             if (!areAnchorsReady || _worldMapState != WorldMapState.Loaded)
@@ -58,9 +58,9 @@ namespace ff.ar_rh_spurlab.Locations
                 TrackingData = new LocationTrackingData
                 {
                     State =
-                        _worldMapState == WorldMapState.Loaded
-                            ? LocationTrackingState.WaitingForAnchors
-                            : LocationTrackingState.AwaitingWorldMap,
+                        _worldMapState != WorldMapState.Loaded
+                            ? LocationTrackingState.WaitingForWorldMap
+                            : LocationTrackingState.WaitingForAnchors,
                     Quality = CalibrationData != null
                         ? CalibrationData.MatchedAnchorsCount * (0.25f / LocationData.NumberOfReferencePoints)
                         : 0,
@@ -123,6 +123,13 @@ namespace ff.ar_rh_spurlab.Locations
         {
             CalibrationData = calibrationData;
             LocationData = locationData;
+
+            TrackingData = new LocationTrackingData
+            {
+                State = LocationTrackingState.None,
+                Quality = 0,
+                CalibrationMessage = "Uninitialized"
+            };
 
             _trackedLocationContents = GetComponentsInChildren<ITrackedLocationContent>();
             Debug.Log($"Location.Initialize: {name} has {_trackedLocationContents.Length} tracked location contents");

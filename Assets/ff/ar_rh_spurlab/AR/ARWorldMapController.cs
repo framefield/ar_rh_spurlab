@@ -58,19 +58,23 @@ namespace ff.ar_rh_spurlab.AR
         private static async Task SaveWorldMap(ARWorldMapRequest request, string worldMapFilePath)
         {
             using var worldMap = request.GetWorldMap();
+
             Debug.Log("Serializing ARWorldMap to byte array...");
-            var size = 0;
+            using var data = worldMap.Serialize(Allocator.Temp);
+            var size = data.Length;
+
+            // native array likes to stay on the main thread
+            var arrayData = data.ToArray();
             await Task.Factory.StartNew(() =>
             {
-                using var data = worldMap.Serialize(Allocator.Temp);
-                size = data.Length;
                 var file = File.Open(worldMapFilePath, FileMode.Create);
                 using var writer = new BinaryWriter(file);
-                writer.Write(data.ToArray());
+                writer.Write(arrayData);
                 writer.Close();
             });
             Debug.Log($"ARWorldMap ({size} Bytes) written to {worldMapFilePath}");
         }
+#endif
 
         private static readonly string[] ByteSizeLabels = { "B", "KB", "MB", "GB", "TB" };
 
@@ -117,7 +121,7 @@ namespace ff.ar_rh_spurlab.AR
                     var applyStartTime = DateTime.Now;
                     Debug.Log("Apply ARWorldMap to current session.");
 #if UNITY_IOS && !UNITY_EDITOR
-                    sessionSubsystem.ApplyWorldMap(worldMap.Value);
+                    sessionSubsystem.ApplyWorldMap(worldMap.map.Value);
 #endif
                     var applyDuration = DateTime.Now - applyStartTime;
                     Debug.Log($"Applied {worldMapFilePath} in {applyDuration.TotalSeconds:F1} seconds.");
@@ -128,7 +132,7 @@ namespace ff.ar_rh_spurlab.AR
                     return false;
                 }
             }
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
             {
                 Debug.LogWarning(
                     $"No ARWorldMap was found in {worldMapFilePath}. Make sure to save the ARWorldMap before attempting to load it.");
@@ -146,6 +150,7 @@ namespace ff.ar_rh_spurlab.AR
             NativeArray<byte> data;
             using (var ms = new MemoryStream())
             {
+                // TODO maybe make async like saving, but take care of the native array
                 var buffer = new byte[bufferSize];
                 int count;
                 while ((count = binaryReader.Read(buffer, 0, buffer.Length)) != 0)
@@ -168,7 +173,7 @@ namespace ff.ar_rh_spurlab.AR
                         throw new Exception("Data is not a valid ARWorldMap.");
                     }
 
-                    return worldMap;
+                    return (worldMap, data.Length);
                 }
 #else
                 return (new ARWorldMap(), data.Length);
@@ -177,6 +182,5 @@ namespace ff.ar_rh_spurlab.AR
                 throw new Exception("Data is not a valid ARWorldMap.");
             }
         }
-#endif
     }
 }
