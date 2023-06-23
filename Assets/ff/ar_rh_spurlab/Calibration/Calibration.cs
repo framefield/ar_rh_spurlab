@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using ff.ar_rh_spurlab.Locations;
 using ff.common.entity;
 using UnityEngine;
@@ -182,18 +183,20 @@ namespace ff.ar_rh_spurlab.Calibration
             return null;
         }
 
-        public void Store(string directoryPath)
+        public async Task Store(string directoryPath)
         {
-            Directory.CreateDirectory(directoryPath);
             var jsonContent = JsonUtility.ToJson(this);
+
             Debug.Log($"calibration serialized content: {jsonContent}");
-
             var filePath = Path.Combine(directoryPath, "calibrationdata.json");
-            var writer = new StreamWriter(filePath);
-            writer.Write(jsonContent);
-            writer.Close();
+            await Task.Factory.StartNew(() =>
+            {
+                Directory.CreateDirectory(directoryPath);
+                using var writer = new StreamWriter(filePath);
+                writer.Write(jsonContent);
+            });
 
-            Debug.Log($"calibration data store to file {filePath}");
+            Debug.Log($"calibration data stored to file {filePath}");
         }
 
         public void AddInstantiatedAnchor(ARAnchor marker)

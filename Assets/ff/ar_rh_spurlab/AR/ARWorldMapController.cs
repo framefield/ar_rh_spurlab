@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
 #if UNITY_IOS
+using System;
 using UnityEngine.XR.ARKit;
 #endif
 
@@ -24,113 +26,156 @@ namespace ff.ar_rh_spurlab.AR
 
 
 #if UNITY_IOS
-        public static IEnumerator Save(ARSession arSession, string worldMapFilePath)
+        public static async Task Save(ARSession arSession, string worldMapFilePath)
         {
             if (!IsSupported(arSession))
             {
-                yield break;
+                return;
             }
 
             var sessionSubsystem = (ARKitSessionSubsystem)arSession.subsystem;
             if (sessionSubsystem == null)
             {
                 Debug.Log("No session subsystem available. Could not save.");
-                yield break;
+                return;
             }
 
-            var request = sessionSubsystem.GetARWorldMapAsync();
-
+            using var request = sessionSubsystem.GetARWorldMapAsync();
             while (!request.status.IsDone())
-                yield return null;
+            {
+                await Task.Delay(100);
+            }
 
             if (request.status.IsError())
             {
                 Debug.Log($"Session serialization failed with status {request.status}");
-                yield break;
+                return;
             }
 
-            var worldMap = request.GetWorldMap();
-            request.Dispose();
-
-            SaveAndDisposeWorldMap(worldMap, worldMapFilePath);
+            await SaveWorldMap(request, worldMapFilePath);
         }
 
-        private static void SaveAndDisposeWorldMap(ARWorldMap worldMap, string worldMapFilePath)
+        private static async Task SaveWorldMap(ARWorldMapRequest request, string worldMapFilePath)
         {
+            using var worldMap = request.GetWorldMap();
             Debug.Log("Serializing ARWorldMap to byte array...");
-            var data = worldMap.Serialize(Allocator.Temp);
-            Debug.Log($"ARWorldMap has {data.Length} bytes.");
-
-            var file = File.Open(worldMapFilePath, FileMode.Create);
-            var writer = new BinaryWriter(file);
-            writer.Write(data.ToArray());
-            writer.Close();
-            data.Dispose();
-            worldMap.Dispose();
-            Debug.Log($"ARWorldMap written to {worldMapFilePath}");
+            var size = 0;
+            await Task.Factory.StartNew(() =>
+            {
+                using var data = worldMap.Serialize(Allocator.Temp);
+                size = data.Length;
+                var file = File.Open(worldMapFilePath, FileMode.Create);
+                using var writer = new BinaryWriter(file);
+                writer.Write(data.ToArray());
+                writer.Close();
+            });
+            Debug.Log($"ARWorldMap ({size} Bytes) written to {worldMapFilePath}");
         }
 
-        public static IEnumerator Load(ARSession arSession, string worldMapFilePath)
+        private static readonly string[] ByteSizeLabels = { "B", "KB", "MB", "GB", "TB" };
+
+        private static string FormatByteSize(long len)
         {
+            var order = 0;
+            while (len >= 1024 && order < ByteSizeLabels.Length - 1)
+            {
+                order++;
+                len /= 1024;
+            }
+
+            return $"{len:F1} {ByteSizeLabels[order]}";
+        }
+
+        public static async Task<bool> Load(ARSession arSession, string worldMapFilePath)
+        {
+#if UNITY_IOS && !UNITY_EDITOR
             if (!IsSupported(arSession))
             {
-                yield break;
+                return false;
             }
 
             var sessionSubsystem = (ARKitSessionSubsystem)arSession.subsystem;
             if (sessionSubsystem == null)
             {
                 Debug.Log("No session subsystem available. Could not load.");
-                yield break;
+                return false;
             }
+#endif
 
-            FileStream file;
             try
             {
-                file = File.Open(worldMapFilePath, FileMode.Open);
+                var loadStartTime = DateTime.Now;
+
+                Debug.Log($"Reading {worldMapFilePath}...");
+                var worldMap = await LoadWorldMapData(worldMapFilePath);
+                var loadingDuration = DateTime.Now - loadStartTime;
+                Debug.Log(
+                    $"Read {worldMapFilePath} ({FormatByteSize(worldMap.size)}) in {loadingDuration.TotalSeconds:F1} seconds.");
+
+                if (worldMap.map.HasValue)
+                {
+                    var applyStartTime = DateTime.Now;
+                    Debug.Log("Apply ARWorldMap to current session.");
+#if UNITY_IOS && !UNITY_EDITOR
+                    sessionSubsystem.ApplyWorldMap(worldMap.Value);
+#endif
+                    var applyDuration = DateTime.Now - applyStartTime;
+                    Debug.Log($"Applied {worldMapFilePath} in {applyDuration.TotalSeconds:F1} seconds.");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            catch (FileNotFoundException)
+            catch (FileNotFoundException e)
             {
-                Debug.LogError(
+                Debug.LogWarning(
                     $"No ARWorldMap was found in {worldMapFilePath}. Make sure to save the ARWorldMap before attempting to load it.");
-                yield break;
             }
 
-            Debug.Log($"Reading {worldMapFilePath}...");
+            return false;
+        }
 
-            const int bytesPerFrame = 1024 * 10;
-            var bytesRemaining = file.Length;
-            var binaryReader = new BinaryReader(file);
-            var allBytes = new List<byte>();
-            while (bytesRemaining > 0)
+        private static async Task<(ARWorldMap? map, long size)> LoadWorldMapData(string worldMapFilePath)
+        {
+            await using var file = File.Open(worldMapFilePath, FileMode.Open);
+
+            using var binaryReader = new BinaryReader(file);
+            const int bufferSize = 4096;
+            NativeArray<byte> data;
+            using (var ms = new MemoryStream())
             {
-                var bytes = binaryReader.ReadBytes(bytesPerFrame);
-                allBytes.AddRange(bytes);
-                bytesRemaining -= bytesPerFrame;
-                yield return null;
+                var buffer = new byte[bufferSize];
+                int count;
+                while ((count = binaryReader.Read(buffer, 0, buffer.Length)) != 0)
+                {
+                    ms.Write(buffer, 0, count);
+                }
+
+                data = new NativeArray<byte>(ms.ToArray(), Allocator.Temp);
             }
 
-            var data = new NativeArray<byte>(allBytes.Count, Allocator.Temp);
-            data.CopyFrom(allBytes.ToArray());
-
-            Debug.Log("Deserializing to ARWorldMap...");
-            if (ARWorldMap.TryDeserialize(data, out var worldMap))
+            using (data)
             {
-                data.Dispose();
-            }
+#if UNITY_IOS && !UNITY_EDITOR
+                if (ARWorldMap.TryDeserialize(data, out var worldMap))
+                {
+                    data.Dispose();
 
-            if (worldMap.valid)
-            {
-                Debug.Log("Deserialized successfully.");
-            }
-            else
-            {
-                Debug.LogError("Data is not a valid ARWorldMap.");
-                yield break;
-            }
+                    if (!worldMap.valid)
+                    {
+                        throw new Exception("Data is not a valid ARWorldMap.");
+                    }
 
-            Debug.Log("Apply ARWorldMap to current session.");
-            sessionSubsystem.ApplyWorldMap(worldMap);
+                    return worldMap;
+                }
+#else
+                return (new ARWorldMap(), data.Length);
+#endif
+
+                throw new Exception("Data is not a valid ARWorldMap.");
+            }
         }
 #endif
     }
