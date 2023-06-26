@@ -100,13 +100,24 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5f7eb664fbe4f40ffbb7a4b092b95efd, type: 2}
     - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
+      propertyPath: _year
+      value: 1946
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: _copyright
+      value: (C) Nansen, Odd
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
       propertyPath: '_title._values.Array.data[0]'
-      value: Zaehlapell (en)
+      value: Drawing from his book "Fra Dag til Dag". Dreyers Forlag, Oslo, 1946
       objectReference: {fileID: 0}
     - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: '_title._values.Array.data[1]'
-      value: Zaehlapell (de)
+      value: "Zeichnung aus seinem Buch \u201EFra Dag til Dag\u201C. Dreyers Forlag,
+        Oslo, 1946"
       objectReference: {fileID: 0}
     - target: {fileID: 8411554890939058692, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}

@@ -110,18 +110,49 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 504bf563b5f1d4a13b82d3e9f9b15fb5, type: 2}
     - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
+      propertyPath: _year
+      value: nach 1945
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: _copyright
+      value: (C) Matejka, Vladimir
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: _title._values.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: _title._locales.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
       propertyPath: '_title._values.Array.data[0]'
-      value: Zaehlapell (en)
+      value: '"Sobriety" from the cycle "There is a way to freedom", ink drawing'
       objectReference: {fileID: 0}
     - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: '_title._values.Array.data[1]'
+      value: "\"N\xFCchternheit\" aus dem Zyklus \"Es gibt einen Weg zur Freiheit\",
+        Tuschezeichnung"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: '_title._values.Array.data[2]'
       value: Zaehlapell (de)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: '_title._locales.Array.data[2]'
+      value: de
       objectReference: {fileID: 0}
     - target: {fileID: 8411554890939058692, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_Name
-      value: "A3-1f-Nu\u0308chternheit-ImageItem Variant"
+      value: "A3-1f-N\xFCchternheit-ImageItem"
       objectReference: {fileID: 0}
     - target: {fileID: 8411554890939058692, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}

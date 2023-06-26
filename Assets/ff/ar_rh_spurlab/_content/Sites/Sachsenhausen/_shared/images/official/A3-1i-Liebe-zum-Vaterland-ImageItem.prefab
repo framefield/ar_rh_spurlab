@@ -110,18 +110,30 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c3482583348f04a8482ab2f8b5840e89, type: 2}
     - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
+      propertyPath: _year
+      value: nach 1945
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: _copyright
+      value: (C) Matejka, Vladimir
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
       propertyPath: '_title._values.Array.data[0]'
-      value: Zaehlapell (en)
+      value: '"Love for the Fatherland" from the cycle "There is a Way to Freedom",
+        ink drawing'
       objectReference: {fileID: 0}
     - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: '_title._values.Array.data[1]'
-      value: Zaehlapell (de)
+      value: '"Liebe zum Vaterland" aus dem Zyklus "Es gibt einen Weg zur Freiheit",
+        Tuschezeichnung'
       objectReference: {fileID: 0}
     - target: {fileID: 8411554890939058692, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_Name
-      value: A3-1i-Liebe-zum-Vaterland-ImageItem Variant
+      value: A3-1i-Liebe-zum-Vaterland-ImageItem
       objectReference: {fileID: 0}
     - target: {fileID: 8411554890939058692, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}

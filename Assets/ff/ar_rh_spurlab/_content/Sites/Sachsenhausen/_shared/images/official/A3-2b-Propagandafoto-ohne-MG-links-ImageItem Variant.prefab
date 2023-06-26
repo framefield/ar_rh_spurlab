@@ -100,13 +100,18 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8de2331b4bb90439f9a67a11cfbb01b4, type: 2}
     - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
+      propertyPath: _year
+      value: Februar 1941
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
       propertyPath: '_title._values.Array.data[0]'
-      value: Zaehlapell (en)
+      value: Propaganda photo with machine gun - inmates counting
       objectReference: {fileID: 0}
     - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: '_title._values.Array.data[1]'
-      value: Zaehlapell (de)
+      value: "Propagandafoto mit Maschinengewehr - H\xE4ftlinge beim Z\xE4hlapell"
       objectReference: {fileID: 0}
     - target: {fileID: 8411554890939058692, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}

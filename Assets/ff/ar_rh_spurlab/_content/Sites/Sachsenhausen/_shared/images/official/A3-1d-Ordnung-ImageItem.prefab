@@ -110,13 +110,23 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8dd75249f1ef1485b95b39346a96589c, type: 2}
     - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
+      propertyPath: _year
+      value: nach 1945
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: _copyright
+      value: (C) Matejka, Vladimir
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
       propertyPath: '_title._values.Array.data[0]'
-      value: Zaehlapell (en)
+      value: '"Order" from the cycle "There is a way to freedom", ink drawing'
       objectReference: {fileID: 0}
     - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: '_title._values.Array.data[1]'
-      value: Zaehlapell (de)
+      value: '"Ordnung" aus dem Zyklus "Es gibt einen Weg zur Freiheit", Tuschezeichnung'
       objectReference: {fileID: 0}
     - target: {fileID: 8411554890939058692, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
