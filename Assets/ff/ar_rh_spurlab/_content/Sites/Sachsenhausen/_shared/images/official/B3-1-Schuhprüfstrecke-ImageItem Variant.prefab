@@ -93,10 +93,20 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1f82e4172ec014c808bfbf575c974204, type: 2}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: '_title._values.Array.data[0]'
+      value: 'Propaganda photo: Prisoner labor command'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: '_title._values.Array.data[1]'
+      value: "Propagandafoto: H\xE4ftlingsarbeitskommando "
+      objectReference: {fileID: 0}
     - target: {fileID: 8411554890939058692, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_Name
-      value: "B3-1-Schuhpru\u0308fstrecke-ImageItem Variant"
+      value: "B3-1-Schuhpr\xFCfstrecke-ImageItem Variant"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

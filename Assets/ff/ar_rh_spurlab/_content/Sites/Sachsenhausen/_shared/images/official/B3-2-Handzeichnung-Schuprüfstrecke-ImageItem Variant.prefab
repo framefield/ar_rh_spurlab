@@ -93,10 +93,32 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 24ffea83fb1a540ce99be8c618722ee3, type: 2}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: _year
+      value: '-'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: _copyright
+      value: '(C) Prokoptschik, Jurij Nikolajewitsch '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: '_title._values.Array.data[0]'
+      value: 'Shoe test track: based on stories and commissioned by the former Ukrainian
+        concentration camp Sachsenhausen prisoner Alexander A. Mogilnyi, hand drawing'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: '_title._values.Array.data[1]'
+      value: "Schuhpr\xFCfstrecke: nach Erz\xE4hlungen und im Auftrag des ehemaligem
+        ukrainische KZ-Sachsenhausen-H\xE4ftlings Alexander A. Mogilnyi, Handzeichnung"
+      objectReference: {fileID: 0}
     - target: {fileID: 8411554890939058692, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_Name
-      value: "B3-2-Handzeichnung-Schupru\u0308fstrecke-ImageItem Variant"
+      value: "B3-2-Handzeichnung-Schupr\xFCfstrecke-ImageItem Variant"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

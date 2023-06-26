@@ -88,6 +88,26 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ad3cc0478cc814bb3b33c9e3b69057a7, type: 2}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: _year
+      value: 1943-1945
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: _copyright
+      value: (C) Budding, Jan
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: '_title._values.Array.data[0]'
+      value: Meal Distribution
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003235129347994339, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: '_title._values.Array.data[1]'
+      value: Essensausgabe
+      objectReference: {fileID: 0}
     - target: {fileID: 8411554890939058692, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_Name
