@@ -19,6 +19,8 @@ namespace ff.ar_rh_spurlab.Locations
 
         private void Start()
         {
+            _ui.OnChapterClicked += OnChapterClickedHandler;
+
             foreach (var story in _stories)
             {
                 if (!story.TimelineManager)
@@ -34,6 +36,14 @@ namespace ff.ar_rh_spurlab.Locations
             }
 
             PlayCtaAudio();
+        }
+
+        private void OnChapterClickedHandler(Chapter chapter)
+        {
+            if (_activeStory == null)
+                return;
+
+            _activeStory.TimelineManager.PlayChapter(chapter);
         }
 
         private void OnStoryIsActiveChangedHandler(Story story, bool isActive)

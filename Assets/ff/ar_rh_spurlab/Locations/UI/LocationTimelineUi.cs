@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using ff.ar_rh_spurlab.Map;
-using ff.ar_rh_spurlab.UI.Site_Ui;
 using ff.common.ui;
 using UnityEngine;
 using UnityEngine.UI;
