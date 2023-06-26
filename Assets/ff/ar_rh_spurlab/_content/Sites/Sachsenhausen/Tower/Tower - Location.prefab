@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6957266007012701191}
   - component: {fileID: 5291812864398375828}
   m_Layer: 0
-  m_Name: TowerA-1938-Timeline
+  m_Name: TowerA2-1938-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 4273006798993615750}
   - component: {fileID: 6668093488301492918}
   m_Layer: 0
-  m_Name: TowerA-1941-Timeline
+  m_Name: TowerA3-1941-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 14405704690528027}
   - component: {fileID: 2005600212777941286}
   m_Layer: 0
-  m_Name: TowerA-1936-Timeline
+  m_Name: TowerA1-1936-Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
