@@ -782,7 +782,7 @@ MonoBehaviour:
     Id: BarrackText-B14
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialDelay: 0.2
+    SequentialDelay: 1
 --- !u!114 &-1524137518450002076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2730,7 +2730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _definitions:
   - Name: AreaSquare - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: AreaSquare - BuildingItem
   - Name: R01 - BuildingItem
     IsActive: 1
@@ -2961,7 +2961,7 @@ MonoBehaviour:
     IsActive: 1
     Id: B20 - BuildingItem
   - Name: Obelisk - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: Obelisk - BuildingItem
   - Name: TowerSimple-BuildingItem
     IsActive: 0
