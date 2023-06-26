@@ -11,12 +11,22 @@ PrefabInstance:
     - target: {fileID: 1902308080381341943, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 30
+      value: 76.76581
       objectReference: {fileID: 0}
     - target: {fileID: 1902308080381341943, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_LocalScale.y
       value: 70.08898
+      objectReference: {fileID: 0}
+    - target: {fileID: 1902308080381341943, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0011927
+      objectReference: {fileID: 0}
+    - target: {fileID: 1902308080381341943, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00016878
       objectReference: {fileID: 0}
     - target: {fileID: 2678031798530944844, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
@@ -26,17 +36,17 @@ PrefabInstance:
     - target: {fileID: 2678031798530944844, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.04
+      value: 0.026918398
       objectReference: {fileID: 0}
     - target: {fileID: 2678031798530944844, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.04
+      value: 0.026918398
       objectReference: {fileID: 0}
     - target: {fileID: 2678031798530944844, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.04
+      value: 0.026918398
       objectReference: {fileID: 0}
     - target: {fileID: 2678031798530944844, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
@@ -122,6 +132,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: C1-3-Handzeichnung-Musik-ImageItem Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633069385449934848, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 76.27192
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633069385449934848, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 69.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633069385449934848, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0011927
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633069385449934848, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633069385449934848, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.20017
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
