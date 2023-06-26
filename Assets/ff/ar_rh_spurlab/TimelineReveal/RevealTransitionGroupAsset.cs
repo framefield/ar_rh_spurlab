@@ -34,8 +34,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         public GroupDefinition[] Definitions => _definitions;
         public SequentialOptions SequentialOptions => _sequentialOptions;
 
-        [CanBeNull]
-        public Dictionary<string, GroupDefinitionWithReveal> ActiveResolvedDefinitions { get; private set; }
+        [CanBeNull] public Dictionary<string, GroupDefinitionWithReveal> ActiveResolvedDefinitions { get; private set; }
 
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
@@ -97,10 +96,13 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         public void UpdateDefinitions(RevealTransitionGroup group)
         {
             var existingDefinitions = new Dictionary<string, (int index, GroupDefinition definition)>();
-            for (var index = 0; index < _definitions.Length; index++)
+            if (_definitions != null)
             {
-                var definition = _definitions[index];
-                existingDefinitions.TryAdd(definition.Id, (index, definition));
+                for (var index = 0; index < _definitions.Length; index++)
+                {
+                    var definition = _definitions[index];
+                    existingDefinitions.TryAdd(definition.Id, (index, definition));
+                }
             }
 
             var newDefinitions = new GroupDefinition[group.Reveals.Length];
