@@ -68,7 +68,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             var weight = 0d;
 
             State state;
-            if (time >= clip.start && existsInNext)
+            if (time >= clip.start + fadeInDuration && existsInNext)
             {
                 state = State.Idle;
                 weight = 1;
