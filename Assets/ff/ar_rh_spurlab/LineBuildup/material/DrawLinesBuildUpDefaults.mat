@@ -68,12 +68,12 @@ Material:
     - FogBias: 1
     - FogDistance: 75
     - LineWidth: 0.1
-    - NoiseAmount: 12.46
+    - NoiseAmount: 30
     - NoiseFrequency: 1
     - NoisePhase: 2.5
     - NoiseVariation: 0
     - ShrinkWithDistance: 0.37
-    - TransitionProgress: 0
+    - TransitionProgress: -1.3
     - VisibleRange: 1
     - _BumpScale: 1
     - _Cutoff: 0.5

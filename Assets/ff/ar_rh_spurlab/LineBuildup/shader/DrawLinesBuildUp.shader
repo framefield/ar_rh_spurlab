@@ -120,7 +120,7 @@
                 float4 posInCamSpace = mul(unity_WorldToCamera, posInWorld);
                 const float distanceToCam = posInCamSpace.z;
 
-                const float noiseAmountForDistanceFactor=  lerp(0.2,1, saturate(distanceToCam/FogDistance));
+                const float noiseAmountForDistanceFactor=  lerp(0.1,1, pow( saturate(distanceToCam/FogDistance), 3));
                 
                 float3 posAA = AddNoise(particleId-1, pointAA.position, NoiseAmount * noiseAmountForDistanceFactor, NoiseVariation, phase, NoiseFrequency);
                 float3 posA  = AddNoise(particleId, pointA.position,    NoiseAmount * noiseAmountForDistanceFactor, NoiseVariation, phase, NoiseFrequency);
