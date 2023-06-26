@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -5,11 +6,7 @@ using System.Threading.Tasks;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-
-#if UNITY_IOS
-using System;
 using UnityEngine.XR.ARKit;
-#endif
 
 namespace ff.ar_rh_spurlab.AR
 {
