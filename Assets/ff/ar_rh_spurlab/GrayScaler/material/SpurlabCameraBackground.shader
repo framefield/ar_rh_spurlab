@@ -17,6 +17,8 @@ Shader "framefield/SpurlabCameraBackground"
         
         _fadeoutGradient ("FadeOutGradient", 2D) = "black" {}
         
+        FocusSphere("FocusSphere", Vector) = (1,7,0,0)
+        
         BrightnessFactor("BrightnessFactor", Float) = 0
         ContrastFactor("ContrastFactor", Float) = 0
         NoiseAmount("NoiseAmount", Float) = 1
@@ -58,27 +60,13 @@ Shader "framefield/SpurlabCameraBackground"
             #pragma vertex vert
             #pragma fragment frag
 
-            #pragma multi_compile_local __ ARKIT_BACKGROUND_URP
             #pragma multi_compile_local __ XR_SIMULATION
             #pragma multi_compile_local __ _DEBUG_NONE _DEBUG_ANGULARDIFFERENCE _DEBUG_PORTALMASK _DEBUG_SPHERE
             #pragma multi_compile_local __ _MODE_GUIDETOPORTAL _MODE_INPORTAL _MODE_NOPORTAL
             #pragma multi_compile_local __ ARKIT_HUMAN_SEGMENTATION_ENABLED ARKIT_ENVIRONMENT_DEPTH_ENABLED
             #pragma multi_compile_local __ _FORCEARKITFEATURE_NONE _FORCEARKITFEATURE_HUMANSEGMENTATION _FORCEARKITFEATURE_DEPTH
 
-
-#if ARKIT_BACKGROUND_URP
-
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
-
-            #define ARKIT_TEXTURE2D_HALF(texture) TEXTURE2D(texture)
-            #define ARKIT_SAMPLER_HALF(sampler) SAMPLER(sampler)
-            #define ARKIT_TEXTURE2D_FLOAT(texture) TEXTURE2D(texture)
-            #define ARKIT_SAMPLER_FLOAT(sampler) SAMPLER(sampler)
-            #define ARKIT_SAMPLE_TEXTURE2D(texture,sampler,texcoord) SAMPLE_TEXTURE2D(texture,sampler,texcoord)
-
-#else // Legacy RP
-
+            
             #include "UnityCG.cginc"
 
             #define real4 half4
@@ -91,17 +79,14 @@ Shader "framefield/SpurlabCameraBackground"
             #define ARKIT_TEXTURE2D_FLOAT(texture) UNITY_DECLARE_TEX2D_FLOAT(texture)
             #define ARKIT_SAMPLER_FLOAT(sampler)
             #define ARKIT_SAMPLE_TEXTURE2D(texture,sampler,texcoord) UNITY_SAMPLE_TEX2D(texture,texcoord)
-
-#endif
-
+            
             float BrightnessFactor = 0;
             float ContrastFactor =0;
             float NoiseAmount = 0;
             float NoiseExponent = 2;
             float NoiseSpeed = 1;
-            //static const float 
             
-
+            float4 FocusSphere;
                 
             float hash12(float2 p)
             {
@@ -213,6 +198,17 @@ Shader "framefield/SpurlabCameraBackground"
             CBUFFER_END
 
 
+            inline float PointInfluence(const float3 poiPos, const float3 pixelViewDir)
+            {
+                const float distanceToPoi = length(_WorldSpaceCameraPos.xyz - poiPos);
+                const float3 poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
+                const float normalized = (1 + dot(poiToCameraDir, pixelViewDir)) / 2.0f;
+
+                
+                const float focusSphereFactor = smoothstep(FocusSphere.x, FocusSphere.y, distanceToPoi) + 0.5;
+                return saturate( normalized  * focusSphereFactor );
+            }
+
             inline float ConvertDistanceToDepth(float d)
             {
                 // Account for scale
@@ -255,8 +251,6 @@ Shader "framefield/SpurlabCameraBackground"
             float4x4 _cameraTransformMatrix;
             float4x4 _PointsOfInterest;
 
-            half degreesPerUv = 170;
-            half sphereRadius = 30;
 
             fragment_output frag (v2f i)
             {
@@ -320,11 +314,8 @@ Shader "framefield/SpurlabCameraBackground"
                 
                 half4 mixedVideo = lerp(videoColor, grayScaleVideo, grayScaleAmount);
                 
-                half3 poiToCameraDir;
-                half3 pixelViewDir;
-                float inverseFadeOutStrength = 1;
 #if _MODE_GUIDETOPORTAL
-                if (portalMask > 0.5)
+                if (portalMask > 0.01)
                 {
                     float2 uvInView = (i.screenTexcoord -0.5 ) * 2;
                     float4 posInView = float4(-uvInView, 0.1,1);
@@ -333,53 +324,38 @@ Shader "framefield/SpurlabCameraBackground"
                     posInCam.xyz /= posInCam.w;  // <--- !
                     float4 posInWorld = mul(unity_CameraToWorld, posInCam);
                     posInWorld.xyz /= posInWorld.w;  // <--- !
-                    pixelViewDir = normalize( posInWorld.xyz - _WorldSpaceCameraPos.xyz);
+                    float3 pixelViewDir = normalize( posInWorld.xyz - _WorldSpaceCameraPos.xyz);
                     
-                    half3 poiPos = 0;
+                    float pointInfluence = 0;
                     if (_PointsOfInterest._m03 > 0)
                     {
-                         poiPos = half3(_PointsOfInterest._m00, _PointsOfInterest._m01, _PointsOfInterest._m02);
+                         float3 poiPos = float3(_PointsOfInterest._m00, _PointsOfInterest._m01, _PointsOfInterest._m02);
+                         pointInfluence = PointInfluence(poiPos, pixelViewDir);
                     }
                     if (_PointsOfInterest._m13 > 0)
                     {
-                         poiPos = half3(_PointsOfInterest._m10, _PointsOfInterest._m11, _PointsOfInterest._m12);
+                         float3 poiPos = float3(_PointsOfInterest._m10, _PointsOfInterest._m11, _PointsOfInterest._m12);
+                         pointInfluence *= PointInfluence(poiPos, pixelViewDir);
                     }
                     if (_PointsOfInterest._m23 > 0)
                     {
-                         poiPos = half3(_PointsOfInterest._m20, _PointsOfInterest._m21, _PointsOfInterest._m22);
+                         float3 poiPos = float3(_PointsOfInterest._m20, _PointsOfInterest._m21, _PointsOfInterest._m22);
+                         pointInfluence *= PointInfluence(poiPos, pixelViewDir);
                     }
                     if (_PointsOfInterest._m33 > 0)
                     {
-                         poiPos = half3(_PointsOfInterest._m30, _PointsOfInterest._m31, _PointsOfInterest._m32);
+                         float3 poiPos = float3(_PointsOfInterest._m30, _PointsOfInterest._m31, _PointsOfInterest._m32);
+                         pointInfluence *= PointInfluence(poiPos, pixelViewDir);
                     }
 
-                    float distanceToPoi = length(_WorldSpaceCameraPos.xyz - poiPos);
-                    float focusSphereFactor = smoothstep(1, 7, distanceToPoi) + 0.5; 
-                    
-                    poiToCameraDir = normalize(poiPos.xyz - _WorldSpaceCameraPos.xyz);
-                    float normalized = (1 + dot(poiToCameraDir, pixelViewDir)) / 2.0f;
-                    const float angleDistance = saturate( normalized  * focusSphereFactor );
-
-                    // Animation experiment (too distracting)
-                    // float wave = pow(sin(normalized * 30 + _Time.x * 30) * 0.5 + 0.5, 5) * 0.1 * saturate(normalized );
-                    const half4 fadeOutColor = ARKIT_SAMPLE_TEXTURE2D(_fadeoutGradient, sampler_fadeoutGradient, half2(angleDistance, 0.5));
+                    const half4 fadeOutColor = ARKIT_SAMPLE_TEXTURE2D(_fadeoutGradient, sampler_fadeoutGradient, half2(pointInfluence, 0.5));
                     mixedVideo = lerp(half4(fadeOutColor.rgb, 1), mixedVideo, max(1 - fadeOutColor.a , humanMask));
                 } 
 #endif
 
 
 #if _DEBUG_ANGULARDIFFERENCE
-               if (i.texcoord.x % 0.1 < 0.05 ? i.texcoord.y % 0.1 < 0.05 : i.texcoord.y % 0.1 > 0.05 )
-               {
-                   o.color = half4(inverseFadeOutStrength, inverseFadeOutStrength, inverseFadeOutStrength, 1);
-               }
-               else  if (i.texcoord.x % 0.1 < 0.075 ? i.texcoord.y % 0.1 < 0.075 : i.texcoord.y % 0.1 > 0.075 )
-               {
-                   o.color = half4((pixelViewDir + float3(1,1,1))/2, 1);
-               }
-               else {
-                   o.color = half4((poiToCameraDir + float3(1,1,1))/2, 1);
-               }
+                o.color = portalMask;
 #elif _DEBUG_PORTALMASK
                 o.color = portalMask;
 #else 
