@@ -120,6 +120,9 @@
                 float4 posInCamSpace = mul(unity_WorldToCamera, posInWorld);
                 const float distanceToCam = posInCamSpace.z;
 
+                if(distanceToCam < 1.5)
+                    discardFactor = 0;
+
                 const float noiseAmountForDistanceFactor=  lerp(0.1,1, pow( saturate(distanceToCam/FogDistance), 3));
                 
                 float3 posAA = AddNoise(particleId-1, pointAA.position, NoiseAmount * noiseAmountForDistanceFactor, NoiseVariation, phase, NoiseFrequency);
@@ -128,37 +131,18 @@
                 float3 posBB = AddNoise(particleId+2, pointBB.position, NoiseAmount * noiseAmountForDistanceFactor, NoiseVariation, phase, NoiseFrequency);
                 
                 
-                const float tz = 0;
+                const float tz = -0.14;
                 float4 aaInScreen  = PointToClipPos(float4(posAA,1)) * aspect;
                 aaInScreen /= aaInScreen.w;
-                if (aaInScreen.z < tz)
-                {
-                    discardFactor = 0;
-                }
-
 
                 float4 aInScreen  = PointToClipPos(float4(posA,1)) * aspect;
                 aInScreen /= aInScreen.w;
-                if (aInScreen.z < tz)
-                {
-                    discardFactor = 0;
-                }
-
 
                 float4 bInScreen  = PointToClipPos(float4(posB,1)) * aspect;
                 bInScreen /= bInScreen.w;
-                if (bInScreen.z < tz)
-                {
-                    discardFactor = 0;
-                }
-
 
                 float4 bbInScreen  = PointToClipPos(float4(posBB,1)) * aspect;
                 bbInScreen /= bbInScreen.w;
-                if (bbInScreen.z < tz)
-                {
-                    discardFactor = 0;
-                }
 
                 float3 direction = (aInScreen - bInScreen).xyz;
                 float3 directionA = particleId > 0 
