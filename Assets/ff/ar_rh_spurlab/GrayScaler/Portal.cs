@@ -163,5 +163,21 @@ namespace ff.ar_rh_spurlab.GrayScaler
 
             public bool IsOutsideTriggers => (!IsInFrontTrigger && !IsInBackTrigger && !IsInCenterTrigger);
         }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            var matrix = transform.localToWorldMatrix *
+                         Matrix4x4.Translate(new Vector3(0, 0.5f, 0)) *
+                         Matrix4x4.Rotate(Quaternion.Euler(0, -90, 0));
+
+
+            Gizmos.matrix = matrix;
+
+            Gizmos.DrawFrustum(Vector3.zero, 30f, 100f, 0.1f, (float)Screen.width / Screen.height);
+            Gizmos.matrix = Matrix4x4.identity;
+        }
+#endif
     }
 }
