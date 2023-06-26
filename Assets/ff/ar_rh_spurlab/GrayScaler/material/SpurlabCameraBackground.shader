@@ -311,6 +311,7 @@ Shader "framefield/SpurlabCameraBackground"
 #endif
                 
                 const half grayScaleAmount = max(0, min(1, 1 - max(humanMask, portalMask)));
+
                 
                 half4 mixedVideo = lerp(videoColor, grayScaleVideo, grayScaleAmount);
                 
