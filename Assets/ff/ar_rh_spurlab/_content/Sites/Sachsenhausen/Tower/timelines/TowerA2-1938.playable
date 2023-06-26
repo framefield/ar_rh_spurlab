@@ -17,7 +17,7 @@ MonoBehaviour:
   m_bufferingTime: 0.1
   m_ClipProperties:
     volume: 1
---- !u!114 &-3368704248436724449
+--- !u!114 &-3265715754562283746
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -26,8 +26,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d906751a5684af182fa107a6b909fbc, type: 3}
-  m_Name: Reveal Transition Track
+  m_Script: {fileID: 11500000, guid: efcf9f6ecba24fcf9ff35a3f71d61372, type: 3}
+  m_Name: Reveal Transition Group Track
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -41,14 +41,14 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: -3051752282900745693}
-    m_Duration: 5
+    m_Asset: {fileID: 71282586445640817}
+    m_Duration: 68.6
     m_TimeScale: 1
-    m_ParentTrack: {fileID: -3368704248436724449}
-    m_EaseInDuration: 1
-    m_EaseOutDuration: 1
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
+    m_ParentTrack: {fileID: -3265715754562283746}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -106,79 +106,9 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: 1936-YearOnHorizon
-  - m_Version: 1
-    m_Start: 5
-    m_ClipIn: 0
-    m_Asset: {fileID: 7779915554002274653}
-    m_Duration: 5
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: -3368704248436724449}
-    m_EaseInDuration: 1
-    m_EaseOutDuration: 1
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: 1937-YearOnHorizon
+    m_DisplayName: RevealTransitionGroupAsset
   m_Markers:
     m_Objects: []
-  _defaultFadeDuration: 1
 --- !u!114 &-3051752282900745693
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,6 +141,259 @@ MonoBehaviour:
   m_bufferingTime: 0.1
   m_ClipProperties:
     volume: 1
+--- !u!114 &-1718806388744358519
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
+  m_Name: RevealTransitionGroupAsset(Clone)
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Name: AreaSquare - BuildingItem
+    IsActive: 0
+    Id: AreaSquare - BuildingItem
+  - Name: R01 - BuildingItem
+    IsActive: 1
+    Id: R01 - BuildingItem
+  - Name: R02 - BuildingItem
+    IsActive: 1
+    Id: R02 - BuildingItem
+  - Name: B01 - BuildingItem
+    IsActive: 1
+    Id: B01 - BuildingItem
+  - Name: B21 - BuildingItem
+    IsActive: 1
+    Id: B21 - BuildingItem
+  - Name: B02 - BuildingItem
+    IsActive: 1
+    Id: B02 - BuildingItem
+  - Name: B22 - BuildingItem
+    IsActive: 1
+    Id: B22 - BuildingItem
+  - Name: B03 - BuildingItem
+    IsActive: 1
+    Id: B03 - BuildingItem
+  - Name: B04 - BuildingItem
+    IsActive: 1
+    Id: B04 - BuildingItem
+  - Name: B23 - BuildingItem
+    IsActive: 1
+    Id: B23 - BuildingItem
+  - Name: B24 - BuildingItem
+    IsActive: 1
+    Id: B24 - BuildingItem
+  - Name: B25 - BuildingItem
+    IsActive: 1
+    Id: B25 - BuildingItem
+  - Name: B43 - BuildingItem
+    IsActive: 1
+    Id: B43 - BuildingItem
+  - Name: B44 - BuildingItem
+    IsActive: 1
+    Id: B44 - BuildingItem
+  - Name: B05 - BuildingItem
+    IsActive: 1
+    Id: B05 - BuildingItem
+  - Name: B26 - BuildingItem
+    IsActive: 1
+    Id: B26 - BuildingItem
+  - Name: B27 - BuildingItem
+    IsActive: 1
+    Id: B27 - BuildingItem
+  - Name: B45 - BuildingItem
+    IsActive: 1
+    Id: B45 - BuildingItem
+  - Name: B06 - BuildingItem
+    IsActive: 1
+    Id: B06 - BuildingItem
+  - Name: B28 - BuildingItem
+    IsActive: 1
+    Id: B28 - BuildingItem
+  - Name: B46 - BuildingItem
+    IsActive: 1
+    Id: B46 - BuildingItem
+  - Name: B47 - BuildingItem
+    IsActive: 1
+    Id: B47 - BuildingItem
+  - Name: B63 - BuildingItem
+    IsActive: 1
+    Id: B63 - BuildingItem
+  - Name: B64 - BuildingItem
+    IsActive: 1
+    Id: B64 - BuildingItem
+  - Name: B - BuildingItem
+    IsActive: 1
+    Id: B - BuildingItem
+  - Name: Laundry - BuildingItem
+    IsActive: 1
+    Id: Laundry - BuildingItem
+  - Name: B48 - BuildingItem
+    IsActive: 1
+    Id: B48 - BuildingItem
+  - Name: B65 - BuildingItem
+    IsActive: 1
+    Id: B65 - BuildingItem
+  - Name: B65c - BuildingItem
+    IsActive: 1
+    Id: B65c - BuildingItem
+  - Name: B49 - BuildingItem
+    IsActive: 1
+    Id: B49 - BuildingItem
+  - Name: B65b - BuildingItem
+    IsActive: 1
+    Id: B65b - BuildingItem
+  - Name: B50 - BuildingItem
+    IsActive: 1
+    Id: B50 - BuildingItem
+  - Name: B65d - BuildingItem
+    IsActive: 1
+    Id: B65d - BuildingItem
+  - Name: E - BuildingItem
+    IsActive: 1
+    Id: E - BuildingItem
+  - Name: Kitchen - BuildingItem
+    IsActive: 1
+    Id: Kitchen - BuildingItem
+  - Name: B51 - BuildingItem
+    IsActive: 1
+    Id: B51 - BuildingItem
+  - Name: B66 - BuildingItem
+    IsActive: 1
+    Id: B66 - BuildingItem
+  - Name: B67 - BuildingItem
+    IsActive: 1
+    Id: B67 - BuildingItem
+  - Name: B52 - BuildingItem
+    IsActive: 1
+    Id: B52 - BuildingItem
+  - Name: B68 - BuildingItem
+    IsActive: 1
+    Id: B68 - BuildingItem
+  - Name: B07 - BuildingItem
+    IsActive: 1
+    Id: B07 - BuildingItem
+  - Name: B29 - BuildingItem
+    IsActive: 1
+    Id: B29 - BuildingItem
+  - Name: B53 - BuildingItem
+    IsActive: 1
+    Id: B53 - BuildingItem
+  - Name: B30 - BuildingItem
+    IsActive: 1
+    Id: B30 - BuildingItem
+  - Name: B54 - BuildingItem
+    IsActive: 1
+    Id: B54 - BuildingItem
+  - Name: B08 - BuildingItem
+    IsActive: 1
+    Id: B08 - BuildingItem
+  - Name: B31 - BuildingItem
+    IsActive: 1
+    Id: B31 - BuildingItem
+  - Name: B09 - BuildingItem
+    IsActive: 1
+    Id: B09 - BuildingItem
+  - Name: B32 - BuildingItem
+    IsActive: 1
+    Id: B32 - BuildingItem
+  - Name: B55 - BuildingItem
+    IsActive: 1
+    Id: B55 - BuildingItem
+  - Name: B56 - Delousing - BuildingItem
+    IsActive: 1
+    Id: B56 - Delousing - BuildingItem
+  - Name: B33 - BuildingItem
+    IsActive: 1
+    Id: B33 - BuildingItem
+  - Name: B10 - BuildingItem
+    IsActive: 1
+    Id: B10 - BuildingItem
+  - Name: B34 - BuildingItem
+    IsActive: 1
+    Id: B34 - BuildingItem
+  - Name: B11 - BuildingItem
+    IsActive: 1
+    Id: B11 - BuildingItem
+  - Name: B35 - BuildingItem
+    IsActive: 1
+    Id: B35 - BuildingItem
+  - Name: B12 - BuildingItem
+    IsActive: 1
+    Id: B12 - BuildingItem
+  - Name: B36 - BuildingItem
+    IsActive: 1
+    Id: B36 - BuildingItem
+  - Name: B13 - BuildingItem
+    IsActive: 1
+    Id: B13 - BuildingItem
+  - Name: B14 - BuildingItem
+    IsActive: 1
+    Id: B14 - BuildingItem
+  - Name: Cells - BuildingItem
+    IsActive: 1
+    Id: Cells - BuildingItem
+  - Name: B15 - BuildingItem
+    IsActive: 1
+    Id: B15 - BuildingItem
+  - Name: B37 - BuildingItem
+    IsActive: 1
+    Id: B37 - BuildingItem
+  - Name: B57 - BuildingItem
+    IsActive: 1
+    Id: B57 - BuildingItem
+  - Name: B16 - BuildingItem
+    IsActive: 1
+    Id: B16 - BuildingItem
+  - Name: B38 - BuildingItem
+    IsActive: 1
+    Id: B38 - BuildingItem
+  - Name: B58 - BuildingItem
+    IsActive: 1
+    Id: B58 - BuildingItem
+  - Name: B17 - BuildingItem
+    IsActive: 1
+    Id: B17 - BuildingItem
+  - Name: B39 - BuildingItem
+    IsActive: 1
+    Id: B39 - BuildingItem
+  - Name: B59 - BuildingItem
+    IsActive: 1
+    Id: B59 - BuildingItem
+  - Name: B18 - BuildingItem
+    IsActive: 1
+    Id: B18 - BuildingItem
+  - Name: B40 - BuildingItem
+    IsActive: 1
+    Id: B40 - BuildingItem
+  - Name: B60 - BuildingItem
+    IsActive: 1
+    Id: B60 - BuildingItem
+  - Name: B19 - BuildingItem
+    IsActive: 1
+    Id: B19 - BuildingItem
+  - Name: B41 - BuildingItem
+    IsActive: 1
+    Id: B41 - BuildingItem
+  - Name: B61 - BuildingItem
+    IsActive: 1
+    Id: B61 - BuildingItem
+  - Name: B20 - BuildingItem
+    IsActive: 1
+    Id: B20 - BuildingItem
+  - Name: Obelisk - BuildingItem
+    IsActive: 0
+    Id: Obelisk - BuildingItem
+  - Name: TowerSimple-BuildingItem
+    IsActive: 0
+    Id: TowerSimple-BuildingItem
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialDelay: 0.05
 --- !u!114 &-1664740233835565783
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -452,13 +635,365 @@ MonoBehaviour:
   m_Tracks:
   - {fileID: -1664740233835565783}
   - {fileID: 8092986353637653784}
-  - {fileID: -3368704248436724449}
+  - {fileID: -3265715754562283746}
+  - {fileID: 8520316193009995229}
+  - {fileID: 1636857326900523829}
+  - {fileID: 8786394942397034531}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 0}
+--- !u!114 &71282586445640817
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
+  m_Name: RevealTransitionGroupAsset
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Name: PersonBlock (1)
+    IsActive: 0
+    Id: PersonBlock (1)
+  - Name: PersonBlockHalf 0b
+    IsActive: 0
+    Id: PersonBlockHalf 0b
+  - Name: PersonBlock 17b
+    IsActive: 0
+    Id: PersonBlock 17b
+  - Name: PersonBlock 16b
+    IsActive: 0
+    Id: PersonBlock 16b
+  - Name: PersonBlock 13b
+    IsActive: 0
+    Id: PersonBlock 13b
+  - Name: PersonBlock 12b
+    IsActive: 0
+    Id: PersonBlock 12b
+  - Name: PersonBlock 11b
+    IsActive: 0
+    Id: PersonBlock 11b
+  - Name: PersonBlock 9b
+    IsActive: 0
+    Id: PersonBlock 9b
+  - Name: PersonBlock 8b
+    IsActive: 0
+    Id: PersonBlock 8b
+  - Name: PersonBlock 7b
+    IsActive: 0
+    Id: PersonBlock 7b
+  - Name: PersonBlock 6b
+    IsActive: 0
+    Id: PersonBlock 6b
+  - Name: PersonBlock 5b
+    IsActive: 0
+    Id: PersonBlock 5b
+  - Name: PersonBlock 4b
+    IsActive: 0
+    Id: PersonBlock 4b
+  - Name: PersonBlock 3b
+    IsActive: 0
+    Id: PersonBlock 3b
+  - Name: PersonBlock 2b
+    IsActive: 0
+    Id: PersonBlock 2b
+  - Name: PersonBlock 1b
+    IsActive: 0
+    Id: PersonBlock 1b
+  - Name: PersonBlockHalf (2)
+    IsActive: 0
+    Id: PersonBlockHalf (2)
+  - Name: PersonBlockHalf (1)
+    IsActive: 0
+    Id: PersonBlockHalf (1)
+  - Name: PersonBlock (2)
+    IsActive: 0
+    Id: PersonBlock (2)
+  - Name: PersonBlock (3)
+    IsActive: 0
+    Id: PersonBlock (3)
+  - Name: PersonBlock (4)
+    IsActive: 0
+    Id: PersonBlock (4)
+  - Name: PersonBlock (5)
+    IsActive: 0
+    Id: PersonBlock (5)
+  - Name: PersonBlock (6)
+    IsActive: 0
+    Id: PersonBlock (6)
+  - Name: PersonBlock (7)
+    IsActive: 0
+    Id: PersonBlock (7)
+  - Name: PersonBlockHalf 1b
+    IsActive: 0
+    Id: PersonBlockHalf 1b
+  - Name: PersonBlock (9)
+    IsActive: 0
+    Id: PersonBlock (9)
+  - Name: PersonBlock (11)
+    IsActive: 0
+    Id: PersonBlock (11)
+  - Name: PersonBlock (12)
+    IsActive: 0
+    Id: PersonBlock (12)
+  - Name: PersonBlock (13)
+    IsActive: 0
+    Id: PersonBlock (13)
+  - Name: PersonBlock (16)
+    IsActive: 0
+    Id: PersonBlock (16)
+  - Name: PersonBlock (17)
+    IsActive: 0
+    Id: PersonBlock (17)
+  - Name: PersonBlockHalf
+    IsActive: 0
+    Id: PersonBlockHalf
+  - Name: PersonBlock (10)
+    IsActive: 0
+    Id: PersonBlock (10)
+  - Name: PersonBlockHalf 2b
+    IsActive: 0
+    Id: PersonBlockHalf 2b
+  _sequentialOptions:
+    PlaySequentially: 0
+    SequentialDelay: 0.2
+--- !u!114 &1636857326900523829
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d906751a5684af182fa107a6b909fbc, type: 3}
+  m_Name: YearOnHorizon
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 0
+    m_ClipIn: 0
+    m_Asset: {fileID: -3051752282900745693}
+    m_Duration: 3
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 1636857326900523829}
+    m_EaseInDuration: 1
+    m_EaseOutDuration: 1
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: 1936-YearOnHorizon
+  - m_Version: 1
+    m_Start: 3
+    m_ClipIn: 0
+    m_Asset: {fileID: 7779915554002274653}
+    m_Duration: 5
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 1636857326900523829}
+    m_EaseInDuration: 1
+    m_EaseOutDuration: 1
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: 1937-YearOnHorizon
+  - m_Version: 1
+    m_Start: 24.516666666666666
+    m_ClipIn: 0
+    m_Asset: {fileID: 8279659653285511568}
+    m_Duration: 5
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 1636857326900523829}
+    m_EaseInDuration: 1
+    m_EaseOutDuration: 1
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: 1938-YearOnHorizon
+  m_Markers:
+    m_Objects: []
+  _defaultFadeDuration: 1
 --- !u!114 &5220900216329966011
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -625,6 +1160,76 @@ MonoBehaviour:
     stereoPan: 0
     spatialBlend: 0
   _locale: en
+--- !u!114 &5904406409805157852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
+  m_Name: RevealTransitionGroupAsset
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Name: BarrackText-R01
+    IsActive: 0
+    Id: BarrackText-R01
+  - Name: BarrackText-B12
+    IsActive: 0
+    Id: BarrackText-B12
+  - Name: BarrackText-B11
+    IsActive: 0
+    Id: BarrackText-B11
+  - Name: BarrackText-B10
+    IsActive: 0
+    Id: BarrackText-B10
+  - Name: BarrackText-B09
+    IsActive: 0
+    Id: BarrackText-B09
+  - Name: BarrackText-B08
+    IsActive: 0
+    Id: BarrackText-B08
+  - Name: BarrackText-B07
+    IsActive: 0
+    Id: BarrackText-B07
+  - Name: BarrackText-E
+    IsActive: 0
+    Id: BarrackText-E
+  - Name: BarrackText-B
+    IsActive: 0
+    Id: BarrackText-B
+  - Name: BarrackText-B06
+    IsActive: 0
+    Id: BarrackText-B06
+  - Name: BarrackText-B05
+    IsActive: 0
+    Id: BarrackText-B05
+  - Name: BarrackText-B04
+    IsActive: 0
+    Id: BarrackText-B04
+  - Name: BarrackText-B03
+    IsActive: 0
+    Id: BarrackText-B03
+  - Name: BarrackText-B02
+    IsActive: 0
+    Id: BarrackText-B02
+  - Name: BarrackText-B01
+    IsActive: 0
+    Id: BarrackText-B01
+  - Name: BarrackText-R02
+    IsActive: 0
+    Id: BarrackText-R02
+  - Name: BarrackText-B13
+    IsActive: 0
+    Id: BarrackText-B13
+  - Name: BarrackText-B14
+    IsActive: 0
+    Id: BarrackText-B14
+  _sequentialOptions:
+    PlaySequentially: 0
+    SequentialDelay: 0.2
 --- !u!114 &5909294005330352402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -639,7 +1244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _definitions:
   - Name: AreaSquare - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: AreaSquare - BuildingItem
   - Name: R01 - BuildingItem
     IsActive: 1
@@ -651,13 +1256,13 @@ MonoBehaviour:
     IsActive: 1
     Id: B01 - BuildingItem
   - Name: B21 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B21 - BuildingItem
   - Name: B02 - BuildingItem
     IsActive: 1
     Id: B02 - BuildingItem
   - Name: B22 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B22 - BuildingItem
   - Name: B03 - BuildingItem
     IsActive: 1
@@ -666,151 +1271,151 @@ MonoBehaviour:
     IsActive: 1
     Id: B04 - BuildingItem
   - Name: B23 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B23 - BuildingItem
   - Name: B24 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B24 - BuildingItem
   - Name: B25 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B25 - BuildingItem
   - Name: B43 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B43 - BuildingItem
   - Name: B44 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B44 - BuildingItem
   - Name: B05 - BuildingItem
     IsActive: 1
     Id: B05 - BuildingItem
   - Name: B26 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B26 - BuildingItem
   - Name: B27 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B27 - BuildingItem
   - Name: B45 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B45 - BuildingItem
   - Name: B06 - BuildingItem
     IsActive: 1
     Id: B06 - BuildingItem
   - Name: B28 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B28 - BuildingItem
   - Name: B46 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B46 - BuildingItem
   - Name: B47 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B47 - BuildingItem
   - Name: B63 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B63 - BuildingItem
   - Name: B64 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B64 - BuildingItem
   - Name: B - BuildingItem
     IsActive: 1
     Id: B - BuildingItem
   - Name: Laundry - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: Laundry - BuildingItem
   - Name: B48 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B48 - BuildingItem
   - Name: B65 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B65 - BuildingItem
   - Name: B65c - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B65c - BuildingItem
   - Name: B49 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B49 - BuildingItem
   - Name: B65b - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B65b - BuildingItem
   - Name: B50 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B50 - BuildingItem
   - Name: B65d - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B65d - BuildingItem
   - Name: E - BuildingItem
     IsActive: 1
     Id: E - BuildingItem
   - Name: Kitchen - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: Kitchen - BuildingItem
   - Name: B51 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B51 - BuildingItem
   - Name: B66 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B66 - BuildingItem
   - Name: B67 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B67 - BuildingItem
   - Name: B52 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B52 - BuildingItem
   - Name: B68 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B68 - BuildingItem
   - Name: B07 - BuildingItem
     IsActive: 1
     Id: B07 - BuildingItem
   - Name: B29 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B29 - BuildingItem
   - Name: B53 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B53 - BuildingItem
   - Name: B30 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B30 - BuildingItem
   - Name: B54 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B54 - BuildingItem
   - Name: B08 - BuildingItem
     IsActive: 1
     Id: B08 - BuildingItem
   - Name: B31 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B31 - BuildingItem
   - Name: B09 - BuildingItem
     IsActive: 1
     Id: B09 - BuildingItem
   - Name: B32 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B32 - BuildingItem
   - Name: B55 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B55 - BuildingItem
   - Name: B56 - Delousing - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B56 - Delousing - BuildingItem
   - Name: B33 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B33 - BuildingItem
   - Name: B10 - BuildingItem
     IsActive: 1
     Id: B10 - BuildingItem
   - Name: B34 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B34 - BuildingItem
   - Name: B11 - BuildingItem
     IsActive: 1
     Id: B11 - BuildingItem
   - Name: B35 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B35 - BuildingItem
   - Name: B12 - BuildingItem
     IsActive: 1
     Id: B12 - BuildingItem
   - Name: B36 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B36 - BuildingItem
   - Name: B13 - BuildingItem
     IsActive: 1
@@ -819,55 +1424,55 @@ MonoBehaviour:
     IsActive: 1
     Id: B14 - BuildingItem
   - Name: Cells - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: Cells - BuildingItem
   - Name: B15 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B15 - BuildingItem
   - Name: B37 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B37 - BuildingItem
   - Name: B57 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B57 - BuildingItem
   - Name: B16 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B16 - BuildingItem
   - Name: B38 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B38 - BuildingItem
   - Name: B58 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B58 - BuildingItem
   - Name: B17 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B17 - BuildingItem
   - Name: B39 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B39 - BuildingItem
   - Name: B59 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B59 - BuildingItem
   - Name: B18 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B18 - BuildingItem
   - Name: B40 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B40 - BuildingItem
   - Name: B60 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B60 - BuildingItem
   - Name: B19 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B19 - BuildingItem
   - Name: B41 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B41 - BuildingItem
   - Name: B61 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B61 - BuildingItem
   - Name: B20 - BuildingItem
-    IsActive: 1
+    IsActive: 0
     Id: B20 - BuildingItem
   - Name: Obelisk - BuildingItem
     IsActive: 0
@@ -877,7 +1482,7 @@ MonoBehaviour:
     Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialDelay: 0.1
+    SequentialDelay: 0.05
 --- !u!114 &7779915554002274653
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -918,7 +1523,76 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 5909294005330352402}
-    m_Duration: 68.6
+    m_Duration: 5.1
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 8092986353637653784}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: RevealTransitionGroupAsset
+  - m_Version: 1
+    m_Start: 5.1
+    m_ClipIn: 0
+    m_Asset: {fileID: -1718806388744358519}
+    m_Duration: 66.86666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: 8092986353637653784}
     m_EaseInDuration: 0
@@ -985,3 +1659,218 @@ MonoBehaviour:
     m_DisplayName: RevealTransitionGroupAsset
   m_Markers:
     m_Objects: []
+--- !u!114 &8209841939389158766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35e7731f69849b580d22192b8ccd0ef, type: 3}
+  m_Name: RevealTransitionAsset(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  _exposedBinding:
+    exposedName: ef3e110385b474c098d9d8f615a0c361
+    defaultValue: {fileID: 0}
+--- !u!114 &8279659653285511568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35e7731f69849b580d22192b8ccd0ef, type: 3}
+  m_Name: RevealTransitionAsset(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  _exposedBinding:
+    exposedName: 1a7b0671625af4654bd7ab20df8207f6
+    defaultValue: {fileID: 0}
+--- !u!114 &8520316193009995229
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efcf9f6ecba24fcf9ff35a3f71d61372, type: 3}
+  m_Name: Reveal Transition Group Track (1)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 0
+    m_ClipIn: 0
+    m_Asset: {fileID: 5904406409805157852}
+    m_Duration: 68.6
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 8520316193009995229}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: RevealTransitionGroupAsset
+  m_Markers:
+    m_Objects: []
+--- !u!114 &8786394942397034531
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d906751a5684af182fa107a6b909fbc, type: 3}
+  m_Name: 3Dshape-triangle
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 15.716666666666667
+    m_ClipIn: 0
+    m_Asset: {fileID: 8209841939389158766}
+    m_Duration: 7.6106802721088425
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 8786394942397034531}
+    m_EaseInDuration: 1
+    m_EaseOutDuration: 1
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: 3Dshape-triangle
+  m_Markers:
+    m_Objects: []
+  _defaultFadeDuration: 1
