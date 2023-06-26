@@ -34,6 +34,7 @@ namespace ff.ar_rh_spurlab.Locations
             set => _autoPlay = value;
         }
 
+        public Portal Portal => _portal;
         public Chapter[] Chapters => _chapters;
 
         public readonly static ReactiveProperty<bool> IsAnyTimelineMgrPlaying = new();

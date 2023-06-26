@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using ff.ar_rh_spurlab.GrayScaler;
 using ff.ar_rh_spurlab.Localization;
 using ff.ar_rh_spurlab.Locations.UI;
 using ff.common.entity;
@@ -17,7 +20,9 @@ namespace ff.ar_rh_spurlab.Locations
         [SerializeField]
         private Story[] _stories;
 
-        private void Start()
+        // TODO: replace awake with a meaningful initialization method
+        // setting gray scale scene point of interest should be done after SimpleTrackedLocation Content is initialized
+        private void Awake()
         {
             _ui.OnChapterClicked += OnChapterClickedHandler;
 
@@ -33,9 +38,16 @@ namespace ff.ar_rh_spurlab.Locations
                 {
                     OnStoryIsActiveChangedHandler(story, isActive);
                 };
+
+                var portal = story.TimelineManager.Portal;
+                var poi = portal.GetComponentInChildren<GrayScaleScenePointOfInterest>();
+                if (poi)
+                {
+                    _storyPOIs.Add((story, poi));
+                }
             }
 
-            PlayCtaAudio();
+            SetFocusToNextNotVisitedStory();
         }
 
         private void OnChapterClickedHandler(Chapter chapter)
@@ -66,7 +78,7 @@ namespace ff.ar_rh_spurlab.Locations
             {
                 if (_activeStory == story)
                 {
-                    PlayCtaAudio();
+                    SetFocusToNextNotVisitedStory();
                     _activeStory = null;
                 }
             }
@@ -79,24 +91,37 @@ namespace ff.ar_rh_spurlab.Locations
             _ui.UpdateVisibility();
         }
 
-        private void PlayCtaAudio()
+
+        private void SetFocusToNextNotVisitedStory()
         {
-            foreach (var story in _stories)
-            {
-                if (story.IsVisited)
-                    continue;
-
-                if (!story.CtaAudio.TryGetAudioClip(ApplicationLocale.Instance.CurrentLocale, out var audioClip))
-                    continue;
-
-                if (audioClip)
-                    _audioSource.PlayOneShot(audioClip);
-
+            var nextAvailableStory = _stories.FirstOrDefault(story => !story.IsVisited);
+            if (nextAvailableStory == null)
                 return;
+
+            PlayAudio(nextAvailableStory.CtaAudio);
+            SetFocusToStoryPoi(nextAvailableStory);
+        }
+
+        private void PlayAudio(LocalizedAudioClip localizedAudioClip)
+        {
+            if (!localizedAudioClip.TryGetAudioClip(ApplicationLocale.Instance.CurrentLocale, out var audioClip))
+                return;
+
+            if (audioClip)
+                _audioSource.PlayOneShot(audioClip);
+        }
+
+        private void SetFocusToStoryPoi(Story story)
+        {
+            foreach (var (s, poi) in _storyPOIs)
+            {
+                poi.enabled = s == story;
             }
         }
 
         private Story _activeStory;
+
+        private List<(Story, GrayScaleScenePointOfInterest)> _storyPOIs = new();
     }
 
     [Serializable]
