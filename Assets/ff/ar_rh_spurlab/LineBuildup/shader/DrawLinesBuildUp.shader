@@ -110,11 +110,22 @@
                 Point pointBB = Points[particleId > SegmentCount-2 ? SegmentCount-2: particleId+2];
 
                 float phase = NoisePhase + _Time.x;
+
                 
-                float3 posAA = AddNoise(particleId-1, pointAA.position,   NoiseAmount, NoiseVariation, phase, NoiseFrequency);
-                float3 posA  = AddNoise(particleId, pointA.position,    NoiseAmount, NoiseVariation, phase, NoiseFrequency);
-                float3 posB  = AddNoise(particleId+1, pointB.position,  NoiseAmount, NoiseVariation, phase, NoiseFrequency);
-                float3 posBB = AddNoise(particleId+2, pointBB.position, NoiseAmount, NoiseVariation, phase, NoiseFrequency);
+                float3 posInObject = cornerFactors.x < 0.5
+                    ? pointA.position
+                    : pointB.position;
+
+                const float4 posInWorld = mul(_ObjectToWorld, float4(posInObject, 1.0));
+                float4 posInCamSpace = mul(unity_WorldToCamera, posInWorld);
+                const float distanceToCam = posInCamSpace.z;
+
+                const float noiseAmountForDistanceFactor=  lerp(0.2,1, saturate(distanceToCam/FogDistance));
+                
+                float3 posAA = AddNoise(particleId-1, pointAA.position, NoiseAmount * noiseAmountForDistanceFactor, NoiseVariation, phase, NoiseFrequency);
+                float3 posA  = AddNoise(particleId, pointA.position,    NoiseAmount * noiseAmountForDistanceFactor, NoiseVariation, phase, NoiseFrequency);
+                float3 posB  = AddNoise(particleId+1, pointB.position,  NoiseAmount * noiseAmountForDistanceFactor, NoiseVariation, phase, NoiseFrequency);
+                float3 posBB = AddNoise(particleId+2, pointBB.position, NoiseAmount * noiseAmountForDistanceFactor, NoiseVariation, phase, NoiseFrequency);
                 
                 
                 const float tz = 0;
@@ -171,7 +182,6 @@
                 float wAtPoint = lerp(pointA.w, pointB.w, cornerFactors.x);
 
                 // Buildup transition
-
                 if (!isnan(wAtPoint)) 
                 {        
                     output.texCoord = float2(wAtPoint - TransitionProgress, cornerFactors.y /2 +0.5);
@@ -181,13 +191,6 @@
                     output.texCoord = float2(0, 0);
                 }
 
-                float3 posInObject = cornerFactors.x < 0.5
-                    ? posA
-                    : posB;
-
-                const float4 posInWorld = mul(_ObjectToWorld, float4(posInObject, 1.0));
-                float4 posInCamSpace = mul(unity_WorldToCamera, posInWorld);
-                const float distanceToCam = posInCamSpace.z;
 
                 float3 neighbourNormal = lerp(normalA, normalB, cornerFactors.x);
                 float3 miterNormal = (normal + neighbourNormal) / 2;
