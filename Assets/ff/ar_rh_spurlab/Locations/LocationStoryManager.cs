@@ -79,7 +79,9 @@ namespace ff.ar_rh_spurlab.Locations
                 if (!story.CtaAudio.TryGetAudioClip(ApplicationLocale.Instance.CurrentLocale, out var audioClip))
                     continue;
 
-                _audioSource.PlayOneShot(audioClip);
+                if (audioClip)
+                    _audioSource.PlayOneShot(audioClip);
+
                 return;
             }
         }

@@ -68,6 +68,9 @@ namespace ff.ar_rh_spurlab.Locations.UI
             if (_chapter == null)
                 return;
 
+            if (!_visitedIcon.gameObject || !_nextIcon.gameObject || !_titleText.gameObject)
+                return;
+
             _visitedIcon.IsVisible = _chapter.IsVisited.Value && !_chapter.IsNext.Value;
             _nextIcon.IsVisible = _chapter.IsNext.Value;
             _titleText.font = _chapter.IsActive.Value ? _activeFont : _inactiveFont;
