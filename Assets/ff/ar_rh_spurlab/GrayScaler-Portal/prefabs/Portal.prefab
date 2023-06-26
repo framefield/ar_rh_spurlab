@@ -119,8 +119,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 5}
+  m_AnchoredPosition: {x: 0, y: -0.061999977}
+  m_SizeDelta: {x: 40, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7214878520065462315
 MeshRenderer:
@@ -212,8 +212,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -570,8 +570,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.009, y: 0}
-  m_SizeDelta: {x: 40, y: 5}
+  m_AnchoredPosition: {x: 0.009, y: -0.062}
+  m_SizeDelta: {x: 40, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8564691221916526061
 MeshRenderer:
@@ -663,8 +663,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1165,11 +1165,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8f23aafa7422f45b4a17aa6c21d4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActivated: 0
   _portalEntryLabelOverride:
     _values: []
     _locales: []
   _portalEntryText: {fileID: 8333281644915133916}
+  _isActivated: 0
 --- !u!1 &8650289597486523082
 GameObject:
   m_ObjectHideFlags: 0
