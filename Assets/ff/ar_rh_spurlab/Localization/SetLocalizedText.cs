@@ -102,5 +102,10 @@ namespace ff.ar_rh_spurlab.Localization
             }
         }
 #endif
+        public void SetLocalizedString(LocalizedString stringToSet)
+        {
+            _localizedString = stringToSet;
+            OnLocaleChangedHandler(ApplicationLocale.Instance.CurrentLocale);
+        }
     }
 }

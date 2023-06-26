@@ -1,7 +1,9 @@
 using System;
+using ff.ar_rh_spurlab.Localization;
+using ff.ar_rh_spurlab.Locations;
+using ff.common.entity;
 using ff.utils;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace ff.ar_rh_spurlab.GrayScaler
 {
@@ -17,6 +19,12 @@ namespace ff.ar_rh_spurlab.GrayScaler
         public event Action OnExit;
 
         [SerializeField]
+        private LocalizedString _portalEntryLabelOverride;
+
+        [SerializeField]
+        private SetLocalizedText _portalEntryText;
+
+        [SerializeField]
         [ReadOnly]
         private bool _isActivated = false;
 
@@ -25,6 +33,20 @@ namespace ff.ar_rh_spurlab.GrayScaler
         private void OnEnable()
         {
             OnPortalTriggered += OnPortalTriggeredHandler;
+
+
+            if (_portalEntryLabelOverride.HasDefaultValue())
+            {
+                _portalEntryText.SetLocalizedString(_portalEntryLabelOverride);
+            }
+            else
+            {
+                var owningLocation = GetComponentInParent<AugmentedLocation>();
+                if (owningLocation && owningLocation.LocationData)
+                {
+                    _portalEntryText.SetLocalizedString(owningLocation.LocationData.Title);
+                }
+            }
         }
 
         private void OnDisable()
