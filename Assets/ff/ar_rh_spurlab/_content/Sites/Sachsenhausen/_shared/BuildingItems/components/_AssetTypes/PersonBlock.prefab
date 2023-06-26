@@ -117,7 +117,7 @@ Transform:
   m_Children:
   - {fileID: 6004618163843559015}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3957469614443365240
 MonoBehaviour:
@@ -170,8 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _revealTransition: {fileID: 3957469614443365240}
-  _fadeInDuration: 0.3
-  _fadeOutDuration: 0.3
+  _fadeInDuration: 1
+  _fadeOutDuration: 0.1
   _normalizedTimePosition: 0
   _state: 0
 --- !u!114 &7350080674655633202

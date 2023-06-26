@@ -43,9 +43,8 @@ Transform:
   - {fileID: 6964969973439501845}
   - {fileID: 5342618220301828636}
   - {fileID: 2938991252344052499}
-  - {fileID: 6576285014491449258}
   - {fileID: 887191316839811032}
-  - {fileID: 6088690210516279783}
+  - {fileID: 6576285014491449258}
   - {fileID: 2985631757572285108}
   - {fileID: 1894634007469624559}
   - {fileID: 2204032176650685994}
@@ -58,11 +57,11 @@ Transform:
   - {fileID: 1802135215966223942}
   - {fileID: 4878737783416845856}
   - {fileID: 8965523351640315553}
+  - {fileID: 4957020489955479390}
   - {fileID: 6293613749136275018}
   - {fileID: 1805151715431615271}
-  - {fileID: 8720145510154581308}
   - {fileID: 7104962572460298836}
-  - {fileID: 4957020489955479390}
+  - {fileID: 8720145510154581308}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -42.638, z: 0}
@@ -95,7 +94,7 @@ MonoBehaviour:
   - {fileID: 4573094750323906787}
   - {fileID: 5547354926193886298}
   - {fileID: 2013230287151711272}
-  - {fileID: 4882147146184827415}
+  - {fileID: 0}
   - {fileID: 4526286714486432068}
   - {fileID: 1005593671299108639}
   - {fileID: 660281044653280730}
@@ -179,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (9)
+      value: PersonBlock R12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -215,7 +214,12 @@ PrefabInstance:
     - target: {fileID: 48325867371128257, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlockHalf 2b
+      value: PersonBlock L62
+      objectReference: {fileID: 0}
+    - target: {fileID: 48325867371128257, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
         type: 3}
@@ -306,7 +310,7 @@ PrefabInstance:
     - target: {fileID: 48325867371128257, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlockHalf
+      value: PersonBlock R43
       objectReference: {fileID: 0}
     - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
         type: 3}
@@ -412,7 +416,7 @@ PrefabInstance:
     - target: {fileID: 4352255406162010843, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 87.8
+      value: 81.3
       objectReference: {fileID: 0}
     - target: {fileID: 4352255406162010843, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
@@ -452,7 +456,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (17)
+      value: PersonBlock R23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -543,7 +547,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 1b
+      value: PersonBlock L11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -634,7 +638,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 9b
+      value: PersonBlock L22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -725,7 +729,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (7)
+      value: PersonBlock R71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -750,97 +754,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ea81e31bfe417ca2c7f2d6ef2f9e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &2262041932311074950
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 5261263853584747340}
-    m_Modifications:
-    - target: {fileID: 48325867371128257, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_Name
-      value: PersonBlockHalf (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 78
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 48
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d6339fbeb43824f659d7ee8bfc8c2a91, type: 3}
---- !u!114 &4882147146184827415 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6675669254760053393, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-    type: 3}
-  m_PrefabInstance: {fileID: 2262041932311074950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23ea81e31bfe417ca2c7f2d6ef2f9e3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &6088690210516279783 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
-    type: 3}
-  m_PrefabInstance: {fileID: 2262041932311074950}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2517541525299457265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -907,7 +820,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 3b
+      value: PersonBlock L31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -998,7 +911,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 11b
+      value: PersonBlock L32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1049,7 +962,7 @@ PrefabInstance:
     - target: {fileID: 4352255406162010843, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 87.854675
+      value: 81.3
       objectReference: {fileID: 0}
     - target: {fileID: 4352255406162010843, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
@@ -1089,7 +1002,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 17b
+      value: PersonBlock L23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1180,7 +1093,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 2b
+      value: PersonBlock L21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1271,7 +1184,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 4b
+      value: PersonBlock L41
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1307,7 +1220,7 @@ PrefabInstance:
     - target: {fileID: 48325867371128257, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlockHalf 1b
+      value: PersonBlock L33
       objectReference: {fileID: 0}
     - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
         type: 3}
@@ -1453,7 +1366,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (2)
+      value: PersonBlock R21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1489,7 +1402,7 @@ PrefabInstance:
     - target: {fileID: 48325867371128257, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlockHalf 0b
+      value: PersonBlock L43
       objectReference: {fileID: 0}
     - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
         type: 3}
@@ -1632,10 +1545,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7350080674655633202, guid: 0d5e717617eef4a34adbf2444beff813,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (1)
+      value: PersonBlock R11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1726,7 +1649,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (12)
+      value: PersonBlock R42
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1817,7 +1740,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 13b
+      value: PersonBlock L52
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1853,7 +1776,7 @@ PrefabInstance:
     - target: {fileID: 48325867371128257, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlockHalf (1)
+      value: 'PersonBlock R33 '
       objectReference: {fileID: 0}
     - target: {fileID: 5411985741629110625, guid: d6339fbeb43824f659d7ee8bfc8c2a91,
         type: 3}
@@ -1999,7 +1922,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 8b
+      value: PersonBlock L12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2090,7 +2013,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (10)
+      value: PersonBlock R22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2181,7 +2104,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 6b
+      value: PersonBlock L61
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2272,7 +2195,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (11)
+      value: PersonBlock R32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2363,7 +2286,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (13)
+      value: PersonBlock R52
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2454,7 +2377,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 5b
+      value: PersonBlock L51
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2545,7 +2468,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (4)
+      value: PersonBlock R41
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2636,7 +2559,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (3)
+      value: PersonBlock R31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2687,7 +2610,7 @@ PrefabInstance:
     - target: {fileID: 4352255406162010843, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 87.854675
+      value: 81.3
       objectReference: {fileID: 0}
     - target: {fileID: 4352255406162010843, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
@@ -2727,7 +2650,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 16b
+      value: PersonBlock L13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2818,7 +2741,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 7b
+      value: PersonBlock L71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2909,7 +2832,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (6)
+      value: PersonBlock R61
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2960,7 +2883,7 @@ PrefabInstance:
     - target: {fileID: 4352255406162010843, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 87.8
+      value: 81.3
       objectReference: {fileID: 0}
     - target: {fileID: 4352255406162010843, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
@@ -3000,7 +2923,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (16)
+      value: PersonBlock R13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3091,7 +3014,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock (5)
+      value: PersonBlock R51
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3182,7 +3105,7 @@ PrefabInstance:
     - target: {fileID: 8635332872881389179, guid: 0d5e717617eef4a34adbf2444beff813,
         type: 3}
       propertyPath: m_Name
-      value: PersonBlock 12b
+      value: PersonBlock L42
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
