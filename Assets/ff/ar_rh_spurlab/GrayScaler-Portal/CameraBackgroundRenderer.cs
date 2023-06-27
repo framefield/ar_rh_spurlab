@@ -85,7 +85,7 @@ namespace ff.ar_rh_spurlab.GrayScaler
             material.DisableKeyword(_xrSimulationKeyword);
 #endif
 
-            if (_pointOfInterests.Count > 0)
+            if (_pointOfInterests.Count > 0 || _isInsidePortal)
             {
                 if (_isInsidePortal)
                 {
