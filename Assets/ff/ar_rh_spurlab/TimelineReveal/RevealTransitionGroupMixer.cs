@@ -102,7 +102,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                 }
                 else
                 {
-                    value.SetVisibility(false, !Application.isPlaying);
+                    value.SetNormalizedTime(0, State.None);
                 }
             }
         }
