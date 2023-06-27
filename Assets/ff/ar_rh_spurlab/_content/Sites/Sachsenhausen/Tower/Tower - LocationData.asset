@@ -15,8 +15,8 @@ MonoBehaviour:
   _id: tower
   _title:
     _values:
-    - Tower
-    - Turm
+    - Tower A
+    - Turm A
     _locales:
     - en
     - de
