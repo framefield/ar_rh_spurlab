@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace ff.ar_rh_spurlab.Locations
 {
-    public class LocationStoryManager : MonoBehaviour
+    public class LocationStoryManager : MonoBehaviour, ITrackedLocationContent
     {
         [SerializeField]
         private AudioSource _audioSource;
@@ -19,6 +19,19 @@ namespace ff.ar_rh_spurlab.Locations
 
         [SerializeField]
         private Story[] _stories;
+
+        public void Initialize()
+        {
+        }
+
+        public void SetIsTracked(bool isTracked)
+        {
+            _isTracked = isTracked;
+            if (_pendingFocusActivation && isTracked)
+            {
+                SetFocusToNextNotVisitedStory();
+            }
+        }
 
         // TODO: replace awake with a meaningful initialization method
         // setting gray scale scene point of interest should be done after SimpleTrackedLocation Content is initialized
@@ -94,6 +107,14 @@ namespace ff.ar_rh_spurlab.Locations
 
         private void SetFocusToNextNotVisitedStory()
         {
+            if (!_isTracked)
+            {
+                _pendingFocusActivation = true;
+                return;
+            }
+
+            _pendingFocusActivation = false;
+
             var nextAvailableStory = _stories.FirstOrDefault(story => !story.IsVisited);
             if (nextAvailableStory == null)
                 return;
@@ -122,6 +143,8 @@ namespace ff.ar_rh_spurlab.Locations
         private Story _activeStory;
 
         private List<(Story, GrayScaleScenePointOfInterest)> _storyPOIs = new();
+        private bool _isTracked;
+        private bool _pendingFocusActivation;
     }
 
     [Serializable]
