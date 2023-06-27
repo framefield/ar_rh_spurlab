@@ -442,7 +442,8 @@ MonoBehaviour:
     Id: Obelisk - BuildingItem
   _sequentialOptions:
     PlaySequentially: 0
-    SequentialDelay: 0.2
+    SequentialFadeInDelay: 0.2
+    SequentialFadeOutDelay: 0.2
 --- !u!114 &-2300884605105543578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -717,7 +718,8 @@ MonoBehaviour:
     Id: B12detailed - BuildingItem
   _sequentialOptions:
     PlaySequentially: 0
-    SequentialDelay: 0.2
+    SequentialFadeInDelay: 0.2
+    SequentialFadeOutDelay: 0.2
 --- !u!114 &3779313714248836262
 MonoBehaviour:
   m_ObjectHideFlags: 1
