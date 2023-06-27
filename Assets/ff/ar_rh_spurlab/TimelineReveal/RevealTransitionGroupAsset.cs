@@ -26,7 +26,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
 
     public class RevealTransitionGroupAsset : PlayableAsset, ITimelineClipAsset
     {
-        public ClipCaps clipCaps => ClipCaps.None;
+        public ClipCaps clipCaps => ClipCaps.Extrapolation | ClipCaps.Blending;
 
         [SerializeField]
         private GroupDefinition[] _definitions;

@@ -1,9 +1,10 @@
 ﻿using System;
+using ff.common.TimelineReveal;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace ff.common.TimelineReveal
+namespace ff.ar_rh_spurlab.TimelineReveal
 {
     [Serializable]
     public class RevealTransitionAsset : PlayableAsset, ITimelineClipAsset, IPropertyPreview
@@ -33,7 +34,7 @@ namespace ff.common.TimelineReveal
             return playable;
         }
 
-   
+
         public void GatherProperties(PlayableDirector director, IPropertyCollector driver)
         {
             if (!director.playableGraph.IsValid())
@@ -45,6 +46,7 @@ namespace ff.common.TimelineReveal
             {
                 _binding = _exposedBinding.Resolve(director.playableGraph.GetResolver());
             }
+
             if (_binding)
             {
                 driver.AddFromClip(_binding.gameObject, _binding.GetClip());

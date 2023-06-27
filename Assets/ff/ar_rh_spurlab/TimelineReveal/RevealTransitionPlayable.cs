@@ -1,8 +1,8 @@
-﻿using ff.ar_rh_spurlab.TimelineReveal;
+﻿using ff.common.TimelineReveal;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace ff.common.TimelineReveal
+namespace ff.ar_rh_spurlab.TimelineReveal
 {
     public class RevealTransitionPlayable : PlayableBehaviour
     {

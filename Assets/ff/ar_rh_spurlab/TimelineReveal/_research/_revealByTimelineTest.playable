@@ -19,9 +19,31 @@ MonoBehaviour:
   - Name: RevealByTimeline-withoutFadeOut (1)
     IsActive: 1
     Id: RevealByTimeline-withoutFadeOut (1)
+  - Name: RevealByTimeline-withoutFadeOut (2)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (2)
+  - Name: RevealByTimeline-withoutFadeOut (3)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (3)
+  - Name: RevealByTimeline-withoutFadeOut (4)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (4)
+  - Name: RevealByTimeline-withoutFadeOut (5)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (5)
+  - Name: RevealByTimeline-withoutFadeOut (6)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (6)
+  - Name: RevealByTimeline-withoutFadeOut (7)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (7)
+  - Name: RevealByTimeline-withoutFadeOut (8)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (8)
   _sequentialOptions:
     PlaySequentially: 0
-    SequentialDelay: 0
+    SequentialFadeInDelay: 0
+    SequentialFadeOutDelay: 0
 --- !u!114 &-3283713321310358704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,13 +92,13 @@ MonoBehaviour:
     m_Start: 0.31666666666666665
     m_ClipIn: 0
     m_Asset: {fileID: -5254789896486049893}
-    m_Duration: 1.5
+    m_Duration: 2.1833333333333336
     m_TimeScale: 1
     m_ParentTrack: {fileID: -3003134298793070063}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_EaseInDuration: 1
+    m_EaseOutDuration: 1
+    m_BlendInDuration: -1
+    m_BlendOutDuration: 0.6833333333333331
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -115,19 +137,19 @@ MonoBehaviour:
     m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
+    m_PreExtrapolationTime: 0.31666666666666665
     m_DisplayName: start
   - m_Version: 1
     m_Start: 1.8166666666666669
     m_ClipIn: 0
     m_Asset: {fileID: -1971787382578416225}
-    m_Duration: 1.5
+    m_Duration: 1.9
     m_TimeScale: 1
     m_ParentTrack: {fileID: -3003134298793070063}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_BlendInDuration: 0.6833333333333331
+    m_BlendOutDuration: 0.6833333333333336
     m_MixInCurve:
       serializedVersion: 2
       m_Curve: []
@@ -136,25 +158,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -169,16 +173,16 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: mid
   - m_Version: 1
-    m_Start: 3.316666666666667
+    m_Start: 3.033333333333333
     m_ClipIn: 0
     m_Asset: {fileID: 4744808537448713555}
-    m_Duration: 1.5
+    m_Duration: 2.316666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: -3003134298793070063}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_EaseInDuration: 1
+    m_EaseOutDuration: 1
+    m_BlendInDuration: 0.6833333333333336
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve: []
@@ -187,7 +191,163 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 1.3666666666666671
+    m_PreExtrapolationTime: 0
+    m_DisplayName: end
+  - m_Version: 1
+    m_Start: 6.716666666666667
+    m_ClipIn: 0
+    m_Asset: {fileID: -1030080207938598796}
+    m_Duration: 4.283333333333333
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3003134298793070063}
+    m_EaseInDuration: 0.5
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: 2
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 1.3666666666666671
+    m_DisplayName: 2
+  - m_Version: 1
+    m_Start: 9
+    m_ClipIn: 0
+    m_Asset: {fileID: 7370346594494574964}
+    m_Duration: 4.949999999999999
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3003134298793070063}
+    m_EaseInDuration: 1.58
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 2
+    m_BlendOutDuration: 0.6333333333333329
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -200,18 +360,18 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: end
+    m_DisplayName: 7
   - m_Version: 1
-    m_Start: 6.5
+    m_Start: 13.316666666666666
     m_ClipIn: 0
-    m_Asset: {fileID: -1030080207938598796}
+    m_Asset: {fileID: 203762968409688941}
     m_Duration: 4
     m_TimeScale: 1
     m_ParentTrack: {fileID: -3003134298793070063}
-    m_EaseInDuration: 0
+    m_EaseInDuration: 1.58
     m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_BlendInDuration: 0.6333333333333329
+    m_BlendOutDuration: 2.1833333333333336
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -270,6 +430,75 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: 4
+  - m_Version: 1
+    m_Start: 15.133333333333333
+    m_ClipIn: 0
+    m_Asset: {fileID: 2243901181624327039}
+    m_Duration: 4.633333333333333
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3003134298793070063}
+    m_EaseInDuration: 1.58
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 2.1833333333333336
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 0
+    m_DisplayName: 2
   m_Markers:
     m_Objects: []
 --- !u!114 &-2561759654432222973
@@ -399,9 +628,31 @@ MonoBehaviour:
   - Name: RevealByTimeline-withoutFadeOut (1)
     IsActive: 1
     Id: RevealByTimeline-withoutFadeOut (1)
+  - Name: RevealByTimeline-withoutFadeOut (2)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (2)
+  - Name: RevealByTimeline-withoutFadeOut (3)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (3)
+  - Name: RevealByTimeline-withoutFadeOut (4)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (4)
+  - Name: RevealByTimeline-withoutFadeOut (5)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (5)
+  - Name: RevealByTimeline-withoutFadeOut (6)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (6)
+  - Name: RevealByTimeline-withoutFadeOut (7)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (7)
+  - Name: RevealByTimeline-withoutFadeOut (8)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (8)
   _sequentialOptions:
     PlaySequentially: 0
-    SequentialDelay: 0
+    SequentialFadeInDelay: 0
+    SequentialFadeOutDelay: 0
 --- !u!114 &-1030080207938598796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -421,9 +672,31 @@ MonoBehaviour:
   - Name: RevealByTimeline-withoutFadeOut (1)
     IsActive: 1
     Id: RevealByTimeline-withoutFadeOut (1)
+  - Name: RevealByTimeline-withoutFadeOut (2)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (2)
+  - Name: RevealByTimeline-withoutFadeOut (3)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (3)
+  - Name: RevealByTimeline-withoutFadeOut (4)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (4)
+  - Name: RevealByTimeline-withoutFadeOut (5)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (5)
+  - Name: RevealByTimeline-withoutFadeOut (6)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (6)
+  - Name: RevealByTimeline-withoutFadeOut (7)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (7)
+  - Name: RevealByTimeline-withoutFadeOut (8)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (8)
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialDelay: 0.2
+    SequentialFadeInDelay: 0.2
+    SequentialFadeOutDelay: 0.2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,6 +719,94 @@ MonoBehaviour:
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: -3283713321310358704}
+--- !u!114 &203762968409688941
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
+  m_Name: RevealTransitionGroupAsset(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Name: RevealByTimeline-withFadeOut (1)
+    IsActive: 0
+    Id: RevealByTimeline-withFadeOut (1)
+  - Name: RevealByTimeline-withoutFadeOut (1)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (1)
+  - Name: RevealByTimeline-withoutFadeOut (2)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (2)
+  - Name: RevealByTimeline-withoutFadeOut (3)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (3)
+  - Name: RevealByTimeline-withoutFadeOut (4)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (4)
+  - Name: RevealByTimeline-withoutFadeOut (6)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (6)
+  - Name: RevealByTimeline-withoutFadeOut (5)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (5)
+  - Name: RevealByTimeline-withoutFadeOut (8)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (8)
+  - Name: RevealByTimeline-withoutFadeOut (7)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (7)
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialFadeInDelay: 0.2
+    SequentialFadeOutDelay: 0.2
+--- !u!114 &2243901181624327039
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
+  m_Name: RevealTransitionGroupAsset(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Name: RevealByTimeline-withFadeOut (1)
+    IsActive: 0
+    Id: RevealByTimeline-withFadeOut (1)
+  - Name: RevealByTimeline-withoutFadeOut (1)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (1)
+  - Name: RevealByTimeline-withoutFadeOut (2)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (2)
+  - Name: RevealByTimeline-withoutFadeOut (3)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (3)
+  - Name: RevealByTimeline-withoutFadeOut (4)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (4)
+  - Name: RevealByTimeline-withoutFadeOut (5)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (5)
+  - Name: RevealByTimeline-withoutFadeOut (6)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (6)
+  - Name: RevealByTimeline-withoutFadeOut (8)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (8)
+  - Name: RevealByTimeline-withoutFadeOut (7)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (7)
+  _sequentialOptions:
+    PlaySequentially: 0
+    SequentialFadeInDelay: 0.2
+    SequentialFadeOutDelay: 0.2
 --- !u!114 &4744808537448713555
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -465,6 +826,72 @@ MonoBehaviour:
   - Name: RevealByTimeline-withoutFadeOut (1)
     IsActive: 0
     Id: RevealByTimeline-withoutFadeOut (1)
+  - Name: RevealByTimeline-withoutFadeOut (2)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (2)
+  - Name: RevealByTimeline-withoutFadeOut (3)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (3)
+  - Name: RevealByTimeline-withoutFadeOut (4)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (4)
+  - Name: RevealByTimeline-withoutFadeOut (5)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (5)
+  - Name: RevealByTimeline-withoutFadeOut (6)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (6)
+  - Name: RevealByTimeline-withoutFadeOut (7)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (7)
+  - Name: RevealByTimeline-withoutFadeOut (8)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (8)
   _sequentialOptions:
     PlaySequentially: 0
-    SequentialDelay: 0
+    SequentialFadeInDelay: 0
+    SequentialFadeOutDelay: 0
+--- !u!114 &7370346594494574964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
+  m_Name: RevealTransitionGroupAsset(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Name: RevealByTimeline-withFadeOut (1)
+    IsActive: 0
+    Id: RevealByTimeline-withFadeOut (1)
+  - Name: RevealByTimeline-withoutFadeOut (1)
+    IsActive: 0
+    Id: RevealByTimeline-withoutFadeOut (1)
+  - Name: RevealByTimeline-withoutFadeOut (8)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (8)
+  - Name: RevealByTimeline-withoutFadeOut (7)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (7)
+  - Name: RevealByTimeline-withoutFadeOut (6)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (6)
+  - Name: RevealByTimeline-withoutFadeOut (5)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (5)
+  - Name: RevealByTimeline-withoutFadeOut (4)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (4)
+  - Name: RevealByTimeline-withoutFadeOut (3)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (3)
+  - Name: RevealByTimeline-withoutFadeOut (2)
+    IsActive: 1
+    Id: RevealByTimeline-withoutFadeOut (2)
+  _sequentialOptions:
+    PlaySequentially: 1
+    SequentialFadeInDelay: 0.2
+    SequentialFadeOutDelay: 0.2
