@@ -1031,7 +1031,7 @@ MonoBehaviour:
   _maxImageWidth: 960
   _maxImageHeight: 600
   _galleryImageWidth: 1194
-  _imageSpacing: 950
+  _imageSpacing: 1018
   _hidable: {fileID: 5329018171866124473}
   _closeButton: {fileID: 9206242833086802587}
   _showButton: {fileID: 7615773659870063745}

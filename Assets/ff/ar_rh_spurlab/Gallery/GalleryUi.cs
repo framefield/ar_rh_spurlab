@@ -134,10 +134,12 @@ namespace ff.ar_rh_spurlab.Gallery
 
         private void OnScrollingChangedHandler(bool isScrolling)
         {
-            if (isScrolling)
-            {
-                _imageTitleHidable.IsVisible = false;
-            }
+            if (!isScrolling)
+                return;
+
+            _imageTitleHidable.IsVisible = false;
+
+            ResetRelativeIndices();
         }
 
         private void OnSlotChangedHandler(int index)
@@ -152,6 +154,13 @@ namespace ff.ar_rh_spurlab.Gallery
             _activeImageData = _galleryImageUiList[index].Data;
             UpdateText();
             _imageTitleHidable.IsVisible = true;
+
+            for (var i = 0; i < _galleryImageUiList.Count; i++)
+            {
+                var galleryImageUi = _galleryImageUiList[i];
+                var relativeIndex = i - index;
+                galleryImageUi.SetRelativeIndex(relativeIndex);
+            }
         }
 
         private void UpdateText()
@@ -221,6 +230,15 @@ namespace ff.ar_rh_spurlab.Gallery
         {
             _currentImageIndex = imageIndex;
             _scrollSlotSnap.ScrollTo(_currentImageIndex);
+            ResetRelativeIndices();
+        }
+
+        private void ResetRelativeIndices()
+        {
+            foreach (var galleryImageUi in _galleryImageUiList)
+            {
+                galleryImageUi.SetRelativeIndex(0);
+            }
         }
 
         private readonly List<GalleryImageUi> _galleryImageUiList = new();

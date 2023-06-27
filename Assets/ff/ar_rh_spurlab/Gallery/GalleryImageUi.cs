@@ -13,6 +13,9 @@ namespace ff.ar_rh_spurlab.Gallery
         [SerializeField]
         private RawImage _rawImage;
 
+        [SerializeField]
+        private ScrollTransition _imageScrollTransition;
+
         public ImageData Data { get; private set; }
         public float PositionX => _rectTransform.anchoredPosition.x;
 
@@ -20,31 +23,48 @@ namespace ff.ar_rh_spurlab.Gallery
         {
             Data = imageData;
             _index = index;
+            _maxWidth = maxWidth;
             _rawImage.texture = Data.ImageTexture;
+
             var imageTransform = _rawImage.GetComponent<RectTransform>();
 
-            float imageWidth = Data.ImageTexture.width;
+            _imageWidth = Data.ImageTexture.width;
             float imageHeight = Data.ImageTexture.height;
 
-            if (imageWidth > maxWidth || imageHeight > maxHeight)
+            if (_imageWidth > maxWidth || imageHeight > maxHeight)
             {
-                var widthRatio = maxWidth / imageWidth;
+                var widthRatio = maxWidth / _imageWidth;
                 var heightRatio = maxHeight / imageHeight;
                 var ratio = Mathf.Min(widthRatio, heightRatio);
-                imageWidth *= ratio;
+                _imageWidth *= ratio;
                 imageHeight *= ratio;
             }
 
-            imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, imageWidth);
+
+            imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _imageWidth);
             imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, imageHeight);
 
             _rectTransform = GetComponent<RectTransform>();
             _rectTransform.anchoredPosition = new Vector2(positionX, _rectTransform.anchoredPosition.y);
         }
 
+        public void SetRelativeIndex(int relativeIndex)
+        {
+            var offset = 0f;
+
+            if (relativeIndex is -1 or 1)
+            {
+                offset = (_imageWidth - _maxWidth) / 2f * relativeIndex;
+            }
+
+            _imageScrollTransition.ScrollTo(offset);
+        }
+
 
         private RectTransform _rectTransform;
         private int _index;
+        private float _maxWidth;
+        private float _imageWidth;
 
         public void OnPointerClick(PointerEventData eventData)
         {
