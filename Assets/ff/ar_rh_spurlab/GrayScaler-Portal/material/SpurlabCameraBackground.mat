@@ -103,7 +103,7 @@ Material:
     m_Ints: []
     m_Floats:
     - Brightness: 0.02
-    - BrightnessFactor: 0.6
+    - BrightnessFactor: 0.45
     - ContrastFactor: 0.6
     - NoiseAmount: 0.2
     - NoiseExponent: 2.5
