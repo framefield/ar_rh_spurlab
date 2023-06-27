@@ -37,7 +37,7 @@ namespace ff.ar_rh_spurlab.Locations
         public Portal Portal => _portal;
         public Chapter[] Chapters => _chapters;
 
-        public readonly static ReactiveProperty<bool> IsAnyTimelineMgrPlaying = new();
+        public static readonly ReactiveProperty<bool> IsAnyTimelineMgrPlaying = new();
 
         public readonly ReactiveProperty<bool> IsPlaying = new();
         public readonly ReactiveProperty<Chapter> ActiveChapter = new();
@@ -81,6 +81,11 @@ namespace ff.ar_rh_spurlab.Locations
             AutoPlay = false;
             Stop();
             IsActive.Value = false;
+
+            foreach (var chapter in _chapters)
+            {
+                chapter.IsVisited.Value = false;
+            }
         }
 
         public void SetIsTracked(bool isTracked)
