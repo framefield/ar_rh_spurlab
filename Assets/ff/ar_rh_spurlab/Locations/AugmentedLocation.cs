@@ -52,7 +52,7 @@ namespace ff.ar_rh_spurlab.Locations
             var areAnchorsReady = CalibrationData is { AreAnchorsReady: true };
             var oldTrackingData = TrackingData;
 
-            if (!areAnchorsReady || _worldMapState != WorldMapState.Loaded)
+            if (!areAnchorsReady || (_worldMapState != WorldMapState.Loaded && !CalibrationData.IsCalibrating))
             {
                 // update tracking data
                 TrackingData = new LocationTrackingData

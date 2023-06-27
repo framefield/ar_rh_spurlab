@@ -135,6 +135,8 @@ namespace ff.ar_rh_spurlab.Calibration
             ? (float)MatchedAnchorsCount / LocationData.NumberOfReferencePoints
             : 0.0f;
 
+        public bool IsCalibrating { get; set; } = false;
+
         public CalibrationData(string id)
         {
             Id = id;
@@ -360,6 +362,8 @@ namespace ff.ar_rh_spurlab.Calibration
                 _allAnchors.Clear();
 
                 _calibrationData = calibrationData;
+                _calibrationData.IsCalibrating = _mode == Mode.Calibrating;
+
                 MatchExistingAnchors();
             }
         }
