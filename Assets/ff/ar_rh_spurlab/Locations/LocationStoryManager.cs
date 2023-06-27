@@ -126,7 +126,7 @@ namespace ff.ar_rh_spurlab.Locations
             foreach (var story in _stories)
             {
                 var portal = story.Portal;
-                if (portal)
+                if (portal && !portal.gameObject.activeSelf)
                 {
                     portal.gameObject.SetActive(true);
                 }
