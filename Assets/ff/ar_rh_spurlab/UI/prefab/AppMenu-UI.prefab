@@ -2061,7 +2061,7 @@ PrefabInstance:
     - target: {fileID: 3002993775462430619, guid: 6e7e796c0c776b94c841af84b4277f9b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 15.825
+      value: 15.83
       objectReference: {fileID: 0}
     - target: {fileID: 3002993775462430619, guid: 6e7e796c0c776b94c841af84b4277f9b,
         type: 3}
@@ -2121,7 +2121,7 @@ PrefabInstance:
     - target: {fileID: 8318833479188326089, guid: 6e7e796c0c776b94c841af84b4277f9b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 15.285
+      value: 15.245
       objectReference: {fileID: 0}
     - target: {fileID: 8318833479188326089, guid: 6e7e796c0c776b94c841af84b4277f9b,
         type: 3}
@@ -2182,6 +2182,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Contact-Text-Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4204591049993650220, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2205,7 +2210,7 @@ PrefabInstance:
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
@@ -2215,12 +2220,12 @@ PrefabInstance:
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 299
       objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
@@ -2265,12 +2270,12 @@ PrefabInstance:
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 149.5
       objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -47
       objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
@@ -2456,12 +2461,12 @@ PrefabInstance:
     - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: '_localizedString._values.Array.data[0]'
-      value: Reset for next visitor
+      value: Restart App
       objectReference: {fileID: 0}
     - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: '_localizedString._values.Array.data[1]'
-      value: Zuruecksetzen fuer den naechsten Besucher
+      value: Neu starten
       objectReference: {fileID: 0}
     - target: {fileID: 8060899709245576921, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
@@ -2514,6 +2519,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terms-Text-Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4204591049993650220, guid: cb224346a454c4d4797a9a20f67bd878,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2537,7 +2547,7 @@ PrefabInstance:
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
@@ -2547,12 +2557,12 @@ PrefabInstance:
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 299
       objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
@@ -2597,12 +2607,12 @@ PrefabInstance:
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 149.5
       objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -89
       objectReference: {fileID: 0}
     - target: {fileID: 4910021568695830128, guid: cb224346a454c4d4797a9a20f67bd878,
         type: 3}
