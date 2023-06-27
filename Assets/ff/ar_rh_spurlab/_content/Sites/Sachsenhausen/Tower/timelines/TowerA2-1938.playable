@@ -463,7 +463,7 @@ MonoBehaviour:
   _sequentialOptions:
     PlaySequentially: 1
     SequentialFadeInDelay: 0.2
-    SequentialFadeOutDelay: 0.05
+    SequentialFadeOutDelay: 0
 --- !u!114 &-1664740233835565783
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1299,8 +1299,8 @@ MonoBehaviour:
     IsActive: 0
     Id: BarrackText-B14
   _sequentialOptions:
-    PlaySequentially: 0
-    SequentialFadeInDelay: 0.2
+    PlaySequentially: 1
+    SequentialFadeInDelay: 0.1
     SequentialFadeOutDelay: 0.2
 --- !u!114 &5909294005330352402
 MonoBehaviour:
@@ -1554,7 +1554,7 @@ MonoBehaviour:
     Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialFadeInDelay: 0.05
+    SequentialFadeInDelay: 0
     SequentialFadeOutDelay: 0.05
 --- !u!114 &6750448511001359678
 MonoBehaviour:

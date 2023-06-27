@@ -57,7 +57,7 @@ MonoBehaviour:
     m_Start: 14.033333333333333
     m_ClipIn: 0
     m_Asset: {fileID: -4568937846442490544}
-    m_Duration: 10.68408163265306
+    m_Duration: 12.516666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: -8564084457715855501}
     m_EaseInDuration: 1
@@ -150,7 +150,7 @@ MonoBehaviour:
     m_Start: 17.633333333333333
     m_ClipIn: 0
     m_Asset: {fileID: 6994360038260764582}
-    m_Duration: 7.08408163265306
+    m_Duration: 8.916666666666668
     m_TimeScale: 1
     m_ParentTrack: {fileID: -8500984057912250333}
     m_EaseInDuration: 1
@@ -581,7 +581,7 @@ MonoBehaviour:
     m_Start: 14.516666666666667
     m_ClipIn: 0
     m_Asset: {fileID: -926504553148373395}
-    m_Duration: 10.200748299319725
+    m_Duration: 12.033333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: -2733152201248194695}
     m_EaseInDuration: 1
@@ -786,7 +786,7 @@ MonoBehaviour:
     Id: BarrackText-B14
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialFadeInDelay: 1
+    SequentialFadeInDelay: 0.5
     SequentialFadeOutDelay: 0.2
 --- !u!114 &-1524137518450002076
 MonoBehaviour:
@@ -1225,7 +1225,7 @@ MonoBehaviour:
     m_Start: 15.616666666666667
     m_ClipIn: 0
     m_Asset: {fileID: -6417832507151339101}
-    m_Duration: 9.100748299319726
+    m_Duration: 10.933333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: -1006692730878266008}
     m_EaseInDuration: 1
@@ -1687,7 +1687,7 @@ MonoBehaviour:
     m_Start: 15.05
     m_ClipIn: 0
     m_Asset: {fileID: 4971756291141634401}
-    m_Duration: 9.667414965986392
+    m_Duration: 11.5
     m_TimeScale: 1
     m_ParentTrack: {fileID: 832091979948781935}
     m_EaseInDuration: 1
@@ -1780,7 +1780,7 @@ MonoBehaviour:
     m_Start: 16.6
     m_ClipIn: 0
     m_Asset: {fileID: 2340274973185354256}
-    m_Duration: 8.117414965986391
+    m_Duration: 9.95
     m_TimeScale: 1
     m_ParentTrack: {fileID: 898168032996801630}
     m_EaseInDuration: 1
@@ -1888,7 +1888,7 @@ MonoBehaviour:
     m_Start: 16.133333333333333
     m_ClipIn: 0
     m_Asset: {fileID: -3872837793606125150}
-    m_Duration: 8.58408163265306
+    m_Duration: 10.416666666666668
     m_TimeScale: 1
     m_ParentTrack: {fileID: 2707248005416690797}
     m_EaseInDuration: 1
@@ -1981,7 +1981,7 @@ MonoBehaviour:
     m_Start: 18.15
     m_ClipIn: 0
     m_Asset: {fileID: -738315232875202381}
-    m_Duration: 6.567414965986394
+    m_Duration: 8.400000000000002
     m_TimeScale: 1
     m_ParentTrack: {fileID: 3626281832325631124}
     m_EaseInDuration: 1
@@ -2091,7 +2091,7 @@ MonoBehaviour:
     m_Start: 17.066666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 8817186318957209844}
-    m_Duration: 7.650748299319726
+    m_Duration: 9.483333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: 4248133409877420334}
     m_EaseInDuration: 1
@@ -2973,7 +2973,7 @@ MonoBehaviour:
     Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialFadeInDelay: 0.2
+    SequentialFadeInDelay: 0
     SequentialFadeOutDelay: 0.05
 --- !u!114 &6585015295878175817
 MonoBehaviour:
