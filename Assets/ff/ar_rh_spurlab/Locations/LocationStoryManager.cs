@@ -98,10 +98,39 @@ namespace ff.ar_rh_spurlab.Locations
 
             if (_activeStory != null)
             {
+                HideAllPortalsButThis(_activeStory.Portal);
                 _ui.SetTimelineManager(_activeStory.TimelineManager, _activeStory.TimelineManager.Chapters);
+            }
+            else
+            {
+                ShowAllPortals();
             }
 
             _ui.UpdateVisibility();
+        }
+
+        private void HideAllPortalsButThis(Portal activePortal)
+        {
+            foreach (var story in _stories)
+            {
+                var portal = story.Portal;
+                if (portal)
+                {
+                    portal.gameObject.SetActive(portal == activePortal);
+                }
+            }
+        }
+
+        private void ShowAllPortals()
+        {
+            foreach (var story in _stories)
+            {
+                var portal = story.Portal;
+                if (portal)
+                {
+                    portal.gameObject.SetActive(true);
+                }
+            }
         }
 
 
@@ -142,7 +171,7 @@ namespace ff.ar_rh_spurlab.Locations
 
         private Story _activeStory;
 
-        private List<(Story, GrayScaleScenePointOfInterest)> _storyPOIs = new();
+        private readonly List<(Story, GrayScaleScenePointOfInterest)> _storyPOIs = new();
         private bool _isTracked;
         private bool _pendingFocusActivation;
     }
@@ -153,6 +182,16 @@ namespace ff.ar_rh_spurlab.Locations
         public string Id;
         public LocationTimelineManager TimelineManager;
         public LocalizedAudioClip CtaAudio;
+
+        public Portal Portal => GetPortalFromStory(this);
+
+        private static Portal GetPortalFromStory(Story story)
+        {
+            if (story == null || !story.TimelineManager || !story.TimelineManager.Portal)
+                return null;
+
+            return story.TimelineManager.Portal;
+        }
 
         [NonSerialized]
         public bool IsVisited;
