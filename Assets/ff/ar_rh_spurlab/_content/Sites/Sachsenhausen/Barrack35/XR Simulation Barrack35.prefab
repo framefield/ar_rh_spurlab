@@ -242,6 +242,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Calibration - Sachsenhausen
       objectReference: {fileID: 0}
+    - target: {fileID: 3819854320605058216, guid: 3fa0c61fc07c64e38a1206d1be663913,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4088049344958510117, guid: 3fa0c61fc07c64e38a1206d1be663913,
         type: 3}
       propertyPath: m_IsActive
@@ -287,6 +292,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201085226132276098, guid: 3fa0c61fc07c64e38a1206d1be663913,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8887821833446454191, guid: 3fa0c61fc07c64e38a1206d1be663913,
         type: 3}
