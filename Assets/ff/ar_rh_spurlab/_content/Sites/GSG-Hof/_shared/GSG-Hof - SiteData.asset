@@ -17,12 +17,12 @@ MonoBehaviour:
     type: 3}
   _title:
     _values:
-    - GSG Yard
-    - GSG Hof
+    - AEG Area
+    - "AEG Gel\xE4nde"
     _locales:
     - en
     - de
   _locations:
-  - {fileID: 11400000, guid: 53100a4c1ba144d3d984376d9d22a690, type: 2}
   - {fileID: 11400000, guid: 0e661dc5c9f434c3cbf798ba49b96763, type: 2}
   - {fileID: 11400000, guid: dd95ec8e250a14badb8af29efa3e98dc, type: 2}
+  - {fileID: 11400000, guid: 53100a4c1ba144d3d984376d9d22a690, type: 2}

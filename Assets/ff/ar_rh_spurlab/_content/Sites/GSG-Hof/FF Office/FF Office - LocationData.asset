@@ -15,8 +15,8 @@ MonoBehaviour:
   _id: ff-office
   _title:
     _values:
-    - FF Office
-    - FF Buero
+    - Office
+    - "B\xFCro"
     _locales:
     - en
     - de
@@ -33,7 +33,7 @@ MonoBehaviour:
     Title:
       _values:
       - Column
-      - Saeule
+      - "S\xE4ule"
       _locales:
       - en
       - de
@@ -42,7 +42,7 @@ MonoBehaviour:
     Title:
       _values:
       - CEO Door
-      - CEO Tuer
+      - "CEO T\xFCr"
       _locales:
       - en
       - de
@@ -51,7 +51,7 @@ MonoBehaviour:
     Title:
       _values:
       - Office Entry
-      - Buero Eingang
+      - "B\xFCro Eingang"
       _locales:
       - en
       - de

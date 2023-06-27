@@ -15,8 +15,8 @@ MonoBehaviour:
   _id: GSGYard CraneBase
   _title:
     _values:
-    - GSG Yard - Crane base
-    - GSG Hof - Kranfundament
+    - Crane base
+    - Kranfundament
     _locales:
     - en
     - de
