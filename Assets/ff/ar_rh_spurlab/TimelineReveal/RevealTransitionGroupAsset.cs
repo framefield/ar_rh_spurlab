@@ -34,7 +34,8 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         public GroupDefinition[] Definitions => _definitions;
         public SequentialOptions SequentialOptions => _sequentialOptions;
 
-        [CanBeNull] public Dictionary<string, GroupDefinitionWithReveal> ActiveResolvedDefinitions { get; private set; }
+        [CanBeNull]
+        public Dictionary<string, GroupDefinitionWithReveal> ActiveResolvedDefinitions { get; private set; }
 
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
@@ -60,16 +61,67 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             }
         }
 
-        public string GetActiveInfoText()
+        public struct InfoStats
         {
-            var actives = string.Empty;
+            public int Count;
+            public int ActiveCount;
+            public string ActiveNames;
+            public float TotalFadeInDuration;
+            public float TotalFadeOutDuration;
+            public float MaxFadeInDuration;
+            public float MaxFadeOutDuration;
+        }
+
+        public InfoStats GetActiveInfoStats()
+        {
             if (_definitions == null)
             {
-                return actives;
+                return new InfoStats
+                {
+                    Count = -1,
+                    ActiveCount = -1,
+                    ActiveNames = "Invalid group",
+                };
             }
 
-            return _definitions.Where(definition => definition.IsActive).Aggregate(actives,
-                (current, definition) => $"{current} {definition.Name}\n");
+            var stats = new InfoStats();
+            foreach (var definition in _definitions)
+            {
+                stats.Count++;
+                if (definition.IsActive)
+                {
+                    stats.ActiveCount++;
+                    if (stats.ActiveNames?.Length > 0)
+                    {
+                        stats.ActiveNames += "\n";
+                    }
+
+                    stats.ActiveNames += definition.Id;
+
+                    var found = false;
+                    if (_group && _group.RevealsById != null)
+                    {
+                        var revealById = _group.RevealsById;
+                        if (revealById != null && revealById.TryGetValue(definition.Id, out var reveal))
+                        {
+                            stats.TotalFadeInDuration += reveal.FadeInDuration;
+                            stats.TotalFadeOutDuration += reveal.FadeOutDuration;
+                            stats.MaxFadeInDuration = Mathf.Max(stats.MaxFadeInDuration, reveal.FadeInDuration);
+                            stats.MaxFadeOutDuration = Mathf.Max(stats.MaxFadeOutDuration, reveal.FadeOutDuration);
+
+                            stats.ActiveNames += $" [{reveal.FadeInDuration:F1}, {reveal.FadeOutDuration:F1}]";
+                            found = true;
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        stats.ActiveNames += " (not found)";
+                    }
+                }
+            }
+
+            return stats;
         }
 
         public void SetActiveAll(bool isActive)
