@@ -2871,11 +2871,11 @@ MonoBehaviour:
     m_Start: 73.5
     m_ClipIn: 0
     m_Asset: {fileID: -6356455468362058035}
-    m_Duration: 23.230544217687054
+    m_Duration: 26.23907436337322
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7969565240035926675}
     m_EaseInDuration: 4
-    m_EaseOutDuration: 1
+    m_EaseOutDuration: 3
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
     m_MixInCurve:
