@@ -37,11 +37,23 @@ namespace ff.ar_rh_spurlab.Locations.UI
             _button.onClick.AddListener(OnButtonClickedHandler);
 
             _chapter = chapter;
-            _chapter.IsActive.OnValueChanged += _ => UpdateChapterUiWithState();
-            _chapter.IsVisited.OnValueChanged += _ => UpdateChapterUiWithState();
-            _chapter.IsNext.OnValueChanged += _ => UpdateChapterUiWithState();
+            _chapter.IsActive.OnValueChanged += UpdateChapterUiWithState;
+            _chapter.IsVisited.OnValueChanged += UpdateChapterUiWithState;
+            _chapter.IsNext.OnValueChanged += UpdateChapterUiWithState;
             UpdateChapterUiWithState();
             OnLocaleChangedHandler(ApplicationLocale.Instance.CurrentLocale);
+        }
+
+        public void PreDestroy()
+        {
+            _button.onClick.RemoveListener(OnButtonClickedHandler);
+
+            if (_chapter == null)
+                return;
+
+            _chapter.IsActive.OnValueChanged -= UpdateChapterUiWithState;
+            _chapter.IsVisited.OnValueChanged -= UpdateChapterUiWithState;
+            _chapter.IsNext.OnValueChanged -= UpdateChapterUiWithState;
         }
 
         private void OnButtonClickedHandler()
@@ -63,12 +75,9 @@ namespace ff.ar_rh_spurlab.Locations.UI
             }
         }
 
-        private void UpdateChapterUiWithState()
+        private void UpdateChapterUiWithState(bool newValue = false)
         {
             if (_chapter == null)
-                return;
-
-            if (!_visitedIcon.gameObject || !_nextIcon.gameObject || !_titleText.gameObject)
                 return;
 
             _visitedIcon.IsVisible = _chapter.IsVisited.Value && !_chapter.IsNext.Value;

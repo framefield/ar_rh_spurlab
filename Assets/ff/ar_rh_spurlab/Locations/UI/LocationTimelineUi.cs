@@ -102,6 +102,11 @@ namespace ff.ar_rh_spurlab.Locations.UI
 
         private void RebuildChaptersUi(IReadOnlyList<Chapter> chapters)
         {
+            foreach (var chapterUi in _chapterUis)
+            {
+                chapterUi.PreDestroy();
+            }
+
             foreach (Transform child in _chaptersContainer)
             {
                 Destroy(child.gameObject);
@@ -117,9 +122,12 @@ namespace ff.ar_rh_spurlab.Locations.UI
                 {
                     Instantiate(_chapterUiSeparatorPrefab, _chaptersContainer);
                 }
+
+                _chapterUis.Add(newChapterUi);
             }
         }
 
+        private readonly List<ChapterUi> _chapterUis = new();
         private LocationTimelineManager _timelineManager;
     }
 }
