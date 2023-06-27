@@ -1,5 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6085354392607052834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d906751a5684af182fa107a6b909fbc, type: 3}
+  m_Name: Reveal Transition Track
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 3.85
+    m_ClipIn: 0
+    m_Asset: {fileID: 691561056022223941}
+    m_Duration: 32.83333333333333
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -6085354392607052834}
+    m_EaseInDuration: 5
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: B39Interior - BuildingItem
+  m_Markers:
+    m_Objects: []
+  _defaultFadeDuration: 1
 --- !u!114 &-5823523669415492570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,105 +238,13 @@ MonoBehaviour:
   - {fileID: -5199537719177857984}
   - {fileID: -5188479135203145983}
   - {fileID: 1723443579675526825}
-  - {fileID: 570625378165939643}
+  - {fileID: -6085354392607052834}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 0}
---- !u!114 &570625378165939643
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efcf9f6ecba24fcf9ff35a3f71d61372, type: 3}
-  m_Name: Reveal Transition Group Track (1)
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_AnimClip: {fileID: 0}
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
-  m_Children: []
-  m_Clips:
-  - m_Version: 1
-    m_Start: 1
-    m_ClipIn: 0
-    m_Asset: {fileID: 4374121284774303177}
-    m_Duration: 32.88333333333333
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 570625378165939643}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: RevealTransitionGroupAsset
-  m_Markers:
-    m_Objects: []
 --- !u!114 &635249111899755372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -479,6 +480,21 @@ MonoBehaviour:
   _sequentialOptions:
     PlaySequentially: 0
     SequentialDelay: 0.2
+--- !u!114 &691561056022223941
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35e7731f69849b580d22192b8ccd0ef, type: 3}
+  m_Name: RevealTransitionAsset
+  m_EditorClassIdentifier: 
+  _exposedBinding:
+    exposedName: 11b5d3d0bbbe885449222c1907fd6300
+    defaultValue: {fileID: 0}
 --- !u!114 &1723443579675526825
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -504,7 +520,7 @@ MonoBehaviour:
     m_Start: 1
     m_ClipIn: 0
     m_Asset: {fileID: 635249111899755372}
-    m_Duration: 32.88333333333333
+    m_Duration: 35.68333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: 1723443579675526825}
     m_EaseInDuration: 0
@@ -650,40 +666,6 @@ MonoBehaviour:
     stereoPan: 0
     spatialBlend: 0
   _locale: en
---- !u!114 &4374121284774303177
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
-  m_Name: RevealTransitionGroupAsset(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  _definitions:
-  - Name: B35detailed - BuildingItem
-    IsActive: 1
-    Id: B35detailed - BuildingItem
-  - Name: B36detailed - BuildingItem
-    IsActive: 1
-    Id: B36detailed - BuildingItem
-  - Name: B34detailed - BuildingItem
-    IsActive: 1
-    Id: B34detailed - BuildingItem
-  - Name: B10detailed - BuildingItem
-    IsActive: 1
-    Id: B10detailed - BuildingItem
-  - Name: B11detailed - BuildingItem
-    IsActive: 1
-    Id: B11detailed - BuildingItem
-  - Name: B12detailed - BuildingItem
-    IsActive: 1
-    Id: B12detailed - BuildingItem
-  _sequentialOptions:
-    PlaySequentially: 0
-    SequentialDelay: 0.2
 --- !u!114 &7231164561396583576
 MonoBehaviour:
   m_ObjectHideFlags: 1

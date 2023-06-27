@@ -11,7 +11,12 @@ PrefabInstance:
     - target: {fileID: 1902308080381341943, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 18.237305
+      value: 26.188768
+      objectReference: {fileID: 0}
+    - target: {fileID: 1902308080381341943, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2678031798530944844, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
@@ -119,6 +124,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "B3-2-Handzeichnung-Schupr\xFCfstrecke-ImageItem Variant"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633069385449934848, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 26.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

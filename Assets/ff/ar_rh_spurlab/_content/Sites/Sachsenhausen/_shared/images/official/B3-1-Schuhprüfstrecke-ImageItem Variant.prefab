@@ -11,7 +11,12 @@ PrefabInstance:
     - target: {fileID: 1902308080381341943, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 19.638056
+      value: 27.886038
+      objectReference: {fileID: 0}
+    - target: {fileID: 1902308080381341943, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2678031798530944844, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
         type: 3}
@@ -107,6 +112,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "B3-1-Schuhpr\xFCfstrecke-ImageItem Variant"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633069385449934848, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 27.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633069385449934848, guid: 607d3fef9df9a4d59aba4b9a2cfee7f4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
