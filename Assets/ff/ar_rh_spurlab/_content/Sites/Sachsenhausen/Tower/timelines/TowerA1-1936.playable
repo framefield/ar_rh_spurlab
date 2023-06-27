@@ -1692,7 +1692,7 @@ MonoBehaviour:
     Id: tree-01 (37)
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialFadeInDelay: 0.1
+    SequentialFadeInDelay: 0
     SequentialFadeOutDelay: 0.2
 --- !u!114 &-217170411679982713
 MonoBehaviour:
@@ -2228,10 +2228,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 17.05
+    m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: -439045041996907276}
-    m_Duration: 51.03333333333333
+    m_Duration: 68.08333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: 4438452490176992422}
     m_EaseInDuration: 0
