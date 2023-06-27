@@ -6,7 +6,6 @@ using ff.utils;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Serialization;
 using UnityEngine.Timeline;
 
 
@@ -17,11 +16,11 @@ namespace ff.ar_rh_spurlab.TimelineReveal
     {
         public bool PlaySequentially;
 
-        [FormerlySerializedAs("SequentialDelay")]
-        public float SequentialFadeInDelay;
+        [Range(-1, 4)]
+        public float SequentialFadeInSpacing;
 
-        [FormerlySerializedAs("SequentialDelay")]
-        public float SequentialFadeOutDelay;
+        [Range(-1, 4)]
+        public float SequentialFadeOutSpacing;
     }
 
     public class RevealTransitionGroupAsset : PlayableAsset, ITimelineClipAsset
@@ -34,7 +33,8 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         [SerializeField]
         private SequentialOptions _sequentialOptions = new SequentialOptions
         {
-            SequentialFadeInDelay = 0.2f
+            SequentialFadeInSpacing = 0f,
+            SequentialFadeOutSpacing = 0f
         };
 
         public GroupDefinition[] Definitions => _definitions;
@@ -72,10 +72,6 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             public int Count;
             public int ActiveCount;
             public string ActiveNames;
-            public float TotalFadeInDuration;
-            public float TotalFadeOutDuration;
-            public float MaxFadeInDuration;
-            public float MaxFadeOutDuration;
         }
 
         public InfoStats GetActiveInfoStats()
@@ -108,14 +104,8 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                     if (_group && _group.RevealsById != null)
                     {
                         var revealById = _group.RevealsById;
-                        if (revealById != null && revealById.TryGetValue(definition.Id, out var reveal))
+                        if (revealById != null && revealById.ContainsKey(definition.Id))
                         {
-                            stats.TotalFadeInDuration += reveal.FadeInDuration;
-                            stats.TotalFadeOutDuration += reveal.FadeOutDuration;
-                            stats.MaxFadeInDuration = Mathf.Max(stats.MaxFadeInDuration, reveal.FadeInDuration);
-                            stats.MaxFadeOutDuration = Mathf.Max(stats.MaxFadeOutDuration, reveal.FadeOutDuration);
-
-                            stats.ActiveNames += $" [{reveal.FadeInDuration:F1}, {reveal.FadeOutDuration:F1}]";
                             found = true;
                         }
                     }

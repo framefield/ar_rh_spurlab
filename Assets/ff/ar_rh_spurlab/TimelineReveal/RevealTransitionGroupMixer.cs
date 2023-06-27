@@ -20,7 +20,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
 
             public override string ToString()
             {
-                return $"Weight: {Weight}, State: {State}, OffsetIndex: {OffsetIndex}";
+                return $"Weight: {Weight:F2}, State: {State}, OffsetIndex: {OffsetIndex}";
             }
         }
 
@@ -135,12 +135,12 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                         //    $"{Clips[i].displayName} - definition: {definition}, reveal: {reveal} existInPrev: {existInPrev}, existsInNext: {existsInNext}");
                     }
 
-                    if (fadeOutCount > 0 && sequentialOptions.PlaySequentially)
+                    if (fadeOutOffsetIndex > 0 && sequentialOptions.PlaySequentially)
                     {
                         fadeOutSequential = sequentialOptions;
                     }
 
-                    if (fadeInCount > 0 && sequentialOptions.PlaySequentially)
+                    if (fadeInOffsetIndex > 0 && sequentialOptions.PlaySequentially)
                     {
                         fadeInSequential = sequentialOptions;
                     }
@@ -164,9 +164,17 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                         _ => -1
                     };
 
+                    var spacing = revealFrameInfo.State switch
+                    {
+                        State.FadeIn => fadeInSequential.SequentialFadeInSpacing,
+                        State.FadeOut => fadeOutSequential.SequentialFadeOutSpacing,
+                        _ => 0f
+                    };
 
-                    var individualDuration = 1f / entryCount;
-                    var individualStart = revealFrameInfo.OffsetIndex * individualDuration;
+
+                    var individualDuration = 1f / (entryCount + (entryCount - 1) * spacing);
+                    var spacingDuration = spacing * individualDuration;
+                    var individualStart = revealFrameInfo.OffsetIndex * (individualDuration + spacingDuration);
 
                     var remapped = Remap(individualStart,
                         (individualStart + individualDuration),
@@ -174,7 +182,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
                         revealFrameInfo.Weight);
 
                     // Debug.Log(
-                    // $"key: {key} {revealFrameInfo} start:{individualStart} duration:{individualDuration} remapped:{remapped}");
+                    //    $"key: {key} {revealFrameInfo} spacing:{spacing} start:{individualStart:F2} duration:{individualDuration:F2} spacingDuration:{spacingDuration:F2} remapped:{remapped:F2}");
 
                     revealFrameInfo.Weight = remapped;
                 }

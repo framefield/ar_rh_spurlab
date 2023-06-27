@@ -43,17 +43,6 @@ namespace ff.ar_rh_spurlab.TimelineReveal.Editor
                 GUILayout.Label(stats.ActiveNames);
             }
 
-            if (asset.SequentialOptions.PlaySequentially)
-            {
-                GUILayout.Label(
-                    $"Max Durations: FadeIn: {stats.ActiveCount * asset.SequentialOptions.SequentialFadeInDelay + stats.MaxFadeInDuration:F1}, FadeOut: {stats.ActiveCount * asset.SequentialOptions.SequentialFadeOutDelay + stats.MaxFadeOutDuration:F1}");
-            }
-            else
-            {
-                GUILayout.Label(
-                    $"Max Durations: FadeIn: {stats.MaxFadeInDuration:F1}, FadeOut: {stats.MaxFadeOutDuration:F1}");
-            }
-
             GUI.enabled = !Application.isPlaying;
 
             if (GUILayout.Button("Activate All"))
