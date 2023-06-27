@@ -256,6 +256,7 @@ namespace ff.ar_rh_spurlab.Locations
             {
                 _activePlayableDirector.stopped -= PlayableDirectorStoppedHandler;
                 _activePlayableDirector.Stop();
+                _activePlayableDirector.Evaluate();
             }
 
             _activePlayableDirector = null;
