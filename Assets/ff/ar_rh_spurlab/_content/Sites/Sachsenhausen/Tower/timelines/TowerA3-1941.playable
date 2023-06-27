@@ -549,9 +549,13 @@ MonoBehaviour:
   - Name: PersonBlock R71
     IsActive: 1
     Id: PersonBlock R71
+  - Name: PersonBlock R62
+    IsActive: 1
+    Id: PersonBlock R62
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialDelay: 1
+    SequentialFadeInDelay: 1
+    SequentialFadeOutDelay: 0.1
 --- !u!114 &-2733152201248194695
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -782,7 +786,8 @@ MonoBehaviour:
     Id: BarrackText-B14
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialDelay: 1
+    SequentialFadeInDelay: 1
+    SequentialFadeOutDelay: 0.2
 --- !u!114 &-1524137518450002076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2968,7 +2973,8 @@ MonoBehaviour:
     Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialDelay: 0.2
+    SequentialFadeInDelay: 0.2
+    SequentialFadeOutDelay: 0.05
 --- !u!114 &6585015295878175817
 MonoBehaviour:
   m_ObjectHideFlags: 1
