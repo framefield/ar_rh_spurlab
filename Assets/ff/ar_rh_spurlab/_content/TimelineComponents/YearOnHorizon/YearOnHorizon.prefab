@@ -115,10 +115,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 0}
-    topRight: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 0}
-    bottomLeft: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 1}
-    bottomRight: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 1}
+    topLeft: {r: 0.426, g: 0.426, b: 0.426, a: 0.5058824}
+    topRight: {r: 0.426, g: 0.426, b: 0.426, a: 0.5058824}
+    bottomLeft: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 0}
+    bottomRight: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 0}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -205,7 +205,7 @@ Transform:
   m_Children:
   - {fileID: 1383305659584979199}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1117941988392514198
 Animator:

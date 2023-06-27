@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Roboto-Bold-year SDF
   m_EditorClassIdentifier: 
-  hashCode: -635320526
+  hashCode: -1462148944
   material: {fileID: 21324650657679518}
-  materialHashCode: -1838732846
+  materialHashCode: -1507166064
   m_Version: 1.1.0
   m_SourceFontFileGUID: a203accc25504bb4a8bee2e7c728c13b
   m_SourceFontFile_EditorRef: {fileID: 0}
@@ -2994,7 +2994,7 @@ Material:
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 0}
     - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
