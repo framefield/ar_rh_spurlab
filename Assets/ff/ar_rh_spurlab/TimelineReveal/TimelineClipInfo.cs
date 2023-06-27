@@ -110,8 +110,8 @@ namespace ff.ar_rh_spurlab.TimelineReveal
             var time = playable.GetGraph().GetRootPlayable(0).GetTime();
             var weight = 0d;
 
-            var startOffsetTime = time - sequentialOptions.SequentialDelay * offsetIndex;
-            var endOffsetTime = time + sequentialOptions.SequentialDelay * offsetIndex;
+            var startOffsetTime = time - sequentialOptions.SequentialFadeInDelay * offsetIndex;
+            var endOffsetTime = time + sequentialOptions.SequentialFadeOutDelay * offsetIndex;
 
             State state;
             if (startOffsetTime >= clip.start && existsInNext)

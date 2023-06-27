@@ -46,7 +46,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal.Editor
             if (asset.SequentialOptions.PlaySequentially)
             {
                 GUILayout.Label(
-                    $"Max Durations: FadeIn: {stats.ActiveCount * asset.SequentialOptions.SequentialDelay + stats.MaxFadeInDuration:F1}, FadeOut: {stats.ActiveCount * asset.SequentialOptions.SequentialDelay + stats.MaxFadeOutDuration:F1}");
+                    $"Max Durations: FadeIn: {stats.ActiveCount * asset.SequentialOptions.SequentialFadeInDelay + stats.MaxFadeInDuration:F1}, FadeOut: {stats.ActiveCount * asset.SequentialOptions.SequentialFadeOutDelay + stats.MaxFadeOutDuration:F1}");
             }
             else
             {

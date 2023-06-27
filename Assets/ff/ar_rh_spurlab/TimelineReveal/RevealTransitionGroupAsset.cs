@@ -6,6 +6,7 @@ using ff.utils;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Serialization;
 using UnityEngine.Timeline;
 
 
@@ -15,7 +16,12 @@ namespace ff.ar_rh_spurlab.TimelineReveal
     public struct SequentialOptions
     {
         public bool PlaySequentially;
-        public float SequentialDelay;
+
+        [FormerlySerializedAs("SequentialDelay")]
+        public float SequentialFadeInDelay;
+
+        [FormerlySerializedAs("SequentialDelay")]
+        public float SequentialFadeOutDelay;
     }
 
     public class RevealTransitionGroupAsset : PlayableAsset, ITimelineClipAsset
@@ -28,7 +34,7 @@ namespace ff.ar_rh_spurlab.TimelineReveal
         [SerializeField]
         private SequentialOptions _sequentialOptions = new SequentialOptions
         {
-            SequentialDelay = 0.2f
+            SequentialFadeInDelay = 0.2f
         };
 
         public GroupDefinition[] Definitions => _definitions;
