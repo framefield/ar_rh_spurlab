@@ -201,77 +201,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2294635195435216133, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: -8895698725163190857, guid: 5f12a3f53575d4306a62083f8e683c85,
-        type: 3}
-    - target: {fileID: 3322811898025984269, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3695203548455573534, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3724361769377970732, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3785045640884384325, guid: 3fa0c61fc07c64e38a1206d1be663913,
         type: 3}
       propertyPath: m_Name
       value: Calibration - Sachsenhausen
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819854320605058216, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4088049344958510117, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5123992017045289171, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5971862277915086572, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032708649706683353, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6494318279920393538, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: -8895698725163190857, guid: 5f12a3f53575d4306a62083f8e683c85,
-        type: 3}
-    - target: {fileID: 7050263897040153285, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7898724035581743566, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8201085226132276098, guid: 3fa0c61fc07c64e38a1206d1be663913,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
