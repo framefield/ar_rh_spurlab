@@ -155,7 +155,8 @@ MonoBehaviour:
     Id: B12detailed - BuildingItem
   _sequentialOptions:
     PlaySequentially: 0
-    SequentialDelay: 0.2
+    SequentialFadeInSpacing: 0
+    SequentialFadeOutSpacing: 0
 --- !u!114 &-2175182576681146857
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,7 +391,8 @@ MonoBehaviour:
     Id: Obelisk - BuildingItem
   _sequentialOptions:
     PlaySequentially: 0
-    SequentialDelay: 0.2
+    SequentialFadeInSpacing: 0
+    SequentialFadeOutSpacing: 0
 --- !u!114 &-455081421387427322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -625,8 +627,8 @@ MonoBehaviour:
     m_ParentTrack: {fileID: 1054443940744456442}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -682,8 +684,8 @@ MonoBehaviour:
     m_Recordable: 0
     m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 1
     m_DisplayName: RevealTransitionGroupAsset
   m_Markers:
     m_Objects: []
@@ -756,7 +758,8 @@ MonoBehaviour:
     Id: BarrackText-B14
   _sequentialOptions:
     PlaySequentially: 0
-    SequentialDelay: 0.2
+    SequentialFadeInSpacing: 0
+    SequentialFadeOutSpacing: 0
 --- !u!114 &1833274762646800695
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -787,8 +790,8 @@ MonoBehaviour:
     m_ParentTrack: {fileID: 1833274762646800695}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -844,8 +847,8 @@ MonoBehaviour:
     m_Recordable: 0
     m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 1
     m_DisplayName: RevealTransitionGroupAsset
   m_Markers:
     m_Objects: []
@@ -911,8 +914,8 @@ MonoBehaviour:
     m_ParentTrack: {fileID: 3346850550385366352}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -968,8 +971,8 @@ MonoBehaviour:
     m_Recordable: 0
     m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 1
     m_DisplayName: RevealTransitionGroupAsset
   m_Markers:
     m_Objects: []
