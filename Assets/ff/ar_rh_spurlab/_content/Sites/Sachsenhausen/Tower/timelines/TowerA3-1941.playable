@@ -297,6 +297,251 @@ MonoBehaviour:
   _exposedBinding:
     exposedName: ec6873059e968491eaa6b6f9906c6a03
     defaultValue: {fileID: 0}
+--- !u!114 &-4551397214726370352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df051f541437aafbfef4345cf74bf, type: 3}
+  m_Name: RevealTransitionGroupAsset(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  _definitions:
+  - Name: tree-01
+    IsActive: 0
+    Id: tree-01
+  - Name: tree-01 (27)
+    IsActive: 0
+    Id: tree-01 (27)
+  - Name: tree-02 (26)
+    IsActive: 0
+    Id: tree-02 (26)
+  - Name: tree-01 (26)
+    IsActive: 0
+    Id: tree-01 (26)
+  - Name: tree-02 (25)
+    IsActive: 0
+    Id: tree-02 (25)
+  - Name: tree-01 (25)
+    IsActive: 0
+    Id: tree-01 (25)
+  - Name: tree-02 (24)
+    IsActive: 0
+    Id: tree-02 (24)
+  - Name: tree-01 (24)
+    IsActive: 0
+    Id: tree-01 (24)
+  - Name: tree-02 (23)
+    IsActive: 0
+    Id: tree-02 (23)
+  - Name: tree-01 (23)
+    IsActive: 0
+    Id: tree-01 (23)
+  - Name: tree-02 (22)
+    IsActive: 0
+    Id: tree-02 (22)
+  - Name: tree-01 (22)
+    IsActive: 0
+    Id: tree-01 (22)
+  - Name: tree-02 (21)
+    IsActive: 0
+    Id: tree-02 (21)
+  - Name: tree-01 (21)
+    IsActive: 0
+    Id: tree-01 (21)
+  - Name: tree-02 (20)
+    IsActive: 0
+    Id: tree-02 (20)
+  - Name: tree-01 (20)
+    IsActive: 0
+    Id: tree-01 (20)
+  - Name: tree-02 (27)
+    IsActive: 0
+    Id: tree-02 (27)
+  - Name: tree-02 (19)
+    IsActive: 0
+    Id: tree-02 (19)
+  - Name: tree-01 (28)
+    IsActive: 0
+    Id: tree-01 (28)
+  - Name: tree-01 (29)
+    IsActive: 0
+    Id: tree-01 (29)
+  - Name: tree-01 (36)
+    IsActive: 0
+    Id: tree-01 (36)
+  - Name: tree-02 (36)
+    IsActive: 0
+    Id: tree-02 (36)
+  - Name: tree-01 (35)
+    IsActive: 0
+    Id: tree-01 (35)
+  - Name: tree-02 (35)
+    IsActive: 0
+    Id: tree-02 (35)
+  - Name: tree-01 (34)
+    IsActive: 0
+    Id: tree-01 (34)
+  - Name: tree-02 (34)
+    IsActive: 0
+    Id: tree-02 (34)
+  - Name: tree-01 (33)
+    IsActive: 0
+    Id: tree-01 (33)
+  - Name: tree-02 (33)
+    IsActive: 0
+    Id: tree-02 (33)
+  - Name: tree-01 (32)
+    IsActive: 0
+    Id: tree-01 (32)
+  - Name: tree-02 (32)
+    IsActive: 0
+    Id: tree-02 (32)
+  - Name: tree-01 (31)
+    IsActive: 0
+    Id: tree-01 (31)
+  - Name: tree-02 (31)
+    IsActive: 0
+    Id: tree-02 (31)
+  - Name: tree-01 (30)
+    IsActive: 0
+    Id: tree-01 (30)
+  - Name: tree-02 (30)
+    IsActive: 0
+    Id: tree-02 (30)
+  - Name: tree-02 (29)
+    IsActive: 0
+    Id: tree-02 (29)
+  - Name: tree-02 (28)
+    IsActive: 0
+    Id: tree-02 (28)
+  - Name: tree-01 (19)
+    IsActive: 0
+    Id: tree-01 (19)
+  - Name: tree-02 (18)
+    IsActive: 0
+    Id: tree-02 (18)
+  - Name: tree-01 (18)
+    IsActive: 0
+    Id: tree-01 (18)
+  - Name: tree-02 (7)
+    IsActive: 0
+    Id: tree-02 (7)
+  - Name: tree-01 (7)
+    IsActive: 0
+    Id: tree-01 (7)
+  - Name: tree-02 (6)
+    IsActive: 0
+    Id: tree-02 (6)
+  - Name: tree-01 (6)
+    IsActive: 0
+    Id: tree-01 (6)
+  - Name: tree-02 (5)
+    IsActive: 0
+    Id: tree-02 (5)
+  - Name: tree-01 (5)
+    IsActive: 0
+    Id: tree-01 (5)
+  - Name: tree-02 (4)
+    IsActive: 0
+    Id: tree-02 (4)
+  - Name: tree-01 (4)
+    IsActive: 0
+    Id: tree-01 (4)
+  - Name: tree-02 (3)
+    IsActive: 0
+    Id: tree-02 (3)
+  - Name: tree-01 (3)
+    IsActive: 0
+    Id: tree-01 (3)
+  - Name: tree-02 (2)
+    IsActive: 0
+    Id: tree-02 (2)
+  - Name: tree-01 (2)
+    IsActive: 0
+    Id: tree-01 (2)
+  - Name: tree-02 (1)
+    IsActive: 0
+    Id: tree-02 (1)
+  - Name: tree-01 (1)
+    IsActive: 0
+    Id: tree-01 (1)
+  - Name: tree-02
+    IsActive: 0
+    Id: tree-02
+  - Name: tree-01 (8)
+    IsActive: 0
+    Id: tree-01 (8)
+  - Name: tree-02 (8)
+    IsActive: 0
+    Id: tree-02 (8)
+  - Name: tree-01 (9)
+    IsActive: 0
+    Id: tree-01 (9)
+  - Name: tree-02 (9)
+    IsActive: 0
+    Id: tree-02 (9)
+  - Name: tree-02 (17)
+    IsActive: 0
+    Id: tree-02 (17)
+  - Name: tree-01 (17)
+    IsActive: 0
+    Id: tree-01 (17)
+  - Name: tree-02 (16)
+    IsActive: 0
+    Id: tree-02 (16)
+  - Name: tree-01 (16)
+    IsActive: 0
+    Id: tree-01 (16)
+  - Name: tree-02 (15)
+    IsActive: 0
+    Id: tree-02 (15)
+  - Name: tree-01 (15)
+    IsActive: 0
+    Id: tree-01 (15)
+  - Name: tree-02 (14)
+    IsActive: 0
+    Id: tree-02 (14)
+  - Name: tree-02 (37)
+    IsActive: 0
+    Id: tree-02 (37)
+  - Name: tree-01 (14)
+    IsActive: 0
+    Id: tree-01 (14)
+  - Name: tree-01 (13)
+    IsActive: 0
+    Id: tree-01 (13)
+  - Name: tree-02 (12)
+    IsActive: 0
+    Id: tree-02 (12)
+  - Name: tree-01 (12)
+    IsActive: 0
+    Id: tree-01 (12)
+  - Name: tree-02 (11)
+    IsActive: 0
+    Id: tree-02 (11)
+  - Name: tree-01 (11)
+    IsActive: 0
+    Id: tree-01 (11)
+  - Name: tree-02 (10)
+    IsActive: 0
+    Id: tree-02 (10)
+  - Name: tree-01 (10)
+    IsActive: 0
+    Id: tree-01 (10)
+  - Name: tree-02 (13)
+    IsActive: 0
+    Id: tree-02 (13)
+  - Name: tree-01 (37)
+    IsActive: 0
+    Id: tree-01 (37)
+  _sequentialOptions:
+    PlaySequentially: 0
+    SequentialFadeInSpacing: 0
+    SequentialFadeOutSpacing: 0
 --- !u!114 &-4244514600640600373
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -554,8 +799,8 @@ MonoBehaviour:
     Id: PersonBlock R62
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialFadeInDelay: 1
-    SequentialFadeOutDelay: 0.1
+    SequentialFadeInSpacing: 0
+    SequentialFadeOutSpacing: 0
 --- !u!114 &-2733152201248194695
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -786,8 +1031,8 @@ MonoBehaviour:
     Id: BarrackText-B14
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialFadeInDelay: 0.5
-    SequentialFadeOutDelay: 0.2
+    SequentialFadeInSpacing: 0
+    SequentialFadeOutSpacing: 0
 --- !u!114 &-1524137518450002076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1348,13 +1593,13 @@ MonoBehaviour:
     m_Start: 25.45
     m_ClipIn: 0
     m_Asset: {fileID: -2792548333703253560}
-    m_Duration: 77.46666666666667
+    m_Duration: 62.25
     m_TimeScale: 1
     m_ParentTrack: {fileID: -732061592895366786}
     m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_EaseOutDuration: 4
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -1410,8 +1655,8 @@ MonoBehaviour:
     m_Recordable: 0
     m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 25.45
     m_DisplayName: RevealTransitionGroupAsset
   m_Markers:
     m_Objects: []
@@ -1437,16 +1682,16 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0
+    m_Start: 0.016666666666666666
     m_ClipIn: 0
     m_Asset: {fileID: -1547888182153045428}
-    m_Duration: 102.91666666666666
+    m_Duration: 91.68333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: -635270851955954651}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_EaseInDuration: 10
+    m_EaseOutDuration: 4
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -1502,8 +1747,8 @@ MonoBehaviour:
     m_Recordable: 0
     m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 0.016666666666666666
     m_DisplayName: RevealTransitionGroupAsset
   m_Markers:
     m_Objects: []
@@ -1652,6 +1897,7 @@ MonoBehaviour:
   - {fileID: 8092986353637653784}
   - {fileID: -635270851955954651}
   - {fileID: -732061592895366786}
+  - {fileID: 682252564980095821}
   - {fileID: 6585015295878175817}
   - {fileID: 5272857964816614573}
   - {fileID: -2224010396783600742}
@@ -1662,6 +1908,98 @@ MonoBehaviour:
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 0}
+--- !u!114 &682252564980095821
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efcf9f6ecba24fcf9ff35a3f71d61372, type: 3}
+  m_Name: Reveal Transition Group Track (2)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 0.016666666666666666
+    m_ClipIn: 0
+    m_Asset: {fileID: -4551397214726370352}
+    m_Duration: 102.91666666666666
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 682252564980095821}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 0.016666666666666666
+    m_DisplayName: RevealTransitionGroupAsset
+  m_Markers:
+    m_Objects: []
 --- !u!114 &832091979948781935
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2066,6 +2404,21 @@ MonoBehaviour:
   m_bufferingTime: 0.1
   m_ClipProperties:
     volume: 1
+--- !u!114 &4125449812995875850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35e7731f69849b580d22192b8ccd0ef, type: 3}
+  m_Name: RevealTransitionAsset
+  m_EditorClassIdentifier: 
+  _exposedBinding:
+    exposedName: 3457dea072c434f3fa55f407c3d7a930
+    defaultValue: {fileID: 0}
 --- !u!114 &4248133409877420334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2704,6 +3057,21 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects: []
+--- !u!114 &5518114443612317328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35e7731f69849b580d22192b8ccd0ef, type: 3}
+  m_Name: RevealTransitionAsset
+  m_EditorClassIdentifier: 
+  _exposedBinding:
+    exposedName: 594401b00795b4db6ab75afc2b69adad
+    defaultValue: {fileID: 0}
 --- !u!114 &5858738506941979990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2973,8 +3341,8 @@ MonoBehaviour:
     Id: TowerSimple-BuildingItem
   _sequentialOptions:
     PlaySequentially: 1
-    SequentialFadeInDelay: 0
-    SequentialFadeOutDelay: 0.05
+    SequentialFadeInSpacing: 0
+    SequentialFadeOutSpacing: 0
 --- !u!114 &6585015295878175817
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2997,10 +3365,148 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0
+    m_Start: 0.016666666666666666
     m_ClipIn: 0
     m_Asset: {fileID: -3051752282900745693}
     m_Duration: 7.948571428571428
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 6585015295878175817}
+    m_EaseInDuration: 1
+    m_EaseOutDuration: 1
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: 1941-YearOnHorizon
+  - m_Version: 1
+    m_Start: 25.45
+    m_ClipIn: 0
+    m_Asset: {fileID: 4125449812995875850}
+    m_Duration: 7.0000000000000036
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 6585015295878175817}
+    m_EaseInDuration: 1
+    m_EaseOutDuration: 1
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: 1939-YearOnHorizon
+  - m_Version: 1
+    m_Start: 42.86666666666667
+    m_ClipIn: 0
+    m_Asset: {fileID: 5518114443612317328}
+    m_Duration: 7
     m_TimeScale: 1
     m_ParentTrack: {fileID: 6585015295878175817}
     m_EaseInDuration: 1
@@ -3105,16 +3611,16 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0
+    m_Start: 0.016666666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 5909294005330352402}
-    m_Duration: 102.91666666666667
+    m_Duration: 91.68333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: 8092986353637653784}
     m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_EaseOutDuration: 4
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -3170,8 +3676,8 @@ MonoBehaviour:
     m_Recordable: 0
     m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 0.016666666666666666
     m_DisplayName: RevealTransitionGroupAsset
   m_Markers:
     m_Objects: []
