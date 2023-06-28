@@ -49,8 +49,8 @@ MonoBehaviour:
   _chapters:
   - Title:
       _values:
-      - Prisoners of War 1
-      - Kriegsgefangenen  1
+      - Prisoners of War
+      - Kriegsgefangene
       _locales:
       - en
       - de
@@ -305,7 +305,7 @@ MonoBehaviour:
     IsWelcomeChapter: 0
   - Title:
       _values:
-      - Closing sentence
+      - Closing words
       - Abschlusssatz
       _locales:
       - en
