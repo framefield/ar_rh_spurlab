@@ -1120,7 +1120,7 @@ MonoBehaviour:
       - Locale: en
         AudioClip: {fileID: 8300000, guid: fed80a2757ad44d5eb7f3e43a99f1a44, type: 3}
       - Locale: de
-        AudioClip: {fileID: 8300000, guid: 7d45f94544a6f472aac281dac1d7026b, type: 3}
+        AudioClip: {fileID: 8300000, guid: 82c98c153adc24c32a8cb7efd6acd190, type: 3}
 --- !u!82 &5875795513545473405
 AudioSource:
   m_ObjectHideFlags: 0
