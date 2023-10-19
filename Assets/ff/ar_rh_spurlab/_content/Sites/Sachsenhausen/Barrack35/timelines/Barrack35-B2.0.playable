@@ -1,22 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7535460636674184215
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
-  m_Name: AudioPlayableAsset
-  m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 0734fc0152d7d4403b9007dcf90efd41, type: 3}
-  m_Loop: 0
-  m_bufferingTime: 0.1
-  m_ClipProperties:
-    volume: 1
 --- !u!114 &-5823523669415492570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,8 +24,8 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 1
     m_ClipIn: 0
-    m_Asset: {fileID: 1701728300713560522}
-    m_Duration: 14.994285714285715
+    m_Asset: {fileID: 662379258406230515}
+    m_Duration: 31.111836734693878
     m_TimeScale: 1
     m_ParentTrack: {fileID: -5823523669415492570}
     m_EaseInDuration: 0
@@ -75,25 +58,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -106,12 +71,12 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: B2.0 - 1937-Aufbau Baracken.DE
+    m_DisplayName: DE-B2.0
   - m_Version: 1
-    m_Start: 16.883333333333333
+    m_Start: 34.266666666666666
     m_ClipIn: 0
-    m_Asset: {fileID: -7535460636674184215}
-    m_Duration: 19.5134693877551
+    m_Asset: {fileID: 1872986014507144098}
+    m_Duration: 15.307755102040817
     m_TimeScale: 1
     m_ParentTrack: {fileID: -5823523669415492570}
     m_EaseInDuration: 0
@@ -175,7 +140,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: B2.1 - 1937-Der zweite Barackenring.DE
+    m_DisplayName: DE-B2.1
   m_Markers:
     m_Objects: []
   m_TrackProperties:
@@ -469,7 +434,7 @@ MonoBehaviour:
     m_Start: 0.01666666666666672
     m_ClipIn: 0
     m_Asset: {fileID: 2555163963926085851}
-    m_Duration: 38.062440905347465
+    m_Duration: 50.65
     m_TimeScale: 1
     m_ParentTrack: {fileID: -2300884605105543578}
     m_EaseInDuration: 1
@@ -561,7 +526,7 @@ MonoBehaviour:
     m_Start: 1
     m_ClipIn: 0
     m_Asset: {fileID: 1409671816568876857}
-    m_Duration: 14.994285714285715
+    m_Duration: 41.35
     m_TimeScale: 1
     m_ParentTrack: {fileID: -444445706099072358}
     m_EaseInDuration: 1
@@ -725,6 +690,23 @@ MonoBehaviour:
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 0}
+--- !u!114 &662379258406230515
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 18d6537bdf80f472294b87e4f091134c, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
 --- !u!114 &1409671816568876857
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -740,7 +722,7 @@ MonoBehaviour:
   _exposedBinding:
     exposedName: cbf1cd153bcaa42098a51ae082d4b8cd
     defaultValue: {fileID: 0}
---- !u!114 &1701728300713560522
+--- !u!114 &1872986014507144098
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -752,7 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
   m_Name: AudioPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 5ad0c0ca6ff654ecdb6eef84b3fb3fa4, type: 3}
+  m_Clip: {fileID: 8300000, guid: 97d67dec1315244f3b7c0a53f47e477e, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
@@ -817,7 +799,7 @@ MonoBehaviour:
     m_Start: 0.01666666666666672
     m_ClipIn: 0
     m_Asset: {fileID: -91200882330317340}
-    m_Duration: 38.062440905347465
+    m_Duration: 50.65
     m_TimeScale: 1
     m_ParentTrack: {fileID: 3086619583687372534}
     m_EaseInDuration: 1
@@ -904,145 +886,7 @@ MonoBehaviour:
   m_Curves: {fileID: 0}
   m_Parent: {fileID: -5199537719177857984}
   m_Children: []
-  m_Clips:
-  - m_Version: 1
-    m_Start: 1
-    m_ClipIn: 0
-    m_Asset: {fileID: 5174069993894889042}
-    m_Duration: 14.706938775510205
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 3779313714248836262}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: B2.0 - 1937-Aufbau Baracken.EN
-  - m_Version: 1
-    m_Start: 16.883333333333333
-    m_ClipIn: 0
-    m_Asset: {fileID: 5275592616581297860}
-    m_Duration: 17.6065306122449
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 3779313714248836262}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: B2.1 - 1937-Der zweite Barackenring.EN
+  m_Clips: []
   m_Markers:
     m_Objects: []
   m_TrackProperties:
@@ -1050,40 +894,6 @@ MonoBehaviour:
     stereoPan: 0
     spatialBlend: 0
   _locale: en
---- !u!114 &5174069993894889042
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
-  m_Name: AudioPlayableAsset
-  m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: fb793e19dab3049d986170187cd5e1f0, type: 3}
-  m_Loop: 0
-  m_bufferingTime: 0.1
-  m_ClipProperties:
-    volume: 1
---- !u!114 &5275592616581297860
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
-  m_Name: AudioPlayableAsset
-  m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 3936198b63bae477c8a8514a85f580e7, type: 3}
-  m_Loop: 0
-  m_bufferingTime: 0.1
-  m_ClipProperties:
-    volume: 1
 --- !u!114 &6642266868778816024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1109,7 +919,7 @@ MonoBehaviour:
     m_Start: 0.01666666666666672
     m_ClipIn: 0
     m_Asset: {fileID: -3473414151079520963}
-    m_Duration: 38.062440905347465
+    m_Duration: 50.65
     m_TimeScale: 1
     m_ParentTrack: {fileID: 6642266868778816024}
     m_EaseInDuration: 1

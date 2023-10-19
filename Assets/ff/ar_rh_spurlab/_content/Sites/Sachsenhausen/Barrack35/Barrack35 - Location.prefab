@@ -1192,15 +1192,6 @@ MonoBehaviour:
       - de
     Timeline: {fileID: 3085715611933342966}
     IsWelcomeChapter: 0
-  - Title:
-      _values:
-      - Music in the barracks
-      - Musik in der Baracke
-      _locales:
-      - en
-      - de
-    Timeline: {fileID: 4323933892015489801}
-    IsWelcomeChapter: 0
   _portal: {fileID: 92215836070700473}
 --- !u!1 &7804265378926874516
 GameObject:
@@ -1351,6 +1342,12 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: -5823523669415492570, guid: 94a7e2dc70aa0412a99859a29d0e6792, type: 2}
     value: {fileID: 0}
+  - key: {fileID: -5554710151494309039, guid: 94a7e2dc70aa0412a99859a29d0e6792, type: 2}
+    value: {fileID: 5976364749614576003}
+  - key: {fileID: 5211712851446811336, guid: 94a7e2dc70aa0412a99859a29d0e6792, type: 2}
+    value: {fileID: 7432989915631259184}
+  - key: {fileID: 3458228940707976142, guid: 94a7e2dc70aa0412a99859a29d0e6792, type: 2}
+    value: {fileID: 1159499575295301573}
   m_ExposedReferences:
     m_References:
     - f0cfa0b107bdb4de4b575411ca13750e: {fileID: 0}
@@ -1440,7 +1437,7 @@ MonoBehaviour:
       - Locale: en
         AudioClip: {fileID: 8300000, guid: cab3dcd64e5914df7a72b5cebb95c48a, type: 3}
       - Locale: de
-        AudioClip: {fileID: 8300000, guid: f6bd9cd427df24c4c8dcbef334930697, type: 3}
+        AudioClip: {fileID: 8300000, guid: f904621e9b88c49799919decf35f785a, type: 3}
   - Id: 1937
     TimelineManager: {fileID: 2524100848269061263}
     CtaAudio:

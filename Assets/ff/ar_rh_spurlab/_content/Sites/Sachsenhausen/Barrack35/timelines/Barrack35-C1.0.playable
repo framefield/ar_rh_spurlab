@@ -25,7 +25,7 @@ MonoBehaviour:
     m_Start: 0.016666666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 974566508985503198}
-    m_Duration: 36.68333333333333
+    m_Duration: 30.983333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: -7999085769316891068}
     m_EaseInDuration: 5
@@ -117,7 +117,7 @@ MonoBehaviour:
     m_Start: 0.016666666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 691561056022223941}
-    m_Duration: 36.68333333333335
+    m_Duration: 30.983333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: -6085354392607052834}
     m_EaseInDuration: 5
@@ -207,10 +207,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 1
+    m_Start: 1.05
     m_ClipIn: 0
-    m_Asset: {fileID: 7293120141447293866}
-    m_Duration: 32.88333333333333
+    m_Asset: {fileID: 6692135203403833121}
+    m_Duration: 9.783333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: -5823523669415492570}
     m_EaseInDuration: 0
@@ -243,7 +243,25 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -256,7 +274,76 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: C1.0 - Skizze Baracke-Belegung der Baracken.DE
+    m_DisplayName: DE-C1.0
+  - m_Version: 1
+    m_Start: 12.966666666666667
+    m_ClipIn: 9.633333333333335
+    m_Asset: {fileID: -2933705796668983176}
+    m_Duration: 15.653197278911566
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -5823523669415492570}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: DE-C1.0
   m_Markers:
     m_Objects: []
   m_TrackProperties:
@@ -338,7 +425,7 @@ MonoBehaviour:
     m_Start: 0.01666666666666672
     m_ClipIn: 0
     m_Asset: {fileID: 3429447648353468918}
-    m_Duration: 36.68333333333333
+    m_Duration: 30.983333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: -4110071918353803122}
     m_EaseInDuration: 1
@@ -405,6 +492,23 @@ MonoBehaviour:
     m_DisplayName: RevealTransitionGroupAsset
   m_Markers:
     m_Objects: []
+--- !u!114 &-2933705796668983176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset(Clone)
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 2b20250db0a7f44838dfb13efbdc49ae, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,7 +846,7 @@ MonoBehaviour:
     m_Start: 0.016666666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 635249111899755372}
-    m_Duration: 36.68333333333333
+    m_Duration: 30.983333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: 1723443579675526825}
     m_EaseInDuration: 5
@@ -900,58 +1004,7 @@ MonoBehaviour:
   m_Curves: {fileID: 0}
   m_Parent: {fileID: -5199537719177857984}
   m_Children: []
-  m_Clips:
-  - m_Version: 1
-    m_Start: 1
-    m_ClipIn: 0
-    m_Asset: {fileID: 7231164561396583576}
-    m_Duration: 33.306530612244906
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 3779313714248836262}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: C1.0 - Skizze Baracke-Belegung der Baracken.EN
+  m_Clips: []
   m_Markers:
     m_Objects: []
   m_TrackProperties:
@@ -959,7 +1012,7 @@ MonoBehaviour:
     stereoPan: 0
     spatialBlend: 0
   _locale: en
---- !u!114 &7231164561396583576
+--- !u!114 &6692135203403833121
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -971,24 +1024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
   m_Name: AudioPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 86e7edb083f5c46adb4887e60e6362f7, type: 3}
-  m_Loop: 0
-  m_bufferingTime: 0.1
-  m_ClipProperties:
-    volume: 1
---- !u!114 &7293120141447293866
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
-  m_Name: AudioPlayableAsset
-  m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 52308199159a34a80850ca41bf026f5a, type: 3}
+  m_Clip: {fileID: 8300000, guid: 2b20250db0a7f44838dfb13efbdc49ae, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
