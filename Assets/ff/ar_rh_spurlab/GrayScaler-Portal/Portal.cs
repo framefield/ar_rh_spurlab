@@ -25,6 +25,10 @@ namespace ff.ar_rh_spurlab.GrayScaler
         private SetLocalizedText _portalEntryText;
 
         [SerializeField]
+        private SetLocalizedText[] _portalEntryTexts = default;
+
+        
+        [SerializeField]
         [ReadOnly]
         private bool _isActivated = false;
 
@@ -37,14 +41,21 @@ namespace ff.ar_rh_spurlab.GrayScaler
 
             if (_portalEntryLabelOverride.HasDefaultValue())
             {
-                _portalEntryText.SetLocalizedString(_portalEntryLabelOverride);
+                foreach (var pet in _portalEntryTexts)
+                {
+                    pet.SetLocalizedString(_portalEntryLabelOverride);
+                }
             }
             else
             {
                 var owningLocation = GetComponentInParent<AugmentedLocation>();
                 if (owningLocation && owningLocation.LocationData)
                 {
-                    _portalEntryText.SetLocalizedString(owningLocation.LocationData.Title);
+                    foreach (var pet in _portalEntryTexts)
+                    {
+                        pet.SetLocalizedString(owningLocation.LocationData.Title);
+
+                    }
                 }
             }
         }

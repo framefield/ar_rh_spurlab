@@ -1235,7 +1235,7 @@ Transform:
   m_Children:
   - {fileID: 6375650508330036950}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4683971174754027662
 MonoBehaviour:
@@ -1253,6 +1253,8 @@ MonoBehaviour:
     _values: []
     _locales: []
   _portalEntryText: {fileID: 8333281644915133916}
+  _portalEntryTexts:
+  - {fileID: 8333281644915133916}
   _isActivated: 0
 --- !u!1 &8650289597486523082
 GameObject:
