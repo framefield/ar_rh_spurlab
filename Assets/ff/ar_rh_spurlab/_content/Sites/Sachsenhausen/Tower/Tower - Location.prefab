@@ -1118,7 +1118,7 @@ MonoBehaviour:
     CtaAudio:
       _audioLocalePairs:
       - Locale: en
-        AudioClip: {fileID: 8300000, guid: fed80a2757ad44d5eb7f3e43a99f1a44, type: 3}
+        AudioClip: {fileID: 8300000, guid: 9a5d812e273c34988a8f0eb16185b034, type: 3}
       - Locale: de
         AudioClip: {fileID: 8300000, guid: 82c98c153adc24c32a8cb7efd6acd190, type: 3}
 --- !u!82 &5875795513545473405
